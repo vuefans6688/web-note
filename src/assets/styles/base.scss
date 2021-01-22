@@ -1,0 +1,34 @@
+$primary-color: #409eff;
+
+@mixin modal {
+  background-color: $primary-color;
+  color: #ffffff;
+}
+
+@mixin alert($background, $text-color) {
+  background-color: $background;
+  color: $text-color;
+  a {
+    color: darken($text-color, 10%);
+  }
+}
+
+$base-color: #ff0000;
+
+$base-color-hsl: hsl(0, 100, 50%);
+body {
+  background-color: adjust-hue($base-color-hsl, 137deg);
+}
+
+$base-color: hsl(222, 100%, 50%);
+$light-color: lighten($base-color, 30%);
+$dark-color: darken($base-color, 20%);
+
+$layout-color:hsl(221, 50%, 50%);
+$saturate-color: saturate($layout-color, 50%);
+$desaturate-color: desaturate($layout-color, 30%);
+
+$colors: (light: #00ff00, dark: #000000);
+@function color($key) {
+  @return map-get($colors, $key);
+}

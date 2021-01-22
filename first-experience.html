@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>web前端Promise</title>
+</head>
+<body>
+
+  <div class="container">
+    <h2 class="header">Promise初体验</h2>
+    <button id="prize">点击抽奖</button>
+  </div>
+
+  <script>
+    /*
+    点击按钮1s后显示是否中奖(30%概率中奖)
+    若中奖就弹出 恭喜恭喜！奖品为10万RMB的劳斯莱斯优惠券
+    若未中奖就弹出 再接再厉。。。
+    */
+    // 生成随机数
+    function rand(m, n) {
+      // return Math.ceil(Math.random() * (n - m + 1)) + m - 1
+      return Math.floor(Math.random() * (m - n) + n)
+    }
+    // 获取元素对象
+    const prize = document.querySelector('#prize')
+    // 绑定单击事件
+    prize.addEventListener('click', () => {
+      const promise = new Promise((resolve, reject) => {
+        setTimeout(() => {
+          // 获取从1-100的一个随机数
+          let num = rand(1, 100)
+          // 判断中奖概率是否低于30%
+          if (num <= 30) {
+            resolve(num)
+          } else {
+            reject(num)
+          }
+        }, 1000)
+      })
+      promise.then(res => {
+        document.body.innerHTML = '恭喜恭喜！奖品为10万RMB的劳斯莱斯优惠券，你的中奖数字为：' + res
+      }, err => {
+        document.body.innerHTML = '再接再厉。。。，你的号码为：' + err
+      })
+    })
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>谈谈你对事件委托(代理)的理解及它们的使用场景</title>
+</head>
+<body>
+  /*
+  1.js中的事件流
+    在解析事件委托之前，我们先回顾一下js中的事件流，即冒泡和捕获。
+
+    ① .冒泡：当下级节点触发某个事件的时候，该事件会逐级向上触发上级节点的同类事件。
+
+    ② .捕获：和冒泡类似，只不过事件的顺序相反。即是从上级节点传递到下级节点
+
+  2.事件委托原理
+    事件委托就是基于js的事件流产生的，事件委托是利用事件冒泡，将事件加在父元素或者祖先元素上，触发该事件
+  */
+  
+  <div id="event-delegation">
+    <input type="button" value="按钮1" id="button1">
+    <input type="button" value="按钮2" id="button2">
+    <input type="button" value="按钮3" id="button3">
+  </div>
+
+  <script>
+    document.getElementById("event-delegation").onclick = function(e) {
+      e = window.event || e
+      const buttonId = e.target.id
+      switch(buttonId) {
+        case "button1":
+          document.body.innerHTML = '按钮1'
+          break
+        case "button2":
+          document.body.innerHTML = '按钮2'
+          break
+        case "button3":
+          document.body.innerHTML = '按钮3'
+          break
+      }
+    }
+  </script>
+
+</body>
+</html>

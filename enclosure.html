@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>使用promise封装ajax</title>
+</head>
+<body>
+  <button>点击发送ajax请求</button>
+  <script>
+    const button = document.querySelector('button')
+    button.addEventListener('click', () => {
+      const promise = new Promise((resolve, reject) => {
+        // 创建ajax对象
+        const xhr = new XMLHttpRequest()
+        // 初始化ajax
+        xhr.open('GET', 'https://autumnfish.cn/heimamm_server/')
+        // 发送ajax
+        xhr.send()
+        // 处理响应结果
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState === 4) {
+            if (xhr.code === 200) {
+              // 响应体
+              resolve(xhr.data)
+            } else {
+              // 响应状态码
+              reject(xhr.status)
+            }
+          }
+        }
+      })
+      promise.then(res => {
+        console.log(res)
+      }, err => {
+        console.log(err)
+      })
+    })
+  </script>
+</body>
+</html>

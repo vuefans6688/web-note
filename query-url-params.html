@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>queryURLParams-查询地址栏参数</title>
+</head>
+<body>
+  <script>
+    function queryURLParams(url) {
+      // 创建a标签来获取问号和哈希参数
+      let link = document.createElement('a')
+      link.href = url
+      let askText = link.search.substr(1)
+      let poundText = link.hash.substr(1)
+      let obj = {}
+      // 存进对象中
+      poundText ? obj['hash'] = poundText : null
+      if (askText) {
+        // 同时按照两个字符来拆分
+        let arr = askText.split(/(?:&|=)/g)
+        for (let i = 0; i < arr.length; i += 2) {
+          // arr[i]是属性名，arr[i + 1]是属性值
+          obj[arr[i]] = arr[i + 1]
+        }
+      }
+      return obj
+    }
+    // {hash: "video", id: "123456", name: "js", from: "baidu"}
+    queryURLParams('http://www.zhufengpeixun.cn/?id=123456&name=js&from=baidu#video')
+  </script>
+</body>
+</html>

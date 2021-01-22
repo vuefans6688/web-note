@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>表单验证</title>
+</head>
+<style>
+  body {
+    padding: 50px;
+    background: #34495e;
+  }
+  input {
+    border: 5px solid #ddd;
+    height: 30px;
+  }
+  .error {
+    border: 5px solid #f00;
+  }
+</style>
+<body>
+  <input type="text" validate rule="max: 12, min: 3">
+  <input type="text" validate rule="max: 12, isNumber">
+
+  <script>
+    'use strict'
+    class Validate {
+      max (value, len) {
+        return value.length <= len
+      }
+      min (value, len) {
+        return value.length >= len
+      }
+      isNumber (value) {
+        return /^\d+$/.test(value)
+      }
+    }
+    function ProxyFactory(target) {
+      return new Proxy(target, {
+        get (target, key) {
+          return target[key]
+        },
+        set (target, key, el) {
+          const rule = el.getAttribute('rule')
+          const validate = new Validate()
+          const state = rule.split(',').every(rules => {
+            const info = rules.split(':')
+            return validate[info[0]](el.value, info[1])
+          })
+          el.classList[state ? 'remove' : 'add']('error')
+          return true
+        }
+      })
+    }
+    const proxy = ProxyFactory(document.querySelectorAll('[validate]'))
+    proxy.forEach((item, i) => {
+      item.addEventListener('keyup', () => {
+        proxy[i] = this
+      })
+    })
+  </script>
+</body>
+</html>
