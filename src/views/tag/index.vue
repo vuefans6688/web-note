@@ -1,36 +1,36 @@
 <template>
   <div class="tag">
-    <div class="content" v-for="(tag, index) in tags" :key="index" 
+    <div class="content" v-for="(tag, index) in tags" :key="tag.id" 
       @mouseenter="handleEnter(index)" @mouseleave="handleLeave" 
-      :class="{active: isActive === index}">
+      :class="{ active: isActive === index }">
       <span class="index">{{ index + 1 }}、</span>
       <span class="text">{{ tag.text }}</span>
-      <span class="el-icon-close" v-if="isActive === index" @click="del(tag.id)"></span>
+      <span class="el-icon-close" v-if="isActive === index" @click="handleDelete(tag.id)"></span>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  data() {
+  data () {
     return {
-      isActive: 0,
+      isActive: false,
       tags: [
-        { id: '01', text: '吃饭' },
-        { id: '02', text: '听音乐' },
-        { id: '03', text: '跑步' },
-        { id: '04', text: '登山' }
+        { id: '001', text: '吃饭' },
+        { id: '002', text: '听音乐' },
+        { id: '003', text: '跑步' },
+        { id: '004', text: '登山' }
       ]
     }
   },
   methods: {
-    handleEnter(index) {
+    handleEnter (index) {
       this.isActive = index
     },
-    handleLeave() {
+    handleLeave () {
       this.isActive = null
     },
-    del(id) {
+    handleDelete (id) {
       const index = this.tags.findIndex(tag => tag.id === id)
       this.tags.splice(index, 1)
     }
@@ -43,15 +43,14 @@ export default {
   width: 130px;
   height: 30px;
   line-height: 30px;
-  margin: 5px auto;
   text-align: center;
   cursor: pointer;
   &.active {
     background: #eee;
   }
-  .index, .text {
+  span {
     font-size: 18px;
-    margin-left: 8px;
+    padding-left: 6px;
   }
   .el-icon-close {
     color: #f00;

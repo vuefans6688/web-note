@@ -1,11 +1,18 @@
 <template>
   <div class="input-item">
-    <el-input size="small"></el-input>
+    文本内容: <el-input v-model="message" size="small"></el-input>
+    <p>{{ message }}</p>
   </div>
 </template>
 
 <script>
-  export default {}
+  export default {
+    data () {
+      return {
+        message: ''
+      }
+    }
+  }
 </script>
 
 <style lang="scss" scoped>

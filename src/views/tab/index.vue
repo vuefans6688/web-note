@@ -1,10 +1,11 @@
 <template>
   <div class="tab">
-    <span class="list" v-for="(item, index) in list" :class="{active: currentIndex === index}"
-      @click="handleTab(index)">
+    <span class="list" v-for="(item, index) in list" :key="item.key" 
+      :class="{ active: currentIndex === index }" @click="handleTab(index)">
       {{ item }}
     </span>
-    <div class="content" v-for="(item, index) in content" v-show="currentIndex === index">
+    <div class="content" v-for="(item, index) in content" :key="item.key" 
+      v-show="currentIndex === index">
       <img :src="item">
     </div>
   </div>
@@ -12,7 +13,7 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       list: ['祝绪丹', '鞠婧祎', '宋轶'],
       content: [
@@ -24,7 +25,7 @@ export default {
     }
   },
   methods: {
-    handleTab(index) {      
+    handleTab (index) {      
       this.currentIndex = index      
     }
   }
@@ -55,5 +56,4 @@ export default {
     }
   }
 }
-
 </style>

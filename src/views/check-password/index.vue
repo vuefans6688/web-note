@@ -18,7 +18,7 @@
 
 <script>
 export default {
-  data() {
+  data () {
     const validatePassword = (rule, value, callback) => {
       if (value === '') {
         callback(new Error('请输入密码'))
@@ -103,7 +103,7 @@ export default {
   },
   methods: {
     // 密码验证是否符合条件
-    passwordPercentFormat(percentage) {
+    passwordPercentFormat (percentage) {
       return percentage === 100 ? '符合' : '不符'
     }
   }

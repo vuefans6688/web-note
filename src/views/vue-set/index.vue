@@ -11,13 +11,13 @@ export default {
   data () {
     return {
       info: {
-        name: '脚本之家',
-        age: 3
+        name: '露茜',
+        age: 20
       }
     }
   },
   created () {
-    this.$set(this.info, 'gender', '男')
+    this.$set(this.info, 'gender', '女')
   }
 }
 </script>

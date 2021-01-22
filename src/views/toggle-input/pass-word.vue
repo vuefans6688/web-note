@@ -7,7 +7,7 @@
       <el-input size="small" type="password" v-model="password" v-if="!isShow" placeholder="密码"></el-input>
       <el-input size="small" type="text" v-model="password" v-else placeholder="密码"></el-input>
     </div>
-    <div class="switch">
+    <div class="switch-icon">
       <el-switch v-model="value" @change="isShow=!isShow"></el-switch>
     </div>
     <div class="verify-code">
@@ -41,23 +41,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.user-name {
-  .el-input {
-    width: 280px;
-  }
-}
 .pass-word {
   margin-top: 20px;
-  .el-input {
-    width: 280px;
-  }
 }
-.switch {
+.switch-icon {
   position: relative;
   .el-switch {
     position: absolute;
     bottom: 6px;
-    left: 230px;
+    right: 8px;
   }
 }
 .verify-code {

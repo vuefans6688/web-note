@@ -25,7 +25,7 @@ export default {
       lineColorMax: 180,
       dotColorMin: 0,
       dotColorMax: 255,
-      contentWidth: 100,
+      contentWidth: 190,
       contentHeight: 30,
       contentLineHeight: 30,
       contentTextAlign: 'center'

@@ -33,9 +33,5 @@ export default {
 .box-card {
   width: 400px;
   margin: 20px auto;
-  .el-tabs {
-    width: 280px;
-    margin-left: 40px;
-  }
 }
 </style>

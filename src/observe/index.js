@@ -6,8 +6,11 @@ export const store = Vue.observable({
 })
 
 export const mutation = {
-  setCount (count) {
-    store.count = count
+  increment (count) {
+    store.count = count + 1
+  },
+  decrement (count) {
+    store.count = count - 1
   },
   changeName (name) {
     store.name = name

@@ -14,32 +14,32 @@
 <script>
 import data from './food-list'
 export default {
-  data() {
+  data () {
     return {
       restaurants: [],
       state: ''
     }
   },
   methods: {
-    querySearch(queryString, callback) {
+    querySearch (queryString, callback) {
       const results = queryString ? this.restaurants.filter(this.createFilter(queryString)) : this.restaurants
       // 调用 callback 返回建议列表的数据
       callback(results)
     },
-    createFilter(queryString) {
+    createFilter (queryString) {
       return restaurant => restaurant.name.toLowerCase().includes(queryString.toLowerCase())
     },
-    loadAll() {
+    loadAll () {
       return data
     },
-    handleSelect(item) {
+    handleSelect () {
       // console.log(item)
     },
-    handleIconClick(event) {
+    handleIconClick () {
       // console.log(event)
     }
   },
-  mounted() {
+  mounted () {
     this.restaurants = this.loadAll()
   }
 }

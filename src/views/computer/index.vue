@@ -12,25 +12,25 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       now: new Date(),
       message: 'Hello World!'
     }
   },
   methods: {
-    reverseMessage1() {
+    reverseMessage1 () {
       return this.message.split('').reverse().join('')
     },
-    reload() {
+    reload () {
       this.$forceUpdate()  // 调用$forceUpdate方法
     }
   },
-  updated() {
+  updated () {
     this.message = '我是修改的数据'  // 更新修改数据
   },
   computed: {
-    reverseMessage2() {
+    reverseMessage2 () {
       return this.message.split('').reverse().join('')
     }
   }

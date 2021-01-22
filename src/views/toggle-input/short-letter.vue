@@ -1,14 +1,14 @@
 <template>
   <div class="short-letter">
     <div class="phone-number">
-      <el-input size="small" v-model="phoneNumber" placeholder="手机号"></el-input>
+      <el-input v-model="phoneNumber" size="small" placeholder="手机号"></el-input>
     </div>
     <div class="verify-code">
-      <el-input size="small" v-model="verifyCode" placeholder="验证码"></el-input>
-      <el-button size="small" :disabled="!stop" type="primary" @click="sendCode">{{ access }}</el-button>
+      <el-input v-model="verifyCode" size="small" placeholder="验证码"></el-input>
+      <el-button @click="sendCode" :disabled="!stop" size="small" type="primary">{{ access }}</el-button>
     </div>
     <div class="login">
-      <el-button size="small" type="primary">登录</el-button>
+      <el-button type="primary" size="small">登录</el-button>
     </div>
   </div>
 </template>
@@ -45,18 +45,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.phone-number {
-  .el-input {
-    width: 280px;
-  }
-}
 .verify-code {
   margin-top: 20px;
   .el-input {
-    width: 137px;
+    width: 160px;
   }
   .el-button {
-    width: 137px;
+    width: 193px;
     margin-left: 6px;
   }
 }

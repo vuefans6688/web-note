@@ -9,13 +9,13 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       date: new Date()
     }
   },
   computed: {
-    today() {
+    today () {
       const date = new Date()
       const year = date.getFullYear()
       const month = date.getMonth() + 1
