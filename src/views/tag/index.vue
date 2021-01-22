@@ -2,10 +2,10 @@
   <div class="tag">
     <div class="content" v-for="(tag, index) in tags" :key="tag.id" 
       @mouseenter="handleEnter(index)" @mouseleave="handleLeave" 
-      :class="{ active: isActive === index }">
+      :class="{ active: currentIndex === index }">
       <span class="index">{{ index + 1 }}、</span>
       <span class="text">{{ tag.text }}</span>
-      <span class="el-icon-close" v-if="isActive === index" @click="handleDelete(tag.id)"></span>
+      <span class="el-icon-close" v-if="currentIndex === index" @click="handleDelete(tag.id)"></span>
     </div>
   </div>
 </template>
@@ -14,7 +14,7 @@
 export default {
   data () {
     return {
-      isActive: false,
+      currentIndex: null,
       tags: [
         { id: '001', text: '吃饭' },
         { id: '002', text: '听音乐' },
@@ -25,10 +25,10 @@ export default {
   },
   methods: {
     handleEnter (index) {
-      this.isActive = index
+      this.currentIndex = index
     },
     handleLeave () {
-      this.isActive = null
+      this.currentIndex = null
     },
     handleDelete (id) {
       const index = this.tags.findIndex(tag => tag.id === id)
