@@ -1,21 +1,13 @@
 <template>
   <div class="shop-cart">
-    <h3>vuex-购物车</h3>
-    <!-- 商品的列表 -->
-    <product />
-    <!-- 购物车的列表 -->
-    <cart />
-    <!-- 小记 -->
-    <info />
+    <layout views="shop-cart"></layout>
   </div>
 </template>
 
 <script>
-import Product from '@/components/Product'
-import Cart from '@/components/Cart'
-import Info from '@/components/Info'
+import Layout from '@/components/Layout'
 export default {
-  components: { Product, Cart, Info }
+  components: { Layout }
 }
 </script>
 

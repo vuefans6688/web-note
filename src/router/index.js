@@ -392,6 +392,10 @@ const router = new VueRouter({
     {
       path: '/vue-set',
       component: () => import('@/views/vue-set')
+    },
+    {
+      path: '/the-home',
+      component: () => import('@/views/the-home')
     }
   ]
 })

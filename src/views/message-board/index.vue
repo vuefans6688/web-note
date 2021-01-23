@@ -276,18 +276,16 @@ export default {
     // deleteBoard(index) {
     //   this.tableData.splice(index, 1) 
     // },
-    // deleteBoard(id) {
-    //   this.tableData = this.tableData.filter(item => {
-    //   // 判断item.id是否等于id，把要删除的元素留下
-    //     return item.id === id ? false : true
-    //   })
-    // },
     deleteBoard(id) {
-      // 用findIndex方法直接找到要删除的元素的索引
-      const index = this.tableData.findIndex(item => item.id === id)
-      this.tableData.splice(index, 1)
+      // 判断item.id是否等于id，把要删除的元素留下
+      this.tableData = this.tableData.filter(item => item.id !== id)
     },
-    eidtBoard(index, row) {
+    // deleteBoard(id) {
+    //   // 用findIndex方法直接找到要删除的元素的索引
+    //   const index = this.tableData.findIndex(item => item.id === id)
+    //   this.tableData.splice(index, 1)
+    // },
+    eidtBoard(index) {
       this.isEdit = true
       this.modifyBoard = {...this.tableData[index]}
       this.index = index            

@@ -60,10 +60,12 @@ export default {
   .item-check {
     margin-right: 22px;
   }
-  ul > li {
-    list-style: none;
-    margin-top: 20px;
-    margin-left: 27px;
+  ul {
+    li {
+      list-style: none;
+      margin-top: 20px;
+      margin-left: 27px;
+    }
     input, span {
       padding: 0 6px;
     }
