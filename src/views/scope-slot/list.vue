@@ -1,6 +1,6 @@
 <template>
   <div class="list">
-    <slot v-for="item in list" :item="item" />
+    <slot v-for="name in names" :name="name" />
   </div>
 </template>
 
@@ -8,7 +8,7 @@
 export default {
   data () {
     return {
-      list: ['张三', '李四', '王五', '赵六']
+      names: ['张三', '李四', '王五', '赵六']
     }
   }
 }

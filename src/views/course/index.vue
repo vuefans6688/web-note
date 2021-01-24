@@ -1,8 +1,9 @@
 <template>
   <div class="course">
     <todo-list>
-      <todo-item v-for="item in lessons" :key="item.id" :title="item.title" 
-        :is-delete="item.isDelete" @delete="handleDelete(item.id)">
+      <todo-item v-for="lesson in lessons" :key="lesson.id" :title="lesson.title" 
+        :is-delete="lesson.isDelete" @delete="handleDelete(lesson.id)"
+        @changed="handleChange(lesson)">
         <template v-slot:pre-icon="{ value }">
           <span>前置图标{{ value }}</span>
         </template>
@@ -26,8 +27,14 @@ export default {
   },
   methods: {
     handleDelete (id) {
-      const index = this.list.findIndex(item => item.id === id)
-      this.list.splice(index, 1)
+      // 找到当前被删除的元素的下标
+      const index = this.lessons.findIndex(item => item.id === id)
+      this.lessons.splice(index, 1)
+    },
+    handleChange (lesson) {
+      // 找到当前需要切换的元素
+      const couse = this.lessons.find(item => item === lesson)
+      couse.isDelete = !couse.isDelete
     }
   }
 }

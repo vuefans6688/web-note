@@ -396,6 +396,10 @@ const router = new VueRouter({
     {
       path: '/the-home',
       component: () => import('@/views/the-home')
+    },
+    {
+      path: '/pierce-through',
+      component: () => import('@/views/pierce-through')
     }
   ]
 })

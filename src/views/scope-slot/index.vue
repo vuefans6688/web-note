@@ -1,15 +1,15 @@
 <template>
   <div class="scope-slot">
     <list v-slot="slotProps">
-      <div>{{ slotProps.item }}</div>
+      <div>{{ slotProps.name }}</div>
     </list>
   </div>
 </template>
 
 <script>
-import List from './list'
+import list from './list'
 export default {
-  components: { List }
+  components: { list }
 }
 </script>
 

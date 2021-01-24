@@ -20,7 +20,7 @@ const mutations = {
     }
 	},
   // 购物车商品数量改变
-  NUM_CHANGE(state, { id, value }) {
+  NUM_CHANGE (state, { id, value }) {
     state.added.forEach(item => {
       if (item.id === id){
         item.num = value
@@ -29,7 +29,7 @@ const mutations = {
   },
 
   // 删除购物车的指定的商品
-  DELETE(state, product) {
+  DELETE (state, product) {
     state.added.forEach((item, index) => {
       if(item.id === product.id) {
         // 找到added的下标值

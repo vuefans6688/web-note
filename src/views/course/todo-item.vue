@@ -2,8 +2,7 @@
   <div class="todo-item">
     <li class="list">
       <slot name="pre-icon" :value="value"></slot>
-      <span class="title-1" v-if="!isDelete">{{ title }}</span>
-      <span class="title-2" v-else>{{ title }}</span>
+      <span :class="isDelete ? 'title-2' : 'title-1'" @click="switchDelete">{{ title }}</span>
       <slot name="suf-icon">😄</slot>
       <span class="delete" v-if="!isDelete" @click="handleRemove">删除</span>
     </li>
@@ -30,6 +29,9 @@ export default {
   methods: {
     handleRemove () {
       this.$emit('delete', this.title)
+    },
+    switchDelete () {
+      this.$emit('changed', this.isDelete)
     }
   }
 }
