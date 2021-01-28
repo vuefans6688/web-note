@@ -1,7 +1,5 @@
 <template>
-  <div class="named-view">
-    命名视图
-  </div>
+  <div class="named-view">命名视图</div>
 </template>
 
 <script>

@@ -24,7 +24,7 @@ const historyList = [
   { id: 3, name: '莉莉', age: 20 }
 ]
 export default {
-  data() {
+  data () {
     return {
       info: '',
       historyList,
@@ -32,19 +32,19 @@ export default {
     }
   },
   methods: {
-    clearHistory() {
+    clearHistory () {
       this.historyList = []
     },
-    searchMessage() {
-      this.historyList = historyList.filter(item => !this.info || item.name.includes(this.info))  
+    searchMessage () {
+      this.historyList = historyList.filter(search => !this.info || search.name.includes(this.info))  
     },
-    handleOver(index) {
+    handleOver (index) {
       this.isActive = index
     },
-    handleOut() {
+    handleOut () {
       this.isActive = null
     },
-    deleteHistory(id) {
+    deleteHistory (id) {
       const index = this.historyList.findIndex(item => item.id === id)
       this.historyList.splice(index, 1)
     }

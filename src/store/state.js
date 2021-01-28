@@ -1,4 +1,6 @@
 const state = {
+  token: '',
+  clinic: '',
   count: 0,
   good_list: [
     {

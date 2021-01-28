@@ -2,7 +2,7 @@
   <div class="child">
     <el-card class="box-card">
       <el-table :data="allData" :row-style="rowStyle" @selection-change="selectChange">
-        <el-table-column type="selection" align="center"></el-table-column>
+        <el-table-column type="selection" align="center" :selectable="selectable"></el-table-column>
         <el-table-column prop="name" label="姓名" align="center"></el-table-column>
         <el-table-column prop="age" label="年龄" align="center">
           <template slot-scope="scope">
@@ -11,7 +11,7 @@
         </el-table-column>
         <el-table-column prop="status" label="状态" align="center">
           <template slot-scope="scope">
-            <span>{{ scope.row.status === 1 ? '启用' : '禁用' }}</span>
+            <span>{{ scope.row.status === 1 ? '已启用' : '已禁用' }}</span>
           </template>
         </el-table-column>
         <el-table-column label="操作" align="center">
@@ -38,7 +38,7 @@
 const DISABLE = 0  // 禁用
 const ENABLE = 1   // 启用
 export default {
-  data() {
+  data () {
     return {
       allData: [],  // 后台传入的数据
       selectData: [],  // 全选选中的数据
@@ -54,29 +54,32 @@ export default {
     }
   },
   methods: {
-    rowStyle({ row }) {
-      const obj = {}
+    rowStyle ({ row }) {
       if (row.status === DISABLE) {
-        obj.color = '#ccc'
+        return {
+          color: '#ccc'
+        }
       }
-      return obj
     },
-    statusChange(row) {
+    selectable (row) {
+      return row.status === DISABLE ? false : true
+    },
+    statusChange (row) {
       row.status = (row.status + 1) % 2
     },
-    deleteChange(id) {
+    deleteChange (id) {
       // this.tableData.splice((this.currentPage - 1) * this.pageSize + index, 1)
       const index = this.tableData.findIndex(item => item.id === id)
       this.tableData.splice(index, 1)
       this.currentPage = 1
       this.handlePaging()
     },
-    selectChange(value) {
+    selectChange (value) {
       this.selectData = value
     },
-    batchDelete() {
+    batchDelete () {
       let arr = []
-      this.tableData.map(item => {
+      this.tableData.forEach(item => {
         let selectList = this.selectData.filter(value => value.id === item.id)
         if (!selectList || selectList.length === 0) {
           arr.push(item)
@@ -86,16 +89,15 @@ export default {
       this.currentPage = 1
       this.handlePaging()
     },
-    sizeChange(size) {
+    sizeChange (size) {
       this.pageSize = size
       this.handlePaging()
     },
-    currentChange(page) {
+    currentChange (page) {
       this.currentPage = page
       this.handlePaging()
     },
-    handlePaging() {
-      // 当前页的下标
+    handlePaging () {
       const pageIndex = Math.ceil(this.tableData.length / this.pageSize)
       if (pageIndex === this.currentPage) {
         this.allData = this.tableData.slice((this.currentPage - 1) * this.pageSize)
@@ -105,11 +107,11 @@ export default {
       this.total = this.tableData.length
     }
   },
-  mounted() {
+  mounted () {
     this.handlePaging()
   },
   filters: {
-    ageFilter(date) {
+    ageFilter (date) {
       if (typeof date === 'string') { 
         date = new Date(date)       
       }

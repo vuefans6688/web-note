@@ -6,11 +6,12 @@
 export default {
   data () {
     return {
-      text: '我是父组件'
+      text: '我是parent组件'
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+
 </style>

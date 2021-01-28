@@ -2,7 +2,7 @@
   <div class="todo-item">
     <li class="list">
       <slot name="pre-icon" :value="value"></slot>
-      <span :class="isDelete ? 'title-2' : 'title-1'" @click="switchDelete">{{ title }}</span>
+      <span :class="isDelete ? 'title-style' : ''" @click="switchDelete">{{ title }}</span>
       <slot name="suf-icon">😄</slot>
       <span class="delete" v-if="!isDelete" @click="handleRemove">删除</span>
     </li>
@@ -14,11 +14,11 @@ export default {
   props: {
     title: {
       type: String,
-      required: true
+      default: ''
     },
     isDelete: {
       type: Boolean,
-      default: false
+      required: true
     }
   },
   data () {
@@ -48,7 +48,7 @@ export default {
   span {
     padding: 6px;
   }
-  .title-2 {
+  .title-style {
     text-decoration: line-through;
     color: #888;
   }

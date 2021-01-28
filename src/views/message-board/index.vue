@@ -149,13 +149,13 @@ export default {
   // 自定义指令，让文本框自动聚焦
   directives: {
     'auto-focus': {
-      inserted(el) {
+      inserted (el) {
         el.children[0].focus()  // element-ui组件中的用法
         // el.focus()  // 非ui组件中的用法
       }
     }
   },
-  data() {
+  data () {
     return {
       isAdd: false,    // 是否显示新增
       isEdit: false,   // 是否显示编辑
@@ -220,25 +220,25 @@ export default {
     }
   },
   // computed: {
-  //   searchList() {
+  //   searchList () {
   //     return this.tableData.filter(item => !this.keyword || item.nickName.includes(this.keyword))
   //   }
   // },
   methods: {
-    // search(keyword) {
+    // search (keyword) {
     //   return this.tableData.filter(item => {
     //     return new RegExp(keyword, 'g').test(item.nickName)
     //   })
     // },
-    search(keyword) {
+    search (keyword) {
       const result = this.tableData.filter(item => new RegExp(keyword, 'g').test(item.nickName))
       this.isEmpty = result.length > 0 ? false : true
       return result
     },
-    wantMessage() {
+    wantMessage () {
       this.isAdd = true
     },
-    addConfirm() {
+    addConfirm () {
       this.isAdd = false
       if (this.formBoard.nickName === '') {
         this.$message({
@@ -262,7 +262,7 @@ export default {
         this.formBoard = {}
       }      
     },    
-    formatter(row, column, cellValue) {
+    formatter (row, column, cellValue) {
       if (typeof cellValue === 'string') {  // 判断日期是否是字符串类型
         cellValue = new Date(cellValue)       
       }
@@ -276,7 +276,7 @@ export default {
     // deleteBoard(index) {
     //   this.tableData.splice(index, 1) 
     // },
-    deleteBoard(id) {
+    deleteBoard (id) {
       // 判断item.id是否等于id，把要删除的元素留下
       this.tableData = this.tableData.filter(item => item.id !== id)
     },
@@ -285,12 +285,12 @@ export default {
     //   const index = this.tableData.findIndex(item => item.id === id)
     //   this.tableData.splice(index, 1)
     // },
-    eidtBoard(index) {
+    eidtBoard (index) {
       this.isEdit = true
       this.modifyBoard = {...this.tableData[index]}
       this.index = index            
     },
-    editConfirm() {
+    editConfirm () {
       this.isEdit = false
       this.tableData[this.index].nickName = this.modifyBoard.nickName
       this.tableData[this.index].content = this.modifyBoard.content
@@ -301,10 +301,10 @@ export default {
       this.tableData[this.index].nativePlace = this.modifyBoard.nativePlace
       this.tableData[this.index].marriage = this.modifyBoard.marriage
     },
-    selectChange(value) {
+    selectChange (value) {
       this.selectBoard = value
     },
-    batchDelete() {
+    batchDelete () {
       // 方法一
       this.selectBoard.forEach(item => {
         const index = this.tableData.findIndex(value => value.id === item.id)
@@ -329,10 +329,10 @@ export default {
       // })     
       // this.tableData = arr  // 替换成空数组
     },
-    stateSwitch(row) {
+    stateSwitch (row) {
       row.status = (row.status + 1) % 2
     },
-    rowStyle({row}) {     
+    rowStyle ({row}) {     
       const styles = {}  
       if (row.status === UN_READ) {
         styles.color = '#ccc'

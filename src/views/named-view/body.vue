@@ -1,7 +1,5 @@
 <template>
-  <div class="body">
-    主体区域
-  </div>
+  <div class="body">主体区域</div>
 </template>
 
 <script>

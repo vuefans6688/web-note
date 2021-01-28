@@ -21,7 +21,7 @@ export default {
     vTextarea, 
     vList
   },
-  data() {
+  data () {
     return {
       id: 1,
       userName: '',
@@ -30,7 +30,7 @@ export default {
     }
   },
   methods: {
-    handleSend() {
+    handleSend () {
       if (this.userName === '' || this.message === '') {
         alert('请输入昵称和内容')
         return
@@ -44,7 +44,7 @@ export default {
       this.userName = ''
       this.message = ''
     },
-    handleReply(index) {
+    handleReply (index) {
       const userName = this.list[index].userName
       this.message = '回复@' + userName + ' : '
       this.$refs.message.focus()

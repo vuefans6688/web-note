@@ -46,11 +46,9 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.work-year, .work-money {
-  .el-input {
-    width: 280px;
-  }
+<style scoped>
+p > .el-input {
+  width: 280px;
 }
 .show-content {
   color: #f00;

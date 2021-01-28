@@ -2,10 +2,10 @@
 // 浏览器中的JavaScript是没有文件操作的能力的
 // 但是Node中的JavaScript具有文件操作的能力
 
-// fs是filesystem的简写，就是文件系统的意思
-// 在Node中如果想要进行文件操作，就必须引入fs这个核心模块
-// 在fs这个核心模块中，就提供了所有的文件操作相关的API
-// 例如: fs.readFile就是用来读取文件的
+// fs是filesystem的简写，是文件系统的意思
+// 在Node中如果想要进行文件操作，首先必须引入fs这个核心模块
+// 在fs这个核心模块中，提供了所有操作文件的API
+// 例如: fs.readFile是用来读取文件的
 
 // 1.使用require方法加载fs核心模块
 const fs = require('fs')

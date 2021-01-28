@@ -5,13 +5,13 @@
 </template>
 
 <script>
-import container from './components/container'
+import containers from './components/containers'
 export default {
-  components: { container },
+  components: { containers },
   data () {
     return {
       list: ['沉鱼', '落雁', '闭月', '羞花'],
-      currentView: container
+      currentView: containers
     }
   }
 }

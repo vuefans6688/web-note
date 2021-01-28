@@ -8,7 +8,7 @@
 <script>
 export default {
   computed: {
-    urlRoute() {
+    urlRoute () {
       return {
         name: 'dynamic-route',
         params: {

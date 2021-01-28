@@ -1,7 +1,5 @@
 <template>
-  <div class="footer">
-    底部区域
-  </div>
+  <div class="footer">底部区域</div>
 </template>
 
 <script>

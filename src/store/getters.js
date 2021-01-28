@@ -1,4 +1,10 @@
 const getters = {
+  clinic (state) {
+    return state.clinic
+  },
+  token (state) {
+    return state.token
+  },
   count (state) {
     return state.count
   },

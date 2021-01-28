@@ -1,7 +1,7 @@
 <template>
   <div class="life-cycle">
     <p class="container">
-      <el-button type="success" @click="handleClick">{{ buttonText }}</el-button>
+      <el-button @click="handleClick" type="success">{{ buttonText }}</el-button>
     </p>
     <clock v-if="!isDestroy"></clock>
   </div>

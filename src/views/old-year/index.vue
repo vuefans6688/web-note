@@ -4,7 +4,7 @@
       姓名: <el-autocomplete @select="selectChange" size="small" placeholder="请输入姓名"></el-autocomplete>
     </div>
     <div class="user-age">
-      年龄: <calculate-age :old="date" ref="ageRefs"></calculate-age>
+      年龄: <calculate-age :old="date" ref="age-ref" :width="width"></calculate-age>
     </div>
   </div>
 </template>
@@ -20,14 +20,15 @@ export default {
         age: '',
         month: '',
         birth: ''
-      }
+      },
+      width: '260px'
     }
   },
   methods: {
     selectChange () {
       const birthday = dateFilter(this.date.birth)
       this.date.birth = new Date(birthday.replace(/-/g, '/'))
-      this.$refs.ageRefs.handleBirth()
+      this.$refs['age-ref'].handleBirth()
     }
   }
 }
@@ -35,6 +36,7 @@ export default {
 
 <style lang="scss" scoped>
 .user-name {
+  margin-top: 10px;
   .el-autocomplete {
     width: 260px;
   }
@@ -43,7 +45,6 @@ export default {
   display: flex;
   margin-top: 20px;
   .calculate-age {
-    width: 260px;
     margin-left: 5px;
   }
 }

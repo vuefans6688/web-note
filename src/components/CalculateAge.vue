@@ -3,17 +3,17 @@
     <el-form :model="old" size="small">
       <el-form-item prop="age">
         <el-input v-model="old.age" @keyup.native="intLimitAge('age')" @blur="calculateBirth" 
-          :maxlength="3" placeholder="请输入您的岁数">
+          :style="{ width }" :maxlength="3" placeholder="请输入您的岁数">
         </el-input>
       </el-form-item>
       <el-form-item prop="month">
         <el-input v-model="old.month" @keyup.native="intLimitAge('month', 12)" 
-          @blur="calculateBirth" :maxlength="2" placeholder="请输入您的出生月份">
+          :style="{ width }" @blur="calculateBirth" :maxlength="2" placeholder="请输入您的出生月份">
         </el-input>
       </el-form-item>
       <el-form-item prop="birth">
         <el-date-picker v-model="old.birth" type="date" @change="handleBirth" :editable="false" 
-          :clearable="false" :picker-options="pickerOptions" style="width: 100%;" placeholder="请选择出生日期">
+          :style="{ width }" :clearable="false" :picker-options="pickerOptions" placeholder="请选择出生日期">
         </el-date-picker>
       </el-form-item>
     </el-form>
@@ -44,6 +44,10 @@ export default {
           birth: ''
         }
       }
+    },
+    width: {
+      type: String,
+      default: '100px'
     }
   },
   methods: {
@@ -58,9 +62,9 @@ export default {
     },
     // 计算生日
     calculateBirth () {  
-      const date = new Date()
-      const year = date.getFullYear() - this.getAge()
-      const month = date.getMonth() - this.getMonthes()
+      let date = new Date()
+      let year = date.getFullYear() - this.getAge()
+      let month = date.getMonth() - this.getMonthes()
       if (month < 0) {
         month += 12
         year -= 1
@@ -75,11 +79,11 @@ export default {
       }
       this.old.age = new Date().getFullYear() - this.getBirth().getFullYear()
       this.old.month = new Date().getMonth() - this.getBirth().getMonth()
-      const totalDay = new Date().getDate() - this.getBirth().getDate()
+      let totalDay = new Date().getDate() - this.getBirth().getDate()
       // 获取当前月天数
-      const currentYear = parseInt(this.getBirth().getFullYear(), 10)
-      const currentMonth = parseInt(this.getBirth().getMonth() + 1, 10)
-      const currentDay = getCurrentMonthDays(currentMonth, currentYear)
+      let currentYear = parseInt(this.getBirth().getFullYear(), 10)
+      let currentMonth = parseInt(this.getBirth().getMonth() + 1, 10)
+      let currentDay = getCurrentMonthDays(currentMonth, currentYear)
       if (totalDay < 0) {
         totalDay += currentDay
         this.old.month -= 1

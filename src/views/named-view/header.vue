@@ -1,7 +1,5 @@
 <template>
-  <div class="header">
-    头部区域
-  </div>
+  <div class="header">头部区域</div>
 </template>
 
 <script>

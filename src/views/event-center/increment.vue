@@ -5,17 +5,17 @@
 </template>
 
 <script>
-import eventBus from './eventBus'
+import bus from './bus'
 export default {
-  data() {
+  data () {
     return {
       info: '我要加油'
     }
   },
   methods: {
-    handle() {
+    handle () {
       // 通过emit触发事件，并传值
-      eventBus.$emit('event-target', this.info)
+      bus.$emit('event-target', this.info)
     }
   }
 }

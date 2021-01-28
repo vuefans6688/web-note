@@ -21,8 +21,6 @@ export default {
     }
   },
   mounted () {
-    console.log(this.$attrs)  // { job:'程序员'}, 非props外的属性
-    console.log(this.$listeners)  // 爷爷给儿子的的方法
     this.$listeners.isClick()  // 孙子组件调用爷爷组件的方法, isClick
     this.$listeners.add()  // 孙子组件调用爷爷组件的方法, add
   }

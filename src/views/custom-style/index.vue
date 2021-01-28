@@ -15,6 +15,9 @@
     <p class="card">这是一张卡片</p>
     <p class="box">这是一个盒子</p>
     <p class="functional">这是一个函数</p>
+    <div class="logo">
+      <a href="#"></a>
+    </div>
   </div>
 </template>
 
@@ -74,5 +77,38 @@ export default {}
 
 .functional {
   background-color: color(light);
+}
+
+.logo {
+  width: 55px;
+  height: 55px;
+  overflow: hidden;
+  margin: 20px auto;
+  a {
+    display: block;
+    width: 110px;
+    height: 55px;
+    &:before {
+      content: '';
+      display: inline-block;
+      width: 55px;
+      height: 55px;
+      background: url('../../assets/img/mi.jpg') no-repeat center;
+      background-size: contain;
+      transition: margin .2s;
+    }
+    &:after {
+      content: '';
+      display: inline-block;
+      width: 55px;
+      height: 55px;
+      background: url('../../assets/img/home.jpg') no-repeat center;
+      background-size: contain;
+    }
+    &:hover:before {
+      margin-left: -55px;
+      transition: margin .2s;
+    }
+  }
 }
 </style>

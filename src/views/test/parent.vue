@@ -7,7 +7,7 @@
       </div>
       <div class="control">
         <el-button @click="cancel" size="mini">取消</el-button>
-        <el-button @click="del" type="primary" size="mini">删除</el-button>
+        <el-button @click="confirm" type="primary" size="mini">确定</el-button>
       </div>
     </el-card>
     <el-table :data="formData" @selection-change="selectChange" ref="formRef">
@@ -44,7 +44,7 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       isShow: false,
       selectData: [],
@@ -66,14 +66,14 @@ export default {
     }
   },
   methods: {
-    selectChange(value) {
+    selectChange (value) {
       this.selectData = value
       this.isShow = false
-      if (value && value.length) {
+      if (value && value.length > 0) {
         this.isShow = true
       }
     },
-    del() {
+    confirm () {
       this.isShow = true
       this.$confirm('是否删除该数据?', {
         confirmButtonText: '确定',
@@ -86,16 +86,21 @@ export default {
           type: 'success',
           message: '删除成功!'
         })
-      }).catch(() => {})
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消!'
+        })
+      })
     },
-    cancel() {
+    cancel () {
       this.isShow = false
       this.$refs.formRef.clearSelection()
     },
-    close() {
+    close () {
       this.cancel()
     },
-    modify(i, row) {
+    modify (i, row) {
       this.formData[i].isEdit = true
       this.formData[i].isModify = true
       this.editData = {
@@ -105,18 +110,18 @@ export default {
       }
       this.currentIndex = i
     },
-    modifyCancel(i) {
+    modifyCancel (i) {
       this.formData[i].isEdit = false
       this.formData[i].isModify = false
       this.formData[i].name = this.editData.name
       this.formData[i].sex = this.editData.sex
       this.formData[i].age = this.editData.age
     },
-    modifyConfirm(i) {
+    modifyConfirm (i) {
       this.formData[i].isEdit = false
       this.formData[i].isModify = false
     },
-    remove(id) {
+    remove (id) {
       const index = this.formData.findIndex(item => item.id === id)
       this.formData.splice(index, 1)
     }

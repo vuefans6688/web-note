@@ -32,6 +32,10 @@ const router = new VueRouter({
       component: () => import('@/views/test/son')
     },
     {
+      path: '/test/try',
+      component: () => import('@/views/test/try')
+    },
+    {
       path: '/family/father',
       component: () => import('@/views/family/father')
     },
@@ -74,16 +78,16 @@ const router = new VueRouter({
       component: () => import('@/views/tab')
     },
     {
-      path: '/course',
-      component: () => import('@/views/course'),
+      path: '/scope-slot',
+      component: () => import('@/views/scope-slot'),
       children: [
         {
           path: 'todo-item',
-          component: () => import('@/views/course/todo-item')
+          component: () => import('@/views/scope-slot/todo-item')
         },
         {
           path: 'todo-list',
-          component: () => import('@/views/course/todo-list')
+          component: () => import('@/views/scope-slot/todo-list')
         }
       ]
     },
@@ -220,8 +224,11 @@ const router = new VueRouter({
       // path: '/receive/:name/:age',
       path: '/receive',
       component: () => import('@/views/receive'),
-      // props: true,
-      props: route => ({
+      // props: true,  // 布尔模式
+      // props: {  // 对象模式
+      //   newsletterPopup: false 
+      // },
+      props: route => ({  // 函数模式
         // name: route.params.name,
         // age: route.params.age
         name: route.query.name,
@@ -246,10 +253,6 @@ const router = new VueRouter({
     {
       path: '/delete-and-cancel',
       component: () => import('@/views/delete-and-cancel')
-    },
-    {
-      path: '/scope-slot',
-      component: () => import('@/views/scope-slot')
     },
     {
       path: '/toggle-input-text',
@@ -400,6 +403,38 @@ const router = new VueRouter({
     {
       path: '/pierce-through',
       component: () => import('@/views/pierce-through')
+    },
+    {
+      path: '/default-slots',
+      component: () => import('@/views/default-slots')
+    },
+    {
+      path: '/named-slots',
+      component: () => import('@/views/named-slots')
+    },
+    {
+      path: '/search-container',
+      component: () => import('@/views/search-container')
+    },
+    {
+      path: '/search-home',
+      component: () => import('@/views/search-home')
+    },
+    {
+      path: '/module/module-menu',
+      component: () => import('@/views/module/module-menu'),
+      children: [
+        {
+          path: 'formulation/:formulationId',
+          name: 'PublicModule',
+          component: () => import('@/views/module/public-module')
+        },
+        {
+          path: 'new-western-formulation/:templateId',
+          name: 'NewWesternFormulation',
+          component: () => import('@/views/module/western-formulation/new-western-formulation')
+        },
+      ]
     }
   ]
 })

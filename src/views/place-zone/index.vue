@@ -65,7 +65,7 @@
 <script>
 import provinceList from '@/utils/provinceList'
 export default {
-  data() {
+  data () {
     return {
       isAdd: false,
       isEdit: false,
@@ -88,10 +88,10 @@ export default {
     }
   },
   methods: {
-    add() {
+    add () {
       this.isAdd = true
     },
-    addConfirm() {
+    addConfirm () {
       this.isAdd = false
       const province = provinceList[this.province]  // 获取省数据
       const city = province.childrenList[this.city]  // 获取市数据
@@ -106,15 +106,15 @@ export default {
       })
       this.resetForm()
     },
-    addCancel() {
+    addCancel () {
       this.isAdd = false
       this.resetForm()
     },
-    edit(row, index) {
+    edit (row, index) {
       this.isEdit = true
       this.currentIndex = index
     },
-    editConfirm() {
+    editConfirm () {
       this.isEdit = false           
       const province = provinceList[this.province]
       const city = province.childrenList[this.city]
@@ -127,23 +127,23 @@ export default {
       this.tableData[this.currentIndex].nativePlace = this.editForm.nativePlace
       this.resetForm()
     },
-    editCancel() {
+    editCancel () {
       this.isEdit = false
       this.resetForm()
     },
-    resetForm() {
+    resetForm () {
       this.province = ''
       this.city = ''
       this.area = ''
     },
-    chooseProvince(index) {
+    chooseProvince (index) {
       // this.province = index  
       this.cityList = provinceList[index].childrenList
       this.areaList = []
       this.city = ''
       this.area = ''
     },
-    chooseCity(index) {
+    chooseCity (index) {
       // this.city = index  
       this.areaList = this.cityList[index].childrenList
       this.area = ''

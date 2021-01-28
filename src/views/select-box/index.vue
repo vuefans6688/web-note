@@ -4,13 +4,13 @@
   　　<input @input="checkAll" v-model="checked" type="checkbox">
   　　<span>全选 / 取消</span>
     </div>
-    <ul class="item-list">
+    <ul>
   　　<li v-for="(item, index) in list" :key="index">
   　　　<input v-model="checkValue" :value="item.id" type="checkbox">
   　　　<span>{{ item.name }}</span>
   　　　<span>{{ item.age }}</span>
   　　　<span>{{ item.money }}元</span>
-  　　　<button @click="remove(item.id)">删除</button>
+  　　　<button @click="removeItem(item.id)">删除</button>
   　　</li>
     </ul>
   </div>
@@ -41,7 +41,7 @@ export default {
         })
       }
     },
-    remove (id) {
+    removeItem (id) {
       const index = this.list.findIndex(item => item.id === id)
       this.list.splice(index, 1)
     }

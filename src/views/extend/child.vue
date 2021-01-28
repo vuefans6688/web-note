@@ -8,7 +8,7 @@ import parent from './parent'
     extends: parent,
     data () {
       return {
-        text: '我要继承父组件'
+        text: '我要继承parent组件'
       }
     }
   }

@@ -5,7 +5,7 @@ $primary-color: #409eff;
   color: #ffffff;
 }
 
-@mixin alert($background, $text-color) {
+@mixin alert ($background, $text-color) {
   background-color: $background;
   color: $text-color;
   a {

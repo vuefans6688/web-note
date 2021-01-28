@@ -1,7 +1,7 @@
 <template>
   <div class="clock">
     <div class="container">
-      <el-button type="primary" @click="handleClick">{{ buttonText }}</el-button>
+      <el-button @click="handleClick" type="primary">{{ buttonText }}</el-button>
       <span class="now-time">当前时间: {{ now | dateFilter }}</span>
     </div>   
   </div>
@@ -13,8 +13,7 @@ export default {
   data () {
     return {
       now: new Date(),
-      start: false,
-      interval: null
+      start: false
     }
   },
   methods: {
@@ -22,19 +21,13 @@ export default {
       this.start = !this.start
     },
     startClock () {
-      clearInterval(this.interval)
+      clearInterval(this.intervalId)
       if (this.start) {
-        this.interval = setInterval(() => {
+        this.intervalId = setInterval(() => {
           this.now = new Date()
         }, 1000)
       }
     }
-  },
-  mounted () {
-    this.startClock()
-  },
-  beforeDestroy () {
-    clearInterval(this.interval)
   },
   watch: {
     start () {
@@ -45,6 +38,12 @@ export default {
     buttonText () {
       return this.start ? '停止' : '开始'
     }
+  },
+  mounted () {
+    this.startClock()
+  },
+  beforeDestroy () {
+    clearInterval(this.intervalId)
   }  
 }
 </script>

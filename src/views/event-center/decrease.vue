@@ -5,16 +5,16 @@
 </template>
 
 <script>
-import eventBus from './eventBus'
+import bus from './bus'
 export default {
-  data() {
+  data () {
     return {
       message: '加油站'
     }
   },
-  mounted() {
+  mounted () {
     // 用$on监听事件，并通过回调方法获取数据
-    eventBus.$on('event-target', value => {
+    bus.$on('event-target', value => {
       this.message = value
     })
   }

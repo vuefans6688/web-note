@@ -58,7 +58,7 @@ git config –global user.email 'xxx@xx.xxx'
 $ git config [--global] user.name "[name]"
 $ git config [--global] user.email "[email address]"
 
-增加删除⽂文件
+增加删除文件
 
 # 添加指定文件到暂存区
 

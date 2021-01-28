@@ -21,7 +21,7 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       tableData: [
         {
@@ -31,7 +31,7 @@ export default {
     }
   },
   methods: {
-    statusChange(index) {
+    statusChange (index) {
       setTimeout(() => {
         this.tableData[index].status = (this.tableData[index].status + 1) % 3
       }, 1000)
@@ -39,7 +39,7 @@ export default {
   },
   filters: {
     // 类型转换
-    statusFilter(status) {
+    statusFilter (status) {
       const statusMap = {
         0: 'danger',
         1: 'success',
@@ -48,7 +48,7 @@ export default {
       return statusMap[status]
     },
     // 状态转换
-    formatStatus(status) {
+    formatStatus (status) {
       const statusMap = {
         0: '禁用',
         1: '启用',

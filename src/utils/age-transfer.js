@@ -5,7 +5,7 @@ export function getCurrentMonthDays(month, year) {
   if (largeMonth.includes(month)) {
     transDays = 31
   } else if (month === 2) {
-    transDays = year % 2 === 0 && year % 100 !== 0 || year % 400 === 0 ? 29 : 28
+    transDays = year % 4 === 0 && year % 100 !== 0 || year % 400 === 0 ? 29 : 28
   }
   return transDays
 }
@@ -14,14 +14,14 @@ export function calculateFromBirth(birthDate) {
   if (!birthDate) {
     return ''
   }
-  const birthYear = birthDate.substr(0, 4)
-  const birthMonth = birthDate.substr(5, 2)
-  const birthDay = birthDate.substr(8, 2)
-  const nowYear = new Date().getFullYear() - birthYear
-  const nowMonth = new Date().getMonth() + 1 - birthMonth
-  const nowDay = new Date().getDate() - birthDay
+  let birthYear = birthDate.substr(0, 4)
+  let birthMonth = birthDate.substr(5, 2)
+  let birthDay = birthDate.substr(8, 2)
+  let nowYear = new Date().getFullYear() - birthYear
+  let nowMonth = new Date().getMonth() + 1 - birthMonth
+  let nowDay = new Date().getDate() - birthDay
   // 获取当前月天数
-  const currentDay = getCurrentMonthDays(birthMonth, birthYear)
+  let currentDay = getCurrentMonthDays(birthMonth, birthYear)
   if (nowDay < 0) {
     nowMonth -= 1
     nowDay += currentDay

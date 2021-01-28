@@ -1,6 +1,6 @@
 <template>
   <div class="input-item">
-    文本内容: <el-input v-model="message" size="small"></el-input>
+    消息: <el-input v-model="message" size="small"></el-input>
     <p>{{ message }}</p>
   </div>
 </template>

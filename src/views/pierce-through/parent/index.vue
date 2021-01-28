@@ -15,11 +15,11 @@ export default {
   props: {
     name: {
       type: String,
-      default: '默认值'
+      default: 'default'
     },
     age: {
       type: String,
-      default: '默认值'
+      default: 'default'
     }
   }
 }
