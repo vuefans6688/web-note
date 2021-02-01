@@ -1,4 +1,4 @@
-// storage封装全局数据key
+// 用storage封装全局数据key
 
 const STORAGE_KEY = 'admin-token'
 
@@ -40,9 +40,8 @@ export default {
     return JSON.parse(window.sessionStorage.getItem(STORAGE_KEY) || '{}')
   },
   /**
-   * 删除模块的key
-   * @param key 
-   * @param module 
+   * @param key 删除模块的key
+   * @param module 模块
    */
   clearSession (key, module) {
     let object = this.getStorage()

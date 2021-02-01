@@ -9,18 +9,21 @@ import moment from 'moment'
 import VueCompositionApi from '@vue/composition-api'
 import Vant from 'vant'
 import 'vant/lib/index.css'
-import axios from 'axios'
+// import axios from 'axios'
+// 自定义封装axios插件
+import httpConfig from './plugin'
+
+Vue.use(httpConfig)
+
+// Vue.prototype.$http = axios
 
 Vue.use(Vant)
 Vue.use(VueCompositionApi)
 Vue.use(ElementUI)
+
 Vue.config.productionTip = false
 
-Vue.filter('dateFilter', (value, pattern = 'YYYY-MM-DD HH:mm:ss') => {
-  return moment(value).format(pattern)
-})
-
-Vue.prototype.$http = axios
+Vue.filter('dateFilter', (value, pattern = 'YYYY-MM-DD HH:mm:ss') => moment(value).format(pattern))
 
 new Vue({  
   router,

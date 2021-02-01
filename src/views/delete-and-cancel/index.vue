@@ -4,7 +4,7 @@
       <span>{{ index + 1 }}、</span>
       <span>{{ menu.message }}</span>
       <span @click="confirmDelete(menu.id)" :class="menu.isCancelDelete ? 'confirm' : 'cancel'">
-        {{ menu.isCancelDelete ? '删除' : '取消删除' }}
+        {{ menu.isCancelDelete ? '删除' : '取消' }}
       </span>
     </div>
   </div>

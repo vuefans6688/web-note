@@ -13,9 +13,7 @@ export default {
       obj.name = '波'
     }, 2000)
     const { name } = toRefs(obj)
-    return {
-      name
-    }
+    return { name }
   }
 }
 </script>

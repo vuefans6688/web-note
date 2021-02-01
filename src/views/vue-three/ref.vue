@@ -14,9 +14,7 @@ export default {
     setTimeout(() => {
       name.value = '皮'
     }, 2000)
-    return { 
-      name 
-    }
+    return { name }
   }
 }
 </script>

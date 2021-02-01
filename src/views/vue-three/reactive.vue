@@ -13,9 +13,7 @@ export default {
     setTimeout(() => {
       obj.name = '波'
     }, 2000)
-    return { 
-      obj 
-    }
+    return { obj }
   }
 }
 </script>

@@ -13,9 +13,7 @@ export default {
     function handleClick() {
       emit('change')
     }
-    return {
-      handleClick
-    }
+    return { handleClick }
   }
 }
 </script>

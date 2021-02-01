@@ -4,6 +4,7 @@ const path = require('path')  // 引入path工具包
 // __dirname 代表当前文件的绝对路径
 const resolve = dir => path.join(__dirname, dir)  
 
+// webpack开发者自己写的配置，vue-cli会把开发者写的配置合并到内置的webpack配置中
 module.exports = {
   // 如果你不需要使用eslint，把lintOnSave设为false即可
   lintOnSave: false,
@@ -22,7 +23,7 @@ module.exports = {
     // 设置默认端口
     port: 8080,
     // 设置代理
-    proxy: {
+    // proxy: {
       // '/api': {
       //   // 目标API地址
       //   target: 'https://autumnfish.cn/heimamm_server',
@@ -33,13 +34,6 @@ module.exports = {
       //   // 是否跨域，将主机标头的原点更改为目标URL
       //   changeOrigin: true
       // }
-
-      // '/service': {
-      //   target: 'http://his.aokaoyun.com',
-      //   changeOrigin: true
-      // }
-
-
-    }
+    // }
   }
 }

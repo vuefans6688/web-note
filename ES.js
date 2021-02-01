@@ -1640,6 +1640,7 @@ getCaption('http://www.baidu.com?123', '?')  // 123
 
 // 封装axios
 import axios from 'axios'
+import { response } from 'express'
 const ERR_OK = 0
 function request(url) {
   return function (params) {
@@ -3031,26 +3032,6 @@ function symmetricArray(arr) {
 }
 symmetricArray(['one', 'two', 'three'])  // ["one", "two", "three", "three", "two", "one"]
 
-// 删除和撤销删除
-class DeleteOrCancel {
-  constructor (arr) {
-    this.arr = arr
-    this.deleteArray = []
-  }
-  // 删除
-  remove (value) {
-    this.arr = this.arr.filter(item => item !== value)
-    this.deleteArray.push(value)
-  }
-  // 取消删除
-  cancel () {
-    const value = this.deleteArray.pop()
-    this.arr.push(value)
-    return value
-  }
-}
-new DeleteOrCancel(['面向对象编程', '类的继承', '原型和原型链', '构造函数'])
-
 // 已知一个字符串对象中，英语单词用各种非字母字符分割，统计单词个数
 // 传入: 'Yes, she*is%my@love.'
 // 规律: 当前面一个字符是字母，后面一个字符是非字母的时候，这就是一个单词
@@ -3538,23 +3519,23 @@ f()  // 3
 //   }.bind(this), 3000)
 // }
 
-// for (let i = 0; i < li.length; i++) {
-//   li[i].index = i
-//   li[i].onclick = function() {
-//     console.log(this.index)
-//   }
-// }
+for (let i = 0; i < li.length; i++) {
+  li[i].index = i
+  li[i].onclick = function() {
+    console.log(this.index)
+  }
+}
 
 // 立即执行函数就是只会执行一次函数
 // 立即执行函数也称为小闭包，因为立即执行函数里面的任何一个函数都可以使用它的i变量
-// for (let i = 0; i < li.length; i++) {
-//   // 利用for循环穿件4个立即执行函数
-//   ((i) => {
-//     li[i].onclick = function() {
-//       console.log(i)
-//     }
-//   })(i)
-// }
+for (let i = 0; i < li.length; i++) {
+  // 利用for循环穿件4个立即执行函数
+  ((i) => {
+    li[i].onclick = function() {
+      console.log(i)
+    }
+  })(i)
+}
 
 // 闭包的主要作用: 延伸了变量的作用域
 // 闭包是一个函数(一个作用域可以访问另一个函数的局部变量)
@@ -3805,7 +3786,7 @@ function pullOutRadish(n) {
 }
 pullOutRadish(500)  // 32
 
-// 有用户输入数字n，计算3/2 + 4/3 + 5/4 + ... + (n+1)/n的结果
+// 有用户输入数字n，计算3 / 2 + 4 / 3 + 5 / 4 + ... + (n + 1) / n的结果
 function fraction(n) {
   // 和的累加器
   let sum = 0
@@ -3937,23 +3918,6 @@ function getPassword(num, digit) {
   return arr.join('')
 }
 getPassword(1456, 4)  // "1096"
-
-function Student(name, sex) {
-  this.name = name
-  this.sex = sex
-}
-Student.prototype = {
-  constructor: Student,
-  study () {
-    return '好好学习，天天向上'
-  },
-  eat () {
-    return '吃得苦中苦，方为人上人'
-  }
-}
-const student = new Student('张三', '男')
-student.study()  // 好好学习，天天向上
-student.eat()  // 吃得苦中苦，方为人上人
 
 Array.prototype.getSum = function() {
   let sum = 0
@@ -4254,31 +4218,6 @@ function fraction(num) {
 }
 fraction(100)  // 0.688172179310195
 
-// created () {  // 在这个钩子函数中取执行获取数据的方法，将验证方法作为回调传入
-//   this.getdata(check)
-// }
-// methods: {  // 在这里面，首先你得有created钩子函数中用到的那两个方法
-//   getdata (callback) {  // 向后端请求用户信息
-//     // 这里我们假设是从后端获取数据
-//     setTimeout(() => {
-//     // 假设我们获取到数据info
-//       const info = {
-//         id: 1,
-//         name: '张三'
-//       }
-//     // 得到数据以后执行函数方法
-//      callback(info)  // 这个就是回调函数，得到用户信息后去验证他的权限
-//     }, 1000)
-//   }
-//   check (data) {  // 验证用户权限
-//     if (data.id === 1) {  // 验证权限的条件，根据实际设定
-//       console.log('验证成功，可以通过')  // 权限通过，可以做什么
-//     } else {
-//       console.log('验证失败，禁止通行')  // 没有权限，可以做什么
-//     }
-//   }
-// }
-
 class Father {
   constructor (x, y) {
     this.x = x
@@ -4288,7 +4227,7 @@ class Father {
     return this.x + this.y
   }
 }
-// extends关键字是子类继承父类
+// extends关键字是子类(Son)继承父类(Father)
 class Son extends Father {  
   constructor (x, y) {
     // super关键字调用了父类的构造函数
@@ -4517,6 +4456,39 @@ function commonMultiple(n1, n2) {
 }
 commonMultiple(12, 8)  // 4
 
+function continueKeyword (num) {
+  let sum = 0
+  let str = '1～20之间的偶数有：'
+  // 把1～20之间的偶数进行累加
+  for (let i = 1; i < num; i++) {
+    // 判断i是否为偶数，如果模不等于0，为奇数，结束当前循环，进入下一次循环
+    if (i % 2 !== 0) {
+      continue
+    }
+    // 如果执行continue语句，循环体内的该行以及后面的代码都不会被执行
+    sum += i
+    str += i + ' '
+  }
+  return str += '\n这些偶数的和为：' + sum
+}
+continueKeyword(20)     
+
+function breakKeyword (num) {
+  let sum = 0
+  let str = '1～20之间的被累加的偶数有：'
+  // 把1～20之间的偶数进行累加
+  for (let i = 2; i < num; i += 2) {
+    if (sum > 60) {
+      // 执行break语句后，整个循环立刻停止结束执行
+      break
+    }
+    sum += i
+    str += i + ' '
+  }
+  return str += '\n这些偶数的和为：' + sum
+}
+breakKeyword(20)
+
 // 输入两个数n和a，如果n === 3，a === 2，输出2 + 22 + 222的值（不用输出式子）
 // 如果n === 4，a === 3，输出3 + 33 + 3333的值
 function getAccumulation(n, a) {
@@ -4547,13 +4519,17 @@ function palindromeNumber(min, max) {
 }
 palindromeNumber(10000, 100000)
 
-// const pathList = ['/my', '/find', '/user-info']
-// const obj = { redirect: '/company' }
-// const { redirect } = obj
-// if (redirect) {
-//   const isExist = pathList.some(item => redirect.indexOf(item) === 0)
-//   if (isExist) {}
-// }
+const pathList = ['/my', '/find', '/user']
+const pathObject = { 
+  redirect: '/video' 
+}
+const { redirect } = pathObject
+if (redirect) {
+  const isExist = pathList.some(item => redirect.indexOf(item) === 0)
+  if (isExist) {
+    return this.$router.push(redirect)
+  }
+}
 
 // 它的优秀之处并非原创，它的原创之处并不优秀
 let list = [
@@ -4561,20 +4537,20 @@ let list = [
   { name: '隆', age: 20, sex: '男' },
   { name: '春丽', age: 19, sex: '女' }
 ]
-function getter(list) {
+function mapGetter(list) {
   return list.map(item => {
     item.name = '街霸' + item.name
     return item
   })
 }
-getter(list)
+mapGetter(list)
 
 let list = [
   { name: '肯', age: 20, sex: '男' },
   { name: '隆', age: 20, sex: '男' },
   { name: '春丽', age: 19, sex: '女' }
 ]
-function mapString(list) {
+function handleMap(list) {
   return list.map(item => {
     return {
       name: '街霸' + item.name,
@@ -4583,4 +4559,58 @@ function mapString(list) {
     }
   })
 }
-mapString(list)
+handleMap(list)
+
+// 使用class类封装axios
+import axios from 'axios'
+class HttpRequest {
+  constructor (options) {
+    this.defaults = {
+      baseURL: ''
+    }
+    this.defaults = Object.assign(this.defaults, options)
+  }
+  interceptors (install) {
+    // 拦截请求，给请求的数据或者头信息添加一些数据
+    install.interceptors.request.use(
+      config => {
+        let token = localStorage.getItem('token')
+        // 判断是否存在token，如果存在的话，则每个http header都加上token
+        if (token) {
+          config.headers.authorization = `Bearer ${token}`
+        }
+        return config
+      },
+      error => {
+        return Promise.reject(error)
+      }
+    )
+    // 拦截响应，给响应的数据添加一些数据
+    install.interceptors.response.use(
+      response => {
+        const { data, status } = response
+        return data
+      },
+      error => {
+        return Promise.reject(error)
+      }
+    )
+  }
+  request (options) {
+    options = Object.assign(this.defaults, options)
+    // 请求的子实例
+    const instance = axios.create(options)
+    this.interceptors(instance)
+    return instance
+  }
+}
+// 创建axios实例
+const instance = new HttpRequest({
+  baseURL: '/api'
+})
+// 请求的axios实例
+const http = instance.request()
+// 使用http
+export function getUserInfo() {
+  return http.get('/user')
+}

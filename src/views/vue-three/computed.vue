@@ -6,7 +6,6 @@
 </template>
 
 <script>
-// computed计算属性
 import { ref, computed } from '@vue/composition-api'
 export default {
   setup () {

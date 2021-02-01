@@ -35,8 +35,6 @@ export default {
     provide('changeName', value => {
       name.value = value
     })
-
-    return {}
   }
 }
 </script>

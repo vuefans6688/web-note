@@ -13,9 +13,7 @@ export default {
     setTimeout(() => {
       obj.age = 20
     }, 2000)
-    return {
-      age
-    }
+    return { age }
   }
 }
 </script>

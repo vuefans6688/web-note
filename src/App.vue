@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div id="app">
     <router-view />
     <router-view name="namedView"></router-view>
@@ -10,8 +10,9 @@
 
 <script>
 export default {
-  name: 'app'
-}
+  name: 'app' 
+} 
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+</style>

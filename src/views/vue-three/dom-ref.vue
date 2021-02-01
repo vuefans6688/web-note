@@ -7,7 +7,7 @@
 <script>
 import { onMounted, ref } from '@vue/composition-api'
 export default {
-  // compositionAPI语法下，通过ref获取真实DOM元素节点
+  // 通过ref获取真实DOM元素节点
   setup () {
     
     const judge = ref(null)
@@ -16,9 +16,7 @@ export default {
       console.log(judge.value)
     })
 
-    return {
-      judge
-    }
+    return { judge }
   }
 }
 </script>
