@@ -3070,38 +3070,73 @@ function changeOfPosition(num1, num2) {
 changeOfPosition(10, 20)  //  20 10
 
 // 数组冒泡排序
-function bubbleSort(arr) {
-  for (let i = 0; i < arr.length - 1; i++) { 
-    for (let j = i + 1; j < arr.length; j++) {
-      // 如果前面的数据比后面的大就交换 
-      if (arr[i] > arr[j]) {  
-        let temp = arr[i]
-        arr[i] = arr[j]
-        arr[j] = temp
-      }
-    }
-  }
-  return arr
-} 
-bubbleSort([1, 3, 8, 2, 5])  // [1, 2, 3, 5, 8]
-
-// 数组冒泡排序
-function bubbleSort(arr) {
+function bubbleSort(array) {
   // 外层循环控制趟数
-  for (let i = 0; i < arr.length - 1; i++) {
+  for (let i = 0; i < array.length - 1; i++) {
     // 内层循环控制每趟的交换次数
-    for (let j = 0; j < arr.length - i - 1; j++) {
+    for (let j = 0; j < array.length - i - 1; j++) {
       // 交换两个变量的值，前一个和后一个数组元素相比较
-      if (arr[j] > arr[j + 1]) {
-        let temp = arr[j]
-        arr[j] = arr[j + 1]
-        arr[j + 1] = temp
+      if (array[j] > array[j + 1]) {
+        let temp = array[j]
+        array[j] = array[j + 1]
+        array[j + 1] = temp
       }
     }
   }
-  return arr
+  return array
 }
 bubbleSort([1, 3, 8, 2, 5])  // [1, 2, 3, 5, 8]
+
+// 数组快速排序
+function quickSort(array) {
+  if (array.length <= 1) {
+    return array
+  }
+  let centerValue = array[0]
+  array.shift()
+  let leftArray = []
+  let rightArray = []
+  for (let i = 0; i < array.length; i++) {
+    if (array[i] <= centerValue) {
+      leftArray.push(array[i])
+    } else {
+      rightArray.push(array[i])
+    }
+  }
+  let leftResult = quickSort(leftArray)
+  let rightResult = quickSort(rightArray)
+  return leftResult.concat(centerValue, rightResult)
+}
+quickSort([57, 68, 59, 52, 72, 28, 96, 33, 24])
+
+// 数组归并排序
+function merge(left, right) {
+	const result = []
+	// 两个子序列进行比较，从小到大放入新的序列result中
+	while (left.length > 0 && right.length > 0) {
+		// 将较小的放入result，并改变left或者right的长度
+		if (left[0] < right[0]) {
+			result.push(left.shift())
+		} else {
+			result.push(right.shift())
+		}
+	}
+	return result.concat(left, right)
+}
+function mergeSort(array) {
+	// 数组长度为1时退出
+	if (array.length < 2) {
+		return array
+	}
+	// 将数组分为两个子数组
+	const middle = Math.floor(array.length / 2)
+	const left = array.slice(0, middle)
+	const right = array.slice(middle)
+	// 递归
+	return merge(mergeSort(left), mergeSort(right))
+}
+// 测试
+mergeSort([45, 56, 12, 78, 23, 89])
 
 // 判断是否是闰年
 function isLeapYear(year) {
@@ -3119,14 +3154,14 @@ backDay(1999)  // "当前年份为平年，2月份有28天"
 backDay(2000)  // "当前年份是闰年，2月份有29天"
 
 // 数组翻转
-function arrayReverse(arr) {
-  for (let i = 0; i < arr.length / 2; i++) {
-    let temp = arr[i]
+function arrayReverse(array) {
+  for (let i = 0; i < array.length / 2; i++) {
+    let temp = array[i]
     // 如果不减i，那么永远是第一个元素和最后一个元素进行交换
-    arr[i] = arr[arr.length - 1 - i]  
-    arr[arr.length - 1 - i] = temp
+    array[i] = array[array.length - 1 - i]  
+    array[array.length - 1 - i] = temp
   }
-  return arr
+  return array
 }
 arrayReverse([1, 2, 3, 4, 5])  // [5, 4, 3, 2, 1]
 
@@ -3303,7 +3338,7 @@ stringPosition('abcoefoxyozzopp')  // "出现最多的字符是o, 一共出现�
 function lowerCase(str) {
   let arr = str.split('')
   let code = ''
-  // 使用for循环遍历数组
+  // 遍历数组
   for (let i = 0; i < arr.length; i++) {
     if (arr[i] >= 'A' && arr[i] <= 'Z') {
       code += arr[i].toLowerCase()
@@ -3319,7 +3354,7 @@ lowerCase('Hello World!')  // "hello world!"
 function upperCase(str) {
   let arr = str.split('')
   let code = ''
-  // 使用forEach方法遍历数组
+  // 遍历数组
   arr.forEach(value => {
     if (value >= 'a' && value <= 'z') {
       code += value.toUpperCase()
@@ -3341,13 +3376,7 @@ function firstUppercase(str) {
 }
 firstUppercase('hOw aRe yOu')  // How Are You
 
-// 找出第一个months小于7的项目
-let cats = [
-  { name: 'Mojo', months: 84 },
-  { name: 'Mao-Mao', months: 34 },
-  { name: 'Pickles', months: 6 },
-  { name: 'Waffles', months: 4 }
-]
+// 找出第一个months小于7的猫
 function minMonth(pets) {
   let min = pets[0]
   for (let i = 0; i < pets.length; i++) {
@@ -3357,14 +3386,14 @@ function minMonth(pets) {
   }
   return min
 }
-minMonth(cats)  // { name: 'Waffles', months: 4 }
-
 let cats = [
   { name: 'Mojo', months: 84 },
   { name: 'Mao-Mao', months: 34 },
   { name: 'Pickles', months: 6 },
   { name: 'Waffles', months: 4 }
 ]
+minMonth(cats)  // { name: 'Waffles', months: 4 }
+
 function minMonth(pets) {
   let min = pets[0]
   for (const item of pets) {
@@ -3374,14 +3403,14 @@ function minMonth(pets) {
   }
   return min
 }
-minMonth(cats)  // { name: 'Waffles', months: 4 }
-
 let cats = [
   { name: 'Mojo', months: 84 },
   { name: 'Mao-Mao', months: 34 },
   { name: 'Pickles', months: 6 },
   { name: 'Waffles', months: 4 }
 ]
+minMonth(cats)  // { name: 'Waffles', months: 4 }
+
 function minMonth(pets) {
   let min = pets[0]
   for (const key in pets) {
@@ -3391,14 +3420,14 @@ function minMonth(pets) {
   }
   return min
 }
-minMonth(cats)  // { name: 'Waffles', months: 4 }
-
 let cats = [
   { name: 'Mojo', months: 84 },
   { name: 'Mao-Mao', months: 34 },
   { name: 'Pickles', months: 6 },
   { name: 'Waffles', months: 4 }
 ]
+minMonth(cats)  // { name: 'Waffles', months: 4 }
+
 function minMonth(pets) {
   let min = pets[0]
   for (const [key] of Object.entries(pets)) {
@@ -3408,39 +3437,45 @@ function minMonth(pets) {
   }
   return min
 }
-minMonth(cats)  // { name: 'Waffles', months: 4 }
-
 let cats = [
   { name: 'Mojo', months: 84 },
   { name: 'Mao-Mao', months: 34 },
   { name: 'Pickles', months: 6 },
   { name: 'Waffles', months: 4 }
 ]
+minMonth(cats)  // { name: 'Waffles', months: 4 }
+
 function getCatsMinMonth(pets) {
   return pets.sort((a, b) => a.months - b.months)[0]
 }
-getCatsMinMonth(cats)  // { name: 'Waffles', months: 4 }
-
 let cats = [
   { name: 'Mojo', months: 84 },
   { name: 'Mao-Mao', months: 34 },
   { name: 'Pickles', months: 6 },
   { name: 'Waffles', months: 4 }
 ]
+getCatsMinMonth(cats)  // { name: 'Waffles', months: 4 }
+
 function minMonth(pets) {
   return pets.reduce((pre, cur) => pre.months < cur.months ? pre : cur)
 }
+let cats = [
+  { name: 'Mojo', months: 84 },
+  { name: 'Mao-Mao', months: 34 },
+  { name: 'Pickles', months: 6 },
+  { name: 'Waffles', months: 4 }
+]
 minMonth(cats)  // { name: 'Waffles', months: 4 }
 
+function monthSum(pets) {
+  return pets.reduce((total, cur) => total += cur.months, 0)
+}
 let cats = [
   { name: 'Mojo', months: 84 },
   { name: 'Mao-Mao', months: 34 },
   { name: 'Waffles', months: 4 },
   { name: 'Pickles', months: 6 }
 ]
-function monthSum(pets) {
-  return pets.reduce((total, cur) => total += cur.months, 0)
-}
 monthSum(cats)  // 128
 
 class Father {
@@ -3448,7 +3483,7 @@ class Father {
     this.x = x
     this.y = y
   }
-  sum () {
+  summation () {
     return this.x + this.y
   }
 }
@@ -3463,15 +3498,15 @@ class Son extends Father {  // 子类继承父类
   }
 }
 let son = new Son(1, 2)
-son.sum()  // 3
+son.summation()  // 3
 let son = new Son(2, 1)
 son.subtract()  // 1
 
-Array.prototype.getSum = function() {
+Array.prototype.summation = function () {
   return this.reduce((item, current) => item += current, 0)
 }
-let arr = [1, 2, 3]
-arr.getSum()  // 6
+let arrays = [1, 2, 3]
+arrays.summation()  // 6
 
 // call()可以调用函数，同时还可以改变this的指向
 function changeThis(x, y) {
@@ -4563,6 +4598,7 @@ handleMap(list)
 
 // 使用class类封装axios
 import axios from 'axios'
+import { merge } from 'lodash'
 class HttpRequest {
   constructor (options) {
     this.defaults = {
