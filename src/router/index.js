@@ -175,7 +175,7 @@ const router = new VueRouter({
         {
           path: 'input-com',
           component: () => import('@/views/input/input-com'),
-          name: 'input-com'
+          name: 'InputCom'
         }
       ]
     },
@@ -196,7 +196,7 @@ const router = new VueRouter({
     {
       path: '/my-like',
       meta: {
-        title: '收藏'
+        title: '我的最爱'
       },
       component: () => import('@/views/my-like')
     },
@@ -341,10 +341,6 @@ const router = new VueRouter({
       component: () => import('@/views/extend/child')
     },
     {
-      path: '/extend/about',
-      component: () => import('@/views/extend/about')
-    },
-    {
       path: '/render-action',
       component: () => import('@/views/render-action')
     },
@@ -435,6 +431,14 @@ const router = new VueRouter({
           component: () => import('@/views/module/western-formulation/new-western-formulation')
         },
       ]
+    },
+    {
+      path: '/mini-games',
+      component: () => import('@/views/mini-games')
+    },
+    {
+      path: '/victory-defeat',
+      component: () => import('@/views/victory-defeat')
     }
   ]
 })

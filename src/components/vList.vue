@@ -20,33 +20,33 @@ export default {
   props: {
     list: {
       type: Array,
-      default() {
+      default () {
         return []
       }
     }
   },
-  data() {
+  data () {
     return {
       showIcon: false,
       currentIndex: 0
     }
   },
   methods: {
-    changeOver(index) {
+    changeOver (index) {
       this.showIcon = true
       this.currentIndex = index
     },
-    changeOut(index) {
+    changeOut (index) {
       this.showIcon = false
       this.currentIndex = index
     },
-    reply(index) {
+    reply (index) {
       this.handleReply(index)
     },
-    handleReply(index) {
+    handleReply (index) {
       this.$emit('reply', index)
     },
-    removeComment(index) {
+    removeComment (index) {
       const isDelete = confirm('确定要删除吗?')
       if (!isDelete) {
         return

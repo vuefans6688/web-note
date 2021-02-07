@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {      
       fullName: '双儿'
     }

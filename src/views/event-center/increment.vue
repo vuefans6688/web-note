@@ -1,6 +1,6 @@
 <template>
   <div class="increment">
-    <p @click="handle">汽车</p>
+    <p @click="handleCar">汽车</p>
   </div>
 </template>
 
@@ -9,13 +9,13 @@ import bus from './bus'
 export default {
   data () {
     return {
-      info: '我要加油'
+      message: '我要加油'
     }
   },
   methods: {
-    handle () {
+    handleCar () {
       // 通过emit触发事件，并传值
-      bus.$emit('event-target', this.info)
+      bus.$emit('event-target', this.message)
     }
   }
 }

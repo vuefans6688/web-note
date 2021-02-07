@@ -13,7 +13,7 @@ export default {
       default: 'asdf'
     }
   },
-  data() {
+  data () {
     return {
       fontSizeMin: 26,
       fontSizeMax: 24,
@@ -33,17 +33,17 @@ export default {
   },
   methods: {
     // 生成一个随机数
-    randomNumber(min, max) {
+    randomNumber (min, max) {
       return Math.floor(Math.random() * (max - min) + min)
     },
     // 生成一个随机的颜色
-    randomColor(min, max) {
+    randomColor (min, max) {
       let r = this.randomNumber(min, max)
       let g = this.randomNumber(min, max)
       let b = this.randomNumber(min, max)
       return `rgb(${r}, ${g}, ${b})`
     },
-    drawPicture() {
+    drawPicture () {
       let canvas = document.getElementById('canvas')
       let ctx = canvas.getContext('2d')
       // 绘制背景
@@ -59,7 +59,7 @@ export default {
       this.drawLine(ctx)
       this.drawDot(ctx)
     },
-    drawText(ctx, txt, i) {
+    drawText (ctx, txt, i) {
       ctx.fillStyle = this.randomColor(this.colorMin, this.colorMax)
       ctx.font = this.randomNumber(this.fontSizeMin, this.fontSizeMax) + 'px SimHei'  // 字体大小
       ctx.textBaseline = 'alphabetic'  // 基线对齐
@@ -74,7 +74,7 @@ export default {
       ctx.rotate(-deg * Math.PI / 180)
       ctx.translate(-x, -y)
     },
-    drawLine(ctx) {
+    drawLine (ctx) {
       // 绘制干扰线
       for (let i = 0; i < 8; i++) {
         ctx.strokeStyle = this.randomColor(this.lineColorMin, this.lineColorMax)
@@ -85,7 +85,7 @@ export default {
         ctx.closePath()  // 结束闭合路径
       }
     },
-    drawDot(ctx) {
+    drawDot (ctx) {
       // 绘制干扰点
       for (let i = 0; i < 100; i++) {
         ctx.fillStyle = this.randomColor(0, 255)
@@ -98,11 +98,11 @@ export default {
     }
   },
   watch: {
-    verify() {
+    verify () {
       this.drawPicture()
     }
   },
-  mounted() {
+  mounted () {
     this.drawPicture()
   }
 }

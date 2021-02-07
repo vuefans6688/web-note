@@ -3338,7 +3338,7 @@ stringPosition('abcoefoxyozzopp')  // "出现最多的字符是o, 一共出现�
 function lowerCase(str) {
   let arr = str.split('')
   let code = ''
-  // 遍历数组
+  // 用for遍历数组
   for (let i = 0; i < arr.length; i++) {
     if (arr[i] >= 'A' && arr[i] <= 'Z') {
       code += arr[i].toLowerCase()
@@ -3354,7 +3354,7 @@ lowerCase('Hello World!')  // "hello world!"
 function upperCase(str) {
   let arr = str.split('')
   let code = ''
-  // 遍历数组
+  // 用forEach遍历数组
   arr.forEach(value => {
     if (value >= 'a' && value <= 'z') {
       code += value.toUpperCase()

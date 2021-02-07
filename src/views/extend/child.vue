@@ -1,19 +1,21 @@
 <template>
-  <div class="child"></div>
+  <div class="child">
+    <ul>
+      <li v-for="data in datas"></li>
+    </ul>
+  </div>
 </template>
 
 <script>
-import parent from './parent'
   export default {
-    extends: parent,
     data () {
       return {
-        text: '我要继承parent组件'
+        datas: [
+          { id: '01', text: '子组件内容一' },
+          { id: '02', text: '子组件内容二' },
+          { id: '03', text: '子组件内容三' }
+        ]
       }
     }
   }
 </script>
-
-<style lang="scss" scoped>
-
-</style>

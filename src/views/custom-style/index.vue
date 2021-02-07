@@ -1,7 +1,7 @@
 <template>
   <div class="custom-style">
     <p class="theme">自定义主题样式</p>
-    <div class="link">
+    <div class="article">
       <p>这是一个段落!!!</p>
     </div>
     <div class="warning">弹窗警告!!!</div>
@@ -31,7 +31,7 @@ export default {}
   background: $primary-color;
 }
 
-.link {
+.article {
   width: 200px;
   & {
     font-size: 20px;

@@ -16,7 +16,7 @@ export default {
   },
   methods: {
     // 监听input输入事件
-    updateValue(event) {
+    updateValue (event) {
       // 触发父组件的自定义事件
       // target事件属性可返回事件的目标节点(触发该事件的节点)，如生成事件的元素、文档或窗口
       // 将input的value值传给父组件
