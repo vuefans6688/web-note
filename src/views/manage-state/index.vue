@@ -1,6 +1,6 @@
 <template>
   <div class="manage-state">
-    <div class="count">
+    <div class="counter">
       <el-button @click="reduceHandle" :disabled="count < 1" size="small">减1</el-button>
       <span>{{ count }}</span>
       <el-button @click="addHandle" size="small">加1</el-button>
@@ -27,7 +27,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.count {
+.counter {
   margin-top: 20px;
   text-align: center;
   span {

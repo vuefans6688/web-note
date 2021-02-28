@@ -212,6 +212,24 @@ const web = new Web('小米', 20)
 web.run()  // "小米在运行"
 web.work()  // "小米在工作"
 
+// 给Sting加一个用正则表达式求出字符串中有多少个数字的方法
+String.prototype.getCount = function (str) {
+  const reg = /\d/
+  const num = 0
+  while (reg.test(str)) {
+    str = str.replace(reg, '')
+    num++
+  }
+}
+String.prototype.getLength = function () {
+  const reg = /\d/g
+  const result = this.match(reg)
+  return result.length
+}
+const inputValue = prompt('请输入字符串: ')
+const temp = inputValue.getLength()
+console.log('输入的字符串有' + temp + '个数字')
+
 // break 是立即结束语句，并跳出语句，进行下个语句执行
 function breakStatement(n) {
   let array = []
@@ -1409,14 +1427,14 @@ getTwoNumberMax(18, 9)  // 18
 // 数组去重排序  
 function arrayRemoveRepeat(arr) {
   // 定义一个临时数组
-  let result = []
+  let temp = []
   for (let i = 0; i < arr.length; i++) {
-    // 如果当前数组的arr[i]已经保存进了临时数组，那么就跳过
-    if (result.indexOf(arr[i]) < 0) {
-      result.push(arr[i])
+    // 如果当前数组的arr[i]已经保存到临时数组中，那么就跳过
+    if (temp.indexOf(arr[i]) < 0) {
+      temp.push(arr[i])
     }
   }
-  return result.sort((a, b) => a - b)
+  return temp.sort((a, b) => a - b)
 }
 arrayRemoveRepeat([1, 2, 2, 2, 2, 5, 3, 2, 9, 5, 6, 3])  // [1, 2, 3, 5, 6, 9]
 
@@ -3070,20 +3088,20 @@ function changeOfPosition(num1, num2) {
 changeOfPosition(10, 20)  //  20 10
 
 // 数组冒泡排序
-function bubbleSort(array) {
+function bubbleSort(arrays) {
   // 外层循环控制趟数
-  for (let i = 0; i < array.length - 1; i++) {
+  for (let i = 0; i < arrays.length - 1; i++) {
     // 内层循环控制每趟的交换次数
-    for (let j = 0; j < array.length - i - 1; j++) {
+    for (let j = 0; j < arrays.length - i - 1; j++) {
       // 交换两个变量的值，前一个和后一个数组元素相比较
-      if (array[j] > array[j + 1]) {
-        let temp = array[j]
-        array[j] = array[j + 1]
-        array[j + 1] = temp
+      if (arrays[j] > arrays[j + 1]) {
+        let temp = arrays[j]
+        arrays[j] = arrays[j + 1]
+        arrays[j + 1] = temp
       }
     }
   }
-  return array
+  return arrays
 }
 bubbleSort([1, 3, 8, 2, 5])  // [1, 2, 3, 5, 8]
 
@@ -3630,8 +3648,7 @@ deepCopy(newObj, oldObj)
 
 // es6数组去重
 function arrayRemoveRepeat(arr) {
-  let set = new Set(arr)
-  return Array.from(set)
+  return Array.from(new Set(arr))
 }
 arrayRemoveRepeat([1, 2, 2, 3])  // [1, 2, 3]
 

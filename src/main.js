@@ -24,6 +24,13 @@ Vue.use(ElementUI)
 Vue.config.productionTip = false
 
 Vue.filter('dateFilter', (value, pattern = 'YYYY-MM-DD HH:mm:ss') => moment(value).format(pattern))
+Vue.filter('capitalize', value => {
+  if (!value) {
+    return ''
+  }
+  value = value.toString()
+  return value.charAt(0).toUpperCase() + value.slice(1)
+})
 
 new Vue({  
   router,

@@ -169,15 +169,8 @@ const router = new VueRouter({
     },
     {
       path: '/input',
-      component: () => import('@/views/input'),
-      name: 'input',
-      children: [
-        {
-          path: 'input-com',
-          component: () => import('@/views/input/input-com'),
-          name: 'InputCom'
-        }
-      ]
+      name: 'Input',
+      component: () => import('@/views/input')
     },
     {
       path: '/toggle-input',
@@ -439,6 +432,10 @@ const router = new VueRouter({
     {
       path: '/victory-defeat',
       component: () => import('@/views/victory-defeat')
+    },
+    {
+      path: '/global-filter',
+      component: () => import('@/views/global-filter')
     }
   ]
 })

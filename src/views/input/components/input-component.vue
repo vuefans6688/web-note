@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="input-component">
     <!-- <input :value="username" @input="$emit('handle-input', $event.target.value)" v-focus> -->
-    <input :value="username" @input="getUsername" v-focus v-enter-number>
+    <input :value="username" @input="getUsername($event)" v-focus v-enter-number>
   </div>
 </template>
 
@@ -14,7 +14,7 @@ export default {
     }
   },
   methods: {
-    getUsername () {
+    getUsername (event) {
       this.$emit('handle-input', event.target.value)
     }
   },
@@ -29,9 +29,9 @@ export default {
       inserted (el) {
         el.addEventListener('keypress', e => {
           e = e || window.event
-          let charcode = typeof e.charCode === 'number' ? e.charCode : e.keyCode
+          let code = typeof e.charCode === 'number' ? e.charCode : e.keyCode
           let reg = /\d/
-          if (!reg.test(String.fromCharCode(charcode)) && charcode > 9 && !e.ctrlKey) {
+          if (!reg.test(String.fromCharCode(code)) && code > 9 && !e.ctrlKey) {
             if (e.preventDefault) {
               e.preventDefault()
             } else {
@@ -46,12 +46,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-input {
-  width: 300px;
-  height: 25px;
-  line-height: 25px;
-  border: 1px solid #e6e6ee;
-  border-radius: 6px;
-  color: #777;
+.input-component {
+  margin-top: 20px;
+  text-align: center;
+  input {
+    width: 300px;
+    height: 25px;
+    line-height: 25px;
+    border: 1px solid #e6e6ee;
+    border-radius: 6px;
+    color: #777;
+  }
 }
 </style>

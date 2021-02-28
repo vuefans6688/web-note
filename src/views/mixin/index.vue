@@ -1,8 +1,8 @@
 <template>
   <div class="mixin">
-    <el-button type="primary" @click="isShow = !isShow">切换动画</el-button>
+    <el-button @click="isShow = !isShow" type="primary">切换动画</el-button>
     <transition name="bounce">
-      <el-card class="box" v-if="isShow">{{ fullName }}</el-card>
+      <el-card v-if="isShow" class="box">{{ fullName }}</el-card>
     </transition>
     <el-button @click="updateStyle">更新样式</el-button>
     <p :class="a">动态绑定class</p>

@@ -1,30 +1,28 @@
 <template>
   <div class="provide-inject">
-    <provide :count="count" />
-    <el-button size="small" @click="count += 1">Add</el-button>
+    <the-provide :count="count" />
   </div>
 </template>
 
 <script>
-import Provide from './provide'
+import TheProvide from './components/the-provide'
 export default {
-  components: { Provide },
+  components: { TheProvide },
   data () {
     return {
-      count: 1
+      count: 0
     }
   },
-  provide: {
-    count: 1
+  provide () {
+    return {
+      count: this.count
+    }
   }
-  // provide () {
-  //   return {
-  //     count: this.count
-  //   }
-  // }
 }
 </script>
 
 <style lang="scss" scoped>
-
+.provide-inject {
+  text-align: center;
+}
 </style>

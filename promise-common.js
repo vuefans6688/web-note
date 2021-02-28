@@ -1,27 +1,26 @@
 // 手写Promise
-(function (window) {
+(window => {
   const PENDING = 'pending'
   const RESOLVED = 'resolved'
   const REJECTED = 'rejected'
 
-  // Promise构造函数
   // excutor执行器函数(同步执行) 
   function Promise(excutor) {
     // 将当前promise对象保存起来
     const self = this
-    // 给promise对象指定status属性，初始值为pending
+    // 给promise对象指定status属性，初始值为PENDING
     self.status = PENDING
     // 给promise对象指定一个用于存储结果数据的属性
     self.data = undefined
-    // 每个元素的结构: {onResolved() {}, onRejected() {}}
+    // 每个元素的结构: { onResolved () {}, onRejected () {} }
     self.callbacks = []
 
     function resolve(value) {
-      // 如果当前状态不是pending，直接结束
+      // 如果当前状态不是PENDING，直接结束
       if (self.status !== PENDING) {
         return
       }
-      // 将状态修改为resolved
+      // 将状态修改为RESOLVED
       self.status = RESOLVED
       // 保存value数据
       self.data = value
@@ -37,11 +36,11 @@
     }
 
     function reject(reason) {
-      // 如果当前状态不是pending，直接结束
+      // 如果当前状态不是PENDING，直接结束
       if (self.status !== PENDING) {
         return
       }
-      // 将状态修改为rejected
+      // 将状态修改为REJECTED
       self.status = REJECTED
       // 保存value数据
       self.data = reason
@@ -100,7 +99,7 @@
           reject(error)
         }
       }
-      // 当前状态还是pending状态，将回调函数保存起来
+      // 当前状态还是PENDING状态，将回调函数保存起来
       if (self.status === PENDING) {
         self.callbacks.push({
           onResolved () {
@@ -110,12 +109,12 @@
             handle(onRejected)
           }
         })
-      // 如果当前是resolved状态，异步执行onResolved并改变return的promise状态
+      // 如果当前是RESOLVED状态，异步执行onResolved并改变return的promise状态
       } else if (self.status === RESOLVED) {
         setTimeout(() => {
           handle(onResolved)
         })
-      // 如果当前是rejected状态，异步执行onRejected并改变return的promise状态  
+      // 如果当前是REJECTED状态，异步执行onRejected并改变return的promise状态  
       } else {
         setTimeout(() => {
           handle(onRejected)
@@ -159,7 +158,7 @@
     let resolvedCount = 0
     // 返回一个新的promise
     return new Promise((resolve, reject) => {
-      // 遍历promises获取每个promise
+      // 遍历promises并获取每个promise
       promises.forEach((promise, index) => {
         Promise.resolve(promise).then(
           value => {

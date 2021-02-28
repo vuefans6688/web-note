@@ -105,7 +105,7 @@ export default {
       this.currentPage = 1
       this.getTemplateList()
     },
-    makeDateTimeString (timestamp) {
+    makeDateTime (timestamp) {
       const str = '' + timestamp
       return '20' + str.substr(0, 2) + '-' + str.substr(2, 2) + '-' + str.substr(4, 2) + ' ' + str.substr(6, 2) + ':' + str.substr(8, 2) + ':' + str.substr(10, 2)
     },
@@ -132,7 +132,7 @@ export default {
             const data = res.data.items || []
             this.tableData = data.map(value => {
               value.owner_type = value.owner_type ? '通用模板' : '个人模板'
-              value.create_time = this.makeDateTimeString(value.create_time)
+              value.create_time = this.makeDateTime(value.create_time)
               return value
             })
             this.total = res.data.total
