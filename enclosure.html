@@ -11,14 +11,14 @@
     const button = document.querySelector('button')
     button.addEventListener('click', () => {
       const promise = new Promise((resolve, reject) => {
-        // 创建ajax对象
+        // 创建ajax实例对象
         const xhr = new XMLHttpRequest()
         // 初始化ajax
         xhr.open('GET', 'https://autumnfish.cn/heimamm_server/')
         // 发送ajax
         xhr.send()
         // 处理响应结果
-        xhr.onreadystatechange = function() {
+        xhr.onreadystatechange = function () {
           if (xhr.readyState === 4) {
             if (xhr.code === 200) {
               // 响应体

@@ -1,5 +1,3 @@
-// 用storage封装全局数据key
-
 const STORAGE_KEY = 'admin-token'
 
 export default {
@@ -41,7 +39,7 @@ export default {
   },
   /**
    * @param key 删除模块的key
-   * @param module 模块
+   * @param module 存储的模块
   */
   clearSession (key, module) {
     let object = this.getStorage()

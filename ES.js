@@ -352,6 +352,15 @@ const list = [
 getId(list, 1)  // {id: 1, name: "家电", goods: Array(2)}
 getId(list, 11)  // {id: 11, name: "冰箱"}
 
+// 用递归求1-100的和
+function recursion(min, max) {
+  if (min === max) {
+    return min
+  }
+  return min + recursion(min + 1, max)
+}
+recursion(1, 100)  // 5050
+
 // 递归求和
 function recursionGetSum(n) {
   if (n === 1) {
@@ -378,26 +387,36 @@ function monkeysEatPeaches(n) {
 monkeysEatPeaches(4)  // 22
 
 // 用递归方式求1-100的和
-function sum(num, start) {
-  num += start
-  start++
-  return start > 100 ? num : sum(num, start)
-}
-sum(0, 1)  // 5050
-
-// 用递归方式求1-100的和
 function add(n1, n2) {
   if (n2 + 1 > 100) {
     return n1 + n2
 	}
 	return add(n1 + n2, n2 + 1)
 }
-add(0, 0)  // 5050  
-add(0, 1)  // 5050  
-add(0, 2)  // 5049  
-add(1, 0)  // 5051  
-add(1, 1)  // 5051  
-add(1, 2)  // 5050
+add(0, 0)  // 5050
+
+// 求 2,4,6,8,10… 第n项与前n项之和
+function recursion(n) {
+  if (n === 0) {
+    return 2
+  }
+  return recursion(n - 1) + 2
+}
+function sum(n) {
+  if (n === 0) {
+    return 2
+  }
+  return recursion(n) + sum(n - 1)
+}
+sum(100)
+
+// 用递归方式求1-100的和
+function sum(num, start) {
+  num += start
+  start++
+  return start > 100 ? num : sum(num, start)
+}
+sum(0, 1)  // 5050
 
 // 用递归求多个参数相加的和
 function sums(...args) {  
@@ -413,7 +432,7 @@ function arraySum(array) {
   if (array.length === 0) {
     return 0
   } 
-  return array[0] + arrSum(array.slice(1))
+  return array[0] + arraySum(array.slice(1))
 }
 arraySum([1, 2, 3, 4])  // 10
 
@@ -460,7 +479,7 @@ function recursionSum(n, total = 1) {
   if (n === 0) {
     return total
   }
-  return recursion(n - 1, n * total)
+  return recursionSum(n - 1, n * total)
 }
 recursionSum(0, 1)  // 1
 recursionSum(1, 1)  // 1
@@ -486,11 +505,6 @@ factorial(2)  // 2
 factorial(3)  // 2
 factorial(4)  // 8
 factorial(5)  // 8
-
-function factorials(num) {
-  return num === 1 ? 1 : num * factorials(--num)
-}
-factorials(5)  // 120
 
 // 基本数据类型是按照值操作，直接把值存储到栈内存中，引用数据类型则是把值存储到堆内存中，我们操作的都是堆内存的引用地址
 // js检测数据类型的属性和方法: typeof、instanceof、constructor、Object.prototype.toString.call()
@@ -636,9 +650,8 @@ function shallowCopy(obj) {
 }
 shallowCopy(o1)
 
-const arr3 = [5, 10, 50]
-Math.max.apply(Math, arr3)  // 最大数50
-Math.max(...arr3)  // 最大数50
+Math.max.apply(Math, [5, 10, 50])  // 最大数50
+Math.max(...[5, 10, 50])  // 最大数50
 
 // 数组合并
 function mergeArray(first, second) {
@@ -719,7 +732,7 @@ function arraysSort(...list) {
 arraysSort(10, -2, 101, -4, 50)  // [-4, -2, 10, 50, 101]
 
 // 一维数组转换成多维数组
-function arrayTransform(num, arr) {
+function arrayTransform(arr, num) {
   const empty = []  
   arr.forEach((item, index) => {
     // 计算多维数组的下标
@@ -732,7 +745,7 @@ function arrayTransform(num, arr) {
   })
   return empty
 }
-arrayTransform(3, [1, 2, 3, 4, 5, 6, 7, 8])  // [[1, 2, 3], [4, 5, 6], [7, 8]]
+arrayTransform([1, 2, 3, 4, 5, 6, 7, 8], 3)  // [[1, 2, 3], [4, 5, 6], [7, 8]]
 
 // 一维数组转换成多维数组
 function changeArray(num, arr) {
@@ -2715,6 +2728,15 @@ function order(field, type = 'asc') {
 goods.sort(order('price', 'desc'))
 goods.sort(order('price'))
 
+const context = {
+  name: 'Mary',
+  getName () {
+    return this.name
+  }
+}
+const bound = context.getName.bind(context) 
+bound()  // "Mary"
+
 let user = {
   name: '皮卡丘',
   grade: [
@@ -2799,9 +2821,7 @@ let proxy = new Proxy(factorial, {
     // ƒ factorial(num) {
     //   return num === 1 ? 1 : num * factorial(num - 1)
     // }
-
     console.log(obj)
-
     // console.log(args)
     // [5]
   }
@@ -4571,6 +4591,19 @@ function palindromeNumber(min, max) {
 }
 palindromeNumber(10000, 100000)
 
+// this.$nextTick()将回调延迟到下次 DOM 更新循环之后执行
+
+// 将一维数组拆分为指定长度的二维数组
+function group(array, elementNumber) {
+  let index = 0
+  let newArray = []
+  while (index < array.length) {
+    newArray.push(array.slice(index, index += elementNumber))
+  }
+  return newArray
+}
+group([1, 2, 3, 4, 5, 6], 3)  // [1, 2, 3] [4, 5, 6]
+
 const pathList = ['/my', '/find', '/user']
 const pathObject = { 
   redirect: '/video' 
@@ -4613,6 +4646,65 @@ function handleMap(list) {
 }
 handleMap(list)
 
+// promise.all 是数组里面所有的 promise 对象执行结束之后，会返回一个存储所有 promise 对象的结果 
+// promise.race 顾名思义 race 就是比赛的意思，只会返回一个执行速度最快的那个 promise 对象返回的结果 
+
+// splice() 方法向/从数组中添加/删除项目，然后返回被删除的项目。
+const fruits = ["Banana", "Orange", "Apple", "Mango"]
+fruits.splice(2, 0, "Lemon")
+console.log(fruits)  // ["Banana", "Orange", "Lemon", "Apple", "Mango"]
+
+// 参数说明:
+// 1.start：开始取的位置，如果是负数则会从末尾开始算
+// 2.end:结束的位置，不填则会从开始位置取到末尾
+const arr = [1, 2, 3, 4, 5, 6, 7]
+console.log(arr.slice(2, 5))  // [3, 4, 5]，注意arr不变
+
+const arr = [1, 2, 3, 4, 5, 6, 7]
+console.log(arr.slice(-2, -1))  // [6]
+
+const arr = [1, 2, 3, 4, 5, 6, 7]
+console.log(arr.slice(3))  // [4, 5, 6, 7]
+
+const array = [1, 2, 3, 4, 5]
+array.forEach((item, index) => array[index] = item * 4)
+console.log(array)  // [4, 8, 12, 16, 20]
+
+// 回调函数: 因为函数实际上是一种对象，它可以存储在变量中，通过参数传递给另一个函数，在函数内部创建，
+// 从函数中返回结果值，因为函数是内置对象，我们可以将它作为参数传递给另一个函数，到函数中执行，
+// 甚至执行后将它返回，它一直被“专业的程序员”看作是一种难懂的技术。
+function a(callback) {
+  let m = 1, n = 3
+  return callback(m, n)
+}
+function b(m, n) {
+  return m + n
+}
+a(b)
+
+// 行内元素和块级元素的区别
+
+// (1)行内元素(a、b、span、img、input、select、strong)
+
+// ①：设置宽高无效
+
+// ②：对margin设置左右方向有效，而上下无效，padding设置都无效
+
+// ③：不会自动换行
+
+// (2)块级元素(div、ul、ol、li、dl、dt、dd、h1、h2、h3、h4、h5、h6、p)
+
+// ①：可以设置宽高
+
+// ②：设置margin和padding都有效
+
+// ③：可以自动换行
+
+// ④：多个块状，默认排列从上到下
+
+// js中双等号与三等号的区别
+// ==， 两边值类型不同的时候，要先进行类型转换，再比较。 ===，不做类型转换，类型不同的一定不等。
+
 // 使用class类封装axios
 import axios from 'axios'
 import { merge } from 'lodash'
@@ -4623,11 +4715,11 @@ class HttpRequest {
     }
     this.defaults = Object.assign(this.defaults, options)
   }
-  interceptors (install) {
+  interceptor (install) {
     // 拦截请求，给请求的数据或者头信息添加一些数据
     install.interceptors.request.use(
       config => {
-        let token = localStorage.getItem('token')
+        const token = localStorage.getItem('token')
         // 判断是否存在token，如果存在的话，则每个http header都加上token
         if (token) {
           config.headers.authorization = `Bearer ${token}`
@@ -4653,7 +4745,7 @@ class HttpRequest {
     options = Object.assign(this.defaults, options)
     // 请求的子实例
     const instance = axios.create(options)
-    this.interceptors(instance)
+    this.interceptor(instance)
     return instance
   }
 }

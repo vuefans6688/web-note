@@ -18,6 +18,11 @@
     <div class="logo">
       <a href="#"></a>
     </div>
+    <ul class="demo">
+      <p>zero</p>
+      <li>one</li>
+      <li>two</li>
+    </ul>
   </div>
 </template>
 
@@ -109,6 +114,17 @@ export default {}
       margin-left: -55px;
       transition: margin .2s;
     }
+  }
+}
+
+// element:nth-of-type(n)是指父元素下第n个element元素
+// element:nth-child(n)是指父元素下第n个元素且这个元素为element，若不是，则选择失败
+.demo {
+  li:nth-child(2) {
+    color: #ff0000;
+  }
+  li:nth-of-type(2) {
+    color: #00ff00;
   }
 }
 </style>

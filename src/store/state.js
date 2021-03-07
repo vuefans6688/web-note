@@ -1,4 +1,4 @@
-const state = {
+export default {
   token: '',
   clinic: '',
   count: 0,
@@ -27,5 +27,3 @@ const state = {
   // 添加到购物车的商品
   added:[]
 }
-
-export default state

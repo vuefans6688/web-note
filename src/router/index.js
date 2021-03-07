@@ -436,6 +436,10 @@ const router = new VueRouter({
     {
       path: '/global-filter',
       component: () => import('@/views/global-filter')
+    },
+    {
+      path: '/recursive',
+      component: () => import('@/views/recursive')
     }
   ]
 })

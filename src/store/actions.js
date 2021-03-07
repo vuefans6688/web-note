@@ -1,6 +1,6 @@
 import { INCREMENT, DECREMENT } from './mutation-types'
 
-const actions = {
+export default {
   [INCREMENT] ({ commit }) {
     commit(INCREMENT)
   },
@@ -25,5 +25,3 @@ const actions = {
     commit('CLEAR')
   }
 }
-
-export default actions

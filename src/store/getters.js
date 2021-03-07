@@ -1,4 +1,4 @@
-const getters = {
+export default {
   clinic (state) {
     return state.clinic
   },
@@ -44,5 +44,3 @@ const getters = {
     return total
   }
 }
-
-export default getters

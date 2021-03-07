@@ -1,6 +1,6 @@
 import { INCREMENT, DECREMENT } from './mutation-types'
 
-const mutations = {
+export default {
   [INCREMENT] (state) {
     state.count++
   },
@@ -42,5 +42,3 @@ const mutations = {
     state.added = []
   }
 }
-
-export default mutations
