@@ -1012,6 +1012,32 @@ function blackDiamond(row) {
 }
 blackDiamond(6)
 
+function mixedStatement(number) {
+  let sum = 0
+  for (let i = 1; i <= number; i++) {
+    if (i % 3 === 0) {
+      continue
+    }
+    sum += i
+    if (sum > 2000) {
+      break
+    }
+  }
+  return sum
+}
+mixedStatement(100)  // 2028
+
+let score = [70, 80, 66, 90, 50, 100, 89]
+let i = 0
+while (i < score.length) {
+  if (score[i] < 60) {
+    console.log(`成绩${score[i]}不及格，不用循环了`)
+    break
+  }
+  console.log(`成绩：${score[i]}及格，继续循环`)
+  i++
+}
+
 // 输入年、月、日计算某一天是该年的第几天(周)
 function computeWhatWeekDay(year, month, day) {
   let sum = 0  // 记录总天数
@@ -1069,7 +1095,7 @@ console.log(arr2)  // ["张三", "韩梅梅", "李四", "王五", "赵六"]
 
 const arr4 = [1, 4, 3, 9]
 arr4.includes(4)  // true
-arr4.includes(4, 2)  // false 从2的位置开始查, 所以没有找到4
+arr4.includes(4, 2)  // false 从2的位置开始查找, 所以没有找到4
 arr4.includes(5)  // false
 
 const obj1 = { name: '韩梅梅', age: 20 }
@@ -3573,6 +3599,20 @@ Object.defineProperty(obj, 'count', {
   configurable: false  // 不允许删除对象属性和修改特性，默认false
 })
 
+let book = {}
+let name = ''
+Object.defineProperty(book, 'name', {
+  set (value) {
+    name = value
+    console.log('你取了一个书名叫做' + value)  // 你取了一个书名叫做vue权威指南
+  },
+  get () {
+    return `《${name}》`
+  }
+})
+book.name = 'vue权威指南'
+console.log(book.name)  // 《vue权威指南》
+
 // 1.不会调用原来的函数，可以改变原来函数内部的this指向
 // 2.返回的是原函数改变this之后产生的新函数
 let obj = { name: 'Jakie' }
@@ -3584,9 +3624,9 @@ f()  // 3
 
 // <button>点击</button>
 // const button = document.querySelector('button')
-// button.onclick = function() {
+// button.onclick = function () {
 //   this.disabled = true
-//   setTimeout(function() {
+//   setTimeout(function () {
 //     this.disabled = false
 //     // 如果有的函数我们不需要立即调用，但是又想改变这个函数内部的this指向，此时用bind
 //   }.bind(this), 3000)
@@ -3594,7 +3634,7 @@ f()  // 3
 
 for (let i = 0; i < li.length; i++) {
   li[i].index = i
-  li[i].onclick = function() {
+  li[i].onclick = function () {
     console.log(this.index)
   }
 }
@@ -3603,8 +3643,8 @@ for (let i = 0; i < li.length; i++) {
 // 立即执行函数也称为小闭包，因为立即执行函数里面的任何一个函数都可以使用它的i变量
 for (let i = 0; i < li.length; i++) {
   // 利用for循环穿件4个立即执行函数
-  ((i) => {
-    li[i].onclick = function() {
+  (function (i) {
+    li[i].onclick = function () {
       console.log(i)
     }
   })(i)
@@ -3647,7 +3687,8 @@ const object = {
     }
   }
 }
-object.getName()()  // "我是内部变量"
+const internalName = object.getName()
+internalName()  // "我是内部变量"  
 
 // 对象深拷贝
 function deepCopy(newObj, oldObj) {
@@ -3665,12 +3706,6 @@ function deepCopy(newObj, oldObj) {
   }
 }
 deepCopy(newObj, oldObj)
-
-// es6数组去重
-function arrayRemoveRepeat(arr) {
-  return Array.from(new Set(arr))
-}
-arrayRemoveRepeat([1, 2, 2, 3])  // [1, 2, 3]
 
 let person = { name: '张三', age: 20 }
 let { name: userName, age: userAge } = person
@@ -3773,7 +3808,7 @@ isNarcissu(153)  // 这个数字是水仙花数
 // 平日：年龄大于等于10岁，门票是300. 年龄小于10岁，门票是140
 // 周末：年龄大于等于10岁，门票是500. 年龄小于10岁，门票是210
 function ticketByAgeAndWeek(week, age) {
-  // 让星期几作为大前提条件
+  // 让星期几作为前提条件
   if (week === 0 || week === 6) {
     // 周末
     return age >= 10 ? '门票为500' : '门票为210'
@@ -4443,6 +4478,12 @@ function arrayRemoveRepeat(array) {
 }
 arrayRemoveRepeat([1, 2, 3, 4, 4, 2, 5])  // [1, 2, 3, 4, 5]
 
+// es6数组去重
+function arrayRemoveRepeat(array) {
+  return Array.from(new Set(array))
+}
+arrayRemoveRepeat([1, 2, 2, 3])  // [1, 2, 3]
+
 // 字符串去重
 function stringRemoveRepeat(strings) {
   let obj = {}
@@ -4459,6 +4500,7 @@ function stringRemoveRepeat(strings) {
 }
 stringRemoveRepeat('abcabcefgefh')  // abcefgh
 
+// 字符串去重
 function duplicateRemove(str) {
   let arr = str.split('').sort().join('')
   let list = arr.match(/(.)\1+/g)
@@ -4487,8 +4529,7 @@ function commonDisior(x, y) {
 commonDisior(8, 5)  // 1
 commonDisior(8, 4)  // 4
 
-// 输入两个数，求两个数的最大公约数
-// 辗转相除法
+// 输入两个数，求两个数的最大公约数(辗转相除法)
 function getDivisor(m, n) {  
 	let a = +m, b = +n
 	while (a !== 0 && b !== 0) {
@@ -4543,7 +4584,7 @@ function continueKeyword (num) {
   }
   return str += '\n这些偶数的和为：' + sum
 }
-continueKeyword(20)     
+continueKeyword(20)  // "1～20之间的偶数有：2 4 6 8 10 12 14 16 18 这些偶数的和为：90"   
 
 function breakKeyword (num) {
   let sum = 0
@@ -4559,7 +4600,7 @@ function breakKeyword (num) {
   }
   return str += '\n这些偶数的和为：' + sum
 }
-breakKeyword(20)
+breakKeyword(20)  // "1～20之间的被累加的偶数有：2 4 6 8 10 12 14 16 这些偶数的和为：72"
 
 // 输入两个数n和a，如果n === 3，a === 2，输出2 + 22 + 222的值（不用输出式子）
 // 如果n === 4，a === 3，输出3 + 33 + 3333的值
@@ -4591,7 +4632,7 @@ function palindromeNumber(min, max) {
 }
 palindromeNumber(10000, 100000)
 
-// this.$nextTick()将回调延迟到下次 DOM 更新循环之后执行
+// this.$nextTick()将回调延迟到下次DOM更新循环之后执行
 
 // 将一维数组拆分为指定长度的二维数组
 function group(array, elementNumber) {
@@ -4655,20 +4696,20 @@ fruits.splice(2, 0, "Lemon")
 console.log(fruits)  // ["Banana", "Orange", "Lemon", "Apple", "Mango"]
 
 // 参数说明:
-// 1.start：开始取的位置，如果是负数则会从末尾开始算
-// 2.end:结束的位置，不填则会从开始位置取到末尾
-const arr = [1, 2, 3, 4, 5, 6, 7]
-console.log(arr.slice(2, 5))  // [3, 4, 5]，注意arr不变
+// 1.start： 开始取的位置，如果是负数则会从末尾开始算
+// 2.end: 结束的位置，不填则会从开始位置取到末尾
+const arrays = [1, 2, 3, 4, 5, 6, 7]
+console.log(arrays.slice(2, 5))  // [3, 4, 5]，注意arrays不变
 
-const arr = [1, 2, 3, 4, 5, 6, 7]
-console.log(arr.slice(-2, -1))  // [6]
+const arrays = [1, 2, 3, 4, 5, 6, 7]
+console.log(arrays.slice(-2, -1))  // [6]
 
-const arr = [1, 2, 3, 4, 5, 6, 7]
-console.log(arr.slice(3))  // [4, 5, 6, 7]
+const arrays = [1, 2, 3, 4, 5, 6, 7]
+console.log(arrays.slice(3))  // [4, 5, 6, 7]
 
-const array = [1, 2, 3, 4, 5]
-array.forEach((item, index) => array[index] = item * 4)
-console.log(array)  // [4, 8, 12, 16, 20]
+const arrays = [1, 2, 3, 4, 5]
+arrays.forEach((item, index) => arrays[index] = item * 4)
+console.log(arrays)  // [4, 8, 12, 16, 20]
 
 // 回调函数: 因为函数实际上是一种对象，它可以存储在变量中，通过参数传递给另一个函数，在函数内部创建，
 // 从函数中返回结果值，因为函数是内置对象，我们可以将它作为参数传递给另一个函数，到函数中执行，
@@ -4680,30 +4721,9 @@ function a(callback) {
 function b(m, n) {
   return m + n
 }
-a(b)
+a(b)  // 4
 
-// 行内元素和块级元素的区别
-
-// (1)行内元素(a、b、span、img、input、select、strong)
-
-// ①：设置宽高无效
-
-// ②：对margin设置左右方向有效，而上下无效，padding设置都无效
-
-// ③：不会自动换行
-
-// (2)块级元素(div、ul、ol、li、dl、dt、dd、h1、h2、h3、h4、h5、h6、p)
-
-// ①：可以设置宽高
-
-// ②：设置margin和padding都有效
-
-// ③：可以自动换行
-
-// ④：多个块状，默认排列从上到下
-
-// js中双等号与三等号的区别
-// ==， 两边值类型不同的时候，要先进行类型转换，再比较。 ===，不做类型转换，类型不同的一定不等。
+// 递归：在函数体内调用自身
 
 // 使用class类封装axios
 import axios from 'axios'
