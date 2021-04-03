@@ -372,19 +372,37 @@ function recursionGetSum(n) {
 }
 recursionGetSum(100)  // 5050
 
+function cursion(obj, props) {
+  // 当数组长度等于1的时候，拿出数组的元素作为对象的属性名，再取出对象的属性值
+  if (props.length === 1) {
+    return obj[props[0]]
+  } else {
+    // obj[props[0]] 取出对象中的嵌套对象  props.slice(1) 删除数组的第一个元素
+    return cursion(obj[props[0]], props.slice(1))
+  }
+}
+const value = cursion({
+  a: {
+    b: {
+      name: 'Mary'
+    }
+  }
+}, ['a', 'b', 'name'])
+console.log(value)
+
 // 有一堆桃子不知道数目，猴子第一天吃掉一半，觉得不过瘾，又多吃了一只，
 // 第二天照此办法，吃掉桃子的一半加一只，天天如此，到第num(num <= 10)天早上，
 // 猴子发现只剩一只桃子了，问这堆桃子原来有多少只？(思路: n为还剩n天吃完的桃子数)
-function monkeysEatPeaches(n) {
+function peache(n) {
   if (n === 1) {
     return 1
   }
   // peach(10) / 2 - 1 = peach(9)
   // peach(10) = (peach(9) + 1) * 2
   // peach(n) = (peach(n - 1) + 1) * 2
-  return (monkeysEatPeaches(n - 1) + 1) * 2
+  return (peache(n - 1) + 1) * 2
 }
-monkeysEatPeaches(4)  // 22
+peache(4)  // 22
 
 // 用递归方式求1-100的和
 function add(n1, n2) {
@@ -428,13 +446,13 @@ function sums(...args) {
 sums(1, 2, 4, 6, 5, 8)  // 26
 
 // 用递归求数组的和
-function arraySum(array) {
-  if (array.length === 0) {
+function cursions(arrays) {
+  if (arrays.length === 0) {
     return 0
   } 
-  return array[0] + arraySum(array.slice(1))
+  return arrays[0] + cursions(arrays.slice(1))
 }
-arraySum([1, 2, 3, 4])  // 10
+cursions([1, 2, 3, 4])  // 10
 
 // 用递归打印倒三角
 function star(sum) {  
@@ -447,17 +465,22 @@ function star(sum) {
 }
 star(5)
 
+// 首先确定如何求最大公约数，例如 24,78，算法如下：
+// 78 % 24 = 6 大数对小数取余
+// 24 % 6 = 0 小数对上次的余数再取余，重复这个过程，直到余数为0
+// 余数为0时，此时用来取余的小数（这里是6）就是最大公约数
 // 使用递归求最大公约数
-function maxCommonDivisor(a, b) {  
-  return b % a === 0 ? a : maxCommonDivisor(b, a % b)
+function commonDivisor(min, max) {
+  // 如果能整除，小数就是最大公约数
+  return max % min === 0 ? min : commonDivisor(min, max % min)
 }
-maxCommonDivisor(2, 3)  // 1
+commonDivisor(24, 78)  // 6
 
 // 使用递归求最小公倍数
-function minCommonMultiple(a, b) {
-  return b % a === 0 ? a : minCommonMultiple(a, b % a)
+function commonMultiple(a, b) {
+  return (a * b) / commonDivisor(a, b)
 }
-minCommonMultiple(2, 4)  // 2
+commonMultiple(2, 4)  // 4
 
 // 返回公约数的数组集合
 function recursion(a, n = 1, b = []) {
@@ -475,16 +498,16 @@ recursion(2)  // [1, 2]
 recursion(3)  // [1, 3]
 recursion(4)  // [1, 2, 4]
 
-function recursionSum(n, total = 1) {
-  if (n === 0) {
+function recursions(number, total = 1) {
+  if (number === 0) {
     return total
   }
-  return recursionSum(n - 1, n * total)
+  return recursions(number - 1, number * total)
 }
-recursionSum(0, 1)  // 1
-recursionSum(1, 1)  // 1
-recursionSum(2, 1)  // 1
-recursionSum(3, 1)  // 6
+recursions(0, 1)  // 1
+recursions(1, 1)  // 1
+recursions(2, 1)  // 1
+recursions(3, 1)  // 6
 
 // 递归求阶乘
 const obj = {    
@@ -512,14 +535,14 @@ factorial(5)  // 8
 // js中创建变量的几种常用方式: var、let/const、function、class、import
 
 // 用递归找出多维数组中元素的个数
-function count(array) {
+function elementCount(arrays) {
   // 计算元素个数的和
   let sum = 0
-  for (let i = 0; i < array.length; i++) {
+  for (let i = 0; i < arrays.length; i++) {
     // 判断arr[i]是不是数组
-    if (array[i] instanceof Array) {
+    if (arrays[i] instanceof Array) {
       // 多维数组元素个数
-      sum += count(array[i])
+      sum += elementCount(arrays[i])
     } else {
       // 一维数组元素个数
       sum += 1
@@ -527,7 +550,7 @@ function count(array) {
   }
   return sum
 }
-count([1, 2, 3, 4, [56, 45, [37]]])  // 7
+elementCount([1, 2, 3, 4, [56, 45, [37]]])  // 7
 
 // 用递归找出多维数组中元素的个数
 function moreCount(array) {
@@ -731,17 +754,45 @@ function arraysSort(...list) {
 }
 arraysSort(10, -2, 101, -4, 50)  // [-4, -2, 10, 50, 101]
 
-// 一维数组转换成多维数组
-function arrayTransform(arr, num) {
-  const empty = []  
-  arr.forEach((item, index) => {
-    // 计算多维数组的下标
-    const page = Math.floor(index / num)
-    // 如果数组中有元素，就把数组清空  
-    if (!empty[page]) {  
-      empty[page] = []
+// 数组快速排序
+function quickSort(array) {
+  // 找基准数，并且将比基准数小的全部放到左边(左数组)
+  // 大于等于基准数的全部放到右边(右数组)
+  let baseNumber = array[0]  // 基准数
+  let leftArray = []  // 左数组
+  let rightArray = []  // 右数组
+  for (let i = 1; i < array.length; i++) {
+    // 比基准数小的放在左数组，否则放在右数组
+    if (array[i] < baseNumber) {
+      leftArray.push(array[i])
+    } else {
+      rightArray.push(array[i])
     }
-    empty[page].push(item)
+  }
+  // 对左右数组分别进行快速排序，返回排序好的左右数组
+  // 条件：就是数组中的元素大于等于2个
+  if (leftArray.length >= 2) {
+    leftArray = quickSort(leftArray)
+  }
+  if (rightArray.length >= 2) {
+    rightArray = quickSort(rightArray)
+  }
+  // 合并排序好之后的左数组、基准数、右数组，并且返回
+  return leftArray.concat(baseNumber, rightArray)
+}
+quickSort([33, 12, 44, 6, 36])  // [6, 12, 33, 36, 44]
+
+// 一维数组转换成多维数组
+function arrayTransform(arrays, numbers) {
+  const empty = []  
+  arrays.forEach((item, index) => {
+    // 计算多维数组的下标
+    const pages = Math.floor(index / numbers)
+    // 如果数组中有元素，就把数组清空 
+    if (!empty[pages]) {  
+      empty[pages] = []
+    }
+    empty[pages].push(item)
   })
   return empty
 }
@@ -4715,8 +4766,7 @@ console.log(arrays)  // [4, 8, 12, 16, 20]
 // 从函数中返回结果值，因为函数是内置对象，我们可以将它作为参数传递给另一个函数，到函数中执行，
 // 甚至执行后将它返回，它一直被“专业的程序员”看作是一种难懂的技术。
 function a(callback) {
-  let m = 1, n = 3
-  return callback(m, n)
+  return callback(1, 3)
 }
 function b(m, n) {
   return m + n

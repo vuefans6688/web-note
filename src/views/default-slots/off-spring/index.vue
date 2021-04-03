@@ -1,16 +1,20 @@
 <template>
   <div class="off-spring">
     <!-- 标记 -->
-    <div class="badge">
-      <i class="el-icon-s-flag"></i>标记
-      <el-badge :value="value" class="item">
-        <el-button size="small">评论</el-button>
-      </el-badge>
+    <div>
+      <i class="el-icon-s-flag"></i>Badge标记
+      <div class="conten">
+        <el-badge :value="value" class="item">
+          <el-button size="small">评论</el-button>
+        </el-badge>
+      </div>
     </div>
     <!-- 进度条 -->
-    <div class="progress">
+    <div>
       <i class="el-icon-s-flag"></i>进度条
-      <el-progress :percentage="percentage"></el-progress>
+      <div class="content">
+        <el-progress :percentage="percentage"></el-progress>
+      </div>
     </div>
     <!-- 占位符 -->
     <slot>我是这个slot里面本来的内容</slot>

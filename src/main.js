@@ -12,6 +12,9 @@ import 'vant/lib/index.css'
 // import axios from 'axios'
 // 自定义封装axios插件
 import httpConfig from './plugin'
+import Situation from '@/components/Situation'
+
+Vue.component('situation', Situation)
 
 Vue.use(httpConfig)
 

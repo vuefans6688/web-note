@@ -7,6 +7,7 @@
       <button @click="reload">强制更新</button>
       <span>{{ message }}</span>
     </p>
+    <situation :info="info" @change-info="changeInfo" />
   </div>
 </template>
 
@@ -15,7 +16,8 @@ export default {
   data () {
     return {
       now: new Date(),
-      message: 'Hello World!'
+      message: 'Hello World!',
+      info: '我是来自全局的组件...'
     }
   },
   methods: {
@@ -24,6 +26,9 @@ export default {
     },
     reload () {
       this.$forceUpdate()  // 调用$forceUpdate方法
+    },
+    changeInfo () {
+      this.info = '赶紧来改改它吧'
     }
   },
   updated () {
