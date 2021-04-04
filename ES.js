@@ -4772,7 +4772,46 @@ function b(m, n) {
 }
 a(b)  // 4
 
-// 递归：在函数体内调用自身
+const obj = {
+  value: 0,
+  increment (count) {
+    this.value += typeof count === 'number' ? count : 1
+  }
+}
+obj.increment()
+console.log(obj.value)  // 1
+obj.increment(2)
+console.log(obj.value)  // 3
+
+function add(...args) {
+  let sum = 0
+  args.forEach(item => sum += item)
+  return sum
+  // return args.reduce((cur, pre) => cur + pre, 0)
+}
+const arrays = [3, 4]
+add.apply(null, arrays)  // 7
+
+function Quo(string) {
+  this.status = string
+}
+Quo.prototype.getStatus = function () {
+  return this.status
+}
+const myQuo = new Quo('confused')
+console.log(myQuo.status)  // confused
+
+function Quo(string) {
+  this.status = string
+}
+Quo.prototype.getStatus = function () {
+  return this.status
+}
+const statusObject = {
+  status: 'A-OK'
+}
+const status = Quo.prototype.getStatus.apply(statusObject)
+console.log(status)  // A-OK
 
 // 使用class类封装axios
 import axios from 'axios'
