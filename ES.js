@@ -362,15 +362,15 @@ function recursion(min, max) {
 recursion(1, 100)  // 5050
 
 // 递归求和
-function recursionGetSum(n) {
+function recursion(n) {
   if (n === 1) {
     return 1
   }
-  // recursionGetSum(100) = recursionGetSum(99) + 100
-  // recursionGetSum(n) = recursionGetSum(n - 1) + n
-  return recursionGetSum(n - 1) + n
+  // recursion(100) = recursion(99) + 100
+  // recursion(n) = recursion(n - 1) + n
+  return recursion(n - 1) + n
 }
-recursionGetSum(100)  // 5050
+recursion(100)  // 5050
 
 function cursion(obj, props) {
   // 当数组长度等于1的时候，拿出数组的元素作为对象的属性名，再取出对象的属性值
@@ -414,17 +414,17 @@ function add(n1, n2) {
 add(0, 0)  // 5050
 
 // 求 2,4,6,8,10… 第n项与前n项之和
-function recursion(n) {
-  if (n === 0) {
+function recursion(number) {
+  if (number === 0) {
     return 2
   }
-  return recursion(n - 1) + 2
+  return recursion(number - 1) + 2
 }
-function sum(n) {
-  if (n === 0) {
+function sum(number) {
+  if (number === 0) {
     return 2
   }
-  return recursion(n) + sum(n - 1)
+  return recursion(number) + sum(number - 1)
 }
 sum(100)
 
@@ -498,16 +498,16 @@ recursion(2)  // [1, 2]
 recursion(3)  // [1, 3]
 recursion(4)  // [1, 2, 4]
 
-function recursions(number, total = 1) {
+function recursion(number, total = 1) {
   if (number === 0) {
     return total
   }
-  return recursions(number - 1, number * total)
+  return recursion(number - 1, number * total)
 }
-recursions(0, 1)  // 1
-recursions(1, 1)  // 1
-recursions(2, 1)  // 1
-recursions(3, 1)  // 6
+recursion(0, 1)  // 1
+recursion(1, 1)  // 1
+recursion(2, 1)  // 1
+recursion(3, 1)  // 6
 
 // 递归求阶乘
 const obj = {    
@@ -517,11 +517,11 @@ const obj = {
 }
 obj.factorial(5)  // 120
 
-function factorial(num) {
-  if (num === 1) { 
+function factorial(number) {
+  if (number === 1) { 
     return 1
   }
-  return num % 2 === 0 ? num * factorial(num - 1) : factorial(num - 1)
+  return number % 2 === 0 ? number * factorial(number - 1) : factorial(number - 1)
 } 
 factorial(1)  // 1
 factorial(2)  // 2
@@ -531,7 +531,6 @@ factorial(5)  // 8
 
 // 基本数据类型是按照值操作，直接把值存储到栈内存中，引用数据类型则是把值存储到堆内存中，我们操作的都是堆内存的引用地址
 // js检测数据类型的属性和方法: typeof、instanceof、constructor、Object.prototype.toString.call()
-// 浏览器常用的内核：webkit、gecko、trident、blink
 // js中创建变量的几种常用方式: var、let/const、function、class、import
 
 // 用递归找出多维数组中元素的个数
@@ -553,9 +552,9 @@ function elementCount(arrays) {
 elementCount([1, 2, 3, 4, [56, 45, [37]]])  // 7
 
 // 用递归找出多维数组中元素的个数
-function moreCount(array) {
+function moreCount(arrays) {
   let sum = 0
-  array.forEach(item => Array.isArray(item) ? sum += moreCount(item) : sum += 1) 
+  arrays.forEach(item => Array.isArray(item) ? sum += moreCount(item) : sum += 1) 
   return sum
 }
 moreCount([1, 2, 3, 4, [56, 45]])  // 6
@@ -711,14 +710,14 @@ let a3 = [...a1, ...a2].sort().map((item) => {
 console.log(a3)  // ["A1", "A2", "A", "B1", "B2", "B", "C1", "C2", "C", "D1", "D2", "D"]
 
 // 使用迭代的方式实现 flatten 函数
-const flatten = function (arr) {
-  while (arr.some(item => Array.isArray(item))) {
-    arr = [].concat(...arr)
+const flatten = function (arrays) {
+  while (arrays.some(item => Array.isArray(item))) {
+    arrays = [].concat(...arrays)
   }
-  return arr
+  return arrays
 }
-let arr = [1, 2, [3, 4, 5, [6, 7], 8], 9, 10, [11, [12, 13]]]
-flatten(arr)  // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+let list = [1, 2, [3, 4, 5, [6, 7], 8], 9, 10, [11, [12, 13]]]
+flatten(list)  // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
 
 // 实现一个函数clone
 Object.prototype.clone = function() { 
@@ -730,17 +729,17 @@ Object.prototype.clone = function() {
 } 
 
 // 求1-100的和
-function summation(a, b) {
-  let sum = 0
-  if (a > b) {
+function getPeace(start, end) {
+  if (start > end) {
     return false
   }
-  for (let i = a; i <= b; i++) {
+  let sum = 0
+  for (let i = start; i <= end; i++) {
     sum += i
   }
   return sum　　　　　　　　　
 }
-summation(1, 100)  // 5050
+getPeace(1, 100)  // 5050
 
 // 使用原型属性给数组排序
 function arraySort() {
@@ -749,10 +748,10 @@ function arraySort() {
 arraySort(10, -2, 101, -4, 50)  // [-4, -2, 10, 50, 101]
 
 // 数组排序
-function arraysSort(...list) {
+function arraySort(...list) {
   return list.sort((a, b) => a - b)
 }
-arraysSort(10, -2, 101, -4, 50)  // [-4, -2, 10, 50, 101]
+arraySort(10, -2, 101, -4, 50)  // [-4, -2, 10, 50, 101]
 
 // 数组快速排序
 function quickSort(array) {
@@ -799,31 +798,31 @@ function arrayTransform(arrays, numbers) {
 arrayTransform([1, 2, 3, 4, 5, 6, 7, 8], 3)  // [[1, 2, 3], [4, 5, 6], [7, 8]]
 
 // 一维数组转换成多维数组
-function changeArray(num, arr) {
+function changeArray(numbers, arrays) {
   let result = []
   // 每行显示的数组个数
-  let lineCount = arr.length % num === 0 ? arr.length / num : Math.ceil(arr.length / num)  
+  let lineCount = arrays.length % numbers === 0 ? arrays.length / numbers : Math.ceil(arrays.length / numbers)  
   for (let i = 0; i < lineCount; i++) {
     // slice()方法返回一个从开始到结束（不包括结束）
     // 选择数组的一部分浅拷贝到一个新数组对象且原数组不会被修改
-    result.push(arr.slice(i * num, i * num + num))
+    result.push(arrays.slice(i * numbers, i * numbers + numbers))
   }
   return result
 }
 changeArray(3, [1, 2, 3, 4, 5, 6, 7, 8])  // 假设每行显示3个 [[1, 2, 3], [4, 5, 6], [7, 8]]
 
-function getSum() {
+function getPeace() {
   let arrays = Array.from(arguments)
   let sum = 0
-  arrays.forEach(value => sum += value)
+  arrays.forEach(item => sum += item)
   return sum
 }
-getSum(1, 2, 3, 4, 5, 6, 7, 8, 9)  // 45
+getPeace(1, 2, 3, 4, 5, 6, 7, 8, 9)  // 45
 
 // 用while打印直角三角形
-function triangle(num) {
+function triangle(number) {
   let outer = 0
-  while (outer < num) {
+  while (outer < number) {
     outer++
     let inner = 0
     while (inner < outer) {
@@ -836,7 +835,7 @@ function triangle(num) {
 triangle(5)
 
 // 用do...while打印直角三角形
-function triangles(num) {
+function triangles(number) {
   let start = 0
   do {
     let i = 0
@@ -846,7 +845,7 @@ function triangles(num) {
     } while (i < start)
     start++
     document.write('<br/>')
-  } while (start < num)
+  } while (start < number)
 }
 triangles(5)
 
