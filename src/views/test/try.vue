@@ -5,7 +5,7 @@
       <van-field v-model="user.mobile" :rules="formRules.mobile" name="mobile" label="手机号" placeholder="请输入手机号或用户名" />
       <van-field v-model="user.code" :rules="formRules.code" name="code" label="验证码" placeholder="请输入验证码">
         <template #button>
-          <van-button @click.prevent="onVerifyCode" size="mini" type="info" plain>{{ buttonText }}</van-button>
+          <van-button @click.prevent="getCode" size="mini" type="info" plain>{{ buttonText }}</van-button>
         </template>
       </van-field>
       <div class="submit-box">
@@ -39,7 +39,7 @@ export default {
     }
   },
   methods: {
-    onVerifyCode () {
+    getCode () {
       if (this.countDown > 0) {
         return 
       }

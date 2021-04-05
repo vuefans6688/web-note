@@ -164,36 +164,4 @@ export default {
     margin: 20px auto;
   }
 }
-
-// 两种以上方式实现已知或者未知宽度的垂直水平居中
-.wrapper {  // 方式一
-  position: relative;
-  .box {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100px;
-    height: 100px;
-    margin: -50px 0 0 -50px;
-  }
-}
-
-.wrapper {  // 方式二
-  position: relative;
-  .box {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-}
-
-.wrapper {  // 方式三
-  .box {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100px;
-  }
-}
 </style>

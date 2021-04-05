@@ -1,6 +1,6 @@
 <template>
   <div class="decrease">
-    <p>{{ message }}</p>
+    <p class="message">{{ message }}</p>
   </div>
 </template>
 
@@ -22,7 +22,7 @@ export default {
 </script>
 
 <style scoped>
-.decrease {
+.message {
   text-align: center;
 }
 </style>

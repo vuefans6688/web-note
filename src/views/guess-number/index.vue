@@ -28,7 +28,7 @@ export default {
       } else {
         this.answer = '<span style="color: #42b983;">恭喜你，猜对了</span>'
       }
-	  this.content = ''
+      this.content = ''
     }
   }
 }

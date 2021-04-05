@@ -289,6 +289,15 @@ distance(3200)  // "3.20公里"
 // 2、找这一次和上一次的关系
 // 3、假设当前函数已经可以使用，调用自身计算上一次
 
+(function foo(i) {
+  if (i === 3) {
+    return
+  } else {
+    foo(++i)
+  }
+  return i
+}(0))
+
 // 斐波那契数列
 function fib(n) {
   if (n === 1 || n === 2) {
@@ -297,26 +306,6 @@ function fib(n) {
   return fib(n - 1) + fib(n - 2)
 }
 fib(4)  // 3
-
-// 斐波那契数列
-function fibs(series) {
-  let n1 = 1, n2 = 1, temp
-  if (series > 2) {
-    for (let i = 0; i < series - 2; i++) {
-      temp = n1 + n2
-      n1 = n2
-      n2 = temp
-    }
-    return temp
-  } else {
-    return 1
-  }
-}
-fibs(1)  // 1
-fibs(2)  // 1
-fibs(3)  // 2
-fibs(4)  // 3
-fibs(5)  // 5
 
 // 递归获取数据中的id
 function getId(data, id) {
@@ -4812,6 +4801,38 @@ const statusObject = {
 }
 const status = Quo.prototype.getStatus.apply(statusObject)
 console.log(status)  // A-OK
+
+// 两种以上方式实现已知或者未知宽度的垂直水平居中
+// .wrapper {  // 方式一
+//   position: relative;
+//   .box {
+//     position: absolute;
+//     top: 50%;
+//     left: 50%;
+//     width: 100px;
+//     height: 100px;
+//     margin: -50px 0 0 -50px;
+//   }
+// }
+
+// .wrapper {  // 方式二
+//   position: relative;
+//   .box {
+//     position: absolute;
+//     top: 50%;
+//     left: 50%;
+//     transform: translate(-50%, -50%);
+//   }
+// }
+
+// .wrapper {  // 方式三
+//   .box {
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     height: 100px;
+//   }
+// }
 
 // 使用class类封装axios
 import axios from 'axios'

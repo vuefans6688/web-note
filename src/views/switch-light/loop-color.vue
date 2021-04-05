@@ -5,7 +5,6 @@
 </template>
 
 <script>
-import { randValue } from '@/utils/random'
 export default {
   data () {
     return {
