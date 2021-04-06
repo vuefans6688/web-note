@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>queryURLParams-查询地址栏参数</title>
+  <title>query-url-params-查询地址栏参数</title>
 </head>
+
 <body>
   <script>
-    function queryURLParams(url) {
+    function queryUrlParams(url) {
       // 创建a标签来获取问号和哈希参数
       let link = document.createElement('a')
       link.href = url
@@ -27,7 +29,8 @@
       return obj
     }
     // {hash: "video", id: "123456", name: "js", from: "baidu"}
-    queryURLParams('http://www.zhufengpeixun.cn/?id=123456&name=js&from=baidu#video')
+    queryUrlParams('http://www.zhufengpeixun.cn/?id=123456&name=js&from=baidu#video')
   </script>
 </body>
+
 </html>
