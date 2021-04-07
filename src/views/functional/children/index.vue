@@ -1,6 +1,6 @@
 <template functional>
   <div class="children">
-    <h3 class="persons" v-for="person in props.persons" :key="person.id">
+    <h3 v-for="person in props.persons" :key="person.id">
       名字: {{ person.name }}，年龄: {{ person.age }}
     </h3>
   </div>
@@ -15,9 +15,11 @@ export default {
 }
 </script>
 
-<style scoped>
-.persons {
+<style lang="scss" scoped>
+.children {
   text-align: center;
-  color: #555;
+  h3 {
+    color: #555;
+  }
 }
 </style>

@@ -440,6 +440,14 @@ const router = new VueRouter({
     {
       path: '/recursive',
       component: () => import('@/views/recursive')
+    },
+    {
+      path: '/multiplication-formula',
+      component: () => import('@/views/multiplication-formula')
+    },
+    {
+      path: '/drag',
+      component: () => import('@/views/drag')
     }
   ]
 })

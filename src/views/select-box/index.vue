@@ -1,7 +1,7 @@
 <template>
   <div class="select-box">
     <div class="item-check">
-  　　<input @input="checkAll" v-model="isChecked" type="checkbox">
+  　　<input @input="checkAll" v-model="checked" type="checkbox">
   　　<span>全选 / 取消</span>
     </div>
     <ul>
@@ -25,13 +25,13 @@ export default {
         { id: 2, name: '红红', age: 18, money: 200 },
         { id: 3, name: '强强', age: 29, money: 300 }
       ],
-      isChecked: false,  // 是否全选
+      checked: false,  // 是否全选
       checkValue: []   // 选中的数据
     }
   },
   methods: {
     checkAll () {
-      if (this.isChecked) {
+      if (this.checked) {
         this.checkValue = []
       } else {
         this.list.forEach(item => {
@@ -48,7 +48,7 @@ export default {
   },
   watch: {
     checkValue () {
-      this.isChecked = this.checkValue.length === this.list.length ? true : false
+      this.checked = this.checkValue.length === this.list.length ? true : false
     }
   }
 }

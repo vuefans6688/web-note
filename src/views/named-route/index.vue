@@ -1,14 +1,14 @@
 <template>
   <div class="named-route">
     <p>命名路由组件</p>
-    <router-link :to="urls">跳转到动态路由组件</router-link>
+    <router-link :to="urlRoute">跳转到动态路由组件</router-link>
   </div>
 </template>
 
 <script>
 export default {
   computed: {
-    urls () {
+    urlRoute () {
       return {
         name: 'dynamic-route',
         params: {

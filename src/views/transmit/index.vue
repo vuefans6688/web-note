@@ -13,7 +13,6 @@ export default {
     // getInfo (name, age) {
     //   this.$router.push(`/receive/${name}/${age}`)
     // },
-
     // 路由query传参
     // getInfo () {
     //   this.$router.push({
@@ -24,12 +23,10 @@ export default {
     //     }
     //   })
     // },
-
     // 通过路由指定的props属性传参
     // getInfo (name, age) {
     //   this.$router.push(`/receive/${name}/${age}`)
     // },
-    
     getInfo (name, age) {
       this.$router.push({
         path: '/receive',

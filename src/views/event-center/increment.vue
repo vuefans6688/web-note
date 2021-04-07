@@ -1,6 +1,6 @@
 <template>
   <div class="increment">
-    <p class="car" @click="handleCar">汽车</p>
+    <p @click="handleCar">汽车</p>
   </div>
 </template>
 
@@ -22,7 +22,7 @@ export default {
 </script>
 
 <style scoped>
-.car {
+.increment {
   text-align: center;
 }
 </style>
