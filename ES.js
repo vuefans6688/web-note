@@ -304,11 +304,11 @@ distance(3200)  // "3.20公里"
 // 3、假设当前函数已经可以使用，调用自身计算上一次
 
 // 斐波那契数列
-function fib (n) {
-  if (n === 1 || n === 2) {
+function fib (number) {
+  if (number === 1 || number === 2) {
     return 1
   }
-  return fib(n - 1) + fib(n - 2)
+  return fib(number - 1) + fib(number - 2)
 }
 fib(4)  // 3
 
