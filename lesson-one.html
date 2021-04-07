@@ -1,0 +1,78 @@
+<!-- 文档声明类型，作用就是告诉浏览器使用哪种HTML版本来显示网页 -->
+<!-- 当前页面采取的是HTML5版本来显示网页 -->
+<!DOCTYPE html>
+<!-- 用来定义当前文档显示的语言 -->
+<html lang="en">
+
+<head>
+  <!-- 字符集(Character set)是多个字符的集合。以便计算机能够识别和存储各种文字 -->
+  <!-- 在<head>标签内，可以通过<meta>标签的charst属性来规定HTML文档应该使用哪种字符编码 -->
+  <!-- UTF-8 万国码 -->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>html笔记</title>
+  <style>
+    .container {
+      width: 150px;
+      height: 150px;
+      border: 1px solid #f00;
+      border-radius: 7px;
+      padding: 1px;
+    }
+
+    .progress {
+      width: 50%;
+      height: 100%;
+      background-color: #f00;
+      transition: all .7s;
+    }
+
+    .container:hover .progress {
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- html标签.$*数字 可以生成类名是有顺序的标签 -->
+  <!-- 如果想要在生成的标签内部写内容可以用{}表示 -->
+  <!-- Shift + Alt + F 快速格式化代码-->
+  <!-- 
+    也可以设置，当我们保存页面的时候自动化代码。
+    1.文件---【首选项】---【设置】
+    2.搜索emmet.include
+    3.在setting.json下的【用户】中添加以下代码：
+      "editor.formatOnType": true,
+      "editor.formatOnSave": true
+   -->
+  <!-- 行高：上空隙和下空隙把文字挤到中间了。如果行高小于盒子高度，文字会偏上，如果行高大于盒子高度，则文字偏下 -->
+  <!-- background-image: url('图片地址') no-repeat: 不平铺 -->
+  <!-- (单独使用)background-position: 方位名词(left、top、center、right、bottom) -->
+  <!-- (单独使用)background-position: 像素单位(px) -->
+  <!-- (混合使用)background-position: 方位名词 像素单位 -->
+  <!-- background-attachment: scroll(背景图片随对象内容滚动) -->
+  <!-- background-attachment: fixed(固定背景图片) -->
+  <!-- 权重叠加：如果是复合选择器，则会有权重叠加，需要计算权重(css优先级) -->
+  <!-- 
+    当我们给盒子指定padding值之后，发生了2件事情：
+    1.内容和边框有了距离，添加了内边距
+    2.padding影响了盒子实际大小
+   -->
+  <!-- 如果盒子已经有了宽度和高度，此时再指定内边框，会撑大盒子 -->
+  <!-- 如果想保证盒子跟效果图大小一致，则让width/height减去多出来的内边距大小即可 -->
+  <!-- 如果盒子本身没有指定width/height属性，则此时padding不会撑开盒子大小 -->
+  <!-- 使用margin定义块元素的垂直外边距时，可能会出现外边距的合并 -->
+  <!-- 问题：对于两个嵌套关系(父子关系)的块元素，父元素有上边距同时子元素也有上外边距，此时父元素会塌陷较大的外边距值 -->
+  <!-- 解决方案：
+    1.可以为父元素定义上边框
+    2.可以为父元素定义上内边距
+    3.可以为父元素添加overflow: hidden
+   -->
+
+  <div class="container">
+    <div class="progress"></div>
+  </div>
+</body>
+
+</html>

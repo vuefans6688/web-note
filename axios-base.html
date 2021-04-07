@@ -1,10 +1,13 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>axios基本使用</title>
 </head>
+
 <body>
   <button onclick="testGet()">GET请求</button>
   <button onclick="testPost()">POST请求</button>
@@ -23,7 +26,7 @@
       // })
 
       axios({
-        url: '/posts', 
+        url: '/posts',
         params: {
           id: 1
         }
@@ -39,10 +42,10 @@
 
       axios({
         url: '/posts',
-        method: 'post', 
+        method: 'post',
         data: {
-          "title": "json-server4", 
-          "author": "typicode4" 
+          "title": "json-server4",
+          "author": "typicode4"
         }
       }).then(res => {
         console.log(res.data)
@@ -56,9 +59,9 @@
 
       axios({
         url: '/posts/4',
-        method: 'put', 
+        method: 'put',
         data: {
-          "title": "json-server，服务器", 
+          "title": "json-server，服务器",
           "author": "typicode，服务器"
         }
       }).then(res => {
@@ -80,4 +83,5 @@
     }
   </script>
 </body>
+
 </html>
