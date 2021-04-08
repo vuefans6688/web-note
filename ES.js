@@ -1299,13 +1299,22 @@ function countOfString (sup, sub) {
 }
 countOfString('abcabcabc', 'abc')  // 3
 
+function queryString (string, char) {
+  let index = string.indexOf(char)
+  let count = 0
+  while (index !== -1) {
+    index = string.indexOf(char, index + 1)
+    count++
+  }
+  return `字符${char}出现了${count}次`
+}
+queryString('abcoefoxyozzopp', 'o')  // 字符o出现了4次
+
 // 计算数组中每个元素出现的次数
-function appearCount (arr) {
-  let obj = {}
-  arr.forEach(item => {
-    obj[item] ? obj[item] += 1 : obj[item] = 1
-  })
-  return obj
+function appearCount (array) {
+  let object = {}
+  array.forEach(key => object[key] ? object[key] += 1 : object[key] = 1)
+  return object
 }
 appearCount(['tom', 'jim', 'jack', 'tom', 'jack'])  // {tom: 2, jim: 1, jack: 2}
 
