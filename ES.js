@@ -2002,13 +2002,13 @@ while (true) {
 }
 
 let money = 100
-let sum = 0
+let result = 0
 let label = ''
 let operate = parseInt(prompt('请输入你的操作：' + '\n' + '1.存钱' + '\n' + '2.取钱' + '\n' + '3.显示余额' + '\n' + '4.退出'))
 switch (operate) {
   case 1:
-    sum = parseInt(money) + parseInt(prompt('请输入你的存钱数'))
-    label = '存款' + sum
+    result = parseInt(money) + parseInt(prompt('请输入你的存钱数'))
+    label = '存款' + result
     break
   case 2:
     let fetch = parseInt(prompt('请输入你取的钱数'))
