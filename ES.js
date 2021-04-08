@@ -2001,6 +2001,39 @@ while (true) {
   }
 }
 
+let money = 100
+let sum = 0
+let label = ''
+let operate = parseInt('请输入你的操作：' + '\n' + '1.存钱' + '\n' + '2.取钱' + '\n' + '3.显示余额' + '\n' + '4.退出')
+switch (operate) {
+  case 1:
+    sum = parseInt(money) + parseInt(prompt('请输入你的存钱数'))
+    label = '存款' + sum
+    break
+  case 2:
+    let fetch = parseInt(prompt('请输入你取的钱数'))
+    money = parseInt(money)
+    if (fetch > money) {
+      label = '不好意思，钱不够'
+    } else {
+      label = '余额为' + (money - fetch)
+    }
+    break
+  case 3:
+    label = '余额：' + money
+    break
+  case 4:
+    let flag = prompt('是否继续？(Y/N)')
+    while (flag !== ('Y' && 'y')) {
+      flag = prompt('是否继续？(Y/N)')
+    }
+    label = '退出成功'
+    break
+  default:
+    label = '输入错误'
+    break
+}
+
 function Ticker (config) {
   this.getNumber = function () {
     return config.start
