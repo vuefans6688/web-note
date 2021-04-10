@@ -898,17 +898,16 @@ quickSort([33, 12, 44, 6, 36])  // [6, 12, 33, 36, 44]
 
 // 一维数组转换成多维数组
 function arrayTransform (arrays, numbers) {
-  const empty = []
-  arrays.forEach((item, index) => {
+  const newArray = []
+  arrays.forEach((items, index) => {
     // 计算多维数组的下标
     const pages = Math.floor(index / numbers)
-    // 如果数组中有元素，就把数组清空 
-    if (!empty[pages]) {
-      empty[pages] = []
+    if (!newArray[pages]) {
+      newArray[pages] = []
     }
-    empty[pages].push(item)
+    newArray[pages].push(items)
   })
-  return empty
+  return newArray
 }
 arrayTransform([1, 2, 3, 4, 5, 6, 7, 8], 3)  // [[1, 2, 3], [4, 5, 6], [7, 8]]
 
