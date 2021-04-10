@@ -816,6 +816,25 @@ function getResult (start, end) {
 }
 getResult(1, 100)  // 5050
 
+// 字符串转换成数组
+function toArray (strings) {
+  try {
+    return Array.prototype.slice.call(strings)
+  } catch (error) {
+    let array = []
+    for (let i = 0; i < strings.length; i++) {
+      array[i] = strings[i]
+    }
+    return array
+  }
+}
+toArray('abcdefg')  // ["a", "b", "c", "d", "e", "f", "g"]
+
+function simpleNormalize(children) {
+ return Array.prototype.concat.apply([], children)
+}
+simpleNormalize([1, 2, 3, [4, 5, 6], 7, 8, [9, 10]])  // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
 function multidimension (children) {
   for (let i = 0; i < children.length; i++) {
     if (Array.isArray(children[i])) {
@@ -4996,3 +5015,4 @@ export function getUserInfo () {
 
 // @media screen and (min-resolution: 96dpi) { ... }
 // @media print and (min-resolution: 300dpi) { ... }
+
