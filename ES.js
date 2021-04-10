@@ -816,11 +816,32 @@ function getResult (start, end) {
 }
 getResult(1, 100)  // 5050
 
+function multidimension (children) {
+  for (let i = 0; i < children.length; i++) {
+    if (Array.isArray(children[i])) {
+      children = Array.prototype.concat.apply([], children)
+      for (let j = 0; j < children.length; j++) {
+        multidimension(children)
+      }
+    }
+  }
+  return children
+}
+multidimension([1, [2,3], [4, [5, 6, [7, 8]]], [9, 10]])  // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
 // 使用原型属性给数组排序
 function arraySort () {
   return Array.prototype.slice.call(arguments).sort((a, b) => a - b)
 }
 arraySort(10, -2, 101, -4, 50)  // [-4, -2, 10, 50, 101]
+
+const objectArray = {
+  0: '玛丽安',
+  1: 20,
+  length: 2
+}
+const person = Array.prototype.slice.call(objectArray)
+console.log(person)
 
 // 数组排序
 function arraysSort (...list) {
@@ -1654,9 +1675,7 @@ arrayRemoveRepeat([1, 2, 2, 2, 2, 5, 3, 2, 9, 5, 6, 3])  // [1, 2, 3, 5, 6, 9]
 // 数组去重排序  
 function arrayRemoveRepeat (array) {
   let newArray = []
-  array.forEach((item, index, list) => {
-    list.indexOf(item) === index ? newArray.push(item) : null
-  })
+  array.forEach((item, index, list) => list.indexOf(item) === index ? newArray.push(item) : null)
   return newArray.sort((a, b) => a - b)
 }
 arrayRemoveRepeat([1, 2, 2, 2, 2, 5, 3, 2, 9, 5, 6, 3])  // [1, 2, 3, 5, 6, 9]
@@ -1699,13 +1718,13 @@ verifyEmail('abc@abc.com.123')    // false
 verifyEmail('abc.hello@163.com')  // true
 
 // 交换两个数的位置
-function changePosition (num1, num2) {
+function exchange (num1, num2) {
   num1 = num1 + num2
   num2 = num1 - num2
   num1 = num1 - num2
-  return num1 + ' ' + num2
+  return `${num1} ${num2}`
 }
-changePosition(1, 2)  // 2 1
+exchange(1, 2)  // 2 1
 
 // 基本数据类型的判断
 console.log(typeof (null))  // object
@@ -1764,7 +1783,7 @@ function getOddSum (start, end) {
   let sum = 0
   while (start <= end) {
     if (start % 2 === 0) {
-      // start++防止程序发生死循环
+      // start++防止程序出现死循环
       start++
       continue
     }
@@ -4908,8 +4927,6 @@ function b (m, n) {
 }
 a(b)  // 4
 
-
-
 // 使用class类封装axios
 import axios from 'axios'
 import { merge } from 'lodash'
@@ -4964,3 +4981,18 @@ const http = instance.request()
 export function getUserInfo () {
   return http.get('/user')
 }
+
+// vue项目中如何使用字体图标：
+// 先在阿里巴巴字体图标库中找到想要的字体图标加入购物车添加到项目中，
+// 然后在vue项目中的index.html文件中引入如下图的css。
+
+// 每英寸包含点的数量（dots per inch）
+// 普通屏幕通常包含96dpi，一般将2倍于此的屏幕称之为高分屏，即大于等于192dpi的屏幕，比如Mac视网膜屏就达到了192dpi（即2dppx），打印时一般会需要更大的dpi；
+// 1dppx = 96dpi
+// 1dpi ≈ 0.39dpcm
+// 1dpcm ≈ 2.54dpi
+// 1in = 2.54cm = 25.4 mm = 101.6q = 72pt = 6pc = 96px
+// 示例代码：
+
+// @media screen and (min-resolution: 96dpi) { ... }
+// @media print and (min-resolution: 300dpi) { ... }
