@@ -52,6 +52,12 @@ console.log(5 >> 1)  // 2
 console.log(-5 >> 1)  // -3
 console.log(5 >>> 1)  // 2
 
+// 简单数据类型传参：函数的形参也可以看做是一个变量，当我们把一个值类型变量作为参数传给函数的形参时，
+// 其实是把变量在栈空间里的值复制了一份给形参，那么在方法内部对形参做任何修改，都不会影响到外部变量。
+
+// 复杂数据类型传参：函数的形参也可以看做是一个变量，当我们把引用类型变量传给形参时，其实是把变量在
+// 栈空间里保存的堆地址复制给了形参，形参和实参其实保存的是同一个堆地址，所以操作的是同一个对象。
+
 // 闭包
 function getList (data) {
   return function (id) {
@@ -543,11 +549,6 @@ factorial(3)  // 2
 factorial(4)  // 8
 factorial(5)  // 8
 
-// 基本数据类型是按照值操作，直接把值存储到栈内存中，引用数据类型则是把值存储到堆内存中，我们操作的都是堆内存的引用地址
-// js检测数据类型的属性和方法: typeof、instanceof、constructor、Object.prototype.toString.call()
-// 浏览器常用的内核：webkit、gecko、trident、blink
-// js中创建变量的几种常用方式: var、let/const、function、class、import
-
 // 用递归找出多维数组中元素的个数
 function elementCount (arrays) {
   // 计算元素个数的和
@@ -653,7 +654,7 @@ divisionArray(3, lists)
 
 const china = {
   nation: '中国',
-  birthPlaces: {
+  places: {
     name: '湖北'
   }
 }
@@ -672,20 +673,37 @@ let newChina = {}
 deepCopy(china, newChina)
 console.log(newChina)
 
+let region = {
+  nation: '中国'
+}
+let doctor = {
+  career: '医生'
+}
+function extendCopy (person) {
+  const human = {}
+  for (const key in person) {
+    human[key] = person[key]
+  }
+  human.uber = person
+  return human
+}
+doctor = extendCopy(region)
+console.log(doctor.nation)  // 中国
+
 // 对象浅拷贝
-let o1 = {
+let oldObject = {
   a: {
     b: 10
   }
 }
-function shallowCopy (obj) {
-  let o2 = {}
-  for (let key in obj) {
-    o2[key] = obj[key]
+function shallowCopy (origins) {
+  let newObject = {}
+  for (let key in origins) {
+    newObject[key] = origins[key]
   }
-  return o2
+  return newObject
 }
-shallowCopy(o1)
+shallowCopy(oldObject)
 
 Math.max.apply(Math, [5, 10, 50])  // 最大数50
 Math.max(...[5, 10, 50])  // 最大数50
@@ -869,9 +887,9 @@ function changeArray (number, array) {
 changeArray(3, [1, 2, 3, 4, 5, 6, 7, 8])  // 假设每行显示3个 [[1, 2, 3], [4, 5, 6], [7, 8]]
 
 function getResult () {
-  let arrays = Array.from(arguments)
+  let list = Array.from(arguments)
   let sum = 0
-  arrays.forEach(value => sum += value)
+  list.forEach(value => sum += value)
   return sum
 }
 getResult(1, 2, 3, 4, 5, 6, 7, 8, 9)  // 45
@@ -2010,15 +2028,26 @@ function transfer (target) {
 }
 outPutChinese('1')  // "壹"
 
+function stringReplacement (string, code) {
+  if (typeof string !== 'string' || typeof code !== 'string') {
+    return console.error('参数格式不对，必须为字符串形式')
+  }
+  while (string.indexOf(code) !== -1) {
+    string = string.replace(code, '*')
+  }
+  return string
+}
+stringReplacement('abcoefoxyozzopp', 'o')
+
 // 字符串去重
 function duplicateRemove (string) {
-  let result = ''
+  let chars = ''
   for (let i = 0; i < string.length; i++) {
-    if (result.search(string[i]) < 0) {
-      result += string[i]
+    if (chars.search(string[i]) < 0) {
+      chars += string[i]
     }
   }
-  return result.replace(/\W+/gi, '')
+  return chars.replace(/\W+/gi, '')
 }
 duplicateRemove('a, a, ss, aa, f, g, e, r, t, y, y')  // "asfgerty"
 
@@ -2204,7 +2233,7 @@ function getCurrentMonthDays (month, year) {
 getCurrentMonthDays(2, 2017)  // 28
 getCurrentMonthDays(2, 2018)  // 29
 
-const getMonthWeek = function (a, b, c) {
+function getMonthWeek (a, b, c) {
   /**
   * a = day = 当前日期
   * b = 6 - week = 当前周的还有几天过完(不算今天)
