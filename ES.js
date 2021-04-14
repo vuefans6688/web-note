@@ -830,8 +830,8 @@ function toArray (strings) {
 }
 toArray('abcdefg')  // ["a", "b", "c", "d", "e", "f", "g"]
 
-function simpleNormalize(children) {
- return Array.prototype.concat.apply([], children)
+function simpleNormalize (children) {
+  return Array.prototype.concat.apply([], children)
 }
 simpleNormalize([1, 2, 3, [4, 5, 6], 7, 8, [9, 10]])  // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
@@ -846,7 +846,7 @@ function multidimension (children) {
   }
   return children
 }
-multidimension([1, [2,3], [4, [5, 6, [7, 8]]], [9, 10]])  // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+multidimension([1, [2, 3], [4, [5, 6, [7, 8]]], [9, 10]])  // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
 // 使用原型属性给数组排序
 function arraySort () {
@@ -3761,8 +3761,8 @@ let cats = [
 ]
 minMonth(cats)  // { name: 'Waffles', months: 4 }
 
-function monthSum (pets) {
-  return pets.reduce((total, cur) => total += cur.months, 0)
+function totalMonth (pets) {
+  return pets.reduce((total, current) => total += current.months, 0)
 }
 let cats = [
   { name: 'Mojo', months: 84 },
@@ -3770,7 +3770,7 @@ let cats = [
   { name: 'Waffles', months: 4 },
   { name: 'Pickles', months: 6 }
 ]
-monthSum(cats)  // 128
+totalMonth(cats)  // 128
 
 class Father {
   constructor(x, y) {
@@ -3783,7 +3783,7 @@ class Father {
 }
 class Son extends Father {  // 子类继承父类
   constructor(x, y) {
-    super(x, y)  // 调用父类的构造函数 super必须在子类this之前调用
+    super(x, y)  // 调用父类的构造函数。super必须在子类this之前调用
     // this.x = x
     // this.y = y
   }
@@ -3967,17 +3967,17 @@ str.clear()
 console.log(str.size)  // 0
 
 // 找出所有三次自幂数
-function selfIdempotent (num) {
-  let arr = []
-  for (let i = 100; i < num; i++) {
+function selfIdempotent (numbers) {
+  let arrays = []
+  for (let i = 100; i < numbers; i++) {
     const a = parseInt(i / 100)
     const b = parseInt(i % 100 / 10)
     const c = i % 10
     if (a * a * a + b * b * b + c * c * c === i) {
-      arr[arr.length] = i + '是自幂数'
+      arrays[arrays.length] = i + '是自幂数'
     }
   }
-  return arr
+  return arrays
 }
 selfIdempotent(1000)  // ["153是自幂数", "370是自幂数", "371是自幂数", "407是自幂数"]
 
@@ -4050,14 +4050,14 @@ ticketByAgeAndWeek(6, 12)  // 门票为500
 ticketByAgeAndWeek(3, 9)  // 门票为140
 
 // 输出一个数的所有公倍数
-function commonMultiple (num) {
-  let arr = []
-  for (let i = 1; i <= num; i++) {
-    if (num % i === 0) {
-      arr[arr.length] = i
+function commonMultiple (numbers) {
+  let arrays = []
+  for (let i = 1; i <= numbers; i++) {
+    if (numbers % i === 0) {
+      arrays[arrays.length] = i
     }
   }
-  return arr
+  return arrays
 }
 commonMultiple(10)  // [1, 2, 5, 10]
 
@@ -4096,10 +4096,10 @@ function betweenTwoNumbers (start, end) {
 betweenTwoNumbers(100, 300)  // 11个
 
 // 求1 + 2 + ... + 100的和
-function oneToHundredSum (n) {
+function oneToHundredSum (numbers) {
   // sum是和的累加器，初始值是0
   let sum = 0
-  for (let i = 1; i <= n; i++) {
+  for (let i = 1; i <= numbers; i++) {
     sum += i
   }
   return sum
@@ -4123,11 +4123,11 @@ function pullOutRadish (count) {
 pullOutRadish(500)  // 32
 
 // 有用户输入数字n，计算3 / 2 + 4 / 3 + 5 / 4 + ... + (n + 1) / n的结果
-function fraction (n) {
+function fraction (numbers) {
   // 和的累加器
   let sum = 0
   // 遍历分母就可以了， 因为分母就是分子加1
-  for (let i = 2; i <= n; i++) {
+  for (let i = 2; i <= numbers; i++) {
     sum += (i + 1) / i
   }
   return sum
@@ -4137,12 +4137,12 @@ fraction(3)  // 2.833333333333333
 
 // 用莱布尼茨级数估算圆周率
 // π = 2 * (1 + 1 / 3 + (1 * 2) / (3 * 5) + (1 * 2 * 3) / (3 * 5 * 7) + (1 * 2 * 3 * 4) / (3 * 5 * 7 * 9) + (1 * ...n) / (3 * 5 * ...2n + 1))
-function leibniz (n) {
+function leibniz (numbers) {
   // 累加器，就是最后答案
   let sum = 0
   // 累乘器，用来制作每一项，然后往累加器中累加
   let item = 1
-  for (let i = 1; i <= n; i++) {
+  for (let i = 1; i <= numbers; i++) {
     // item就是小车厢
     item *= i / (2 * i + 1)
     // 把小车厢往累加器中累加
@@ -4156,16 +4156,16 @@ leibniz(30)  // 3.14159265330116
 // 计算数组中所有奇数和偶数之和
 function arrayGetSum (array) {
   let odd = 0, even = 0
-  array.forEach(num => num % 2 ? odd += num : even += num)
+  array.forEach(item => item % 2 ? odd += item : even += item)
   return `奇数和: ${odd}，偶数和: ${even}`
 }
 arrayGetSum([12, 34, 11, 56])  // "奇数和: 11 偶数和: 102"
 
 // 求数组中素数个数
-function isPrimer (num) {
+function isPrimer (numbers) {
   let flag = true
-  for (let i = 2; i <= num - 1; i++) {
-    if (num % i === 0) {
+  for (let i = 2; i <= numbers - 1; i++) {
+    if (numbers % i === 0) {
       flag = false
     }
   }
@@ -4451,10 +4451,10 @@ function divideByThree (start, end) {
 divideByThree(1, 10)  // [3, 6, 9]
 
 function ArrayRemoveRepeat (array) {
-  return array.reduce((item, cur) => {
-    // item初始状态为空数组，cur为当前数组中的每一项元素
-    if (!item.includes(cur)) {
-      item.push(cur)
+  return array.reduce((item, current) => {
+    // item初始状态为空数组，current为当前数组中的每一项元素
+    if (!item.includes(current)) {
+      item.push(current)
     }
     return item
   }, [])
@@ -4524,17 +4524,17 @@ function createCode (codeLength) {
 createCode(4)  // 输出一个4位的随机验证码
 
 // 判断一个数是不是质数
-function isPrimeNumber (n) {
+function isPrime (numbers) {
   let flag = true
-  for (let i = 2; i < n; i++) {
-    if (n % i === 0) {
+  for (let i = 2; i < numbers; i++) {
+    if (numbers % i === 0) {
       flag = false
     }
   }
   return flag ? '是质数' : '不是质数'
 }
-isPrimeNumber(20)  // 不是质数
-isPrimeNumber(13)  // 是质数
+isPrime(20)  // 不是质数
+isPrime(13)  // 是质数
 
 // 求出1 - 1/2 + 1/3 - 1/4 ... 1/100的和，已知let i = 1
 function fraction (num) {
@@ -4635,40 +4635,40 @@ const cat = new Cat('小黑', 6)
 cat.getCatInfo()
 
 // 数组去重
-function arrayRemoveRepeat (arr) {
-  let obj = {}
-  for (let i = 0; i < arr.length; i++) {
-    const item = arr[i]
-    if (typeof obj[item] !== 'undefined') {
-      arr.splice(i, 1)
+function arrayRemoveRepeat (arrays) {
+  let objects = {}
+  for (let i = 0; i < arrays.length; i++) {
+    const item = arrays[i]
+    if (typeof objects[item] !== 'undefined') {
+      arrays.splice(i, 1)
       // 防止数组塌陷
       i--
       continue
     }
     // 把这一项作为对象的属性名和属性值存储进去
-    obj[item] = item
+    objects[item] = item
   }
-  return arr
+  return arrays
 }
 arrayRemoveRepeat([1, 2, 3, 3, 4, 3, 2, 5, 6, 5])  // [1, 2, 3, 4, 5, 6]
 
 // 数组去重
-function arrayRemoveRepeat (arr) {
-  let obj = {}
-  for (let i = 0; i < arr.length; i++) {
-    const item = arr[i]
-    if (typeof obj[item] !== 'undefined') {
+function arrayRemoveRepeat (arrays) {
+  let objects = {}
+  for (let i = 0; i < arrays.length; i++) {
+    const item = arrays[i]
+    if (typeof objects[item] !== 'undefined') {
       // 我们把数组最后一项获取到，替换当前项
       // 再把数组最后一项删除
-      arr[i] = arr[arr.length - 1]
-      arr.length--
+      arrays[i] = arrays[arrays.length - 1]
+      arrays.length--
       i--
       continue
     }
     // 把这一项作为对象的属性名和属性值存储进去
-    obj[item] = item
+    objects[item] = item
   }
-  return arr
+  return arrays
 }
 arrayRemoveRepeat([1, 2, 3, 3, 4, 3, 2, 5, 6, 5])  // [1, 2, 3, 4, 5, 6]
 
@@ -4709,14 +4709,14 @@ arrayRemoveRepeat([1, 2, 2, 3])  // [1, 2, 3]
 
 // 字符串去重
 function stringRemoveRepeat (strings) {
-  let obj = {}
+  let objects = {}
   for (let i = 0; i < strings.length; i++) {
     let value = strings[i]
     // 如果是true，证明对象中有这个成员，否则对象中没有这个成员
-    obj[value] ? obj[value] += 1 : obj[value] = 1
+    objects[value] ? objects[value] += 1 : objects[value] = 1
   }
   let result = ''
-  for (const key in obj) {
+  for (const key in objects) {
     result += key
   }
   return result
@@ -4724,30 +4724,30 @@ function stringRemoveRepeat (strings) {
 stringRemoveRepeat('abcabcefgefh')  // abcefgh
 
 // 字符串去重
-function duplicateRemove (str) {
-  let arr = str.split('').sort().join('')
-  let list = arr.match(/(.)\1+/g)
+function duplicateRemove (strings) {
+  let arrays = strings.split('').sort().join('')
+  let list = arrays.match(/(.)\1+/g)
   for (let i = 0; i < list.length; i++) {
-    arr = arr.replace(list[i], list[i].substring(0, 1))
+    arrays = arrays.replace(list[i], list[i].substring(0, 1))
   }
-  return arr
+  return arrays
 }
 duplicateRemove('1234321abaccc')  // "1234abc"
 
 // 输入两个数，求两个数的最大公约数
 function commonDisior (x, y) {
   // 声明一个变量当作最大公约数
-  let num = 1
+  let max = 1
   for (let i = x; i > 1; i--) {
     // i就是两个数字的最大公约数
     if (x % i === 0 && y % i === 0) {
       // 因为是倒着循环，那么找到了一个就是最大的  
-      num = i
+      max = i
       // 直接结束循环  
       break
     }
   }
-  return num
+  return max
 }
 commonDisior(8, 5)  // 1
 commonDisior(8, 4)  // 4
@@ -4766,10 +4766,10 @@ getDivisor(3, 4)  // 1
 getDivisor(8, 4)  // 4
 
 // 输入两个数，求两个数的最大公约数
-function maxDivisor (m, n) {
-  let max = m > n ? n : m
+function maxDivisor (a, b) {
+  let max = a > b ? b : a
   while (max !== 0) {
-    if (m % max === 0 && n % max === 0) {
+    if (a % max === 0 && b % max === 0) {
       break
     }
     max--
@@ -4780,10 +4780,10 @@ maxDivisor(3, 4)  // 1
 maxDivisor(12, 4)  // 4
 
 // 输入两个数，求两个数的最大公约数
-function commonMultiple (n1, n2) {
-  let max = Math.max(n1, n2)
+function commonMultiple (a, b) {
+  let max = Math.max(a, b)
   for (let i = max; i > 0; i--) {
-    if (n1 % i === 0 && n2 % i === 0) {
+    if (a % i === 0 && b % i === 0) {
       max = i
       break
     }
@@ -4792,36 +4792,36 @@ function commonMultiple (n1, n2) {
 }
 commonMultiple(12, 8)  // 4
 
-function continueKeyword (num) {
+function continueKeyword (numbers) {
   let sum = 0
-  let str = '1～20之间的偶数有：'
+  let strings = '1～20之间的偶数有：'
   // 把1～20之间的偶数进行累加
-  for (let i = 1; i < num; i++) {
+  for (let i = 1; i < numbers; i++) {
     // 判断i是否为偶数，如果模不等于0，为奇数，结束当前循环，进入下一次循环
     if (i % 2 !== 0) {
       continue
     }
     // 如果执行continue语句，循环体内的该行以及后面的代码都不会被执行
     sum += i
-    str += i + ' '
+    strings += i + ' '
   }
-  return str += '\n这些偶数的和为：' + sum
+  return strings += '\n这些偶数的和为：' + numbers
 }
 continueKeyword(20)  // "1～20之间的偶数有：2 4 6 8 10 12 14 16 18 这些偶数的和为：90"   
 
-function breakKeyword (num) {
+function breakKeyword (numbers) {
   let sum = 0
-  let str = '1～20之间的被累加的偶数有：'
+  let strings = '1～20之间的被累加的偶数有：'
   // 把1～20之间的偶数进行累加
-  for (let i = 2; i < num; i += 2) {
+  for (let i = 2; i < numbers; i += 2) {
     if (sum > 60) {
       // 执行break语句后，整个循环立刻停止结束执行
       break
     }
     sum += i
-    str += i + ' '
+    strings += i + ' '
   }
-  return str += '\n这些偶数的和为：' + sum
+  return strings += '\n这些偶数的和为：' + sum
 }
 breakKeyword(20)  // "1～20之间的被累加的偶数有：2 4 6 8 10 12 14 16 这些偶数的和为：72"
 
@@ -4841,17 +4841,17 @@ getAccumulation(3, 2)  // 246
 
 // 五位数中，对称的数称为回文数，找出所有的回文数。如12321
 function palindromeNumber (min, max) {
-  let arr = []
+  let arrays = []
   for (let i = min; i < max; i++) {
     const a = 1 % 10  // 个位
     const b = parseInt(i / 10) % 10  // 十位
     const c = parseInt(i / 1000) % 10  // 千位
     const d = parseInt(i / 10000)  // 万位
     if (a === d && b === c) {
-      arr[arr.length] = i
+      arrays[arrays.length] = i
     }
   }
-  return arr
+  return arrays
 }
 palindromeNumber(10000, 100000)
 
