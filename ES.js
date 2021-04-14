@@ -3631,34 +3631,34 @@ function stringPosition (code) {
 stringPosition('abcoefoxyozzopp')  // "出现最多的字符是o, 一共出现了4次"
 
 // 将字符串的字符全部转换为小写字符
-function lowerCase (string) {
-  let array = string.split('')
-  let code = ''
+function lowerCase (chars) {
+  let array = chars.split('')
+  let strings = ''
   // 用for遍历数组
   for (let i = 0; i < array.length; i++) {
     if (array[i] >= 'A' && array[i] <= 'Z') {
-      code += array[i].toLowerCase()
+      strings += array[i].toLowerCase()
     } else {
-      code += array[i]
+      strings += array[i]
     }
   }
-  return code
+  return strings
 }
 lowerCase('Hello World!')  // "hello world!"
 
 // 将字符串的字符全部转换为大写字符
-function upperCase (string) {
-  let array = string.split('')
-  let code = ''
+function upperCase (chars) {
+  let array = chars.split('')
+  let strings = ''
   // 用forEach遍历数组
   array.forEach(value => {
     if (value >= 'a' && value <= 'z') {
-      code += value.toUpperCase()
+      strings += value.toUpperCase()
     } else {
-      code += value
+      strings += value
     }
   })
-  return code
+  return strings
 }
 upperCase('Hello World!')  // "HELLO WORLD!"
 
@@ -3808,32 +3808,34 @@ arrays.summation()  // 6
 function changeThis (x, y) {
   return x + y
 }
-const obj = { name: 'Jakie' }
-changeThis.call(obj, 1, 2)  // 3
+const objects = {
+  name: 'Jakie'
+}
+changeThis.call(objects, 1, 2)  // 3
 
-let obj = {
+let objects = {
   id: 1,
   name: '小米',
   price: 1999
 }
-Object.defineProperty(obj, 'count', {  // 添加或修改属性
+Object.defineProperty(objects, 'count', {  // 添加或修改属性
   value: 100
 })
-console.log(obj)  // { id: 1, name: "小米", price: 1999, count: 100 }
-Object.defineProperty(obj, 'id', {
+console.log(objects)  // { id: 1, name: "小米", price: 1999, count: 100 }
+Object.defineProperty(objects, 'id', {
   writable: false  // 不允许修改属性值，默认false
 })
-console.log(obj)
-Object.defineProperty(obj, 'count', {
+console.log(objects)
+Object.defineProperty(objects, 'count', {
   enumerable: false  // 不允许遍历对象属性，默认false
 })
-Object.defineProperty(obj, 'count', {
+Object.defineProperty(objects, 'count', {
   configurable: false  // 不允许删除对象属性和修改特性，默认false
 })
 
-let book = {}
+let books = {}
 let name = ''
-Object.defineProperty(book, 'name', {
+Object.defineProperty(books, 'name', {
   set (value) {
     name = value
     console.log('你取了一个书名叫做' + value)  // 你取了一个书名叫做vue权威指南
@@ -3842,16 +3844,18 @@ Object.defineProperty(book, 'name', {
     return `《${name}》`
   }
 })
-book.name = 'vue权威指南'
-console.log(book.name)  // 《vue权威指南》
+books.name = 'vue权威指南'
+console.log(books.name)  // 《vue权威指南》
 
 // 1.不会调用原来的函数，可以改变原来函数内部的this指向
 // 2.返回的是原函数改变this之后产生的新函数
-let object = { name: 'Jakie' }
+let objects = {
+  name: 'Jakie'
+}
 function getResult (a, b) {
   return a + b
 }
-let result = getResult.bind(object, 1, 2)
+let result = getResult.bind(objects, 1, 2)
 result()  // 3                     
 
 // <button>点击</button>
@@ -3871,7 +3875,7 @@ for (let i = 0; i < li.length; i++) {
   }
 }
 
-// 立即执行函数就是只会执行一次函数
+// 概念：立即执行函数就是只会执行一次函数
 // 立即执行函数也称为小闭包，因为立即执行函数里面的任何一个函数都可以使用它的i变量
 for (let i = 0; i < li.length; i++) {
   // 利用for循环穿件4个立即执行函数
@@ -3884,9 +3888,9 @@ for (let i = 0; i < li.length; i++) {
 
 // 闭包的主要作用: 延伸了变量的作用域
 // 闭包是一个函数(一个作用域可以访问另一个函数的局部变量)
-// 闭包应用-计算打车价格
-// 打车起步价13(3公里内)，之后每多一公里增加5元钱，用户输入公里数就可以计算打车价格
-// 如果有拥堵情况，总价格多收取10元钱拥堵费
+// 闭包应用--计算打车价格
+// 打车起步价13(3公里内)，之后每多一公里增加5元钱，用户输入公里数就可以计算打车价格，
+// 如果有拥堵情况，总价格多收取10元钱拥堵费。
 let car = (() => {
   let start = 13  // 起步价
   let total = 0   // 总价
@@ -4038,7 +4042,7 @@ isNarcissu(153)  // 这个数字是水仙花数
 
 // 平日：年龄大于等于10岁，门票是300. 年龄小于10岁，门票是140
 // 周末：年龄大于等于10岁，门票是500. 年龄小于10岁，门票是210
-function ticketByAgeAndWeek (week, age) {
+function sellTicket (week, age) {
   // 让星期几作为前提条件
   if (week === 0 || week === 6) {
     // 周末
@@ -4048,8 +4052,8 @@ function ticketByAgeAndWeek (week, age) {
     return age >= 10 ? '门票为300' : '门票为140'
   }
 }
-ticketByAgeAndWeek(6, 12)  // 门票为500
-ticketByAgeAndWeek(3, 9)  // 门票为140
+sellTicket(6, 12)  // 门票为500
+sellTicket(3, 9)  // 门票为140
 
 // 输出一个数的所有公倍数
 function commonMultiple (numbers) {
