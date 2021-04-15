@@ -4,8 +4,8 @@
 // 例子：
 // new Date().formatter("yyyy-MM-dd hh:mm:ss.S")  ==> 2006-07-02 08:09:04.423
 // new Date().formatter("yyyy-M-d h:m:s.S")       ==> 2006-7-2 8:9:4.18
-export function formatterTime(date, formatter) {
-  const o = {
+export function formatterTime (date, formatter) {
+  const config = {
     'M+': date.getMonth() + 1,                   // 月份
     'd+': date.getDate(),                        // 日
     'h+': date.getHours(),                       // 小时
@@ -14,24 +14,24 @@ export function formatterTime(date, formatter) {
     'S+': date.getMilliseconds(),                // 毫秒
     'q+': Math.floor((date.getMonth() + 3) / 3)  // 季度
   }
-  if (/(y+)/.test(formatter)) { 
+  if (/(y+)/.test(formatter)) {
     const year = date.getFullYear()
     formatter = formatter.replace(RegExp.$1, (`${year}`).substr(4 - RegExp.$1.length))
   }
-  Object.keys(o).forEach(key => {
+  Object.keys(config).forEach(key => {
     if (new RegExp(`(${key})`).test(formatter)) {
       if (key === 'S+') {
-        const start = `00${o[key]}`.length - 3
-        formatter = formatter.replace(RegExp.$1, `00${o[key]}`.substr(start, RegExp.$1.length))
+        const start = `00${config[key]}`.length - 3
+        formatter = formatter.replace(RegExp.$1, `00${config[key]}`.substr(start, RegExp.$1.length))
       } else {
-        formatter = formatter.replace(RegExp.$1, (RegExp.$1.length === 1) ? (o[key]) : ((`00${o[key]}`).substr((`${o[key]}`).length)))
+        formatter = formatter.replace(RegExp.$1, (RegExp.$1.length === 1) ? (config[key]) : ((`00${config[key]}`).substr((`${config[key]}`).length)))
       }
     }
   })
   return formatter
 }
 
-export function dateFilter(date, format = 'yyyy-MM-dd') {
+export function dateFilter (date, format = 'yyyy-MM-dd') {
   if (!date) {
     return ''
   }
@@ -46,7 +46,7 @@ export function dateFilter(date, format = 'yyyy-MM-dd') {
 }
 
 // 将日期yyyy-MM-dd转化成日期对象(支持8位、14位) 
-export function dateChange(value) {
+export function dateChange (value) {
   value += ''
   let date = ''
   if (value.length === 8) {

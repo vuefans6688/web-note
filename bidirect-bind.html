@@ -1,20 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>实现数据双向绑定</title>
 </head>
-
 <body>
-  <input type="text" v-model="title">
-  <input type="text" v-model="title">
-  <h4 v-bind="title">这里也会发生更新</h4>
+    <input type="text" v-model="title">
+    <input type="text" v-model="title">
+    <h4 v-bind="title">这里也会发生更新</h4>
   <script>
     function View() {
       let proxy = new Proxy({}, {
-        set(obj, property, value) {
+        set (obj, property, value) {
           document.querySelectorAll(`[v-model="${property}"]`).forEach(item => {
             item.value = value
           })
@@ -23,7 +21,7 @@
           })
         }
       })
-      this.init = function () {
+      this.init = function() {
         const els = document.querySelectorAll('[v-model]')
         els.forEach(item => {
           item.addEventListener('keyup', () => {
@@ -32,8 +30,7 @@
         })
       }
     }
-    new View().init()
+    new View().init() 
   </script>
 </body>
-
 </html>

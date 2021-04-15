@@ -5,13 +5,24 @@
         <el-input v-model="addDetail.title" placeholder="请输入标题"></el-input>
       </el-form-item>
       <el-form-item label="发布人:" prop="user">
-        <el-input v-model="addDetail.user" placeholder="请输入发布人"></el-input>
+        <el-input
+          v-model="addDetail.user"
+          placeholder="请输入发布人"
+        ></el-input>
       </el-form-item>
       <el-form-item label="发布时间:">
-        <el-date-picker v-model="addDetail.dates" :value-format="valueFormat" :editable="false" type="date" placeholder="选择日期"></el-date-picker>
+        <el-date-picker
+          v-model="addDetail.dates"
+          :value-format="valueFormat"
+          :editable="false"
+          type="date"
+          placeholder="选择日期"
+        ></el-date-picker>
       </el-form-item>
       <el-form-item>
-        <el-button @click="add" :disabled="disabled" type="primary">新增</el-button>
+        <el-button @click="add" :disabled="disabled" type="primary"
+          >新增</el-button
+        >
       </el-form-item>
     </el-form>
     <el-table :data="allData" @selection-change="selectChange" stripe>
@@ -21,24 +32,61 @@
           <span>{{ scope.$index + 1 }}</span>
         </template>
       </el-table-column>
-      <el-table-column align="center" prop="title" label="标题"></el-table-column>
-      <el-table-column align="center" prop="user" label="发布人"></el-table-column>
-      <el-table-column align="center" prop="dates" label="发布时间"></el-table-column>
+      <el-table-column
+        align="center"
+        prop="title"
+        label="标题"
+      ></el-table-column>
+      <el-table-column
+        align="center"
+        prop="user"
+        label="发布人"
+      ></el-table-column>
+      <el-table-column
+        align="center"
+        prop="dates"
+        label="发布时间"
+      ></el-table-column>
       <el-table-column align="center" label="操作">
         <template slot-scope="scope">
-          <el-button @click="del(scope.row.id)" type="danger" size="small">删除</el-button>
-          <el-button @click="edit(scope.row, scope.$index)" type="primary" size="small">编辑</el-button>
+          <el-button @click="del(scope.row.id)" type="danger" size="small"
+            >删除</el-button
+          >
+          <el-button
+            @click="edit(scope.row, scope.$index)"
+            type="primary"
+            size="small"
+            >编辑</el-button
+          >
         </template>
       </el-table-column>
     </el-table>
     <div class="batch-delete">
-      <el-button @click="batchDelete" :disabled="selectData.length === 0" type="danger" size="small">批量删除</el-button>
+      <el-button
+        @click="batchDelete"
+        :disabled="selectData.length === 0"
+        type="danger"
+        size="small"
+        >批量删除</el-button
+      >
     </div>
-    <el-pagination @size-change="sizeChange" @current-change="currentChange" :total="total"
-      :current-page="currentPage" :page-size="pageSize" :page-sizes="[1, 2, 3, 4]"
-      layout="total, sizes, prev, pager, next, jumper" background>
+    <el-pagination
+      @size-change="sizeChange"
+      @current-change="currentChange"
+      :total="total"
+      :current-page="currentPage"
+      :page-size="pageSize"
+      :page-sizes="[1, 2, 3, 4]"
+      layout="total, sizes, prev, pager, next, jumper"
+      background
+    >
     </el-pagination>
-    <el-dialog title="提示" :visible.sync="dialogVisible" width="50%" align="center">
+    <el-dialog
+      title="提示"
+      :visible.sync="dialogVisible"
+      width="50%"
+      align="center"
+    >
       <div class="delete-tip">
         <i class="el-icon-warning-outline"></i>
         <span class="text">是否删除该数据?</span>
@@ -47,7 +95,7 @@
         <el-button @click="dialogVisible = false" size="small">取消</el-button>
         <el-button @click="confirm" type="primary" size="small">确定</el-button>
       </div>
-		</el-dialog>
+    </el-dialog>
     <el-dialog :visible.sync="isEdit" title="编辑资料" align="center">
       <el-form :model="editDetail" size="small" label-width="80px">
         <el-form-item prop="title" label="标题:">
@@ -57,7 +105,13 @@
           <el-input v-model="editDetail.user"></el-input>
         </el-form-item>
         <el-form-item prop="dates" label="发布时间:">
-          <el-date-picker v-model="editDetail.dates" type="date" :value-format="valueFormat" placeholder="请选择日期" style="width: 100%;"></el-date-picker>
+          <el-date-picker
+            v-model="editDetail.dates"
+            type="date"
+            :value-format="valueFormat"
+            placeholder="请选择日期"
+            style="width: 100%"
+          ></el-date-picker>
         </el-form-item>
         <el-form-item>
           <el-button @click="update" type="primary">更新</el-button>
@@ -78,10 +132,10 @@ export default {
       newsList: [
         {
           id: '45211546',
-          title: '在移动设备开发',
+          title: '移动设备开发',
           user: '小红',
           dates: '2020-11-18'
-        }, 
+        },
         {
           id: '61341341',
           title: '图形及特效特性',

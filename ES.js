@@ -52,12 +52,6 @@ console.log(5 >> 1)  // 2
 console.log(-5 >> 1)  // -3
 console.log(5 >>> 1)  // 2
 
-// 简单数据类型传参：函数的形参也可以看做是一个变量，当我们把一个值类型变量作为参数传给函数的形参时，
-// 其实是把变量在栈空间里的值复制了一份给形参，那么在方法内部对形参做任何修改，都不会影响到外部变量。
-
-// 复杂数据类型传参：函数的形参也可以看做是一个变量，当我们把引用类型变量传给形参时，其实是把变量在
-// 栈空间里保存的堆地址复制给了形参，形参和实参其实保存的是同一个堆地址，所以操作的是同一个对象。
-
 // 闭包
 function getList (data) {
   return function (id) {
@@ -74,13 +68,13 @@ const data = {
 let closure = getList(data)
 closure(data.list.map(item => console.log(item.id)))  // 123
 
-function closure (i) {
+function useClosure (i) {
   return function (j) {
     return i + j
   }
 }
-let result = closure(1)
-result(2)  // 3  
+let c = useClosure(1)
+c(2)  // 3  
 
 // 实现一函数，判断输入的是不是回文字符串
 function palindRome (code) {
@@ -219,11 +213,11 @@ web.run()  // "小米在运行"
 web.work()  // "小米在工作"
 
 // 给Sting加一个用正则表达式求出字符串中有多少个数字的方法
-String.prototype.getCount = function (strings) {
+String.prototype.getCount = function (str) {
   const reg = /\d/
   const num = 0
-  while (reg.test(strings)) {
-    strings = strings.replace(reg, '')
+  while (reg.test(str)) {
+    str = str.replace(reg, '')
     num++
   }
 }
@@ -237,9 +231,9 @@ const temp = inputValue.getLength()
 console.log('输入的字符串有' + temp + '个数字')
 
 // break 是立即结束语句，并跳出语句，进行下个语句执行
-function breakStatement (number) {
+function breakStatement (n) {
   let array = []
-  for (let i = 1; i <= number; i++) {
+  for (let i = 1; i <= n; i++) {
     if (i === 6) {
       break
     }
@@ -250,9 +244,9 @@ function breakStatement (number) {
 breakStatement(10)  // [1, 2, 3, 4, 5]
 
 // continue 是停止当前语句，并从头执行该语句
-function continueStatement (number) {
+function continueStatement (n) {
   let array = []
-  for (let i = 1; i <= number; i++) {
+  for (let i = 1; i <= n; i++) {
     if (i === 6) {
       continue
     }
@@ -310,11 +304,11 @@ distance(3200)  // "3.20公里"
 // 3、假设当前函数已经可以使用，调用自身计算上一次
 
 // 斐波那契数列
-function fib (number) {
-  if (number === 1 || number === 2) {
+function fib (n) {
+  if (n === 1 || n === 2) {
     return 1
   }
-  return fib(number - 1) + fib(number - 2)
+  return fib(n - 1) + fib(n - 2)
 }
 fib(4)  // 3
 
@@ -382,23 +376,23 @@ function recursion (start, end) {
 recursion(1, 100)  // 5050
 
 // 递归求和
-function recursion (number) {
-  if (number === 1) {
+function recursion (n) {
+  if (n === 1) {
     return 1
   }
   // recursion(100) = recursion(99) + 100
-  // recursion(number) = recursion(number - 1) + number
-  return recursion(number - 1) + number
+  // recursion(n) = recursion(n - 1) + n
+  return recursion(n - 1) + n
 }
 recursion(100)  // 5050
 
-function recursion (data, props) {
+function recursion (obj, props) {
   // 当数组长度等于1的时候，拿出数组的元素作为对象的属性名，再取出对象的属性值
   if (props.length === 1) {
-    return data[props[0]]
+    return obj[props[0]]
   } else {
-    // data[props[0]] 取出对象中的嵌套对象  props.slice(1) 删除数组的第一个元素
-    return recursion(data[props[0]], props.slice(1))
+    // obj[props[0]] 取出对象中的嵌套对象  props.slice(1) 删除数组的第一个元素
+    return recursion(obj[props[0]], props.slice(1))
   }
 }
 const value = recursion({
@@ -413,23 +407,23 @@ console.log(value)
 // 有一堆桃子不知道数目，猴子第一天吃掉一半，觉得不过瘾，又多吃了一只，
 // 第二天照此办法，吃掉桃子的一半加一只，天天如此，到第num(num <= 10)天早上，
 // 猴子发现只剩一只桃子了，问这堆桃子原来有多少只？(思路: n为还剩n天吃完的桃子数)
-function peache (numbers) {
-  if (numbers === 1) {
+function peache (n) {
+  if (n === 1) {
     return 1
   }
   // peach(10) / 2 - 1 = peach(9)
   // peach(10) = (peach(9) + 1) * 2
-  // peach(numbers) = (peach(numbers - 1) + 1) * 2
-  return (peache(numbers - 1) + 1) * 2
+  // peach(n) = (peach(n - 1) + 1) * 2
+  return (peache(n - 1) + 1) * 2
 }
 peache(4)  // 22
 
 // 用递归方式求1-100的和
-function add (min, max) {
-  if (max + 1 > 100) {
-    return min + max
+function add (n1, n2) {
+  if (n2 + 1 > 100) {
+    return n1 + n2
   }
-  return add(min + max, max + 1)
+  return add(n1 + n2, n2 + 1)
 }
 add(0, 0)  // 5050
 
@@ -530,12 +524,12 @@ recursion(2, 1)  // 1
 recursion(3, 1)  // 6
 
 // 递归求阶乘
-const objects = {
+const object = {
   factorial (number) {
     return number === 1 ? 1 : number * object.factorial(number - 1)
   }
 }
-objects.factorial(5)  // 120
+object.factorial(5)  // 120
 
 function factorial (number) {
   if (number === 1) {
@@ -548,6 +542,11 @@ factorial(2)  // 2
 factorial(3)  // 2
 factorial(4)  // 8
 factorial(5)  // 8
+
+// 基本数据类型是按照值操作，直接把值存储到栈内存中，引用数据类型则是把值存储到堆内存中，我们操作的都是堆内存的引用地址
+// js检测数据类型的属性和方法: typeof、instanceof、constructor、Object.prototype.toString.call()
+// 浏览器常用的内核：webkit、gecko、trident、blink
+// js中创建变量的几种常用方式: var、let/const、function、class、import
 
 // 用递归找出多维数组中元素的个数
 function elementCount (arrays) {
@@ -654,7 +653,7 @@ divisionArray(3, lists)
 
 const china = {
   nation: '中国',
-  places: {
+  birthPlaces: {
     name: '湖北'
   }
 }
@@ -673,82 +672,23 @@ let newChina = {}
 deepCopy(china, newChina)
 console.log(newChina)
 
-let region = {
-  nation: '中国'
-}
-let doctor = {
-  career: '医生'
-}
-function extendCopy (person) {
-  const human = {}
-  for (const key in person) {
-    human[key] = person[key]
-  }
-  human.uber = person
-  return human
-}
-doctor = extendCopy(region)
-console.log(doctor.nation)  // 中国
-
 // 对象浅拷贝
-let oldObject = {
+let o1 = {
   a: {
     b: 10
   }
 }
-function shallowCopy (origins) {
-  let newObject = {}
-  for (let key in origins) {
-    newObject[key] = origins[key]
+function shallowCopy (obj) {
+  let o2 = {}
+  for (let key in obj) {
+    o2[key] = obj[key]
   }
-  return newObject
+  return o2
 }
-shallowCopy(oldObject)
+shallowCopy(o1)
 
 Math.max.apply(Math, [5, 10, 50])  // 最大数50
 Math.max(...[5, 10, 50])  // 最大数50
-
-// 将数组中大于10的数存进数组里
-function moreThanTen (array) {
-  let newArray = []
-  let j = 0
-  for (let i = 0; i < array.length; i++) {
-    if (array[i] > 10) {
-      // 新数组索引应该从0开始，依次递增
-      newArray[j] = array[i]
-      j++
-    }
-  }
-  return newArray
-}
-moreThanTen([2, 0, 6, 1, 77, 0, 52, 0, 25, 7])  // [77, 52, 25]
-
-// 将数组中大于10的数存进数组里
-function moreThanTen (array) {
-  const newArray = []
-  // 刚开始newArray.length就是0
-  for (let i = 0; i < array.length; i++) {
-    if (array[i] > 10) {
-      // 新数组索引应该从0开始，依次递增
-      newArray[newArray.length] = array[i]
-    }
-  }
-  return newArray
-}
-moreThanTen([2, 0, 6, 1, 77, 0, 52, 0, 25, 7])  // [77, 52, 25]
-
-// 去除数组中为0的数
-function removeZero (array) {
-  const newArray = []
-  for (let i = 0; i < array.length; i++) {
-    if (array[i] !== 0) {
-      // 数组名+数组索引
-      newArray[newArray.length] = array[i]
-    }
-  }
-  return newArray
-}
-removeZero([2, 0, 6, 1, 77, 0, 52, 0, 25, 7])  // [2, 6, 1, 77, 52, 25, 7]
 
 // 数组合并
 function mergeArray (first, second) {
@@ -816,51 +756,11 @@ function getResult (start, end) {
 }
 getResult(1, 100)  // 5050
 
-// 字符串转换成数组
-function toArray (strings) {
-  try {
-    return Array.prototype.slice.call(strings)
-  } catch (error) {
-    let array = []
-    for (let i = 0; i < strings.length; i++) {
-      array[i] = strings[i]
-    }
-    return array
-  }
-}
-toArray('abcdefg')  // ["a", "b", "c", "d", "e", "f", "g"]
-
-function simpleNormalize (children) {
-  return Array.prototype.concat.apply([], children)
-}
-simpleNormalize([1, 2, 3, [4, 5, 6], 7, 8, [9, 10]])  // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-
-function multidimension (children) {
-  for (let i = 0; i < children.length; i++) {
-    if (Array.isArray(children[i])) {
-      children = Array.prototype.concat.apply([], children)
-      for (let j = 0; j < children.length; j++) {
-        multidimension(children)
-      }
-    }
-  }
-  return children
-}
-multidimension([1, [2, 3], [4, [5, 6, [7, 8]]], [9, 10]])  // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-
 // 使用原型属性给数组排序
 function arraySort () {
   return Array.prototype.slice.call(arguments).sort((a, b) => a - b)
 }
 arraySort(10, -2, 101, -4, 50)  // [-4, -2, 10, 50, 101]
-
-const objectArray = {
-  0: '玛丽安',
-  1: 20,
-  length: 2
-}
-const person = Array.prototype.slice.call(objectArray)
-console.log(person)
 
 // 数组排序
 function arraysSort (...list) {
@@ -898,16 +798,17 @@ quickSort([33, 12, 44, 6, 36])  // [6, 12, 33, 36, 44]
 
 // 一维数组转换成多维数组
 function arrayTransform (arrays, numbers) {
-  const newArray = []
-  arrays.forEach((items, index) => {
+  const empty = []
+  arrays.forEach((item, index) => {
     // 计算多维数组的下标
     const pages = Math.floor(index / numbers)
-    if (!newArray[pages]) {
-      newArray[pages] = []
+    // 如果数组中有元素，就把数组清空 
+    if (!empty[pages]) {
+      empty[pages] = []
     }
-    newArray[pages].push(items)
+    empty[pages].push(item)
   })
-  return newArray
+  return empty
 }
 arrayTransform([1, 2, 3, 4, 5, 6, 7, 8], 3)  // [[1, 2, 3], [4, 5, 6], [7, 8]]
 
@@ -925,10 +826,52 @@ function changeArray (number, array) {
 }
 changeArray(3, [1, 2, 3, 4, 5, 6, 7, 8])  // 假设每行显示3个 [[1, 2, 3], [4, 5, 6], [7, 8]]
 
+// 将数组中大于10的数存进数组里
+function moreThanTen (array) {
+  let newArray = []
+  let j = 0
+  for (let i = 0; i < array.length; i++) {
+    if (array[i] > 10) {
+      // 新数组索引应该从0开始，依次递增
+      newArray[j] = array[i]
+      j++
+    }
+  }
+  return newArray
+}
+moreThanTen([2, 0, 6, 1, 77, 0, 52, 0, 25, 7])  // [77, 52, 25]
+
+// 将数组中大于10的数存进数组里
+function moreThanTen (array) {
+  const newArray = []
+  // 刚开始newArray.length就是0
+  for (let i = 0; i < array.length; i++) {
+    if (array[i] > 10) {
+      // 新数组索引应该从0开始，依次递增
+      newArray[newArray.length] = array[i]
+    }
+  }
+  return newArray
+}
+moreThanTen([2, 0, 6, 1, 77, 0, 52, 0, 25, 7])  // [77, 52, 25]
+
+// 去除数组中为0的数
+function removeZero (array) {
+  const newArray = []
+  for (let i = 0; i < array.length; i++) {
+    if (array[i] !== 0) {
+      // 数组名+数组索引
+      newArray[newArray.length] = array[i]
+    }
+  }
+  return newArray
+}
+removeZero([2, 0, 6, 1, 77, 0, 52, 0, 25, 7])  // [2, 6, 1, 77, 52, 25, 7]
+
 function getResult () {
-  let list = Array.from(arguments)
+  let arrays = Array.from(arguments)
   let sum = 0
-  list.forEach(value => sum += value)
+  arrays.forEach(value => sum += value)
   return sum
 }
 getResult(1, 2, 3, 4, 5, 6, 7, 8, 9)  // 45
@@ -1026,7 +969,7 @@ for (let i = 0; i < 10; i++) {
   for (let j = i; j < 10; j++) {
     str += '*'
   }
-  str += '\n'
+  str += "\n"
 }
 console.log(str)
 
@@ -1344,34 +1287,25 @@ const bool2 = computers.some(value => value.ram > 16)
 console.log(bool2)  // true
 
 // 数组转换
-function arrayTrans (array) {
-  return array.reduce((acc, cur) => acc.concat(cur))
+function arrayTrans (arr) {
+  return arr.reduce((acc, cur) => acc.concat(cur))
 }
 arrayTrans([[1, 2], [3, 4], [5, 6]])  // [1, 2, 3, 4, 5, 6]
 
-// 实现函数查找字符串出现的次数
+// 实现函数查找子字符串出现的次数
 function countOfString (sup, sub) {
   let array = sup.split(sub)
   return array.length - 1
 }
 countOfString('abcabcabc', 'abc')  // 3
 
-function queryString (string, char) {
-  let index = string.indexOf(char)
-  let count = 0
-  while (index !== -1) {
-    index = string.indexOf(char, index + 1)
-    count++
-  }
-  return `字符${char}出现了${count}次`
-}
-queryString('abcoefoxyozzopp', 'o')  // 字符o出现了4次
-
 // 计算数组中每个元素出现的次数
-function appearCount (array) {
-  let object = {}
-  array.forEach(key => object[key] ? object[key] += 1 : object[key] = 1)
-  return object
+function appearCount (arr) {
+  let obj = {}
+  arr.forEach(item => {
+    obj[item] ? obj[item] += 1 : obj[item] = 1
+  })
+  return obj
 }
 appearCount(['tom', 'jim', 'jack', 'tom', 'jack'])  // {tom: 2, jim: 1, jack: 2}
 
@@ -1399,7 +1333,7 @@ function elementCount (list, item) {
 }
 elementCount([1, 2, 3, 1, 1], 1)  // 3
 
-// 获取任意数中的其中3个奇数
+// 取出3个奇数
 function takeOutThreeOdd (n) {
   let count = 0
   let array = []
@@ -1441,10 +1375,10 @@ function multiples () {
 multiples(10, 20, 30)  // 60
 
 // 函数多参数求和
-const paramSum = (...args) => args.reduce((item, current) => {
-  current = Number(current)
-  isNaN(current) ? current = 0 : null
-  return item + current
+const paramSum = (...args) => args.reduce((item, cur) => {
+  cur = Number(cur)
+  isNaN(cur) ? cur = 0 : null
+  return item + cur
 })
 paramSum(10, 20, 30, '40', 'a')  // 100
 
@@ -1536,37 +1470,38 @@ function sevenMultipleSum (start, end) {
 sevenMultipleSum(1, 100)  // 总和735，7的倍数的数有14个
 
 // 打印1-100之间所有7的倍数的数字个数以及总和
-function sevenMultiple (start, end) {
+function sevenMultiple (n) {
+  let i = 1
   let count = 0
   let sum = 0
-  while (start <= end) {
-    if (start % 7 === 0) {
-      sum += start
+  while (i <= n) {
+    if (i % 7 === 0) {
+      sum += i
       count++
     }
-    start++
+    i++
   }
   return `总和${sum}，7的倍数的个数有${count}个`
 }
-sevenMultiple(1, 100)  // "总和735，7的倍数的数有14个"
+sevenMultiple(100)  // "总和735，7的倍数的数有14个"
 
 // 在页面中接受一个用户输入的数字，并判断该数是否是质数
 // 质数：只能被1和它自身整除的数，1不是质数也不是合数，质数必须大于1的自然数
-function isPrimer (number) {
-  if (number <= 1) {
+function isPrimer (num) {
+  if (num <= 1) {
     return '该值不合法!'
   } else {
     // 创建一个变量来保存当前数的状态
     let flag = true
-    // 获取2到number之间的数
-    for (let i = 2; i < number; i++) {
-      // 判断number是否能被i整除
-      if (number % i === 0) {
-        // 如果number能被i整除，则number不是质数
+    // 获取2到num之间的数
+    for (let i = 2; i < num; i++) {
+      // 判断num是否能被i整除
+      if (num % i === 0) {
+        // 如果num能被i整除，则num不是质数
         flag = false
       }
     }
-    return flag ? `${number}是质数` : '不是质数'
+    return flag ? `${num}是质数` : '不是质数'
   }
 }
 isPrimer(4)  // 不是质数
@@ -1619,7 +1554,7 @@ function allPrime (start, end) {
 allPrime(2, 100)  // [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]
 
 // 鸡兔同笼，参数chicken表示鸡的只数，参数rabbit表示兔的只数
-function chickenAndRabbit (chicken, rabbit) {
+function chickenAndRabbitSameCage (chicken, rabbit) {
   for (let i = 0; i <= chicken; i++) {
     for (let j = 0; j <= rabbit; j++) {
       if (i + j === chicken && 2 * i + 4 * j === rabbit) {
@@ -1628,7 +1563,7 @@ function chickenAndRabbit (chicken, rabbit) {
     }
   }
 }
-chickenAndRabbit(35, 94)  // "鸡有23只，兔有12只"
+chickenAndRabbitSameCage(35, 94)  // "鸡有23只，兔有12只"
 
 // 鸡兔同笼，参数chicken表示鸡的只数，参数rabbit表示兔的只数
 function chickenAndRabbit (chicken, rabbit) {
@@ -1641,10 +1576,10 @@ function chickenAndRabbit (chicken, rabbit) {
 }
 chickenAndRabbit(35, 94)  // "鸡有23只，兔有12只"
 
-function getArrayRandom (array, count) {
+function getArrayThreeRandom (array, count) {
   let result = []
   for (let i = 0; i < count; i++) {
-    // 随机选择一项的下标，数组的下标0-array.length - 1
+    // 随机选择一项的下标，数组的下标0~arr.length - 1
     const index = Math.floor(Math.random() * array.length)
     // 把这项推入result数组
     result.push(array[index])
@@ -1653,50 +1588,52 @@ function getArrayRandom (array, count) {
   }
   return result
 }
-getArrayRandom([3, 6, 10, 5, 8, 9], 3)  // 随机输出一个三个元素的数组
+getArrayThreeRandom([3, 6, 10, 5, 8, 9], 3)  // 随机输出一个三个元素的数组
 
 // 求圆的面积
-function getCirculArea (r) {
+function getCircularArea (r) {
   return 3.14 * r * r
 }
-getCirculArea(10)  // 314
+getCircularArea(10)  // 314
 
 // 求圆的周长
-function getCirculGirth (r) {
+function getCircularGirth (r) {
   r = r || 0
   return 2 * Math.PI * r
 }
-getCirculGirth(5)  // 31.41592653589793
+getCircularGirth(5)  // 31.41592653589793
 
 // 求两个数中的最大值
-function getTwoNumberMax (x, y) {
-  x = x || 0
-  y = y || 0
-  return x > y ? x : y
+function getTwoNumberMax (n1, n2) {
+  n1 = n1 || 0
+  n2 = n2 || 0
+  return n1 > n2 ? n1 : n2
 }
 getTwoNumberMax(18, 9)  // 18
 
 // 数组去重排序  
-function arrayRemoveRepeat (array) {
+function arrayRemoveRepeat (arr) {
   // 定义一个临时数组
-  let newArray = []
-  for (let i = 0; i < array.length; i++) {
+  let temp = []
+  for (let i = 0; i < arr.length; i++) {
     // 如果当前数组的arr[i]已经保存到临时数组中，那么就跳过
-    if (newArray.indexOf(array[i]) < 0) {
-      newArray.push(array[i])
+    if (temp.indexOf(arr[i]) < 0) {
+      temp.push(arr[i])
     }
   }
-  return newArray.sort((a, b) => a - b)
+  return temp.sort((a, b) => a - b)
 }
 arrayRemoveRepeat([1, 2, 2, 2, 2, 5, 3, 2, 9, 5, 6, 3])  // [1, 2, 3, 5, 6, 9]
 
 // 数组去重排序  
-function arrayRemoveRepeat (array) {
-  let newArray = []
-  array.forEach((item, index, list) => list.indexOf(item) === index ? newArray.push(item) : null)
-  return newArray.sort((a, b) => a - b)
+function arrayRemove (array) {
+  let result = []
+  array.forEach((item, index, list) => {
+    list.indexOf(item) === index ? result.push(item) : null
+  })
+  return result.sort((a, b) => a - b)
 }
-arrayRemoveRepeat([1, 2, 2, 2, 2, 5, 3, 2, 9, 5, 6, 3])  // [1, 2, 3, 5, 6, 9]
+arrayRemove([1, 2, 2, 2, 2, 5, 3, 2, 9, 5, 6, 3])  // [1, 2, 3, 5, 6, 9]
 
 // 获取数组当前元素的下标
 function findElementIndex (array, num) {
@@ -1711,38 +1648,39 @@ function findElementIndex (array, num) {
 findElementIndex([1, 2, 3, 4], 3)  // 2
 
 // 截取字符串中的数字
-function interceptNumbers (string) {
-  return [...string].filter(item => !Number.isNaN(parseInt(item))).join('')
+function interceptNumbers (str) {
+  let num = [...str].filter(item => !Number.isNaN(parseInt(item)))
+  return num.join('')
 }
 interceptNumbers('houdunren2200hdcms9988')  // "22009988"
 
 // 用正则表达式匹配所有字母
-function matchLetter (string) {
-  return string.match(/[a-z]/gi)
+function matchLetter (str) {
+  return str.match(/[a-z]/gi)
 }
 matchLetter('1a2b3c4d5e6f7G8H')  // ["a", "b", "c", "d", "e", "f", "G", "H"]
 
 // 用正则表达式验证手机号的合法性
-function verifyMobile (string) {
-  return /^1[3-9][0-9]{9}$/.test(string)
+function verifyMobile (str) {
+  return /^1[3-9][0-9]{9}$/.test(str)
 }
 verifyMobile('13067890123')  // true
 
 // 用正则表达式验证电子邮件的合法性
-function verifyEmail (string) {
-  return /^\w{3,}(\.\w+)*@[A-z0-9]+(\.[A-z]{2,5}){1,2}$/.test(string)
+function verifyEmail (str) {
+  return /^\w{3,}(\.\w+)*@[A-z0-9]+(\.[A-z]{2,5}){1,2}$/.test(str)
 }
 verifyEmail('abc@abc.com.123')    // false
 verifyEmail('abc.hello@163.com')  // true
 
 // 交换两个数的位置
-function exchange (x, y) {
-  x = x + y
-  y = x - y
-  x = x - y
-  return `${x} ${y}`
+function changePosition (num1, num2) {
+  num1 = num1 + num2
+  num2 = num1 - num2
+  num1 = num1 - num2
+  return num1 + ' ' + num2
 }
-exchange(1, 2)  // 2 1
+changePosition(1, 2)  // 2 1
 
 // 基本数据类型的判断
 console.log(typeof (null))  // object
@@ -1765,9 +1703,9 @@ console.log(typeof parseInt(null))  // number
 console.log(!typeof parseFloat('0'))  // false
 
 // 计算2的n次幂，n为自然数
-function cube (number) {
+function cube (n) {
   let product = 1
-  for (let i = 0; i < number; i++) {
+  for (let i = 0; i < n; i++) {
     product *= 2
   }
   return product
@@ -1787,10 +1725,10 @@ function getByteLength (target) {
 getByteLength('皮卡丘abc')  // 9
 
 // 获取字符串的unicode编码长度
-function getUnicodeLength (string) {
+function getUnicodeLength (str) {
   let count = 0
-  for (let i = 0; i < string.length; i++) {
-    string.charCodeAt(i) > 255 ? count += 2 : count++
+  for (let i = 0; i < str.length; i++) {
+    str.charCodeAt(i) > 255 ? count += 2 : count++
   }
   return count
 }
@@ -1801,7 +1739,7 @@ function getOddSum (start, end) {
   let sum = 0
   while (start <= end) {
     if (start % 2 === 0) {
-      // start++防止程序出现死循环
+      // start++防止程序发生死循环
       start++
       continue
     }
@@ -1907,16 +1845,16 @@ getCaption('http://www.baidu.com?123', '?')  // 123
 
 // 封装axios
 import axios from 'axios'
-const ERROR_OK = 0
+const ERR_OK = 0
 function request (url) {
   return function (params) {
-    return axios.get(url, { params }).then(response => {
-      const { status, data } = response.data
-      if (status === ERROR_OK) {
+    return axios.get(url, { params }).then(res => {
+      const { errno, data } = res.data
+      if (errno === ERR_OK) {
         return data
       }
-    }).catch(error => {
-      console.log(error)
+    }).catch(err => {
+      console.log(err)
     })
   }
 }
@@ -1937,7 +1875,7 @@ const LENGTH = 5
 const CLASS_ON = 'on'
 const CLASS_HALF = 'half'
 const CLASS_OFF = 'off'
-function itemClass () {
+function itemClasses () {
   // 创建一个数组存储
   let result = []
   let score = Math.floor(this.score * 2) / 2
@@ -1958,7 +1896,7 @@ function itemClass () {
     result.push(CLASS_OFF)
   }
 }
-itemClass()
+itemClasses()
 
 function starType () {
   return 'star-' + this.size
@@ -1973,36 +1911,36 @@ iconClass()
 
 function stringRemoveRepeat (data) {
   // 声明一个空对象用来存放统计后的字符
-  let objects = {}
+  let obj = {}
   // 循环查找
   for (let i = 0; i < data.length; i++) {
     // 数组里的i个元素
     let value = data[i]
-    // 将数组的i个元素作为objects对象的属性查询其属性值
-    // 如果objects对象没有该属性，则设置该属性的值为1，有的话在其基础上再+1
-    objects[value] ? objects[value] += 1 : objects[value] = 1
+    // 将数组的i个元素作为obj对象的属性查询其属性值
+    // 如果obj对象没有该属性，则设置该属性的值为1，有的话在其基础上再+1
+    obj[value] ? obj[value] += 1 : obj[value] = 1
   }
-  return objects
+  return obj
 }
 stringRemoveRepeat(['b', 'a', 'c', 'a', 'b', 'b', 'b', 'c', 'c', 'a', 'c', 'a', 'a', 'a', 'b', 'c'])  // {b: 5, a: 6, c: 5}
 
 function stringRemoveRepeat (data) {
   // 声明一个空对象用来存放统计后的字符
-  let objects = {}
+  let obj = {}
   // 循环查找
   for (let value of data) {
     // 将数组的value个元素作为obj对象的属性查询其属性值
     // 如果obj对象没有该属性，则设置该属性的值为1，有的话在其基础上再+1
-    objects[value] ? objects[value] += 1 : objects[value] = 1
+    obj[value] ? obj[value] += 1 : obj[value] = 1
   }
-  return objects
+  return obj
 }
 stringRemoveRepeat(['b', 'a', 'c', 'a', 'b', 'b', 'b', 'c', 'c', 'a', 'c', 'a', 'a', 'a', 'b', 'c'])  // {b: 5, a: 6, c: 5}
 
-function fraction (numbers) {
+function fraction (num) {
   let i = 1
   let sum = 0
-  while (i <= numbers) {
+  while (i <= num) {
     // 判断分母是奇数还是偶数
     if (i % 2 === 0) {
       sum -= 1 / i
@@ -2032,14 +1970,14 @@ while (i <= 2000) {
 
 // 定义一个函数，输入数字，逆转并输出汉字形式
 function outPutChinese (value) {
-  let strings = ""
+  let str = ""
   if (typeof value !== 'string' || value === '0' || value === '' || /[^\d]/g.test(value)) {
     return '请输入合法的值!'
   }
   for (let i = value.length - 1; i >= 0; i--) {
-    strings += transfer(value[i])
+    str += transfer(value[i])
   }
-  return strings
+  return str
 }
 function transfer (target) {
   switch (target) {
@@ -2065,26 +2003,15 @@ function transfer (target) {
 }
 outPutChinese('1')  // "壹"
 
-function stringReplacement (string, code) {
-  if (typeof string !== 'string' || typeof code !== 'string') {
-    return console.error('参数格式不对，必须为字符串形式')
-  }
-  while (string.indexOf(code) !== -1) {
-    string = string.replace(code, '*')
-  }
-  return string
-}
-stringReplacement('abcoefoxyozzopp', 'o')
-
 // 字符串去重
-function duplicateRemove (string) {
-  let chars = ''
-  for (let i = 0; i < string.length; i++) {
-    if (chars.search(string[i]) < 0) {
-      chars += string[i]
+function duplicateRemove (str) {
+  let result = ''
+  for (let i = 0; i < str.length; i++) {
+    if (result.search(str[i]) < 0) {
+      result += str[i]
     }
   }
-  return chars.replace(/\W+/gi, '')
+  return result.replace(/\W+/gi, '')
 }
 duplicateRemove('a, a, ss, aa, f, g, e, r, t, y, y')  // "asfgerty"
 
@@ -2116,39 +2043,6 @@ while (true) {
   }
 }
 
-let money = 100
-let sum = 0
-let label = ''
-let operate = parseInt(prompt('请输入你的操作：' + '\n' + '1.存钱' + '\n' + '2.取钱' + '\n' + '3.显示余额' + '\n' + '4.退出'))
-switch (operate) {
-  case 1:
-    sum = parseInt(money) + parseInt(prompt('请输入你的存钱数'))
-    label = '存款' + sum
-    break
-  case 2:
-    let fetch = parseInt(prompt('请输入你取的钱数'))
-    money = parseInt(money)
-    if (fetch > money) {
-      label = '不好意思，钱不够'
-    } else {
-      label = '余额为' + (money - fetch)
-    }
-    break
-  case 3:
-    label = '余额：' + money
-    break
-  case 4:
-    let flag = prompt('是否继续？(Y/N)')
-    while (flag !== ('Y' && 'y')) {
-      flag = prompt('是否继续？(Y/N)')
-    }
-    label = '退出成功'
-    break
-  default:
-    label = '输入错误'
-    break
-}
-
 function Ticker (config) {
   this.getNumber = function () {
     return config.start
@@ -2157,10 +2051,10 @@ function Ticker (config) {
     return config.start += config.step
   }
 }
-Ticker.prototype.times = function (number) {
-  while (number > 0) {
+Ticker.prototype.times = function (n) {
+  while (n > 0) {
     this.getTick()
-    number--
+    n--
   }
 }
 const ticker1 = new Ticker({ start: 100, step: 2 })
@@ -2221,7 +2115,7 @@ console.log(students[index2])  // 王五
 const index3 = 2 + Math.floor(Math.random() * (4 - 2))
 console.log(students[index3])  // 赵六
 
-const names = ['张三', '李四', '王五', '赵六', '小红']
+const surnames = ['张三', '李四', '王五', '赵六', '小红']
 function arrayRandomValue (array, start = 1, end) {
   // 随机传一个值，从start开始，到end结束
   start--
@@ -2231,7 +2125,7 @@ function arrayRandomValue (array, start = 1, end) {
   const index = start + Math.floor(Math.random() * (end - start))
   return array[index]
 }
-arrayRandomValue(names, 3, 4)  // 王五或赵六
+arrayRandomValue(surnames, 3, 4)  // 王五或赵六
 
 // 倒计时秒杀
 function countDown (t1, t2) {
@@ -2270,7 +2164,7 @@ function getCurrentMonthDays (month, year) {
 getCurrentMonthDays(2, 2017)  // 28
 getCurrentMonthDays(2, 2018)  // 29
 
-function getMonthWeek (a, b, c) {
+const getMonthWeek = function (a, b, c) {
   /**
   * a = day = 当前日期
   * b = 6 - week = 当前周的还有几天过完(不算今天)
@@ -2581,9 +2475,9 @@ Array.prototype.find = function (callback) {
   }
   return undefined
 }
-let arrays = [1, 2, 3, 4, 5]
-arrays.find(item => item === 2)   // 2
-arrays.find(item => item === 22)  // undefined
+let arr9 = [1, 2, 3, 4, 5]
+arr9.find(item => item === 2)   // 2
+arr9.find(item => item === 22)  // undefined
 
 function sort (array, callback) {
   for (const n in array) {
@@ -2597,8 +2491,8 @@ function sort (array, callback) {
   }
   return array
 }
-let arrays = [1, 5, 3, 9, 7]
-sort(arrays, ((a, b) => a - b))  // [1, 3, 5, 7, 9]
+let arr10 = [1, 5, 3, 9, 7]
+sort(arr10, ((a, b) => a - b))  // [1, 3, 5, 7, 9]
 
 // 求数组最大元素
 function getMax (array) {
@@ -2616,13 +2510,13 @@ function getMaxed (array) {
 }
 getMaxed([1, 2, 3, 4, 5, 6, 7])  // 7
 
-let arrays = ['后盾网', '后盾人']
-let keys = arrays.keys()
+let arr12 = ['后盾网', '后盾人']
+let keys = arr12.keys()
 let { value, done } = keys.next()
-let values = arrays.values()
+let values1 = arr.values()
 let { value, done } = values1.next()
 console.log(value, done)  // 后盾网 false
-let entries = arrays.entries()
+let entries = arr.entries()
 let { value, done } = entries.next()
 console.log(value, done)  // [0, '后盾网']
 
@@ -2635,8 +2529,8 @@ function filter (array, callback) {
   }
   return newArray
 }
-let lists = [1, 2, 3, 4]
-filter(lists, value => value > 2)  // [3, 4]
+let list1 = [1, 2, 3, 4]
+filter(list1, value => value > 2)  // [3, 4]
 
 // 获取数组中最大的价格
 let cart = [
@@ -2649,17 +2543,17 @@ function maxPrice (goods) {
 }
 maxPrice(cart)  // { name: "imac", price: 25000 }
 
-let cart = [
+let cart1 = [
   { name: 'iphone', price: 12000 },
   { name: 'imac', price: 25000 },
   { name: 'ipad', price: 3600 }
 ]
-function sum (goods) {
+function sum1 (goods) {
   return goods.reduce((total, current) => total += current.price, 0)
 }
-sum(cart)  // 40600
+sum1(cart1)  // 40600
 
-let cart = [
+let cart2 = [
   { name: 'iphone', price: 12000 },
   { name: 'imac', price: 25000 },
   { name: 'ipad', price: 3600 }
@@ -2672,7 +2566,7 @@ function getNameByPrice (goods, price) {
     return array
   }, []).map(item => item.name)
 }
-getNameByPrice(cart, 10000)  // ["iphone", "imac"]
+getNameByPrice(cart2, 10000)  // ["iphone", "imac"]
 
 // 数组去重排序
 function removeRepeat (array) {
@@ -2700,7 +2594,7 @@ const removeRepeates = array => {
   }
   return result
 }
-const lists = [
+const list2 = [
   { id: 1 },
   { id: 2, parentId: 1 },
   { id: 3, parentId: 2 },
@@ -2708,7 +2602,7 @@ const lists = [
   { id: 3, parentId: 2 },
   { id: 5, parentId: 4 }
 ]
-removeRepeates(lists)
+removeRepeates(list2)
 
 // 防抖函数
 function debounce (func) {
@@ -2773,8 +2667,8 @@ function sum (total, discount, discountAgain) {
 }
 sum(1000, 0.1, 0.2)  // 720
 
-function show (array) {
-  return array <= 3
+function show (arr) {
+  return arr <= 3
 }
 [1, 2, 3, 4, 5, 6, 7].filter(show)  // [1, 2, 3]
 
@@ -2853,27 +2747,27 @@ let user = {
   desc: '用户资料',
   key: Symbol('会员资料')
 }
-let cart = {
+let cart4 = {
   name: 'apple',
   desc: '购物车',
   key: Symbol('购物车数据')
 }
 Cache.set(user.key, user)
-Cache.set(cart.key, cart)
+Cache.set(cart4.key, cart)
 console.log(Cache.get(user.key))  // {name: "apple", desc: "用户资料", key: Symbol(会员资料)}
-console.log(Cache.get(cart.key))  // {name: "apple", desc: "购物车", key: Symbol(购物车数据)}
+console.log(Cache.get(cart4.key))  // {name: "apple", desc: "购物车", key: Symbol(购物车数据)}
 
 let symbol = Symbol('这是一个Symbol类型')
-let obj = {
+let obj2 = {
   name: '皮卡丘',
   [symbol]: '我会放十万伏特的电'
 }
 // 遍历Symbol私有属性
-for (const key of Object.getOwnPropertySymbols(obj)) {
+for (const key of Object.getOwnPropertySymbols(obj2)) {
   console.log(key)  // Symbol(这是一个Symbol类型)
 }
 // 遍历Symbol所有属性
-for (const key of Reflect.ownKeys(obj)) {
+for (const key of Reflect.ownKeys(obj2)) {
   console.log(key)  // name Symbol(这是一个Symbol类型)
 }
 
@@ -2927,25 +2821,25 @@ let b = new Set([4, 5, 2, 9])
 // 交集
 console.log(new Set([...a].filter(item => b.has(item))))  // Set(2) {2, 4}
 
-let obj = {
+let obj3 = {
   1: 'hdcms',
   '1': 'houdunren'
 }
-let hd = {
+let hd1 = {
   [obj]: '后盾人'
 }
-console.log(hd[obj.toString()])  // 后盾人
+console.log(hd1[obj3.toString()])  // 后盾人
 
-function User (name) {
+function User3 (name) {
   this.name = name
 }
-let user = new User('小红')
-console.log(user)  // {name: "小红"}
-let obj = { url: 'hdcms.com' }
-User.call(obj, '开源系统')
-console.log(obj)  // {url: "hdcms.com", name: "开源系统"}
-User.apply(obj, ['免费教程'])
-console.log(obj)  // {url: "hdcms.com", name: "免费教程"}
+let user3 = new User('小红')
+console.log(user3)  // {name: "小红"}
+let obj4 = { url: 'hdcms.com' }
+User.call(obj4, '开源系统')
+console.log(obj4)  // {url: "hdcms.com", name: "开源系统"}
+User.apply(obj4, ['免费教程'])
+console.log(obj4)  // {url: "hdcms.com", name: "免费教程"}
 
 let lisi = { name: '李四' }
 function User (web, url) {
@@ -2956,8 +2850,8 @@ User.apply(lisi, ['后盾人', 'houdunren.com'])  // "后盾人houdunren.com李�
 
 function Request () {
   this.get = function (params) {
-    let string = Object.keys(params).map(k => `${k}=${params[k]}`).join('&')
-    return `https://api.houdunren.com?${this.url}/${string}`
+    let str = Object.keys(params).map(k => `${k}=${params[k]}`).join('&')
+    return `https://api.houdunren.com?${this.url}/${str}`
   }
 }
 function Article () {
@@ -2969,8 +2863,8 @@ article.get({ id: 1, cat: 'js' })  // https://api.houdunren.com?article/lists/id
 
 function Request () {
   this.get = function (params) {
-    let string = Object.keys(params).map(k => `${k}=${params[k]}`).join('&')
-    return `https://api.houdunren.com?${this.url}/${string}`
+    let str = Object.keys(params).map(k => `${k}=${params[k]}`).join('&')
+    return `https://api.houdunren.com?${this.url}/${str}`
   }
 }
 function User () {
@@ -2982,8 +2876,8 @@ let user = new User()
 user.get({ id: 2, role: 'admin' })  // https://api.houdunren.com?user/lists/id=2&role=admin
 
 function between (a, b) {
-  return function (value) {
-    return value >= a && value <= b
+  return function (v) {
+    return v >= a && v <= b
   }
 }
 let array = [1, 23, 4, 5, 6, 7, 8, 9, 21, 10]
@@ -3079,13 +2973,13 @@ let web = {
 web.site = '开源产品,www.hdcms.com'
 console.log(web.site)
 
-const objects = { name: '后盾人' }
-const proxy = new Proxy(objects, {
-  get (objects, property) {
-    return objects[property]
+const obj = { name: '后盾人' }
+const proxy = new Proxy(obj, {
+  get (obj, property) {
+    return obj[property]
   },
-  set (objects, property, value) {
-    objects[property] = value
+  set (obj, property, value) {
+    obj[property] = value
     return true
   }
 })
@@ -3125,19 +3019,17 @@ let proxy = new Proxy(lessons, {
 })
 console.log(proxy[0])  // {title: "flex弹性布局", category: "css"} 
 
-let objects = {
-  name: '面向对象'
-}
+let obj = { name: '面向对象' }
 let parent = {
   name: '父类',
   show () {
     return '父类方法: ' + this.name
   }
 }
-Object.setPrototypeOf(objects, parent)
-objects.show()  // "父类方法: 面向对象"
+Object.setPrototypeOf(obj, parent)
+obj.show()  // "父类方法: 面向对象"
 parent.show()
-Object.getPrototypeOf(objects)  // {name: "父类", show: ƒ}
+Object.getPrototypeOf(obj)  // {name: "父类", show: ƒ}
 
 function User (name) {
   this.name = name
@@ -3171,23 +3063,23 @@ function createNewObject (obj, ...args) {
 let lisi = createNewObject(user, '李四')
 lisi.show()
 
-let objects = {
+let obj = {
   data: [1, 2, 3, 34, 5, 7]
 }
-Object.setPrototypeOf(objects, {
+Object.setPrototypeOf(obj, {
   max (data) {
     return data.sort((a, b) => b - a)[0]
   }
 })
-objects.max(objects.data)  // 34
+obj.max(obj.data)  // 34
 let gather = {
   lessons: { js: 87, css: 66, html: 99, node: 70 },
   get data () {
     return Object.values(this.lessons)
   }
 }
-objects.max.apply(gather)  // 99
-objects.max.call(null, Object.values(gather.lessons))  // 99
+obj.max.apply(gather)  // 99
+obj.max.call(null, Object.values(gather.lessons))  // 99
 
 function User (name, age) {
   this.name = name
@@ -3296,58 +3188,69 @@ list.remove(2)
 console.log(list)
 
 // 常规方法提取字符串中的数字
-function extractNumber (string) {
-  return [...string].filter(a => !Number.isNaN(parseInt(a))).join('')
+function extractNumber (str) {
+  return [...str].filter(a => !Number.isNaN(parseInt(a))).join('')
 }
 extractNumber('houdunren2200hdcms9988')  // 22009988
 
 // 正则方法提取字符串中的数字
-function extractNumber (string) {
-  return string.match(/\d/g).join('')
+function extractNumber (str) {
+  return str.match(/\d/g).join('')
 }
 extractNumber('houdunren2200hdcms9988')  // 22009988
 
 // 找出数组中大于10的元素
-function greaterThanTen (list, number) {
-  let array = []
+function greaterThanTen (list, num) {
+  let arr = []
   let count = 0
   for (let i = 0; i < list.length; i++) {
-    if (list[i] >= number) {
+    if (list[i] >= num) {
       // 新数组下标应该从0开始 依次递增
-      array[count] = list[i]
+      arr[count] = list[i]
       count++
     }
   }
-  return array
+  return arr
 }
 greaterThanTen([2, 0, 6, 1, 77, 0, 52, 0, 265, 7], 10)  // [77, 52, 265]
 
-function reverseFruits (fruit) {
-  let array = []
-  for (let i = fruit.length - 1; i >= 0; i--) {
-    array[array.length] = fruit[i]
+function numberRemoveRepeat (list) {
+  let arr = []
+  for (let i = 0; i < list.length; i++) {
+    if (list[i] !== 0) {
+      arr[arr.length] = list[i]
+    }
   }
-  return array
+  return arr.sort((a, b) => a - b)
+}
+numberRemoveRepeat([2, 0, 6, 1, 77, 0, 52, 0, 25, 7])  // [1, 2, 6, 7, 25, 52, 77]
+
+function reverseFruits (fruit) {
+  let arr = []
+  for (let i = fruit.length - 1; i >= 0; i--) {
+    arr[arr.length] = fruit[i]
+  }
+  return arr
 }
 reverseFruits(['red', 'green', 'blue', 'pink', 'purple'])  // ['purple', 'pink', 'blue', 'green', 'red']
 
 // 对称数组
-function symmetricArray (array) {
-  const newArray = array.concat()
-  for (let i = array.length - 1; i >= 0; i--) {
-    newArray.push(array[i])
+function symmetricArray (arr) {
+  const newArr = arr.concat()
+  for (let i = arr.length - 1; i >= 0; i--) {
+    newArr.push(arr[i])
   }
-  return newArray
+  return newArr
 }
 symmetricArray(['one', 'two', 'three'])  // ["one", "two", "three", "three", "two", "one"]
 
 // 已知一个字符串对象中，英语单词用各种非字母字符分割，统计单词个数
 // 传入: 'Yes, she*is%my@love.'
 // 规律: 当前面一个字符是字母，后面一个字符是非字母的时候，这就是一个单词
-function countOfWord (string) {
+function countOfWord (str) {
   let count = 0
-  for (let i = 0; i < string.length; i++) {
-    if (isLetter(string[i]) && !isLetter(string[i + 1])) {
+  for (let i = 0; i < str.length; i++) {
+    if (isLetter(str[i]) && !isLetter(str[i + 1])) {
       count++
     }
   }
@@ -3358,11 +3261,23 @@ function isLetter (char) {
   return (char >= 'a' && char <= 'z') || (char >= 'A' && char <= 'Z') ? true : false
 }
 
-function changeOfPosition (x, y) {
-  let temp = x
-  x = y
-  y = temp
-  return x + ' ' + y
+function getSum (n1, n2) {
+  let total = 0
+  if (n1 > n2) {
+    return false
+  }
+  for (let i = n1; i <= n2; i++) {
+    total += i
+  }
+  return total
+}
+getSum(1, 100)  // 5050
+
+function changeOfPosition (num1, num2) {
+  let temp = num1
+  num1 = num2
+  num2 = temp
+  return num1 + ' ' + num2
 }
 changeOfPosition(10, 20)  //  20 10
 
@@ -3404,7 +3319,7 @@ function quickSort (array) {
   let rightResult = quickSort(rightArray)
   return leftResult.concat(centerValue, rightResult)
 }
-quickSort([57, 68, 59, 52, 72, 28, 96, 33, 24])  // [24, 28, 33, 52, 57, 59, 68, 72, 96]
+quickSort([57, 68, 59, 52, 72, 28, 96, 33, 24])
 
 // 数组归并排序
 function merge (left, right) {
@@ -3432,6 +3347,7 @@ function mergeSort (array) {
   // 递归
   return merge(mergeSort(left), mergeSort(right))
 }
+// 测试
 mergeSort([45, 56, 12, 78, 23, 89])
 
 // 判断是否是闰年
@@ -3450,25 +3366,25 @@ backDay(1999)  // "当前年份为平年，2月份有28天"
 backDay(2000)  // "当前年份是闰年，2月份有29天"
 
 // 数组翻转
-function arrayReverse (arrays) {
-  for (let i = 0; i < arrays.length / 2; i++) {
-    let temp = arrays[i]
+function arrayReverse (array) {
+  for (let i = 0; i < array.length / 2; i++) {
+    let temp = array[i]
     // 如果不减i，那么永远是第一个元素和最后一个元素进行交换
-    arrays[i] = arrays[arrays.length - 1 - i]
-    arrays[arrays.length - 1 - i] = temp
+    array[i] = array[array.length - 1 - i]
+    array[array.length - 1 - i] = temp
   }
-  return arrays
+  return array
 }
 arrayReverse([1, 2, 3, 4, 5])  // [5, 4, 3, 2, 1]
 
 // 数组翻转
-function arrayReverse (arrays) {
-  if (arrays instanceof Array) {
-    let newArray = []
-    for (let i = arrays.length - 1; i >= 0; i--) {
-      newArray[newArray.length] = arrays[i]
+function arrayReverse (array) {
+  if (array instanceof Array) {
+    let result = []
+    for (let i = array.length - 1; i >= 0; i--) {
+      result[result.length] = array[i]
     }
-    return newArray
+    return result
   } else {
     return new Error('参数要求必须是数组格式')
   }
@@ -3479,16 +3395,16 @@ arrayReverse(1, 2, 3)  // 参数要求必须是数组格式
 // 截取地址栏中的字段，并将其存入对象
 function getData (url) {
   let index = url.indexOf('?')
-  let params = url.substr(index + 1)
-  let arrays = params.split('&')
-  let object = {}
-  for (let i = 0; i < arrays.length; i++) {
-    let result = arrays[i].split('=')
+  let param = url.substr(index + 1)
+  let arr = param.split('&')
+  let obj = {}
+  for (let i = 0; i < arr.length; i++) {
+    let result = arr[i].split('=')
     let key = result[0]
     let value = result[1]
-    object[key] = value
+    obj[key] = value
   }
-  return object
+  return obj
 }
 getData('https://www.bilibili.com/video/BV1G4411V7tb?name=pibo&age=20')  // {name: "pibo", age: "20"}
 
@@ -3500,20 +3416,20 @@ function fetchData (url) {
   let questionText = url.substring(questionIndex + 1, poundIndex)
   let poundText = url.substring(poundIndex + 1)
   // 将获取到的结果进行解析，然后拼成一个对象返回
-  let object = {}
+  let obj = {}
   // 处理哈希值(井号后面的值)
-  poundText.length > 0 ? object['hash'] = poundText : null
+  poundText.length > 0 ? obj['hash'] = poundText : null
   // 问号参数的处理
   if (questionText) {
     // item 遍历数组的每一项
     questionText.split('&').forEach(item => {
-      let array = item.split('=')
-      let key = array[0]
-      let value = array[1]
-      object[key] = value
+      let arr = item.split('=')
+      let key = arr[0]
+      let value = arr[1]
+      obj[key] = value
     })
   }
-  return object
+  return obj
 }
 fetchData('https://www.bilibili.com/video/BV1G4411V7tb?name=bilibili&age=10#video')  // {hash: "video", name: "bilibili", age: "10"}
 
@@ -3526,15 +3442,15 @@ function fetchData (url) {
   }
   let questionText = url.substring(questionIndex + 1, poundIndex)
   let poundText = url.substring(poundIndex + 1)
-  let object = {}
-  poundText.length > 0 ? object['hash'] = poundText : null
+  let obj = {}
+  poundText.length > 0 ? obj['hash'] = poundText : null
   if (questionText) {
     questionText.split('&').forEach(item => {
-      let array = item.split('=')
-      object[array[0]] = array[1]
+      let arr = item.split('=')
+      obj[arr[0]] = arr[1]
     })
   }
-  return object
+  return obj
 }
 fetchData('http://www.zhufengpeixun.cn/?id=123&name=js&from=baidu')  // {id: "123", name: "js", from: "baidu"}
 
@@ -3552,31 +3468,31 @@ function fetchData (url) {
   if (questionIndex === -1) {
     questionText = url.substring(questionIndex + 1, poundIndex)
   }
-  let object = {}
-  poundText.length > 0 ? object['hash'] = poundText : null
+  let obj = {}
+  poundText.length > 0 ? obj['hash'] = poundText : null
   if (questionText) {
     questionText.split('&').forEach(item => {
-      let array = item.split('=')
-      object[array[0]] = array[1]
+      let arr = item.split('=')
+      obj[arr[0]] = arr[1]
     })
   }
-  return object
+  return obj
 }
 fetchData('http://www.zhufengpeixun.cn/id=123&name=js&from=baidu')
 
 function queryURLParams (url) {
-  let object = {}
-  url.replace(/([^?=&#]+)=([^?=&#]+)/g, (_, key, value) => object[key] = value)
-  url.replace(/#([^?=&#]+)/g, (_, hash) => object['HASH'] = hash)
-  return object
+  let obj = {}
+  url.replace(/([^?=&#]+)=([^?=&#]+)/g, (_, key, value) => obj[key] = value)
+  url.replace(/#([^?=&#]+)/g, (_, hash) => obj['HASH'] = hash)
+  return obj
 }
 queryURLParams('http://www.zhufengpeixun.cn/?id=123&name=js&from=baidu#video')
 
 function queryURLParams () {
-  let object = {}
-  this.replace(/([^?=&#]+)=([^?=&#]+)/g, (_, key, value) => object[key] = value)
-  this.replace(/#([^?=&#]+)/g, (_, hash) => object['HASH'] = hash)
-  return object
+  let obj = {}
+  this.replace(/([^?=&#]+)=([^?=&#]+)/g, (_, key, value) => obj[key] = value)
+  this.replace(/#([^?=&#]+)/g, (_, hash) => obj['HASH'] = hash)
+  return obj
 }
 String.prototype.queryURLParams = queryURLParams
 let url = 'http://www.zhufengpeixun.cn/?id=123&name=js&from=baidu#video'
@@ -3596,79 +3512,79 @@ function appearMostChars (chars, code) {
 appearMostChars('I am from runoob, welcome to runoob site.', 'runoob')  // ["runoob,", "runoob"]
 
 function swapper (code, chinese) {
-  let string = ''
+  let str = ''
   for (let i = 0; i < code.length; i++) {
-    string += chinese.charAt(code.charAt(i))
+    str += chinese.charAt(code.charAt(i))
   }
-  return string
+  return str
 }
 swapper('1112223337789999', '零壹贰叁肆伍陆柒捌玖')  // "壹壹壹贰贰贰叁叁叁柒柒捌玖玖玖玖"
 
-function charAtTest (string, number) {
+function charAtTest (str, n) {
   // 从索引为n – 1的位置，获取正确的字符，并返回
-  return string.charAt(number - 1)
+  return str.charAt(n - 1)
 }
 charAtTest('ABCDEFGHIJKLMNOPQRSTUVWXYZ')  // "A"
 
 function stringPosition (code) {
-  let object = {}
+  let obj = {}
   // 把每个字符都保存在对象里面，如果对象中有该属性，就+1，如果对象中没有该属性，就为1
   for (let i = 0; i < code.length; i++) {
     let chars = code[i]
-    // object[chars]得到的是属性值
-    object[chars] ? object[chars] += 1 : object[chars] = 1
+    // obj[chars]得到的是属性值
+    obj[chars] ? obj[chars] += 1 : obj[chars] = 1
   }
-  let string = ''
+  let str = ''
   let count = 0
-  for (const key in object) {
-    if (object[key] > count) {
-      count = object[key]
-      string = key
+  for (const key in obj) {
+    if (obj[key] > count) {
+      count = obj[key]
+      str = key
     }
   }
-  return `出现最多的字符是${string}, 一共出现了${count}次`
+  return `出现最多的字符是${str}, 一共出现了${count}次`
 }
 stringPosition('abcoefoxyozzopp')  // "出现最多的字符是o, 一共出现了4次"
 
 // 将字符串的字符全部转换为小写字符
-function lowerCase (chars) {
-  let array = chars.split('')
-  let strings = ''
+function lowerCase (str) {
+  let arr = str.split('')
+  let code = ''
   // 用for遍历数组
-  for (let i = 0; i < array.length; i++) {
-    if (array[i] >= 'A' && array[i] <= 'Z') {
-      strings += array[i].toLowerCase()
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] >= 'A' && arr[i] <= 'Z') {
+      code += arr[i].toLowerCase()
     } else {
-      strings += array[i]
+      code += arr[i]
     }
   }
-  return strings
+  return code
 }
 lowerCase('Hello World!')  // "hello world!"
 
 // 将字符串的字符全部转换为大写字符
-function upperCase (chars) {
-  let array = chars.split('')
-  let strings = ''
+function upperCase (str) {
+  let arr = str.split('')
+  let code = ''
   // 用forEach遍历数组
-  array.forEach(value => {
+  arr.forEach(value => {
     if (value >= 'a' && value <= 'z') {
-      strings += value.toUpperCase()
+      code += value.toUpperCase()
     } else {
-      strings += value
+      code += value
     }
   })
-  return strings
+  return code
 }
 upperCase('Hello World!')  // "HELLO WORLD!"
 
-function firstUppercase (string) {
-  let array = string.toLowerCase().split(' ')
-  for (let i = 0; i < array.length; i++) {
+function firstUppercase (str) {
+  let arr = str.toLowerCase().split(' ')
+  for (let i = 0; i < arr.length; i++) {
     // 截取字符串的首字母并转换成大写，再拼接剩下的字符
-    array[i] = array[i].charAt(0).toUpperCase() + array[i].substr(1)
+    arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].substr(1)
   }
-  return array.join(' ')
+  return arr.join(' ')
 }
 firstUppercase('hOw aRe yOu')  // How Are You
 
@@ -3763,8 +3679,8 @@ let cats = [
 ]
 minMonth(cats)  // { name: 'Waffles', months: 4 }
 
-function totalMonth (pets) {
-  return pets.reduce((total, current) => total += current.months, 0)
+function monthSum (pets) {
+  return pets.reduce((total, cur) => total += cur.months, 0)
 }
 let cats = [
   { name: 'Mojo', months: 84 },
@@ -3772,7 +3688,7 @@ let cats = [
   { name: 'Waffles', months: 4 },
   { name: 'Pickles', months: 6 }
 ]
-totalMonth(cats)  // 128
+monthSum(cats)  // 128
 
 class Father {
   constructor(x, y) {
@@ -3785,7 +3701,7 @@ class Father {
 }
 class Son extends Father {  // 子类继承父类
   constructor(x, y) {
-    super(x, y)  // 调用父类的构造函数。super必须在子类this之前调用
+    super(x, y)  // 调用父类的构造函数 super必须在子类this之前调用
     // this.x = x
     // this.y = y
   }
@@ -3808,34 +3724,32 @@ arrays.summation()  // 6
 function changeThis (x, y) {
   return x + y
 }
-const objects = {
-  name: 'Jakie'
-}
-changeThis.call(objects, 1, 2)  // 3
+const obj = { name: 'Jakie' }
+changeThis.call(obj, 1, 2)  // 3
 
-let objects = {
+let obj = {
   id: 1,
   name: '小米',
   price: 1999
 }
-Object.defineProperty(objects, 'count', {  // 添加或修改属性
+Object.defineProperty(obj, 'count', {  // 添加或修改属性
   value: 100
 })
-console.log(objects)  // { id: 1, name: "小米", price: 1999, count: 100 }
-Object.defineProperty(objects, 'id', {
+console.log(obj)  // { id: 1, name: "小米", price: 1999, count: 100 }
+Object.defineProperty(obj, 'id', {
   writable: false  // 不允许修改属性值，默认false
 })
-console.log(objects)
-Object.defineProperty(objects, 'count', {
+console.log(obj)
+Object.defineProperty(obj, 'count', {
   enumerable: false  // 不允许遍历对象属性，默认false
 })
-Object.defineProperty(objects, 'count', {
+Object.defineProperty(obj, 'count', {
   configurable: false  // 不允许删除对象属性和修改特性，默认false
 })
 
-let books = {}
+let book = {}
 let name = ''
-Object.defineProperty(books, 'name', {
+Object.defineProperty(book, 'name', {
   set (value) {
     name = value
     console.log('你取了一个书名叫做' + value)  // 你取了一个书名叫做vue权威指南
@@ -3844,19 +3758,17 @@ Object.defineProperty(books, 'name', {
     return `《${name}》`
   }
 })
-books.name = 'vue权威指南'
-console.log(books.name)  // 《vue权威指南》
+book.name = 'vue权威指南'
+console.log(book.name)  // 《vue权威指南》
 
 // 1.不会调用原来的函数，可以改变原来函数内部的this指向
 // 2.返回的是原函数改变this之后产生的新函数
-let objects = {
-  name: 'Jakie'
-}
-function getResult (a, b) {
+let obj = { name: 'Jakie' }
+function func (a, b) {
   return a + b
 }
-let result = getResult.bind(objects, 1, 2)
-result()  // 3                     
+let f = func.bind(obj, 1, 2)
+f()  // 3                     
 
 // <button>点击</button>
 // const button = document.querySelector('button')
@@ -3875,7 +3787,7 @@ for (let i = 0; i < li.length; i++) {
   }
 }
 
-// 概念：立即执行函数就是只会执行一次函数
+// 立即执行函数就是只会执行一次函数
 // 立即执行函数也称为小闭包，因为立即执行函数里面的任何一个函数都可以使用它的i变量
 for (let i = 0; i < li.length; i++) {
   // 利用for循环穿件4个立即执行函数
@@ -3888,9 +3800,9 @@ for (let i = 0; i < li.length; i++) {
 
 // 闭包的主要作用: 延伸了变量的作用域
 // 闭包是一个函数(一个作用域可以访问另一个函数的局部变量)
-// 闭包应用--计算打车价格
-// 打车起步价13(3公里内)，之后每多一公里增加5元钱，用户输入公里数就可以计算打车价格，
-// 如果有拥堵情况，总价格多收取10元钱拥堵费。
+// 闭包应用-计算打车价格
+// 打车起步价13(3公里内)，之后每多一公里增加5元钱，用户输入公里数就可以计算打车价格
+// 如果有拥堵情况，总价格多收取10元钱拥堵费
 let car = (() => {
   let start = 13  // 起步价
   let total = 0   // 总价
@@ -3927,20 +3839,21 @@ const internalName = object.getName()
 internalName()  // "我是内部变量"  
 
 // 对象深拷贝
-function deepCopy (newObject, oldObject) {
-  for (const key in oldObject) {
-    if (oldObject[key] instanceof Array) {  // 判断是否是数组
-      newObject[key] = []
-      deepCopy(newObject[key], oldObject[key])
-    } else if (oldObject[key] instanceof Object) {  // 判断是否是对象
-      newObject[key] = {}
-      deepCopy(newObject[key], oldObject[key])
+function deepCopy (newObj, oldObj) {
+  for (const key in oldObj) {
+    const item = oldObj[key]  // 获取属性值
+    if (item instanceof Array) {  // 判断是否是数组
+      newObj[key] = []
+      deepCopy(newObj[key], item)
+    } else if (item instanceof Object) {  // 判断是否是对象
+      newObj[key] = {}
+      deepCopy(newObj[key], item)
     } else {  // 否则就是基本数据类型
-      newObject[key] = oldObject[key]
+      newObj[key] = item
     }
   }
 }
-deepCopy(newObject, oldObject)
+deepCopy(newObj, oldObj)
 
 let person = { name: '张三', age: 20 }
 let { name: userName, age: userAge } = person
@@ -3973,17 +3886,17 @@ str.clear()
 console.log(str.size)  // 0
 
 // 找出所有三次自幂数
-function selfIdempotent (numbers) {
-  let arrays = []
-  for (let i = 100; i < numbers; i++) {
+function selfIdempotent (num) {
+  let arr = []
+  for (let i = 100; i < num; i++) {
     const a = parseInt(i / 100)
     const b = parseInt(i % 100 / 10)
     const c = i % 10
     if (a * a * a + b * b * b + c * c * c === i) {
-      arrays[arrays.length] = i + '是自幂数'
+      arr[arr.length] = i + '是自幂数'
     }
   }
-  return arrays
+  return arr
 }
 selfIdempotent(1000)  // ["153是自幂数", "370是自幂数", "371是自幂数", "407是自幂数"]
 
@@ -4042,7 +3955,7 @@ isNarcissu(153)  // 这个数字是水仙花数
 
 // 平日：年龄大于等于10岁，门票是300. 年龄小于10岁，门票是140
 // 周末：年龄大于等于10岁，门票是500. 年龄小于10岁，门票是210
-function sellTicket (week, age) {
+function ticketByAgeAndWeek (week, age) {
   // 让星期几作为前提条件
   if (week === 0 || week === 6) {
     // 周末
@@ -4052,22 +3965,22 @@ function sellTicket (week, age) {
     return age >= 10 ? '门票为300' : '门票为140'
   }
 }
-sellTicket(6, 12)  // 门票为500
-sellTicket(3, 9)  // 门票为140
+ticketByAgeAndWeek(6, 12)  // 门票为500
+ticketByAgeAndWeek(3, 9)  // 门票为140
 
 // 输出一个数的所有公倍数
-function commonMultiple (numbers) {
-  let arrays = []
-  for (let i = 1; i <= numbers; i++) {
-    if (numbers % i === 0) {
-      arrays[arrays.length] = i
+function commonMultiple (num) {
+  let arr = []
+  for (let i = 1; i <= num; i++) {
+    if (num % i === 0) {
+      arr[arr.length] = i
     }
   }
-  return arrays
+  return arr
 }
 commonMultiple(10)  // [1, 2, 5, 10]
 
-function getFact (start, end) {
+function getFactSum (start, end) {
   let sum = 0
   for (let i = start; i <= end; i++) {
     start *= i
@@ -4075,10 +3988,10 @@ function getFact (start, end) {
   }
   return sum
 }
-getFact(1, 5)  // 153
+getFactSum(1, 5)  // 153
 
 // 求1 - 1 / 2 + 1 / 3 - 1 / 4 + 1 / 5 + ... 1 / 100 1 / n的和
-function getFract (start, end) {
+function getFractSum (start, end) {
   let sum = 0
   for (let i = start; i <= end; i++) {
     sum += start / i
@@ -4086,7 +3999,7 @@ function getFract (start, end) {
   }
   return sum
 }
-getFract(1, 100)  // 0.688172179310195
+getFractSum(1, 100)  // 0.688172179310195
 
 // 找出100-300之间能被6和9整除的数的个数
 function betweenTwoNumbers (start, end) {
@@ -4102,10 +4015,10 @@ function betweenTwoNumbers (start, end) {
 betweenTwoNumbers(100, 300)  // 11个
 
 // 求1 + 2 + ... + 100的和
-function oneToHundredSum (numbers) {
+function oneToHundredSum (n) {
   // sum是和的累加器，初始值是0
   let sum = 0
-  for (let i = 1; i <= numbers; i++) {
+  for (let i = 1; i <= n; i++) {
     sum += i
   }
   return sum
@@ -4114,12 +4027,12 @@ oneToHundredSum(100)  // 5050
 
 // 小兔子拔萝卜，第1天拔1个，第2天拔2个，第3天拔3个...
 // 问：第几天能拔光500个萝卜？
-function pullOutRadish (count) {
+function pullOutRadish (n) {
   // 和的累加器
   let sum = 0
   // 天的序号，也就是这一天拔的萝卜数
   let i = 1
-  while (sum < count) {
+  while (sum < n) {
     sum += i
     i++
   }
@@ -4129,11 +4042,11 @@ function pullOutRadish (count) {
 pullOutRadish(500)  // 32
 
 // 有用户输入数字n，计算3 / 2 + 4 / 3 + 5 / 4 + ... + (n + 1) / n的结果
-function fraction (numbers) {
+function fraction (n) {
   // 和的累加器
   let sum = 0
   // 遍历分母就可以了， 因为分母就是分子加1
-  for (let i = 2; i <= numbers; i++) {
+  for (let i = 2; i <= n; i++) {
     sum += (i + 1) / i
   }
   return sum
@@ -4143,12 +4056,12 @@ fraction(3)  // 2.833333333333333
 
 // 用莱布尼茨级数估算圆周率
 // π = 2 * (1 + 1 / 3 + (1 * 2) / (3 * 5) + (1 * 2 * 3) / (3 * 5 * 7) + (1 * 2 * 3 * 4) / (3 * 5 * 7 * 9) + (1 * ...n) / (3 * 5 * ...2n + 1))
-function leibniz (numbers) {
+function leibniz (n) {
   // 累加器，就是最后答案
   let sum = 0
   // 累乘器，用来制作每一项，然后往累加器中累加
   let item = 1
-  for (let i = 1; i <= numbers; i++) {
+  for (let i = 1; i <= n; i++) {
     // item就是小车厢
     item *= i / (2 * i + 1)
     // 把小车厢往累加器中累加
@@ -4160,18 +4073,20 @@ leibniz(3)  // 3.0476190476190474
 leibniz(30)  // 3.14159265330116
 
 // 计算数组中所有奇数和偶数之和
-function arrayGetSum (array) {
+function getSum (arr) {
   let odd = 0, even = 0
-  array.forEach(item => item % 2 ? odd += item : even += item)
+  arr.forEach(num => {
+    num % 2 ? odd += num : even += num
+  })
   return `奇数和: ${odd}，偶数和: ${even}`
 }
-arrayGetSum([12, 34, 11, 56])  // "奇数和: 11 偶数和: 102"
+getSum([12, 34, 11, 56])  // "奇数和: 11 偶数和: 102"
 
 // 求数组中素数个数
-function isPrimer (numbers) {
+function isPrimer (num) {
   let flag = true
-  for (let i = 2; i <= numbers - 1; i++) {
-    if (numbers % i === 0) {
+  for (let i = 2; i <= num - 1; i++) {
+    if (num % i === 0) {
       flag = false
     }
   }
@@ -4207,7 +4122,7 @@ has([1, 3, 5], 7)  // false
 has([1, 3, 5], 5)  // true
 
 // 编写函数noRepeat，将数组的重复元素去掉，并返回新的数组
-function noRepeat (array) {
+function arrayRemoveRepeat (array) {
   let newArray = []
   array.forEach(item => {
     if (!has(newArray, item)) {
@@ -4216,29 +4131,29 @@ function noRepeat (array) {
   })
   return newArray
 }
-noRepeat([2, 6, 12, 6, 19, 12])  // [2, 6, 12, 19]
+arrayRemoveRepeat([2, 6, 12, 6, 19, 12])  // [2, 6, 12, 19]
 
 // 有一个升序的数组，现在输入一个数，这个数按原来规律插入到数组中
-function insertToArray (array, number) {
-  let index = array.length
+function insertToArray (arr, num) {
+  let index = arr.length
   for (let i = 0; i < index; i++) {
-    if (array[i] > number) {
+    if (arr[i] > num) {
       index = i
       break
     }
   }
-  array.splice(index, 0, number)
-  return array
+  arr.splice(index, 0, num)
+  return arr
 }
 insertToArray([10, 20, 28, 32], 29)  // [10, 20, 28, 29, 32]
 
 // 定义函数，求数组为偶数的元素的平均值
-function evenAverage (array) {
+function evenAverage (arr) {
   let sum = 0
   let even = 0
-  for (let i = 1; i < array.length; i++) {
+  for (let i = 1; i < arr.length; i++) {
     if (i % 2 === 0) {
-      sum += array[i]
+      sum += arr[i]
       even++
     }
   }
@@ -4249,37 +4164,38 @@ evenAverage([1, 2, 3, 4, 5, 6])  // 4
 // 某个公司采用电话传递数据，数据是四位的整数，在传递过程中是加密的，加密规则如
 // 每位数字都加上5，然后用除以10的余数代替该数字，再将第一位和第四位交换，第二位和第三位交换
 // 请编写一个函数，传入原文，输出密文
-function getPassword (number, digit) {
-  let array = []
+function getPassword (num, digit) {
+  let arr = []
   for (let i = 0; i < digit; i++) {
-    array[i] = (number % 10 + 5) % 10
-    number = parseInt(number / 10)
+    arr[i] = (num % 10 + 5) % 10
+    num = parseInt(num / 10)
   }
-  return array.join('')
+  return arr.join('')
 }
 getPassword(1456, 4)  // "1096"
 
-Array.prototype.summation = function () {
+Array.prototype.getSum = function () {
   let sum = 0
   for (let i = 0; i < this.length; i++) {
     sum += this[i]
   }
   return sum
 }
-const array = [1, 2, 3, 4, 5]
-array.summation()  // 15
+const arr = [1, 2, 3, 4, 5]
+arr.getSum()  // 15
+
 // 类数组
-const object = {
+const obj = {
   0: 10,
   1: 20,
   2: 30,
   3: 40,
   length: 4
 }
-Array.prototype.summation.call(object)  // 100
-Array.prototype.splice.call(object, 0, 4)
-array.summation()  // 100
-Array.from(object).summation()  // 100
+Array.prototype.getSum.call(obj)  // 100
+Array.prototype.splice.call(obj, 0, 4)
+arr.getSum()  // 100
+Array.from(obj).getSum()  // 100
 
 // 求1-100之间所有偶数与奇数的和
 function getResult (start, end) {
@@ -4303,13 +4219,13 @@ function principalAndInterest (money, year) {
 principalAndInterest(10000, 5)  // 10150.90270405243
 
 function exchangeVariables (x, y) {
-  let a = 1
-  let b = 1
+  let n1 = 1
+  let n2 = 1
   let sum = 0
   for (let i = x; i <= y; i++) {
-    sum = a + b
-    a = b
-    b = sum
+    sum = n1 + n2
+    n1 = n2
+    n2 = sum
   }
   return sum
 }
@@ -4344,11 +4260,11 @@ function even (start, end) {
 even(100, 200)  // 7500
 
 // 求10以内所有奇数的和
-function odd (number) {
+function odd (n) {
   let sum = 0
-  for (let i = 1; i <= number; i++) {
+  for (let i = 1; i <= n; i++) {
     // 如果个位数是3，就跳过
-    if (i % number === 3) {
+    if (i % n === 3) {
       continue
     }
     sum += i
@@ -4363,8 +4279,8 @@ Array.prototype.flatten = function () {
     return pre.concat(Array.isArray(item) ? item.flatten() : item)
   }, [])
 }
-const lists = [1, [2, [3, 4]]]
-lists.flatten()  // [1, 2, 3, 4]
+const list = [1, [2, [3, 4]]]
+list.flatten()  // [1, 2, 3, 4]
 
 // 多维数组转化为一维数组
 Array.prototype.flatten = function () {
@@ -4374,8 +4290,8 @@ Array.prototype.flatten = function () {
   }
   return array
 }
-let lists = [1, [2, [3, 4]]]
-lists.flatten()  // [1, 2, 3, 4]
+let list = [1, [2, [3, 4]]]
+list.flatten()  // [1, 2, 3, 4]
 
 function paddingEndZero (value, length) {
   // 避免出现.00的情况
@@ -4394,9 +4310,9 @@ paddingEndZero(9, 2)  // 9.00
 paddingEndZero(9, 3)  // 9.000
 
 // 求100以内所有奇数的和
-function odd (number) {
+function odd (num) {
   let sum = 0
-  for (let i = 1; i < number; i++) {
+  for (let i = 1; i < num; i++) {
     if (i % 2 === 0) {
       continue
     }
@@ -4407,9 +4323,9 @@ function odd (number) {
 odd(100) // 2500
 
 // 求100以内所有奇数的和
-function odd (number) {
+function odd (num) {
   let sum = 0, i = 1
-  while (i < number) {
+  while (i < num) {
     sum += i
     i += 2
   }
@@ -4418,9 +4334,9 @@ function odd (number) {
 odd(100)  // 2500
 
 // 求100以内所有奇数的和
-function odd (number) {
+function odd (num) {
   let sum = 0, i = 1
-  while (i < number) {
+  while (i < num) {
     if (i % 2 === 1) {
       sum += i
     }
@@ -4431,11 +4347,11 @@ function odd (number) {
 odd(100)  // 2500
 
 // 求100以内所有奇数的和
-function odd (number) {
+function odd (num) {
   let sum = 0
-  while (number > 0) {
-    sum += number
-    number -= 2
+  while (num > 0) {
+    sum += num
+    num -= 2
   }
   return sum
 }
@@ -4456,11 +4372,11 @@ function divideByThree (start, end) {
 }
 divideByThree(1, 10)  // [3, 6, 9]
 
-function ArrayRemoveRepeat (array) {
-  return array.reduce((item, current) => {
-    // item初始状态为空数组，current为当前数组中的每一项元素
-    if (!item.includes(current)) {
-      item.push(current)
+function ArrayRemoveRepeat (arr) {
+  return arr.reduce((item, cur) => {
+    // item初始状态为空数组，cur为当前数组中的每一项元素
+    if (!item.includes(cur)) {
+      item.push(cur)
     }
     return item
   }, [])
@@ -4468,10 +4384,10 @@ function ArrayRemoveRepeat (array) {
 ArrayRemoveRepeat([1, 2, 3, 3, 1, 4, 2])  // [1, 2, 3, 4]
 
 // 求100以内所有奇数与偶数的和
-function getOddEvenSum (number) {
+function getOddEvenSum (n) {
   let odd = 0  // 奇数的和累加，初始值为0
   let even = 0  // 偶数的和累加，初始值为0
-  for (let i = 1; i <= number; i++) {
+  for (let i = 1; i <= n; i++) {
     // 判断i是不是奇偶数
     i % 2 === 0 ? even += i : odd += i
   }
@@ -4514,7 +4430,7 @@ function randomValue (max, min) {
   return Math.floor(Math.random() * (max - min) + min)
 }
 function createCode (codeLength) {
-  let string = ''
+  let str = ''
   let codeList = [
     0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l',
     'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D',
@@ -4523,24 +4439,24 @@ function createCode (codeLength) {
   ]
   for (let i = 0; i < codeLength; i++) {
     let index = randomValue(62, 0)
-    string += codeList[index]
+    str += codeList[index]
   }
-  return string
+  return str
 }
 createCode(4)  // 输出一个4位的随机验证码
 
 // 判断一个数是不是质数
-function isPrime (numbers) {
+function isPrimeNumber (n) {
   let flag = true
-  for (let i = 2; i < numbers; i++) {
-    if (numbers % i === 0) {
+  for (let i = 2; i < n; i++) {
+    if (n % i === 0) {
       flag = false
     }
   }
   return flag ? '是质数' : '不是质数'
 }
-isPrime(20)  // 不是质数
-isPrime(13)  // 是质数
+isPrimeNumber(20)  // 不是质数
+isPrimeNumber(13)  // 是质数
 
 // 求出1 - 1/2 + 1/3 - 1/4 ... 1/100的和，已知let i = 1
 function fraction (num) {
@@ -4641,40 +4557,40 @@ const cat = new Cat('小黑', 6)
 cat.getCatInfo()
 
 // 数组去重
-function arrayRemoveRepeat (arrays) {
-  let objects = {}
-  for (let i = 0; i < arrays.length; i++) {
-    const item = arrays[i]
-    if (typeof objects[item] !== 'undefined') {
-      arrays.splice(i, 1)
+function arrayRemoveRepeat (arr) {
+  let obj = {}
+  for (let i = 0; i < arr.length; i++) {
+    const item = arr[i]
+    if (typeof obj[item] !== 'undefined') {
+      arr.splice(i, 1)
       // 防止数组塌陷
       i--
       continue
     }
     // 把这一项作为对象的属性名和属性值存储进去
-    objects[item] = item
+    obj[item] = item
   }
-  return arrays
+  return arr
 }
 arrayRemoveRepeat([1, 2, 3, 3, 4, 3, 2, 5, 6, 5])  // [1, 2, 3, 4, 5, 6]
 
 // 数组去重
-function arrayRemoveRepeat (arrays) {
-  let objects = {}
-  for (let i = 0; i < arrays.length; i++) {
-    const item = arrays[i]
-    if (typeof objects[item] !== 'undefined') {
+function arrayRemoveRepeat (arr) {
+  let obj = {}
+  for (let i = 0; i < arr.length; i++) {
+    const item = arr[i]
+    if (typeof obj[item] !== 'undefined') {
       // 我们把数组最后一项获取到，替换当前项
       // 再把数组最后一项删除
-      arrays[i] = arrays[arrays.length - 1]
-      arrays.length--
+      arr[i] = arr[arr.length - 1]
+      arr.length--
       i--
       continue
     }
     // 把这一项作为对象的属性名和属性值存储进去
-    objects[item] = item
+    obj[item] = item
   }
-  return arrays
+  return arr
 }
 arrayRemoveRepeat([1, 2, 3, 3, 4, 3, 2, 5, 6, 5])  // [1, 2, 3, 4, 5, 6]
 
@@ -4715,14 +4631,14 @@ arrayRemoveRepeat([1, 2, 2, 3])  // [1, 2, 3]
 
 // 字符串去重
 function stringRemoveRepeat (strings) {
-  let objects = {}
+  let obj = {}
   for (let i = 0; i < strings.length; i++) {
     let value = strings[i]
     // 如果是true，证明对象中有这个成员，否则对象中没有这个成员
-    objects[value] ? objects[value] += 1 : objects[value] = 1
+    obj[value] ? obj[value] += 1 : obj[value] = 1
   }
   let result = ''
-  for (const key in objects) {
+  for (const key in obj) {
     result += key
   }
   return result
@@ -4730,30 +4646,30 @@ function stringRemoveRepeat (strings) {
 stringRemoveRepeat('abcabcefgefh')  // abcefgh
 
 // 字符串去重
-function duplicateRemove (strings) {
-  let arrays = strings.split('').sort().join('')
-  let list = arrays.match(/(.)\1+/g)
+function duplicateRemove (str) {
+  let arr = str.split('').sort().join('')
+  let list = arr.match(/(.)\1+/g)
   for (let i = 0; i < list.length; i++) {
-    arrays = arrays.replace(list[i], list[i].substring(0, 1))
+    arr = arr.replace(list[i], list[i].substring(0, 1))
   }
-  return arrays
+  return arr
 }
 duplicateRemove('1234321abaccc')  // "1234abc"
 
 // 输入两个数，求两个数的最大公约数
 function commonDisior (x, y) {
   // 声明一个变量当作最大公约数
-  let max = 1
+  let num = 1
   for (let i = x; i > 1; i--) {
     // i就是两个数字的最大公约数
     if (x % i === 0 && y % i === 0) {
       // 因为是倒着循环，那么找到了一个就是最大的  
-      max = i
+      num = i
       // 直接结束循环  
       break
     }
   }
-  return max
+  return num
 }
 commonDisior(8, 5)  // 1
 commonDisior(8, 4)  // 4
@@ -4772,10 +4688,10 @@ getDivisor(3, 4)  // 1
 getDivisor(8, 4)  // 4
 
 // 输入两个数，求两个数的最大公约数
-function maxDivisor (a, b) {
-  let max = a > b ? b : a
+function maxDivisor (m, n) {
+  let max = m > n ? n : m
   while (max !== 0) {
-    if (a % max === 0 && b % max === 0) {
+    if (m % max === 0 && n % max === 0) {
       break
     }
     max--
@@ -4786,10 +4702,10 @@ maxDivisor(3, 4)  // 1
 maxDivisor(12, 4)  // 4
 
 // 输入两个数，求两个数的最大公约数
-function commonMultiple (a, b) {
-  let max = Math.max(a, b)
+function commonMultiple (n1, n2) {
+  let max = Math.max(n1, n2)
   for (let i = max; i > 0; i--) {
-    if (a % i === 0 && b % i === 0) {
+    if (n1 % i === 0 && n2 % i === 0) {
       max = i
       break
     }
@@ -4798,36 +4714,36 @@ function commonMultiple (a, b) {
 }
 commonMultiple(12, 8)  // 4
 
-function continueKeyword (numbers) {
+function continueKeyword (num) {
   let sum = 0
-  let strings = '1～20之间的偶数有：'
+  let str = '1～20之间的偶数有：'
   // 把1～20之间的偶数进行累加
-  for (let i = 1; i < numbers; i++) {
+  for (let i = 1; i < num; i++) {
     // 判断i是否为偶数，如果模不等于0，为奇数，结束当前循环，进入下一次循环
     if (i % 2 !== 0) {
       continue
     }
     // 如果执行continue语句，循环体内的该行以及后面的代码都不会被执行
     sum += i
-    strings += i + ' '
+    str += i + ' '
   }
-  return strings += '\n这些偶数的和为：' + numbers
+  return str += '\n这些偶数的和为：' + sum
 }
 continueKeyword(20)  // "1～20之间的偶数有：2 4 6 8 10 12 14 16 18 这些偶数的和为：90"   
 
-function breakKeyword (numbers) {
+function breakKeyword (num) {
   let sum = 0
-  let strings = '1～20之间的被累加的偶数有：'
+  let str = '1～20之间的被累加的偶数有：'
   // 把1～20之间的偶数进行累加
-  for (let i = 2; i < numbers; i += 2) {
+  for (let i = 2; i < num; i += 2) {
     if (sum > 60) {
       // 执行break语句后，整个循环立刻停止结束执行
       break
     }
     sum += i
-    strings += i + ' '
+    str += i + ' '
   }
-  return strings += '\n这些偶数的和为：' + sum
+  return str += '\n这些偶数的和为：' + sum
 }
 breakKeyword(20)  // "1～20之间的被累加的偶数有：2 4 6 8 10 12 14 16 这些偶数的和为：72"
 
@@ -4847,17 +4763,17 @@ getAccumulation(3, 2)  // 246
 
 // 五位数中，对称的数称为回文数，找出所有的回文数。如12321
 function palindromeNumber (min, max) {
-  let arrays = []
+  let arr = []
   for (let i = min; i < max; i++) {
     const a = 1 % 10  // 个位
     const b = parseInt(i / 10) % 10  // 十位
     const c = parseInt(i / 1000) % 10  // 千位
     const d = parseInt(i / 10000)  // 万位
     if (a === d && b === c) {
-      arrays[arrays.length] = i
+      arr[arr.length] = i
     }
   }
-  return arrays
+  return arr
 }
 palindromeNumber(10000, 100000)
 
@@ -4951,10 +4867,11 @@ function b (m, n) {
 }
 a(b)  // 4
 
+
+
 // 使用class类封装axios
 import axios from 'axios'
-import { response } from 'express'
-import { merge, xor } from 'lodash'
+import { merge } from 'lodash'
 class HttpRequest {
   constructor(options) {
     this.defaults = {
@@ -5006,19 +4923,3 @@ const http = instance.request()
 export function getUserInfo () {
   return http.get('/user')
 }
-
-// vue项目中如何使用字体图标：
-// 先在阿里巴巴字体图标库中找到想要的字体图标加入购物车添加到项目中，
-// 然后在vue项目中的index.html文件中引入如下图的css。
-
-// 每英寸包含点的数量（dots per inch）
-// 普通屏幕通常包含96dpi，一般将2倍于此的屏幕称之为高分屏，即大于等于192dpi的屏幕，比如Mac视网膜屏就达到了192dpi（即2dppx），打印时一般会需要更大的dpi；
-// 1dppx = 96dpi
-// 1dpi ≈ 0.39dpcm
-// 1dpcm ≈ 2.54dpi
-// 1in = 2.54cm = 25.4 mm = 101.6q = 72pt = 6pc = 96px
-// 示例代码：
-
-// @media screen and (min-resolution: 96dpi) { ... }
-// @media print and (min-resolution: 300dpi) { ... }
-

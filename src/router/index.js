@@ -448,6 +448,10 @@ const router = new VueRouter({
     {
       path: '/drag',
       component: () => import('@/views/drag')
+    },
+    {
+      path: '/table-use',
+      component: () => import('@/views/table-use')
     }
   ]
 })
