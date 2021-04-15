@@ -4860,14 +4860,12 @@ console.log(arrays)  // [4, 8, 12, 16, 20]
 // 从函数中返回结果值，因为函数是内置对象，我们可以将它作为参数传递给另一个函数，到函数中执行，
 // 甚至执行后将它返回，它一直被“专业的程序员”看作是一种难懂的技术。
 function a (callback) {
-  return callback(1, 3)
+  return callback && callback(1, 3)
 }
 function b (m, n) {
   return m + n
 }
 a(b)  // 4
-
-
 
 // 使用class类封装axios
 import axios from 'axios'
