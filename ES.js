@@ -4867,7 +4867,7 @@ a(b)  // 4
 
 // 使用class类封装axios
 import axios from 'axios'
-import { merge, xor } from 'lodash'
+import { merge } from 'lodash'
 class HttpRequest {
   constructor(options) {
     this.defaults = {
