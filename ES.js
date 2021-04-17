@@ -1813,7 +1813,7 @@ function primeNumber (start, end) {
         break
       }
     }
-    // 满足条件，也就是为flag为true时
+    // 满足条件，也就是flag为true时
     if (flag) {
       sum += i
     }
@@ -1868,16 +1868,16 @@ getCaption('http://www.baidu.com?123', '?')  // 123
 
 // 封装axios
 import axios from 'axios'
-const ERR_OK = 0
+const ERROR_OK = 0
 function request (url) {
   return function (params) {
-    return axios.get(url, { params }).then(res => {
-      const { errno, data } = res.data
-      if (errno === ERR_OK) {
+    return axios.get(url, { params }).then(response => {
+      const { status, data } = response.data
+      if (status === ERROR_OK) {
         return data
       }
-    }).catch(err => {
-      console.log(err)
+    }).catch(error => {
+      console.log(error)
     })
   }
 }
@@ -1898,7 +1898,7 @@ const LENGTH = 5
 const CLASS_ON = 'on'
 const CLASS_HALF = 'half'
 const CLASS_OFF = 'off'
-function itemClasses () {
+function itemClass () {
   // 创建一个数组存储
   let result = []
   let score = Math.floor(this.score * 2) / 2
@@ -1919,7 +1919,7 @@ function itemClasses () {
     result.push(CLASS_OFF)
   }
 }
-itemClasses()
+itemClass()
 
 function starType () {
   return 'star-' + this.size
@@ -1976,20 +1976,25 @@ function fraction (numbers) {
 }
 fraction(100)  // 0.688172179310195
 
-let i = 1000
-let counts = 0  // 统计闰年的个数
-while (i <= 2000) {
-  // 判断是不是闰年
-  if (i % 4 === 0 && i % 100 !== 0 || i % 400 === 0) {
-    document.write(i + '&nbsp;')
-    counts++
-    // 每行输出四个闰年
-    if (counts % 4 === 0) {
-      document.write('<br/>')
+function numberLeapYear (start, end) {
+  // 统计闰年的总数
+  let count = 0
+  let label = ''
+  while (start <= end) {
+    // 判断是不是闰年
+    if (start % 4 === 0 && start % 100 !== 0 || start % 400 === 0) {
+      label += start + ' '
+      count++
+      // 每行输出4个闰年
+      if (count % 4 === 0) {
+        label += '\n'
+      }
     }
+    start++
   }
-  i++
+  return label
 }
+numberLeapYear(1000, 2000)
 
 // 定义一个函数，输入数字，逆转并输出汉字形式
 function outPutChinese (values) {
