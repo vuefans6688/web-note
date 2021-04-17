@@ -27,11 +27,17 @@
     </el-form>
     <el-table :data="allData" @selection-change="selectChange" stripe>
       <el-table-column type="selection" align="center"></el-table-column>
-      <el-table-column label="序号" align="center">
+      <!-- <el-table-column label="序号" align="center">
         <template slot-scope="scope">
           <span>{{ scope.$index + 1 }}</span>
         </template>
-      </el-table-column>
+      </el-table-column> -->
+      <el-table-column
+        :index="tableIndex"
+        type="index"
+        width="60"
+        align="center"
+      ></el-table-column>
       <el-table-column
         align="center"
         prop="title"
@@ -237,6 +243,10 @@ export default {
         this.allData = this.newsList.slice((this.currentPage - 1) * this.pageSize, this.currentPage * this.pageSize)
       }
       this.total = this.newsList.length
+    },
+    // 表格序号
+    tableIndex (index) {
+      return (this.currentPage - 1) * this.pageSize + index + 1
     }
   },
   mounted () {

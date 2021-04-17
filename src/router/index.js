@@ -452,6 +452,10 @@ const router = new VueRouter({
     {
       path: '/table-use',
       component: () => import('@/views/table-use')
+    },
+    {
+      path: '/table-search',
+      component: () => import('@/views/table-search')
     }
   ]
 })
