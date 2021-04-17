@@ -3,7 +3,13 @@
     <label class="content">留言内容: </label>
     <!-- ref被用来给元素或子组件注册引用信息，引用信息将会注册在父组件的$refs对象上 -->
     <!-- 如果在普通的dom元素上使用，引用就指向dom元素，如果用在子组件上，引用就指向组件实例 -->
-    <textarea type="text" ref="message" :value="value" @input="updateValue($event)" placeholder="请输入留言内容"></textarea>
+    <textarea
+      type="text"
+      ref="message"
+      :value="value"
+      @input="updateValue($event)"
+      placeholder="请输入留言内容"
+    ></textarea>
   </div>
 </template>
 

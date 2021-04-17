@@ -1,7 +1,12 @@
 <template>
   <div class="input-enter">
     <label class="nick">昵称: </label>
-    <input type="text" :value="value" @input="updateValue($event)" placeholder="请输入昵称">
+    <input
+      type="text"
+      :value="value"
+      @input="updateValue($event)"
+      placeholder="请输入昵称"
+    />
   </div>
 </template>
 

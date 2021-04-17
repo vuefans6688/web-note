@@ -1,5 +1,5 @@
 // 计算当前月份的天数
-export function getCurrentMonthDays(month, year) {
+export function getCurrentMonthDays (month, year) {
   let transDays = 30
   let largeMonth = [1, 3, 5, 7, 8, 10, 12]
   if (largeMonth.includes(month)) {
@@ -10,7 +10,7 @@ export function getCurrentMonthDays(month, year) {
   return transDays
 }
 
-export function calculateFromBirth(birthDate) {
+export function calculateFromBirth (birthDate) {
   if (!birthDate) {
     return ''
   }

@@ -1,13 +1,20 @@
 <template>
   <div class="list">
     <template v-if="list.length">
-      <div class="container" v-for="(item, index) in list" :key="item.id" 
-        @mouseover="changeOver(index)" @mouseout="changeOut(index)">
-        <div class="name">{{ item.userName }}: </div>
+      <div
+        class="container"
+        v-for="(item, index) in list"
+        :key="item.id"
+        @mouseover="changeOver(index)"
+        @mouseout="changeOut(index)"
+      >
+        <div class="name">{{ item.userName }}:</div>
         <div class="message">{{ item.message }}</div>
-        <div class="el-icon-close" v-if="showIcon && currentIndex === index" 
-          @click="removeComment(index)">
-        </div>
+        <div
+          class="el-icon-close"
+          v-if="showIcon && currentIndex === index"
+          @click="removeComment(index)"
+        ></div>
         <div class="reply" @click="reply(index)">回复</div>
       </div>
     </template>

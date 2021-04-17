@@ -21,7 +21,7 @@ export default {
       backgroundColorMax: 240,
       colorMin: 50,
       colorMax: 160,
-      lineColorMin:40,
+      lineColorMin: 40,
       lineColorMax: 180,
       dotColorMin: 0,
       dotColorMax: 255,
@@ -51,7 +51,7 @@ export default {
       ctx.strokeStyle = this.randomColor(this.backgroundColorMin, this.backgroundColorMax)  // 图形轮廓的颜色设置
       ctx.fillRect(0, 0, this.contentWidth, this.contentHeight)  // 绘制一个填充的矩形 0 0 width height x起点 y起点  宽 高
       ctx.strokeRect(0, 0, this.contentWidth, this.contentHeight)  // 绘制一个矩形边框 0 0 width height x起点 y起点  宽 高
-      ctx.clearRect(50, 0, this.contentWidth,this.contentHeight)   // 清除指定矩形区域，清除部分完全透明
+      ctx.clearRect(50, 0, this.contentWidth, this.contentHeight)   // 清除指定矩形区域，清除部分完全透明
       // 绘制文字
       for (let i = 0; i < this.verify.length; i++) {
         this.drawText(ctx, this.verify[i], i)

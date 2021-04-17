@@ -2,18 +2,38 @@
   <div class="calculate-age">
     <el-form :model="old" size="small">
       <el-form-item prop="age">
-        <el-input v-model="old.age" @keyup.native="intLimitAge('age')" @blur="calculateBirth" 
-          :style="{ width }" :maxlength="3" placeholder="请输入您的岁数">
+        <el-input
+          v-model="old.age"
+          @keyup.native="intLimitAge('age')"
+          @blur="calculateBirth"
+          :style="{ width }"
+          :maxlength="3"
+          placeholder="请输入您的岁数"
+        >
         </el-input>
       </el-form-item>
       <el-form-item prop="month">
-        <el-input v-model="old.month" @keyup.native="intLimitAge('month', 12)" 
-          :style="{ width }" @blur="calculateBirth" :maxlength="2" placeholder="请输入您的出生月份">
+        <el-input
+          v-model="old.month"
+          @keyup.native="intLimitAge('month', 12)"
+          :style="{ width }"
+          @blur="calculateBirth"
+          :maxlength="2"
+          placeholder="请输入您的出生月份"
+        >
         </el-input>
       </el-form-item>
       <el-form-item prop="birth">
-        <el-date-picker v-model="old.birth" type="date" @change="handleBirth" :editable="false" 
-          :style="{ width }" :clearable="false" :picker-options="pickerOptions" placeholder="请选择出生日期">
+        <el-date-picker
+          v-model="old.birth"
+          type="date"
+          @change="handleBirth"
+          :editable="false"
+          :style="{ width }"
+          :clearable="false"
+          :picker-options="pickerOptions"
+          placeholder="请选择出生日期"
+        >
         </el-date-picker>
       </el-form-item>
     </el-form>
@@ -61,7 +81,7 @@ export default {
       return this.old.birth || new Date()
     },
     // 计算生日
-    calculateBirth () {  
+    calculateBirth () {
       let date = new Date()
       let year = date.getFullYear() - this.getAge()
       let month = date.getMonth() - this.getMonthes()
@@ -72,7 +92,7 @@ export default {
       this.old.birth = new Date(year, month, date.getDate())
     },
     // 根据生日计算岁数
-    handleBirth () {  
+    handleBirth () {
       if (this.getBirth() > new Date()) {
         this.old.birth = ''
         return

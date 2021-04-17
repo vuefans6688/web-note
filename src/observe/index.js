@@ -2,7 +2,7 @@ import Vue from 'vue'
 
 export const store = Vue.observable({
   count: 0,
-  name: '皮卡丘'
+  name: '四季更替'
 })
 
 export const mutation = {

@@ -2,7 +2,11 @@
   <div class="layout">
     <el-container>
       <el-aside>
-        <el-menu router :default-active="$route.path" class="el-menu-vertical-demo nav">
+        <el-menu
+          router
+          :default-active="$route.path"
+          class="el-menu-vertical-demo nav"
+        >
           <el-menu-item index="/the-home">
             <i class="el-icon-menu"></i>
             <span slot="title">首页</span>
@@ -30,15 +34,15 @@ import { mapGetters, mapActions } from 'vuex'
 import Goods from './Goods'
 import Cart from './Cart'
 export default {
-	name: 'layout',
-	props: {
+  name: 'layout',
+  props: {
     views: String
   },
-	components: { Goods, Cart },
-	computed: {
-		...mapGetters(['goodList', 'totalNum'])
-	},
-	methods: {
+  components: { Goods, Cart },
+  computed: {
+    ...mapGetters(['goodList', 'totalNum'])
+  },
+  methods: {
     ...mapActions(['addToCart'])
   }
 }

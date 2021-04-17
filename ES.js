@@ -214,23 +214,22 @@ web.work()  // "小米在工作"
 
 // 给Sting加一个用正则表达式求出字符串中有多少个数字的方法
 String.prototype.getCount = function (strings) {
-  const reg = /\d/
-  const count = 0
-  while (reg.test(strings)) {
-    strings = strings.replace(reg, '')
+  let regular = /\d/
+  let count = 0
+  while (regular.test(strings)) {
+    strings = strings.replace(regular, '')
     count++
   }
 }
 String.prototype.getLength = function () {
-  const reg = /\d/g
-  const result = this.match(reg)
-  return result.length
+  const regular = /\d/g
+  return this.match(regular).length
 }
-const inputValue = prompt('请输入字符串: ')
-const temp = inputValue.getLength()
+const values = prompt('请输入字符串: ')
+const temp = values.getLength()
 console.log('输入的字符串有' + temp + '个数字')
 
-// break 是立即结束语句，并跳出语句，进行下个语句执行
+// break是立即结束语句，并跳出语句，进行下个语句执行
 function breakStatement (numbers) {
   let arrays = []
   for (let i = 1; i <= numbers; i++) {
@@ -243,7 +242,7 @@ function breakStatement (numbers) {
 }
 breakStatement(10)  // [1, 2, 3, 4, 5]
 
-// continue 是停止当前语句，并从头执行该语句
+// continue是停止当前语句，并从头执行该语句
 function continueStatement (numbers) {
   let arrays = []
   for (let i = 1; i <= numbers; i++) {
@@ -1694,6 +1693,13 @@ function verifyMobile (strings) {
 }
 verifyMobile('13067890123')  // true
 
+// 用正则表达式验证座机号
+function verifyLandLine (strings) {
+  return /^\d{3,4}-\d{7,8}/.test(strings)
+}
+verifyLandLine('010-12345678')  // true
+verifyLandLine('0530-1234567')  // true
+
 // 用正则表达式验证电子邮件的合法性
 function verifyEmail (strings) {
   return /^\w{3,}(\.\w+)*@[A-z0-9]+(\.[A-z]{2,5}){1,2}$/.test(strings)
@@ -1730,7 +1736,7 @@ console.log(typeof !(null))  // boolean
 console.log(typeof parseInt(null))  // number
 console.log(!typeof parseFloat('0'))  // false
 
-// 计算2的n次幂，n为自然数
+// 计算2的numbers次幂，numbers为自然数
 function cube (numbers) {
   let product = 1
   for (let i = 0; i < numbers; i++) {
@@ -1817,7 +1823,7 @@ function primeNumber (start, end) {
 primeNumber(100, 200)  // 3167
 
 // 求100-200之间所有素数的和
-function primer (start, end) {
+function primeNumber (start, end) {
   let sum = 0
   // 第一次循环
   for (let i = start; i <= end; i++) {
@@ -1836,18 +1842,7 @@ function primer (start, end) {
   }
   return sum
 }
-primer(100, 200)  // 3167
-
-function mapArray (datas) {
-  let emptys = []
-  let arrays = datas.map(item => {
-    item.age += 10
-    return item
-  })
-  emptys.push(...arrays)
-  return emptys
-}
-mapArray([{ name: 'Lily', age: 10 }])  // [{ name: 'Lily', age: 20 }]
+primeNumber(100, 200)  // 3167
 
 function findMaxNumber (array) {
   let max = array[0]
@@ -4837,6 +4832,17 @@ if (redirect) {
 }
 
 // 它的优秀之处并非原创，它的原创之处并不优秀
+
+function mapArray (datas) {
+  let emptys = []
+  let arrays = datas.map(item => {
+    item.age += 10
+    return item
+  })
+  emptys.push(...arrays)
+  return emptys
+}
+mapArray([{ name: 'Lily', age: 10 }])  // [{ name: 'Lily', age: 20 }]
 
 function mapGetter (list) {
   return list.map(item => {

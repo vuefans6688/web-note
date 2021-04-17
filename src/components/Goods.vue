@@ -1,18 +1,49 @@
 <template>
   <div class="goods">
-    <el-table :data="goodList" @selection-change="selectChange" style="width: 100%">
+    <el-table
+      :data="goodList"
+      @selection-change="selectChange"
+      style="width: 100%"
+    >
       <el-table-column type="selection" align="center"></el-table-column>
-      <el-table-column prop="id" label="商品ID" width="180" align="center"></el-table-column>
-      <el-table-column prop="name" label="商品名称" width="180" align="center"></el-table-column>
-      <el-table-column prop="price" label="单价" width="180" align="center"></el-table-column>
+      <el-table-column
+        prop="id"
+        label="商品ID"
+        width="180"
+        align="center"
+      ></el-table-column>
+      <el-table-column
+        prop="name"
+        label="商品名称"
+        width="180"
+        align="center"
+      ></el-table-column>
+      <el-table-column
+        prop="price"
+        label="单价"
+        width="180"
+        align="center"
+      ></el-table-column>
       <el-table-column label="操作" align="center">
         <template slot-scope="scope">
-          <el-button @click="addToCart(scope.row)" size="mini" type="primary" icon="el-icon-plus">加入购物车</el-button>
+          <el-button
+            @click="addToCart(scope.row)"
+            size="mini"
+            type="primary"
+            icon="el-icon-plus"
+            >加入购物车</el-button
+          >
         </template>
       </el-table-column>
     </el-table>
     <div class="batch-delete">
-      <el-button @click="batchDelete" :disabled="selectData.length === 0" size="small" type="danger">批量删除</el-button>
+      <el-button
+        @click="batchDelete"
+        :disabled="selectData.length === 0"
+        size="small"
+        type="danger"
+        >批量删除</el-button
+      >
     </div>
   </div>
 </template>
@@ -26,10 +57,10 @@ export default {
       selectData: []
     }
   },
-	computed: {
-		...mapGetters(['goodList', 'totalNum'])
-	},
-	methods: {
+  computed: {
+    ...mapGetters(['goodList', 'totalNum'])
+  },
+  methods: {
     ...mapActions(['addToCart']),
     selectChange (value) {
       this.selectData = value
