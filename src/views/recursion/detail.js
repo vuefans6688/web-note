@@ -42,6 +42,7 @@ export const treeData = [
     ]
   },
   {
+    id: 'node-2',
     name: "节点-2"
   }
 ]

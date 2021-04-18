@@ -1,7 +1,10 @@
 <template>
   <div class="tree-structure">
     <div class="name-text">{{ treeData.name }}</div>
-    <ul v-if="treeData.children && treeData.children.length" class="sub-item">
+    <ul
+      v-if="treeData.children && treeData.children.length > 0"
+      class="sub-item"
+    >
       <tree-item
         v-for="item in treeData.children"
         :tree-data="item"
@@ -13,6 +16,7 @@
 
 <script>
 export default {
+  // 递归组件需要设置名称，才能间接或者直接调用那个自身
   name: 'tree-item',
   props: {
     treeData: {

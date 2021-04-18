@@ -39,6 +39,9 @@ export default {
   .el-input {
     width: 280px;
   }
+  .el-button {
+    margin-left: 10px;
+  }
 }
 ul {
   li {

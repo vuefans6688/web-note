@@ -14,9 +14,7 @@
 import { treeData } from './detail'
 import treeItem from './components/tree-item'
 export default {
-  components: {
-    treeItem
-  },
+  components: { treeItem },
   data () {
     return {
       dataList: []
