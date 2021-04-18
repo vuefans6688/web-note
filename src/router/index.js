@@ -456,6 +456,10 @@ const router = new VueRouter({
     {
       path: '/table-search',
       component: () => import('@/views/table-search')
+    },
+    {
+      path: '/recursion',
+      component: () => import('@/views/recursion')
     }
   ]
 })
