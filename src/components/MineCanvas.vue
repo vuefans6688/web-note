@@ -38,10 +38,10 @@ export default {
     },
     // 生成一个随机颜色
     randomColor (min, max) {
-      let r = this.randomNumber(min, max)
-      let g = this.randomNumber(min, max)
-      let b = this.randomNumber(min, max)
-      return `rgb(${r}, ${g}, ${b})`
+      let red = this.randomNumber(min, max)
+      let green = this.randomNumber(min, max)
+      let blue = this.randomNumber(min, max)
+      return `rgb(${red}, ${green}, ${blue})`
     },
     drawPicture () {
       let canvas = document.getElementById('canvas')
