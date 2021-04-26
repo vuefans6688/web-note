@@ -17,10 +17,13 @@
 <script>
 export default {
   // 递归组件需要设置名称，才能间接或者直接调用那个自身
-  name: 'tree-item',
+  name: 'TreeItem',
   props: {
     treeData: {
-      type: [Array, Object]
+      type: Array,
+      default () {
+        return []
+      }
     }
   }
 }

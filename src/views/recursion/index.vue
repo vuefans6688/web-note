@@ -12,9 +12,11 @@
 
 <script>
 import { treeData } from './detail'
-import treeItem from './components/tree-item'
+import TreeItem from './components/tree-item'
 export default {
-  components: { treeItem },
+  components: {
+    TreeItem
+  },
   data () {
     return {
       dataList: []

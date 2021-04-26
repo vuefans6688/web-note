@@ -1,20 +1,21 @@
 <template>
   <div class="dom-ref">
-    <!-- ref实际是获取dom节点/组件引用的语法 -->
-    <common-item ref="common" />
+    <!-- ref用来获取dom节点/组件引用的语法 -->
+    <common-item ref="commons" />
   </div>
 </template>
 
 <script>
-import CommonItem from './common-item'
+import CommonItem from './components/common-item'
 export default {
-  components: { CommonItem },
+  components: {
+    CommonItem
+  },
   mounted () {
-    this.$refs.common.sayHello()
+    this.$refs.commons.handleClick()
   }
 }
 </script>
 
 <style lang="scss" scoped>
-
 </style>

@@ -49,7 +49,10 @@ export default {
       pickerOptions: {
         disabledDate (time) {
           const date = new Date()
-          return time.getTime() > new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime()
+          const year = date.getFullYear()
+          const month = date.getMonth()
+          const day = date.getDate()
+          return time.getTime() > new Date(year, month, day).getTime()
         }
       }
     }
@@ -85,11 +88,12 @@ export default {
       let date = new Date()
       let year = date.getFullYear() - this.getAge()
       let month = date.getMonth() - this.getMonthes()
+      let day = date.getDate()
       if (month < 0) {
         month += 12
         year -= 1
       }
-      this.old.birth = new Date(year, month, date.getDate())
+      this.old.birth = new Date(year, month, day)
     },
     // 根据生日计算岁数
     handleBirth () {
