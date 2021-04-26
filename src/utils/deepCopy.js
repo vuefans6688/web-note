@@ -1,5 +1,5 @@
-export default function deepCopy(obj) {
-  return JSON.parse(JSON.stringify(obj))
+export default function deepCopy (value) {
+  return JSON.parse(JSON.stringify(value))
 }
 
 

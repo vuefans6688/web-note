@@ -217,6 +217,7 @@ export default {
     selectChange (value) {
       this.selectData = value
     },
+    // 批量删除
     batchDelete () {
       this.selectData.forEach(item => {
         const index = this.newsList.filter(value => value.id === item.id)
@@ -235,9 +236,10 @@ export default {
       this.currentPage = page
       this.handlePaging()
     },
+    // 表格分页
     handlePaging () {
-      const pageIndex = Math.ceil(this.newsList.length / this.pageSize)
-      if (pageIndex === this.currentPage) {
+      const pageCount = Math.ceil(this.newsList.length / this.pageSize)
+      if (pageCount === this.currentPage) {
         this.allData = this.newsList.slice((this.currentPage - 1) * this.pageSize)
       } else {
         this.allData = this.newsList.slice((this.currentPage - 1) * this.pageSize, this.currentPage * this.pageSize)

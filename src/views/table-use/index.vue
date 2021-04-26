@@ -34,7 +34,7 @@
             <el-button
               type="danger"
               size="small"
-              @click="handleRemove(scope.$index, scope.row)"
+              @click="handleRemove(scope.row.id, scope.row)"
               >删除</el-button
             >
           </template>
@@ -136,12 +136,13 @@ export default {
       this.tableData.splice(0, 0, this.userInfo)
       this.formVisible = false
     },
-    handleRemove (index, row) {
+    handleRemove (id, row) {
       this.$confirm(`确定删除${row.name}吗？`, '提示', {
         onfirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'error'
       }).then(() => {
+        const index = this.tableData.findIndex(item => item.id === id)
         this.tableData.splice(index, 1)
         this.$message({
           message: '删除成功!',

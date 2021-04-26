@@ -4,35 +4,35 @@ export function computeAge (birthday) {
   let year = date.getFullYear()
   let month = date.getMonth() + 1
   let day = date.getDate()
-  let hour = date.getHours()
-  let minute = date.getMinutes()
-  let second = date.getSeconds()
+  // let hour = date.getHours()
+  // let minute = date.getMinutes()
+  // let second = date.getSeconds()
 
   let birthDate = new Date(birthday)
   let birthYear = birthDate.getFullYear()
   let birthMonth = birthDate.getMonth() + 1
   let birthDay = birthDate.getDate()
-  let birthHour = birthDate.getHours()
-  let birthMinute = birthDate.getMinutes()
-  let birthSecond = birthDate.getSeconds()
+  // let birthHour = birthDate.getHours()
+  // let birthMinute = birthDate.getMinutes()
+  // let birthSecond = birthDate.getSeconds()
 
-  let nowSecond = second - birthSecond
-  if (nowSecond < 0) {
-    minute -= 1
-    nowSecond = 60 - birthSecond + second
-  }
+  // let nowSecond = second - birthSecond
+  // if (nowSecond < 0) {
+  //   minute -= 1
+  //   nowSecond = 60 - birthSecond + second
+  // }
 
-  let nowMinute = minute - birthMinute
-  if (nowMinute < 0) {
-    hour -= 1
-    nowMinute = 60 - birthMinute + minute
-  }
+  // let nowMinute = minute - birthMinute
+  // if (nowMinute < 0) {
+  //   hour -= 1
+  //   nowMinute = 60 - birthMinute + minute
+  // }
 
-  let nowHour = hour - birthHour
-  if (nowHour < 0) {
-    day -= 1
-    nowHour = 24 - birthHour + hour
-  }
+  // let nowHour = hour - birthHour
+  // if (nowHour < 0) {
+  //   day -= 1
+  //   nowHour = 24 - birthHour + hour
+  // }
 
   let nowDay = day - birthDay
   if (nowDay < 0) {
@@ -66,16 +66,14 @@ export function getDaysOfMonth (dateString) {
   const date = new Date(dateString)
   const year = date.getFullYear()
   const month = date.getMonth() + 1
-  let day = 0
   // 判断2月份的天数
   if (month === 2) {
     // 判断是否为闰年
-    day = (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0) ? 29 : 28
+    return (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0) ? 29 : 28
   } else if (month === 1 || month === 3 || month === 5 ||
     month === 7 || month === 8 || month === 10 || month === 12) {
-    day = 31
+    return 31
   } else {
-    day = 30
+    return 30
   }
-  return day
 }

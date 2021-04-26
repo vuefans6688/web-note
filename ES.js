@@ -2180,14 +2180,14 @@ getDaysInMonth(2017, 2)  // 28
 getDaysInMonth(2018, 2)  // 29
 
 function getCurrentMonthDays (month, year) {
-  let transDays = 30
   let largeMonth = [1, 3, 5, 7, 8, 10, 12]
   if (largeMonth.includes(month)) {
-    transDays = 31
+    return 31
   } else if (month === 2) {
-    transDays = year % 2 === 0 && year % 100 !== 0 || year % 400 === 0 ? 29 : 28
+    return year % 2 === 0 && year % 100 !== 0 || year % 400 === 0 ? 29 : 28
+  } else {
+    return 30
   }
-  return transDays
 }
 getCurrentMonthDays(2, 2017)  // 28
 getCurrentMonthDays(2, 2018)  // 29
@@ -2252,7 +2252,7 @@ yearToYearOfDay('2010-06-12', '2020-11-22')  // 3816天
 // 获取前后n天的时间
 function handleMonth (month) {
   if (month.toString().length === 1) {
-    month = "0" + month
+    month = '0' + month
   }
   return month
 }
@@ -2317,8 +2317,8 @@ formatTime(date, '{0}年{1}月{2}日')
 // 全局挂载时间格式化
 function formatTimes (template = '{0}年{1}月{2}日 {3}时{4}分{5}秒') {
   const validates = this.match(/\d+/g)
-  return template.replace(/\{(\d+)\}/g, (_, n) => {
-    const item = validates[n] || '0' + item
+  return template.replace(/\{(\d+)\}/g, (_, number) => {
+    const item = validates[number] || '0' + item
     item.length < 2 ? item : null
     return item
   })
@@ -2331,8 +2331,8 @@ time.formatTimes('{0}年{1}月{2}日 {3}时{4}分{5}秒')
   (proto => {
     function formatTime (template = '{0}年{1}月{2}日 {3}时{4}分{5}秒') {
       const validates = this.match(/\d+/g)
-      return template.replace(/\{(\d+)\}/g, (_, n) => {
-        const item = validates[n] || '0' + item
+      return template.replace(/\{(\d+)\}/g, (_, number) => {
+        const item = validates[number] || '0' + item
         item.length < 2 ? item : null
         return item
       })
@@ -2342,31 +2342,7 @@ time.formatTimes('{0}年{1}月{2}日 {3}时{4}分{5}秒')
 let times = '2020/12/30 11:03:00'
 times.formatTime('{0}年{1}月{2}日 {3}时{4}分{5}秒')
 
-function calculateAge (birth) {
-  let age = ''
-  const date = new Date()
-  const year = date.getFullYear()
-  const month = date.getMonth() + 1
-  const day = date.getDate()
-  if (month < 10) {
-    month += '0'
-  }
-  if (day < 10) {
-    day += '0'
-  }
-  const now = year + '-' + month + '-' + day
-  if (now.substring(0, 4) >= birth.substring(0, 4)
-    && now.substring(5, 7) >= birth.substring(5, 7)
-    && now.substring(8, 10) >= birth.substring(8, 10)) {
-    age = year - parseInt(birth.substring(0, 4))
-  } else {
-    age = year - parseInt(birth.substring(0, 4)) - 1
-  }
-  return age
-}
-calculateAge('2000-10-18')  // 20
-
-function getAge (birthDate) {
+function calculateAge (birthDate) {
   const birthArray = birthDate.split('-')
   const birthYear = birthArray[0]
   const birthMonth = birthArray[1]
@@ -2375,39 +2351,35 @@ function getAge (birthDate) {
   const nowYear = currentDate.getFullYear()
   const nowMonth = currentDate.getMonth() + 1
   const nowDay = currentDate.getDate()
-  let age = null
   if (birthArray === null) {
     return false
   }
   if (nowYear === birthYear) {
-    age = 0
+    return 0
   } else {
-    const diffYear = nowYear - birthYear
-    if (diffYear > 0) {
+    const age = nowYear - birthYear
+    if (age > 0) {
       if (nowMonth === birthMonth) {
-        const diffDay = nowDay - birthDay
-        age = diffDay < 0 ? diffYear - 1 : diffYear
+        return nowDay - birthDay < 0 ? age - 1 : age
       } else {
-        const diffMonth = nowMonth - birthMonth
-        age = diffMonth < 0 ? diffYear - 1 : diffYear
+        return nowMonth - birthMonth < 0 ? age - 1 : age
       }
     } else {
       return '出生日期晚于今天，数据有误'  // 返回-1，表示出生日期输入错误，晚于今天
     }
   }
-  return age
 }
-getAge('1991-09-18')  // 29
+calculateAge('1991-09-18')  // 29
 
 // 统计1-n整数中出现1的次数
-function countOne (n) {
+function countOne (number) {
   let factor = 1
   let count = 0
-  let next = parseInt(n / factor)
+  let next = parseInt(number / factor)
   while (next !== 0) {
-    let lower = n - next * factor
+    let lower = number - next * factor
     let current = next % 10
-    let high = parseInt(n / (10 * factor))
+    let high = parseInt(number / (10 * factor))
     if (current === 0) {
       count += high * factor
     } else if (current === 1) {
@@ -2416,7 +2388,7 @@ function countOne (n) {
       count += (high + 1) * factor
     }
     factor *= 10
-    next = parseInt(n / factor)
+    next = parseInt(number / factor)
   }
   return count
 }
