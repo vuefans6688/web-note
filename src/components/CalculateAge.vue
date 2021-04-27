@@ -89,13 +89,14 @@ export default {
       let year = date.getFullYear() - this.getAge()
       let month = date.getMonth() - this.getMonthes()
       let day = date.getDate()
+      // JavaScript的Date对象中月份是0开始取值的
       if (month < 0) {
         month += 12
         year -= 1
       }
       this.old.birth = new Date(year, month, day)
     },
-    // 根据生日计算岁数
+    // 根据出生日期来计算岁数
     handleBirth () {
       if (this.getBirth() > new Date()) {
         this.old.birth = ''
@@ -103,13 +104,13 @@ export default {
       }
       this.old.age = new Date().getFullYear() - this.getBirth().getFullYear()
       this.old.month = new Date().getMonth() - this.getBirth().getMonth()
-      let totalDay = new Date().getDate() - this.getBirth().getDate()
-      // 获取当前月天数
+      let remainDay = new Date().getDate() - this.getBirth().getDate()
+      // 获取当前月份的天数
       let currentYear = parseInt(this.getBirth().getFullYear(), 10)
       let currentMonth = parseInt(this.getBirth().getMonth() + 1, 10)
       let currentDay = getCurrentMonthDays(currentMonth, currentYear)
-      if (totalDay < 0) {
-        totalDay += currentDay
+      if (remainDay < 0) {
+        remainDay += currentDay
         this.old.month -= 1
       }
       if (this.old.month < 0) {
@@ -117,8 +118,8 @@ export default {
         this.old.age -= 1
       }
     },
-    intLimitAge (value, limit) {
-      this.old[value] = intLimit(this.old[value], limit)
+    intLimitAge (value, condition) {
+      this.old[value] = intLimit(this.old[value], condition)
     }
   }
 }

@@ -1,11 +1,17 @@
 // 计算当前月份的天数
 export function getCurrentMonthDays (month, year) {
+  // 存放大月的数组
   const largeMonth = [1, 3, 5, 7, 8, 10, 12]
+  // 如果存在所有大月
   if (largeMonth.includes(month)) {
+    // 就返回31天
     return 31
+    // 判断二月份
   } else if (month === 2) {
+    // 平年返回28天，闰年返回29天
     return year % 4 === 0 && year % 100 !== 0 || year % 400 === 0 ? 29 : 28
   } else {
+    // 剩下的小月就返回30天
     return 30
   }
 }
