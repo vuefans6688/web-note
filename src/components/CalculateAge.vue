@@ -83,7 +83,7 @@ export default {
     getBirth () {
       return this.old.birth || new Date()
     },
-    // 计算生日
+    // 计算出生日期
     calculateBirth () {
       let date = new Date()
       let year = date.getFullYear() - this.getAge()
