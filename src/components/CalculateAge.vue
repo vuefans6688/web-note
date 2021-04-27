@@ -89,7 +89,7 @@ export default {
       let year = date.getFullYear() - this.getAge()
       let month = date.getMonth() - this.getMonthes()
       let day = date.getDate()
-      // JavaScript的Date对象中月份是0开始取值的
+      // Date对象中月份是0开始取值的
       if (month < 0) {
         month += 12
         year -= 1
