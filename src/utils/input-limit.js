@@ -6,8 +6,7 @@ export function intLimit (value, boundary = 0) {
     ['[^\\d]+', '']        // 禁止输入任何非数字
   ]
   regularsArray.forEach(item => {
-    const matched = new RegExp(item[0])
-    value = value.replace(matched, item[1])
+    value = value.replace(new RegExp(item[0]), item[1])
   })
   if (boundary) {
     return parseInt(value, 10) > boundary ? boundary.toString() : value
@@ -25,8 +24,7 @@ export function floatLimit (value, bit) {  // 控制输入价格
     [`^(\\d+\\.\\d{${bit}}).+`, '$1']    // 禁止输入小数点后n位以上
   ]
   regularsArray.forEach(item => {
-    const matched = new RegExp(item[0])
-    value = value.replace(matched, item[1])
+    value = value.replace(new RegExp(item[0]), item[1])
   })
   return value
 }
