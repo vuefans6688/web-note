@@ -2256,7 +2256,7 @@ function handleMonth (month) {
   }
   return month
 }
-function getDay (day) {
+function getDifferDay (day) {
   let today = new Date()
   let milliseconds = today.getTime() + 1000 * 60 * 60 * 24 * day
   today.setTime(milliseconds)
@@ -2267,10 +2267,10 @@ function getDay (day) {
   date = handleMonth(date)
   return year + "-" + month + "-" + date
 }
-getDay(5)  // "2020-11-27"
-getDay(-5)  // "2020-11-17"
+getDifferDay(5)  // "2020-11-27"
+getDifferDay(-5)  // "2020-11-17"
 
-function dataFormat (date) {
+function dateFormat (date) {
   let year = date.getFullYear()
   let month = date.getMonth() + 1
   let day = date.getDate()
@@ -2284,7 +2284,7 @@ function dataFormat (date) {
   second = second >= 10 ? second : '0' + second
   return `${year}-${month}-${day} ${hour}:${minute}:${second}`
 }
-dataFormat(new Date())
+dateFormat(new Date())
 
 function interceptDate (date) {
   const year = date.substr(0, 4)
@@ -2294,7 +2294,7 @@ function interceptDate (date) {
 }
 interceptDate('2020-12-11')  // 2020年12月11日
 
-function interceptDates (date) {
+function interceptDate (date) {
   const dateArray = date.split('-')
   // 使用parseInt()将日期字符串转化为数值参与运算
   const year = parseInt(dateArray[0], 10)
@@ -2302,7 +2302,7 @@ function interceptDates (date) {
   const day = parseInt(dateArray[2], 10)
   return year + '年' + month + '月' + day + '日'
 }
-interceptDates('2020-12-11')  // "2020年12月11日"
+interceptDate('2020-12-11')  // "2020年12月11日"
 
 function formatTime (time, template = '{0}年{1}月{2}日 {3}时{4}分{5}秒') {
   const validates = time.match(/\d+/g)
