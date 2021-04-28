@@ -1,5 +1,5 @@
 // 获取出生年龄，周岁、月、天、时、分、秒
-export function computeAge (birthday) {
+export function computeAge (time) {
   let date = new Date()
   let year = date.getFullYear()
   let month = date.getMonth() + 1
@@ -8,7 +8,7 @@ export function computeAge (birthday) {
   // let minute = date.getMinutes()
   // let second = date.getSeconds()
 
-  let birthDate = new Date(birthday)
+  let birthDate = new Date(time)
   let birthYear = birthDate.getFullYear()
   let birthMonth = birthDate.getMonth() + 1
   let birthDay = birthDate.getDate()
@@ -37,7 +37,7 @@ export function computeAge (birthday) {
   let nowDay = day - birthDay
   if (nowDay < 0) {
     month -= 1
-    nowDay = getDaysOfMonth(birthday) - birthDay + day
+    nowDay = getDaysOfMonth(time) - birthDay + day
   }
 
   let nowMonth = month - birthMonth

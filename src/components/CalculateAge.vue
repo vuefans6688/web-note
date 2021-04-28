@@ -8,7 +8,7 @@
           @blur="calculateBirth"
           :style="{ width }"
           :maxlength="3"
-          placeholder="请输入您的岁数"
+          placeholder="请输入岁数"
         >
         </el-input>
       </el-form-item>
@@ -19,7 +19,7 @@
           :style="{ width }"
           @blur="calculateBirth"
           :maxlength="2"
-          placeholder="请输入您的出生月份"
+          placeholder="请输入出生月份"
         >
         </el-input>
       </el-form-item>
