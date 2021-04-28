@@ -3417,6 +3417,17 @@ function getData (url) {
 }
 getData('https://www.bilibili.com/video/BV1G4411V7tb?name=pibo&age=20')  // {name: "pibo", age: "20"}
 
+function getRequest (url) {
+  let objects = {}
+  let index = url.indexOf('?')
+  if (index !== -1) {
+    let params = url.substr(index + 1).split('&')
+    params.forEach(item => objects[item.split('=')[0]] = unescape(item.split('=')[1]))
+  }
+  return objects
+}
+getRequest('https://www.baidu.com?id=007&name=Bond')  // {id: "007", name: "Bond"}
+
 function fetchData (url) {
   // 获取问号和井号所在的位置
   let questionIndex = url.indexOf('?')
