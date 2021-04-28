@@ -4,7 +4,7 @@
       <el-form-item prop="age">
         <el-input
           v-model="old.age"
-          @keyup.native="intLimitAge('age')"
+          @keyup.native="handleAge('age')"
           @blur="calculateBirth"
           :style="{ width }"
           :maxlength="3"
@@ -15,7 +15,7 @@
       <el-form-item prop="month">
         <el-input
           v-model="old.month"
-          @keyup.native="intLimitAge('month', 12)"
+          @keyup.native="handleAge('month', 12)"
           :style="{ width }"
           @blur="calculateBirth"
           :maxlength="2"
@@ -118,7 +118,7 @@ export default {
         this.old.age -= 1
       }
     },
-    intLimitAge (value, condition) {
+    handleAge (value, condition) {
       this.old[value] = intLimit(this.old[value], condition)
     }
   }
