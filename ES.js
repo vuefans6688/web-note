@@ -2327,7 +2327,7 @@ String.prototype.formatTime = formatTimes
 let time = '2020/12/30 11:03:00'
 time.formatTimes('{0}年{1}月{2}日 {3}时{4}分{5}秒')
 
-  // 闭包实现时间格式化
+  // 使用闭包实现时间格式化
   (proto => {
     function formatTime (template = '{0}年{1}月{2}日 {3}时{4}分{5}秒') {
       const validates = this.match(/\d+/g)
