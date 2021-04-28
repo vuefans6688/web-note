@@ -385,24 +385,6 @@ function recursion (number) {
 }
 recursion(100)  // 5050
 
-function recursion (item, props) {
-  // 当数组长度等于1的时候，拿出数组的元素作为对象的属性名，再取出对象的属性值
-  if (props.length === 1) {
-    return item[props[0]]
-  } else {
-    // item[props[0]] 取出对象中的嵌套对象，props.slice(1)删除数组的第一个元素
-    return recursion(item[props[0]], props.slice(1))
-  }
-}
-const value = recursion({
-  a: {
-    b: {
-      name: 'Mary'
-    }
-  }
-}, ['a', 'b', 'name'])
-console.log(value)
-
 // 有一堆桃子不知道数目，猴子第一天吃掉一半，觉得不过瘾，又多吃了一只，
 // 第二天照此办法，吃掉桃子的一半加一只，天天如此，到第num(num <= 10)天早上，
 // 猴子发现只剩一只桃子了，问这堆桃子原来有多少只？(思路: n为还剩n天吃完的桃子数)
@@ -457,15 +439,6 @@ function sum (...args) {
   return args.pop() + sum(...args)
 }
 sum(1, 2, 4, 6, 5, 8)  // 26
-
-// 用递归求数组的和
-function recursion (arrays) {
-  if (arrays.length === 0) {
-    return 0
-  }
-  return arrays[0] + recursion(arrays.slice(1))
-}
-recursion([1, 2, 3, 4])  // 10
 
 // 用递归打印倒三角
 function star (numbers) {
@@ -614,6 +587,80 @@ function singleLetter (char) {
   }
 }
 
+// 用递归求数组的和
+function recursion (arrays) {
+  if (arrays.length === 0) {
+    return 0
+  }
+  return arrays[0] + recursion(arrays.slice(1))
+}
+recursion([1, 2, 3, 4])  // 10
+
+function recursion (item, props) {
+  // 当数组长度等于1的时候，拿出数组的元素作为对象的属性名，再取出对象的属性值
+  if (props.length === 1) {
+    return item[props[0]]
+  } else {
+    // item[props[0]] 取出对象中的嵌套对象，props.slice(1)删除数组的第一个元素
+    return recursion(item[props[0]], props.slice(1))
+  }
+}
+const value = recursion({
+  a: {
+    b: {
+      name: 'Mary'
+    }
+  }
+}, ['a', 'b', 'name'])
+console.log(value)
+
+// 使用原型属性给数组排序
+function arraySort () {
+  return Array.prototype.slice.call(arguments).sort((a, b) => a - b)
+}
+arraySort(10, -2, 101, -4, 50)  // [-4, -2, 10, 50, 101]
+
+function phone (mobile, len = 3) {
+  return String(mobile).slice(0, len * -1) + '*'.repeat(len)
+}
+phone(13744560918, 8)  // 137********
+
+// 一维数组转换成多维数组
+function arrayTransform (arrays, numbers) {
+  const lists = []
+  arrays.forEach((item, index) => {
+    // 计算多维数组的下标
+    const page = Math.floor(index / numbers)
+    // 如果数组中有元素，就把数组清空 
+    if (!lists[page]) {
+      lists[page] = []
+    }
+    lists[page].push(item)
+  })
+  return lists
+}
+arrayTransform([1, 2, 3, 4, 5, 6, 7, 8], 3)  // [[1, 2, 3], [4, 5, 6], [7, 8]]
+
+// 将一维数组拆分为指定长度的二维数组
+function group (array, count) {
+  let index = 0
+  let newArray = []
+  while (index < array.length) {
+    newArray.push(array.slice(index, index += count))
+  }
+  return newArray
+}
+const list = [
+  { id: '001', name: '小红' },
+  { id: '002', name: '小明' },
+  { id: '003', name: '小萍' },
+  { id: '004', name: '小丽' },
+  { id: '005', name: '小天' },
+  { id: '006', name: '小华' }
+]
+group(list, 3)
+group([1, 2, 3, 4, 5, 6], 3)  // [1, 2, 3] [4, 5, 6]
+
 // 按指定长度切割，返回一个新的数组集合，比如按照3的倍数切割，返回结果为每三个一组
 function divisionArray (proport, data) {
   let count = 0
@@ -645,9 +692,52 @@ let lists = [
 ]
 divisionArray(3, lists)
 
-const china = {
+// 一维数组转换成多维数组
+function changeArray (number, array) {
+  let newArray = []
+  // 每行显示的数组个数
+  let count = array.length % number === 0 ? array.length / number : Math.ceil(array.length / number)
+  for (let i = 0; i < count; i++) {
+    // slice()方法返回一个从开始到结束（不包括结束）
+    // 选择数组的一部分浅拷贝到一个新数组对象且原数组不会被修改
+    newArray.push(array.slice(i * number, i * number + number))
+  }
+  return newArray
+}
+changeArray(3, [1, 2, 3, 4, 5, 6, 7, 8])  // 假设每行显示3个 [[1, 2, 3], [4, 5, 6], [7, 8]]
+
+// 数组归并排序
+function merge (left, right) {
+  const result = []
+  // 两个子序列进行比较，从小到大放入新的序列result中
+  while (left.length > 0 && right.length > 0) {
+    // 将较小的放入result，并改变left或者right的长度
+    if (left[0] < right[0]) {
+      result.push(left.shift())
+    } else {
+      result.push(right.shift())
+    }
+  }
+  return result.concat(left, right)
+}
+function mergeSort (array) {
+  // 数组长度为1时退出
+  if (array.length < 2) {
+    return array
+  }
+  // 将数组分为两个子数组
+  const middle = Math.floor(array.length / 2)
+  const left = array.slice(0, middle)
+  const right = array.slice(middle)
+  // 递归
+  return merge(mergeSort(left), mergeSort(right))
+}
+// 测试
+mergeSort([45, 56, 12, 78, 23, 89])
+
+let users = {
   nation: '中国',
-  birthPlaces: {
+  places: {
     name: '湖北'
   }
 }
@@ -662,9 +752,9 @@ function deepCopy (origin, target) {
     }
   }
 }
-let newChina = {}
-deepCopy(china, newChina)
-console.log(newChina)
+let datas = {}
+deepCopy(users, datas)
+console.log(datas)
 
 // 对象浅拷贝
 function shallowCopy (original) {
@@ -750,12 +840,6 @@ function getResult (start, end) {
 }
 getResult(1, 100)  // 5050
 
-// 使用原型属性给数组排序
-function arraySort () {
-  return Array.prototype.slice.call(arguments).sort((a, b) => a - b)
-}
-arraySort(10, -2, 101, -4, 50)  // [-4, -2, 10, 50, 101]
-
 // 数组排序
 function arraysSort (...list) {
   return list.sort((a, b) => a - b)
@@ -789,36 +873,6 @@ function quickSort (array) {
   return leftArray.concat(baseNumber, rightArray)
 }
 quickSort([33, 12, 44, 6, 36])  // [6, 12, 33, 36, 44]
-
-// 一维数组转换成多维数组
-function arrayTransform (arrays, numbers) {
-  const newArrays = []
-  arrays.forEach((item, index) => {
-    // 计算多维数组的下标
-    const page = Math.floor(index / numbers)
-    // 如果数组中有元素，就把数组清空 
-    if (!newArrays[page]) {
-      newArrays[page] = []
-    }
-    newArrays[page].push(item)
-  })
-  return newArrays
-}
-arrayTransform([1, 2, 3, 4, 5, 6, 7, 8], 3)  // [[1, 2, 3], [4, 5, 6], [7, 8]]
-
-// 一维数组转换成多维数组
-function changeArray (number, array) {
-  let newArray = []
-  // 每行显示的数组个数
-  let count = array.length % number === 0 ? array.length / number : Math.ceil(array.length / number)
-  for (let i = 0; i < count; i++) {
-    // slice()方法返回一个从开始到结束（不包括结束）
-    // 选择数组的一部分浅拷贝到一个新数组对象且原数组不会被修改
-    newArray.push(array.slice(i * number, i * number + number))
-  }
-  return newArray
-}
-changeArray(3, [1, 2, 3, 4, 5, 6, 7, 8])  // 假设每行显示3个 [[1, 2, 3], [4, 5, 6], [7, 8]]
 
 // 将数组中大于10的数存进数组里
 function moreThanTen (array) {
@@ -2055,11 +2109,6 @@ function links (strings, ...multiples) {
   return strings.map((item, key) => item + (multiples[key] ? multiples[key].replace('后盾人', `<a href="https://www.houdunren.com">后盾人</a>`) : '')).join('')
 }
 templates()  // 作者: 小红 课程: 后盾人媒体查询响应式布局 ...
-
-function phone (mobile, len = 3) {
-  return String(mobile).slice(0, len * -1) + '*'.repeat(len)
-}
-phone(13744560918, 8)  // 137********
 
 while (true) {
   const year = prompt('后盾人哪年成立的?').trim()
@@ -3330,35 +3379,6 @@ function quickSort (array) {
 }
 quickSort([57, 68, 59, 52, 72, 28, 96, 33, 24])
 
-// 数组归并排序
-function merge (left, right) {
-  const result = []
-  // 两个子序列进行比较，从小到大放入新的序列result中
-  while (left.length > 0 && right.length > 0) {
-    // 将较小的放入result，并改变left或者right的长度
-    if (left[0] < right[0]) {
-      result.push(left.shift())
-    } else {
-      result.push(right.shift())
-    }
-  }
-  return result.concat(left, right)
-}
-function mergeSort (array) {
-  // 数组长度为1时退出
-  if (array.length < 2) {
-    return array
-  }
-  // 将数组分为两个子数组
-  const middle = Math.floor(array.length / 2)
-  const left = array.slice(0, middle)
-  const right = array.slice(middle)
-  // 递归
-  return merge(mergeSort(left), mergeSort(right))
-}
-// 测试
-mergeSort([45, 56, 12, 78, 23, 89])
-
 // 判断是否是闰年
 function isLeapYear (year) {
   let flag = false
@@ -3418,13 +3438,13 @@ function getData (url) {
 getData('https://www.bilibili.com/video/BV1G4411V7tb?name=pibo&age=20')  // {name: "pibo", age: "20"}
 
 function getRequest (url) {
-  let objects = {}
+  let datas = {}
   let index = url.indexOf('?')
   if (index !== -1) {
     let params = url.substr(index + 1).split('&')
-    params.forEach(item => objects[item.split('=')[0]] = unescape(item.split('=')[1]))
+    params.forEach(item => datas[item.split('=')[0]] = unescape(item.split('=')[1]))
   }
-  return objects
+  return datas
 }
 getRequest('https://www.baidu.com?id=007&name=Bond')  // {id: "007", name: "Bond"}
 
@@ -4784,28 +4804,17 @@ getAccumulation(3, 2)  // 246
 function palindromeNumber (min, max) {
   let arrays = []
   for (let i = min; i < max; i++) {
-    const a = 1 % 10  // 个位
-    const b = parseInt(i / 10) % 10  // 十位
-    const c = parseInt(i / 1000) % 10  // 千位
-    const d = parseInt(i / 10000)  // 万位
-    if (a === d && b === c) {
+    const ge = 1 % 10  // 个位
+    const shi = parseInt(i / 10) % 10  // 十位
+    const bai = parseInt(i / 1000) % 10  // 千位
+    const qian = parseInt(i / 10000)  // 万位
+    if (ge === qian && shi === bai) {
       arrays[arrays.length] = i
     }
   }
   return arrays
 }
 palindromeNumber(10000, 100000)
-
-// 将一维数组拆分为指定长度的二维数组
-function group (array, count) {
-  let index = 0
-  let newArray = []
-  while (index < array.length) {
-    newArray.push(array.slice(index, index += count))
-  }
-  return newArray
-}
-group([1, 2, 3, 4, 5, 6], 3)  // [1, 2, 3] [4, 5, 6]
 
 const pathList = ['/my', '/find', '/user']
 const pathObject = {
