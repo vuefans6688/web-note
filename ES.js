@@ -4906,6 +4906,79 @@ function b (m, n) {
 }
 a(b)  // 4
 
+// 从对象或数组中深度删除所有假值
+function compactObject (objects) {
+  const datas = Array.isArray(objects) ? objects.filter(Boolean) : objects
+  return Object.keys(datas).reduce((accept, key) => {
+    const value = datas[key]
+    if (value) {
+      accept[key] = typeof value === 'object' ? compactObject(value) : value
+    }
+    return accept
+  }, Array.isArray(datas) ? [] : {})
+}
+const objects = {
+  a: null,
+  b: false,
+  c: true,
+  d: 0,
+  e: 1,
+  f: '',
+  g: 'a',
+  h: [null, false, '', true, 1, 'a'],
+  i: { j: 0, k: false, l: 'a' }
+}
+compactObject(objects)
+
+// 通过给定的选择器来获取对象中的值
+function get (from, ...selectors) {
+  return selectors.map(item => {
+    return item.replace(/\[(\w+)\]/g, '.$1').split('.').reduce((previou, current) => {
+      return previou && previou[current]
+    }, from)
+  })
+}
+const data = {
+  selector: { to: { value: 'value to select' } },
+  user: { name: 'mary' },
+  target: [1, 2, { a: 'test' }]
+}
+get(data, 'selector.to.value', 'user.name', 'target[0]', 'target[2].a')
+
+// for...of、reduce、链式编程
+function forLoop (files) {
+  const arrays = []
+  for (const file of files) {
+    const fileName = file.trim()
+    if (fileName) {
+      const filePath = `~/cool_app/${fileName}`
+      arrays.push(filePath)
+    }
+  }
+  return arrays
+}
+const files = ['foo.txt ', '.bar', ' ', 'baz.foo']
+forLoop(files)
+
+function reduceWay (files) {
+  return files.reduce((result, file) => {
+    const fileName = file.trim()
+    if (fileName) {
+      const filePath = `~/cool_app/${fileName}`
+      result.push(filePath)
+    }
+    return result
+  }, [])
+}
+const files = ['foo.txt ', '.bar', ' ', 'baz.foo']
+reduceWay(files)
+
+function chain (files) {
+  return files.map(item => item.trim()).filter(Boolean).map(fileName => `~/cool_app/${fileName}`)
+}
+const files = ['foo.txt ', '.bar', ' ', 'baz.foo']
+chain(files)
+
 // 使用class类封装axios
 import axios from 'axios'
 import { merge } from 'lodash'
