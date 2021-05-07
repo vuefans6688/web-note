@@ -208,6 +208,36 @@ function render () {
 })()
 console.log((5).plus(3).minus(2))  // 6
 
+  (function () {
+    function indexOf (origin) {
+      let index = -1
+      if (origin.length > this.length) {
+        return index
+      }
+      for (let i = 0; i <= this.length - origin.length; i++) {
+        if (this.substr(i, origin.length) === origin) {
+          index = i
+          break
+        }
+      }
+      return index
+    }
+    String.prototype.indexOf = indexOf
+  })()
+const strings = 'zhufengpeixun', chars = 'pei'
+console.log(strings.indexOf(chars))  // 7
+
+  (function () {
+    function indexOf (origin) {
+      // this代表的是strings
+      let result = new RegExp(origin).exec(this)
+      return result === null ? -1 : result.index
+    }
+    String.prototype.indexOf = indexOf
+  })()
+const strings = 'zhufengpeixun', chars = 'pei'
+console.log(strings.indexOf(chars))  // 7
+
 function Person (name, age) {
   this.name = name
   this.age = age
