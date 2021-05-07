@@ -1,5 +1,5 @@
 // 证件类型
-const idCard = [  
+export const idCard = [
   { id: '01', name: '居民身份证' },
   { id: '02', name: '中国人民解放军军官证' },
   { id: '03', name: '中国人民武装警察警官证' },
@@ -18,5 +18,3 @@ const idCard = [
   { id: '90', name: '社会保障卡' },
   { id: '100', name: '其他身份证件' }
 ]
-
-export default idCard

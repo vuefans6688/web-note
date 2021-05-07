@@ -5,9 +5,7 @@ export function intLimit (value, boundary = 0) {
     ['^0(\\d+)$', '$1'],   // 禁止输入整数部分两位以上，但首位必须为0
     ['[^\\d]+', '']        // 禁止输入任何非数字
   ]
-  regularsArray.forEach(item => {
-    value = value.replace(new RegExp(item[0]), item[1])
-  })
+  regularsArray.forEach(item => value = value.replace(new RegExp(item[0]), item[1]))
   if (boundary) {
     return parseInt(value, 10) > boundary ? boundary.toString() : value
   }
@@ -23,9 +21,7 @@ export function floatLimit (value, bit) {  // 控制输入价格
     ['\\.(\\d?)\\.+', '.$1'],   // 禁止输入两个以上的点
     [`^(\\d+\\.\\d{${bit}}).+`, '$1']    // 禁止输入小数点后n位以上
   ]
-  regularsArray.forEach(item => {
-    value = value.replace(new RegExp(item[0]), item[1])
-  })
+  regularsArray.forEach(item => value = value.replace(new RegExp(item[0]), item[1]))
   return value
 }
 

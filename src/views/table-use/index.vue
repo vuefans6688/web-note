@@ -81,7 +81,7 @@
 </template>
 
 <script>
-import { computeAge } from '@/utils/computeAge'
+import { computeAge } from '@/utils/compute-age'
 export default {
   data () {
     return {

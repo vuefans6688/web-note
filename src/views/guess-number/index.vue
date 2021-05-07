@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import { getRandom } from '@/utils/getRandom'
+import { getRandom } from '@/utils/get-random'
 export default {
   data () {
     return {
@@ -28,7 +28,7 @@ export default {
       } else {
         this.answer = '<span style="color: #42b983;">恭喜你，猜对了</span>'
       }
-	  this.content = ''
+      this.content = ''
     }
   }
 }

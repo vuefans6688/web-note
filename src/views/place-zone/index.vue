@@ -119,7 +119,7 @@
 </template>
 
 <script>
-import provinceList from '@/utils/provinceList'
+import { provinceList } from '@/utils/province-list'
 export default {
   data () {
     return {

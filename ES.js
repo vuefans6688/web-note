@@ -191,6 +191,23 @@ function render () {
   return <div>{!!bool && <div>这是一段文本</div>}</div>
 }
 
+(function () {
+  function check (n) {
+    return n = Number(n) && (isNaN(n) ? 0 : n)
+  }
+  function plus (n) {
+    n = check(n)
+    return this + n
+  }
+  function minus (n) {
+    n = check(n)
+    return this - n
+  }
+  Number.prototype.plus = plus
+  Number.prototype.minus = minus
+})()
+console.log((5).plus(3).minus(2))  // 6
+
 function Person (name, age) {
   this.name = name
   this.age = age
@@ -213,17 +230,15 @@ web.run()  // "小米在运行"
 web.work()  // "小米在工作"
 
 // 给Sting加一个用正则表达式求出字符串中有多少个数字的方法
-String.prototype.getCount = function (strings) {
-  let regular = /\d/
+String.prototype.getCount = function (param) {
   let count = 0
-  while (regular.test(strings)) {
-    strings = strings.replace(regular, '')
+  while (/\d/.test(param)) {
+    param = param.replace(/\d/, '')
     count++
   }
 }
 String.prototype.getLength = function () {
-  const regular = /\d/g
-  return this.match(regular).length
+  return this.match(/\d/g).length
 }
 const values = prompt('请输入字符串: ')
 const temp = values.getLength()

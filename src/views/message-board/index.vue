@@ -300,10 +300,10 @@
 const UN_READ = 0
 const AL_READ = 1
 import nations from '@/utils/nations'
-import idCard from '@/utils/idCard'
-import provinceList from '@/utils/provinceList'
-import marriageList from '@/utils/marriageList'
-import { dateFormat } from '@/utils/dateFormat'
+import { idCard } from '@/utils/id-card'
+import { provinceList } from '@/utils/province-list'
+import { marriageList } from '@/utils/marriage-list'
+import { dateFormat } from '@/utils/date-format'
 export default {
   // 自定义指令，让文本框自动聚焦
   directives: {
