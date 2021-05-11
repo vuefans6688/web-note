@@ -674,9 +674,9 @@ phone(13744560918, 8)  // 137********
 function arrayTransform (arrays, numbers) {
   const lists = []
   arrays.forEach((item, index) => {
-    // 计算多维数组的下标
+    // 计算该元素在第几个数组内
     const page = Math.floor(index / numbers)
-    // 如果数组中有元素，就把数组清空 
+    // 判断是否存在数组 
     if (!lists[page]) {
       lists[page] = []
     }
