@@ -686,6 +686,28 @@ function arrayTransform (arrays, numbers) {
 }
 arrayTransform([1, 2, 3, 4, 5, 6, 7, 8], 3)  // [[1, 2, 3], [4, 5, 6], [7, 8]]
 
+// 数组分割
+function splitArray (data, count) {
+  const arrays = []
+  for (let i = 0; i < data.length; i++) {
+    if (i % count !== 0) {
+      continue
+    }
+    arrays.push(data.slice(i, i + count))
+  }
+  return arrays
+}
+const lists = [
+  { id: '1', name: 'A' },
+  { id: '2', name: 'B' },
+  { id: '3', name: 'C' },
+  { id: '4', name: 'D' },
+  { id: '5', name: 'E' },
+  { id: '6', name: 'F' },
+  { id: '7', name: 'G' }
+]
+splitArray(lists, 2)
+
 // 将一维数组拆分为指定长度的二维数组
 function group (array, count) {
   let index = 0
