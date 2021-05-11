@@ -24,7 +24,7 @@ export default {
   },
   computed: {
     message () {
-      return this.isHide ? '我是common-item组件!!!' : '我会通过ref属性把值传递给父组件...'
+      return this.isHide ? '我是common-item组件' : '我会通过ref属性把值传递给父组件'
     }
   }
 }
