@@ -148,7 +148,7 @@ export default {
   },
   filters: {
     ageFilter (date) {
-      if (typeof date === 'object') {
+      if (typeof date === 'string') {
         date = new Date(date)
       }
       // 出生日期
