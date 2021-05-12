@@ -1,48 +1,36 @@
-export const treeData = [
+export const datas = [
   {
-    id: 'node-1',
-    name: "节点-1",
+    id: "01",
+    name: "经济",
     children: [
       {
-        id: 'node-1-1',
-        name: "节点-1-1",
+        id: "001",
+        name: "如家",
         children: [
           {
-            id: 'node-1-1-1',
-            name: "节点-1-1-1"
+            id: "0001",
+            name: "上江路-如家"
           },
           {
-            id: 'node-1-1-2',
-            name: "节点-1-1-2"
-          },
-          {
-            id: 'node-1-1-3',
-            name: "节点-1-1-3"
+            id: "0002",
+            name: "望江路-如家"
           }
         ]
       },
       {
-        id: 'node-1-2',
-        name: "节点-1-2",
+        id: "002",
+        name: "7天",
         children: [
           {
-            id: 'node-1-2-1',
-            name: "节点-1-2-1"
+            id: "0002",
+            name: "长江路-7天"
           },
           {
-            id: 'node-1-2-2',
-            name: "节点-1-2-2"
-          },
-          {
-            id: 'node-1-2-3',
-            name: "节点-1-2-3"
+            id: "0003",
+            name: "望江路-7天"
           }
         ]
       }
     ]
-  },
-  {
-    id: 'node-2',
-    name: "节点-2"
   }
 ]

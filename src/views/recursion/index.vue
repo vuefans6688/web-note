@@ -1,34 +1,29 @@
 <template>
   <div class="recursion">
-    <ul>
-      <tree-item
-        v-for="item in dataList"
-        :tree-data="item"
-        :key="item.id"
-      ></tree-item>
-    </ul>
+    <list :list="datas" />
   </div>
 </template>
 
 <script>
-import { treeData } from './detail'
-import TreeItem from './components/tree-item'
+import list from './components/list'
+import { datas } from './detail'
 export default {
+  name: 'Recursion',
   components: {
-    TreeItem
+    list
   },
   data () {
     return {
-      dataList: []
+      datas
     }
   },
   methods: {
     loadData () {
-      return treeData
+      return datas
     }
   },
   created () {
-    this.dataList = this.loadData()
+    this.datas = this.loadData()
   }
 }
 </script>
