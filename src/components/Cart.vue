@@ -74,7 +74,7 @@
 import { mapGetters, mapActions } from 'vuex'
 import Info from './Info'
 export default {
-  name: 'cart',
+  name: 'Cart',
   data () {
     return {
       dialogVisible: false,
@@ -87,7 +87,7 @@ export default {
   },
   components: { Info },
   methods: {
-    ...mapActions(['delProduct', 'numChange']),
+    ...mapActions(['delProduct', 'numberChange']),
     handleDelete (data) {
       this.dialogVisible = true
       this.result = data
@@ -101,7 +101,7 @@ export default {
     },
     handleChange (data) {
       data.value = this.inputNumberValue
-      this.numChange(data)
+      this.numberChange(data)
     }
   }
 }

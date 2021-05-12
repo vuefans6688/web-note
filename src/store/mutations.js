@@ -8,8 +8,8 @@ export default {
     state.count--
   },
   // 加入购物车
-	ADD_TO_CART (state, { id }) {
-		let record = state.added.find(item => item.id === id )
+  ADD_TO_CART (state, { id }) {
+    let record = state.added.find(item => item.id === id)
     if (!record) {
       state.added.push({
         id,
@@ -18,11 +18,11 @@ export default {
     } else {
       record.num++
     }
-	},
+  },
   // 购物车商品数量改变
-  NUM_CHANGE (state, { id, value }) {
+  CHANGE_NUMBER (state, { id, value }) {
     state.added.forEach(item => {
-      if (item.id === id){
+      if (item.id === id) {
         item.num = value
       }
     })
@@ -31,7 +31,7 @@ export default {
   // 删除购物车的指定的商品
   DELETE (state, product) {
     state.added.forEach((item, index) => {
-      if(item.id === product.id) {
+      if (item.id === product.id) {
         // 找到added的下标值
         state.added.splice(index, 1)
       }

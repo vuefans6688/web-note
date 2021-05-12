@@ -8,15 +8,15 @@ export default {
     commit(DECREMENT)
   },
   addToCart ({ commit }, product) {
-		commit('ADD_TO_CART', { id: product.id })
-	},
-  numChange ({ commit }, data) {
-    commit('NUM_CHANGE', {
+    commit('ADD_TO_CART', { id: product.id })
+  },
+  numberChange ({ commit }, data) {
+    commit('CHANGE_NUMBER', {
       id: data.id,
       value: data.value
     })
   },
-	// 删除购物车的指定的商品
+  // 删除购物车的指定的商品
   delProduct ({ commit }, product) {
     commit('DELETE', product)
   },
