@@ -328,6 +328,25 @@ function whileLoop (numbers) {
 }
 whileLoop(10)  // [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
+function narcissus (i, max) {
+  // 声明一个空数组用来存放所有水仙花数
+  let array = []
+  // 循环出所有的三位数
+  while (i < max) {
+    // 计算出每一个三位数里面的每一位数
+    const hundred = parseInt(i / 100)
+    const ten = parseInt(i % 100 / 10)
+    const one = parseInt(i % 10)
+    // 判断是不是水仙花数
+    if (Math.pow(hundred, 3) + Math.pow(ten, 3) + Math.pow(one, 3) === i) {
+      array[array.length] = i
+    }
+    i++  // i的值每次加1
+  }
+  return array
+}
+narcissus(100, 1000)  //最小三位数是100 最大三位数是999
+
 // return 停止函数
 function format (data) {
   return data < 10 ? `0${data}` : data
@@ -1371,6 +1390,32 @@ function computeWhatWeekDay (year, month, day) {
 }
 computeWhatWeekDay(2010, 11, 21)  // 这是第325天，这是第47周
 
+// 计算当前月份有多少天
+function getCountDays (date) {
+  let currentDate = new Date(date)
+  // 获取当前月份
+  let currentMonth = currentDate.getMonth()
+  // 实际月份比currentMonth大1，下面将月份设置为下一个月
+  currentDate.setMonth(currentMonth + 1)
+  // 将日期设置为0，表示自动计算为上个月（这里指的是当前月份）的最后一天
+  currentDate.setDate(0)
+  // 返回当前月份的天数
+  return currentDate.getDate()
+}
+getCountDays('2021-5-13')
+
+function getCountMonth (timeStamp) {
+  let currentDate = new Date(timeStamp * 1000)  // 转为时间对象（js的时间戳是毫秒数）
+  let currentYear = currentDate.getFullYear()  // 年
+  let currentMonth = currentDate.getMonth() + 1  // 月
+  let nowDate = new Date()  // 今天日期
+  let nowYear = nowDate.getFullYear()  // 今天年份
+  let nowMonth = nowDate.getMonth() + 1  // 今天月份
+  let totalMonth = (nowYear - currentYear) * 12 + (nowMonth - currentMonth) // 距今月数
+  return currentDate.toLocaleDateString() + "距今" + totalMonth + "个月"
+}
+getCountMonth('1577808000')  // "2020/1/1距今16个月"
+
 const arrays = ['呵呵', '啦啦', '哒哒', '哈哈', '哈哈', '嘻嘻']
 arrays.indexOf('哈哈')  // 3
 arrays.lastIndexOf('哈哈')  // 4
@@ -2116,6 +2161,8 @@ function numberLeapYear (start, end) {
   return label
 }
 numberLeapYear(1000, 2000)
+
+
 
 // 定义一个函数，输入数字，逆转并输出汉字形式
 function outPutChinese (values) {
