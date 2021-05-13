@@ -1334,21 +1334,70 @@ function mixedStatement (start, end) {
 }
 mixedStatement(1, 100)  // 2028
 
+function byAgeGetMoney (start, end) {
+  let label = ''
+  while (start < end) {
+    if (start === 25) {  // 如果是25岁，就不能领取
+      start++
+      continue  // 跳出本次循环继续执行后续代码，下次循环
+      // break  // 结束掉整个循环
+    }
+    label += start + "领取一万快"
+    start++
+  }
+  return label
+}
+byAgeGetMoney(18, 50)
+
 function getScore (data) {
   let i = 0
   let label = ''
   while (i < data.length) {
     if (data[i] < 60) {
-      label = `成绩${data[i]}不及格，不用循环了`
+      label = `成绩: ${data[i]}不及格，不用循环了`
       break
+    } else {
+      label = `成绩: ${data[i]}及格了，继续循环`
+      i++
     }
-    label = `成绩：${data[i]}及格了，继续循环`
-    count++
   }
   return label
 }
 getScore([70, 80, 66, 90, 50, 100, 89])  // "成绩50不及格，不用循环了"
 getScore([70, 80, 66, 90, 60, 100, 89])  // "成绩89及格了，继续循环"
+
+// 让用户随机输入一个正整数，弹出这个数字有几位
+function getNumberOf (numbers) {
+  let i = 1
+  while (numbers > 10) {
+    numbers = parseInt(numbers / 10)
+    i++
+  }
+  return "该整数共有" + i + "位"
+}
+getNumberOf(123)  // "该整数共有3位"
+
+// 让用户随机输入一个正整数，弹出该数的各个位数之和
+function getDigitResult (numbers) {
+  let summation = 0
+  while (numbers > 10) {
+    summation += numbers % 10
+    numbers = parseInt(numbers / 10)
+  }
+  return summation += numbers
+}
+getDigitResult(123)  // 6
+
+// 用户输入一个数字，然后反转输出这个数字
+function reverseNumber (numbers) {
+  let label = ''
+  while (numbers > 10) {
+    label += numbers % 10
+    numbers = parseInt(numbers / 10)
+  }
+  return label += numbers
+}
+reverseNumber(123)  // "321"
 
 // 输入年、月、日计算某一天是该年的第几天(周)
 function computeWhatWeekDay (year, month, day) {
