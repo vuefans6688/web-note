@@ -2722,16 +2722,6 @@ function getMaxed (array) {
 }
 getMaxed([1, 2, 3, 4, 5, 6, 7])  // 7
 
-let arrays = ['后盾网', '后盾人']
-let keys = arrays.keys()
-let { value, done } = keys.next()
-let values1 = arrays.values()
-let { value, done } = values1.next()
-console.log(value, done)  // 后盾网 false
-let entries = arrays.entries()
-let { value, done } = entries.next()
-console.log(value, done)  // [0, '后盾网']
-
 function filter (array, callback) {
   let newArray = []
   for (let value of array) {
@@ -2741,8 +2731,8 @@ function filter (array, callback) {
   }
   return newArray
 }
-let list1 = [1, 2, 3, 4]
-filter(list1, value => value > 2)  // [3, 4]
+let lists = [1, 2, 3, 4]
+filter(lists, value => value > 2)  // [3, 4]
 
 // 获取数组中最大的价格
 let cart = [
@@ -2755,7 +2745,7 @@ function maxPrice (goods) {
 }
 maxPrice(cart)  // { name: "imac", price: 25000 }
 
-let cart1 = [
+let cart = [
   { name: 'iphone', price: 12000 },
   { name: 'imac', price: 25000 },
   { name: 'ipad', price: 3600 }
@@ -2763,9 +2753,9 @@ let cart1 = [
 function sum1 (goods) {
   return goods.reduce((total, current) => total += current.price, 0)
 }
-sum1(cart1)  // 40600
+sum1(cart)  // 40600
 
-let cart2 = [
+let cart = [
   { name: 'iphone', price: 12000 },
   { name: 'imac', price: 25000 },
   { name: 'ipad', price: 3600 }
@@ -2778,7 +2768,7 @@ function getNameByPrice (goods, price) {
     return array
   }, []).map(item => item.name)
 }
-getNameByPrice(cart2, 10000)  // ["iphone", "imac"]
+getNameByPrice(cart, 10000)  // ["iphone", "imac"]
 
 // 数组去重排序
 function removeRepeat (array) {
@@ -2794,19 +2784,19 @@ removeRepeat([1, 2, 3, 3, 1, 4, 2])  // [1, 2, 3, 4]
 // 将数组去重，然后再转换成树形结构的数组
 const removeRepeates = array => {
   const newArray = []
-  const map = array.reduce((value, item) => ((value[item.id] = item), value), {})
-  for (const item of Object.values(map)) {
+  const maps = array.reduce((value, item) => ((value[item.id] = item), value), {})
+  for (const item of Object.values(maps)) {
     if (!item.parentId) {
       newArray.push(item)
     } else {
-      const parent = map[item.parentId]
+      const parent = maps[item.parentId]
       parent.child = parent.child || []
       parent.child.push(item)
     }
   }
   return newArray
 }
-const list2 = [
+const lists = [
   { id: 1 },
   { id: 2, parentId: 1 },
   { id: 3, parentId: 2 },
@@ -2814,7 +2804,7 @@ const list2 = [
   { id: 3, parentId: 2 },
   { id: 5, parentId: 4 }
 ]
-removeRepeates(list2)
+removeRepeates(lists)
 
 // 防抖函数
 function debounce (func) {
@@ -2998,30 +2988,30 @@ class User {
   }
 }
 // 创建一个User的实例对象
-let users = new User('皮卡丘')
-users.getName()  // "后盾人-皮卡丘"
+let user = new User('皮卡丘')
+user.getName()  // "后盾人-皮卡丘"
 
 let set = new Set()
 set.add(1)
 set.add('1')
 console.log(set)  // Set(2) {1, "1"}
 
-let set1 = new Set([1, 2, 3, 4, 5])
-console.log(set1)  // Set(5) {1, 2, 3, 4, 5}
+let set = new Set([1, 2, 3, 4, 5])
+console.log(set)  // Set(5) {1, 2, 3, 4, 5}
 
-let set2 = new Set('123456789')
-set2 = new Set([...set2].filter(item => item < 5))
-console.log(set2)  // Set(4) {"1", "2", "3", "4"}
+let set = new Set('123456789')
+set = new Set([...set].filter(item => item < 5))
+console.log(set)  // Set(4) {"1", "2", "3", "4"}
 
-let array = [1, 2, 3, 4, 5, 2, 3, 1]
-array = [...new Set(array)]
-console.log(array)  // (5) [1, 2, 3, 4, 5]
+let arrays = [1, 2, 3, 4, 5, 2, 3, 1]
+arrays = [...new Set(arrays)]
+console.log(arrays)  // (5) [1, 2, 3, 4, 5]
 
-let set3 = new Set(['hdcms', 'houdunren'])
-set3.forEach(value => {
+let set = new Set(['hdcms', 'houdunren'])
+set.forEach(value => {
   console.log(value)  // hdcms houdunren
 })
-for (const value of set3) {
+for (const value of set) {
   console.log(value)  // hdcms houdunren
 }
 
@@ -3139,25 +3129,51 @@ let user = {
 user.average()  // "皮卡丘的平均成绩是: 89"
 
 function upload (params) {
-  let options = { size: 2000 }
+  let options = {
+    size: 2000
+  }
   options = Object.assign(options, params)
   return JSON.stringify(options, null, 2)
 }
 upload({ size: 999, type: 'png' })
 
-let obj = { name: 'vue', click: 99 }
-for (const iterator of Object.keys(obj)) {
-  console.log(iterator)  // key: name key: click
+let data = { name: 'vue', click: 99 }
+for (const iterator of Object.keys(data)) {
+  console.log(iterator)  // name click
 }
-for (const iterator of Object.values(obj)) {
-  console.log(iterator)  // value: vue value: 99
+
+let data = { name: 'vue', click: 99 }
+Object.keys(data).forEach(item => console.log(item))  // name click
+
+let data = { name: 'vue', click: 99 }
+for (const iterator of Object.values(data)) {
+  console.log(iterator)  // vue 99
 }
-for (const iterator of Object.entries(obj)) {
-  console.log(iterator)  // ['name', 'vue'] ['click', 99]
+
+let data = { name: 'vue', click: 99 }
+for (const iterator of Object.entries(data)) {
+  console.log(iterator)  // ["name", "vue"] ["click", 99]
 }
-for (const [key, value] of Object.entries(obj)) {
+
+let data = { name: 'vue', click: 99 }
+for (const [key, value] of Object.entries(data)) {
   console.log(key, value)  // name vue click 99
 }
+
+const arrays = ['后盾网', '后盾人']
+const keys = arrays.keys()
+const { value, done } = keys.next()
+console.log(value, done)  // 0 false
+
+const arrays = ['后盾网', '后盾人']
+const values = arrays.values()
+const { value, done } = values.next()
+console.log(value, done)  // 后盾网 false
+
+const arrays = ['后盾网', '后盾人']
+const entries = arrays.entries()
+const { value, done } = entries.next()
+console.log(value, done)  // [0, '后盾网'] false
 
 const user = {
   data: {
@@ -3208,19 +3224,6 @@ console.log(proxy.name)  // 皮卡丘
 function factorial (numbers) {
   return numbers === 1 ? 1 : numbers * factorial(numbers - 1)
 }
-let proxy = new Proxy(factorial, {
-  apply (func, obj, args) {
-    // console.log(func)
-    // ƒ factorial(num) {
-    //   return num === 1 ? 1 : num * factorial(num - 1)
-    // }
-    console.log(obj)
-    // console.log(args)
-    // [5]
-  }
-})
-// proxy(5)
-proxy.apply(this, [5])
 
 let lessons = [
   { title: 'flex弹性布局', category: 'css' },
@@ -3238,7 +3241,7 @@ let proxy = new Proxy(lessons, {
 })
 console.log(proxy[0])  // {title: "flex弹性布局", category: "css"} 
 
-let objects = {
+let son = {
   name: '面向对象'
 }
 let parent = {
@@ -3247,10 +3250,10 @@ let parent = {
     return '父类方法: ' + this.name
   }
 }
-Object.setPrototypeOf(objects, parent)
-objects.show()  // "父类方法: 面向对象"
+Object.setPrototypeOf(son, parent)
+son.show()  // "父类方法: 面向对象"
 parent.show()
-Object.getPrototypeOf(objects)  // {name: "父类", show: ƒ}
+Object.getPrototypeOf(son)  // {name: "父类", show: ƒ}
 
 function User (name) {
   this.name = name
@@ -3277,8 +3280,8 @@ User.prototype = {
   }
 }
 let user = new User('后盾人')
-function createNewObject (obj, ...args) {
-  const constructor = Object.getPrototypeOf(obj).constructor
+function createNewObject (objects, ...args) {
+  const constructor = Object.getPrototypeOf(objects).constructor
   return new constructor(...args)
 }
 let lisi = createNewObject(user, '李四')
