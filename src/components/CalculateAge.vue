@@ -15,9 +15,9 @@
       <el-form-item prop="month">
         <el-input
           v-model="old.month"
+          @blur="calculateBirth"
           @keyup.native="handleAge('month', 12)"
           :style="{ width }"
-          @blur="calculateBirth"
           :maxlength="2"
           placeholder="请输入出生月份"
         >
