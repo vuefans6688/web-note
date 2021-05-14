@@ -1,4 +1,4 @@
-export default function deepCopy (value) {
+export function deepCopy (value) {
   return JSON.parse(JSON.stringify(value))
 }
 

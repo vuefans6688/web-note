@@ -62,8 +62,8 @@ export function computeAge (time) {
 }
 
 // 获取当月的天数
-export function getDaysOfMonth (dateString) {
-  const date = new Date(dateString)
+export function getDaysOfMonth (birthDate) {
+  const date = new Date(birthDate)
   const year = date.getFullYear()
   const month = date.getMonth() + 1
   // 判断2月份的天数

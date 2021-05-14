@@ -83,7 +83,7 @@
 
 <script>
 import { dateFormat } from '@/utils/date-format'
-import deepCopy from '@/utils/deep-copy'
+import { deepCopy } from '@/utils/deep-copy'
 export default {
   data () {
     return {
