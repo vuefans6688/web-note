@@ -2464,7 +2464,7 @@ yearToYearOfDay('2010-06-12', '2020-11-22')  // 3816天
 // 获取前后n天的时间
 function paddingZero (number) {
   if (number.toString().length === 1) {
-    number += '0'
+    number = '0' + number
   }
   return number
 }
