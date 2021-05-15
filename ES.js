@@ -2470,8 +2470,7 @@ function aroundDay (month) {
 }
 function getDifferDay (day) {
   let today = new Date()
-  let milliseconds = today.getTime() + 1000 * 60 * 60 * 24 * day
-  today.setTime(milliseconds)
+  today.setTime(today.getTime() + 1000 * 60 * 60 * 24 * day)
   let year = today.getFullYear()
   let month = today.getMonth() + 1
   let date = today.getDate()
@@ -2483,12 +2482,12 @@ getDifferDay(5)  // "2020-11-27"
 getDifferDay(-5)  // "2020-11-17"
 
 function dateFormat (date) {
-  let year = date.getFullYear()
-  let month = date.getMonth() + 1
-  let day = date.getDate()
-  let hour = date.getHours()
-  let minute = date.getMinutes()
-  let second = date.getSeconds()
+  const year = date.getFullYear()
+  const month = date.getMonth() + 1
+  const day = date.getDate()
+  const hour = date.getHours()
+  const minute = date.getMinutes()
+  const second = date.getSeconds()
   month = month >= 10 ? month : '0' + month
   day = day >= 10 ? day : '0' + day
   hour = hour >= 10 ? hour : '0' + hour
@@ -2559,10 +2558,10 @@ function calculateAge (birthDate) {
   const birthYear = birthArray[0]
   const birthMonth = birthArray[1]
   const birthDay = birthArray[2]
-  const currentDate = new Date()
-  const nowYear = currentDate.getFullYear()
-  const nowMonth = currentDate.getMonth() + 1
-  const nowDay = currentDate.getDate()
+  const nowDate = new Date()
+  const nowYear = nowDate.getFullYear()
+  const nowMonth = nowDate.getMonth() + 1
+  const nowDay = nowDate.getDate()
   if (birthArray === null) {
     return false
   }
