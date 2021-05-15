@@ -90,6 +90,7 @@ export default {
       let month = date.getMonth() - this.getMonthes()
       let day = date.getDate()
       // Date对象中月份是0开始取值的
+      // 一年十二月，月份位做十二进制减法，不足借一，一当12
       if (month < 0) {
         month += 12
         year -= 1
@@ -102,6 +103,7 @@ export default {
         this.old.birth = ''
         return
       }
+      // 获取出生月份的天数
       this.old.age = new Date().getFullYear() - this.getBirth().getFullYear()
       this.old.month = new Date().getMonth() - this.getBirth().getMonth()
       let remainDay = new Date().getDate() - this.getBirth().getDate()
