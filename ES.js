@@ -2462,11 +2462,11 @@ function yearToYearOfDay (start, end) {
 yearToYearOfDay('2010-06-12', '2020-11-22')  // 3816天
 
 // 获取前后n天的时间
-function aroundDay (month) {
-  if (month.toString().length === 1) {
-    month = '0' + month
+function paddingZero (number) {
+  if (number.toString().length === 1) {
+    number += '0'
   }
-  return month
+  return number
 }
 function getDifferDay (day) {
   let today = new Date()
@@ -2474,8 +2474,8 @@ function getDifferDay (day) {
   let year = today.getFullYear()
   let month = today.getMonth() + 1
   let date = today.getDate()
-  month = aroundDay(month)
-  date = aroundDay(date)
+  month = paddingZero(month)
+  date = paddingZero(date)
   return year + "-" + month + "-" + date
 }
 getDifferDay(5)  // "2020-11-27"
