@@ -85,10 +85,9 @@ export default {
     },
     // 计算出生日期
     calculateBirth () {
-      let date = new Date()
-      let year = date.getFullYear() - this.getAge()
-      let month = date.getMonth() - this.getMonthes()
-      let day = date.getDate()
+      let year = new Date().getFullYear() - this.getAge()
+      let month = new Date().getMonth() - this.getMonthes()
+      let day = new Date().getDate()
       // Date对象中月份是0开始取值的
       // 一年十二月，月份位做十二进制减法，不足借一，一当12
       if (month < 0) {
