@@ -8,7 +8,7 @@ export function getCurrentMonthDays (month, year) {
     return 31
     // 判断二月份天数
   } else if (month === 2) {
-    // 平年返回28天，闰年返回29天
+    // 判断是不是闰年，是闰年就返回29天, 而平年就返回28天
     return year % 4 === 0 && year % 100 !== 0 || year % 400 === 0 ? 29 : 28
   } else {
     // 剩下的小月就返回30天

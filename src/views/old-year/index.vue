@@ -1,10 +1,16 @@
 <template>
   <div class="old-year">
     <div class="user-name">
-      姓名: <el-autocomplete @select="selectChange" size="small" placeholder="请输入姓名"></el-autocomplete>
+      姓名:
+      <el-autocomplete
+        @select="selectChange"
+        size="small"
+        placeholder="请输入姓名"
+      ></el-autocomplete>
     </div>
     <div class="user-age">
-      年龄: <calculate-age :old="date" ref="age-ref" :width="width"></calculate-age>
+      年龄:
+      <calculate-age :old="date" ref="age-ref" :width="width"></calculate-age>
     </div>
   </div>
 </template>
@@ -26,8 +32,8 @@ export default {
   },
   methods: {
     selectChange () {
-      const birthday = dateFilter(this.date.birth)
-      this.date.birth = new Date(birthday.replace(/-/g, '/'))
+      let birthday = dateFilter(this.date.birth)
+      birthday = new Date(birthday.replace(/-/g, '/'))
       this.$refs['age-ref'].handleBirth()
     }
   }
