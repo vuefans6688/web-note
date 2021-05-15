@@ -106,13 +106,12 @@ export default {
       // 获取出生月份的天数
       this.old.age = new Date().getFullYear() - this.getBirth().getFullYear()
       this.old.month = new Date().getMonth() - this.getBirth().getMonth()
-      let remainDay = new Date().getDate() - this.getBirth().getDate()
-      // 获取当前月份的天数
-      let currentYear = parseInt(this.getBirth().getFullYear(), 10)
-      let currentMonth = parseInt(this.getBirth().getMonth() + 1, 10)
-      let currentDay = getCurrentMonthDays(currentMonth, currentYear)
-      if (remainDay < 0) {
-        remainDay += currentDay
+      let diffDay = new Date().getDate() - this.getBirth().getDate()
+      let birthYear = parseInt(this.getBirth().getFullYear(), 10)
+      let birthMonth = parseInt(this.getBirth().getMonth() + 1, 10)
+      let birthDay = getCurrentMonthDays(birthMonth, birthYear)
+      if (diffDay < 0) {
+        diffDay += birthDay
         this.old.month -= 1
       }
       if (this.old.month < 0) {
