@@ -2497,6 +2497,21 @@ function dateFormat (date) {
 }
 dateFormat(new Date())
 
+function paddingZero (number) {
+  number = number.toString()
+  return number[1] ? number : '0' + number
+}
+function formatTime (date) {
+  const year = date.getFullYear()
+  const month = date.getMonth() + 1
+  const day = date.getDate()
+  const hour = date.getHours()
+  const minute = date.getMinutes()
+  const second = date.getSeconds()
+  return [year, month, day].map(paddingZero).join('-') + ' ' + [hour, minute, second].map(paddingZero).join(':')
+}
+formatTime(new Date())
+
 function interceptDate (date) {
   const year = date.substr(0, 4)
   const month = date.substr(5, 2)
@@ -2716,10 +2731,10 @@ function getMax (array) {
 getMax([1, 2, 3, 4, 5, 6, 7])  // 7
 
 // 求数组最大元素
-function getMaxed (array) {
+function getMax (array) {
   return Math.max.apply(null, array)
 }
-getMaxed([1, 2, 3, 4, 5, 6, 7])  // 7
+getMax([1, 2, 3, 4, 5, 6, 7])  // 7
 
 function filter (array, callback) {
   let newArray = []
@@ -2749,10 +2764,10 @@ let cart = [
   { name: 'imac', price: 25000 },
   { name: 'ipad', price: 3600 }
 ]
-function sum1 (goods) {
+function sum (goods) {
   return goods.reduce((total, current) => total += current.price, 0)
 }
-sum1(cart)  // 40600
+sum(cart)  // 40600
 
 let cart = [
   { name: 'iphone', price: 12000 },
