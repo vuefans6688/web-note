@@ -1,7 +1,7 @@
 <template>
   <div class="table-use">
     <el-card class="box-card">
-      <el-button type="success" size="small" @click="handleAdd">增加</el-button>
+      <el-button type="success" size="small" @click="handleAdd">添加</el-button>
       <el-table :data="tableData">
         <el-table-column
           prop="date"
@@ -91,12 +91,14 @@ export default {
       rowIndex: null,
       tableData: [
         {
+          id: '001',
           date: '2021年4月15日',
           name: '王小虎',
           address: '上海市普陀区金沙江路 1518 弄',
           age: 51
         },
         {
+          id: '002',
           date: '2021年4月15日',
           name: '张小丽',
           address: '上海市普陀区金沙江路 1519 弄',
@@ -119,6 +121,7 @@ export default {
     handleEdit (index, row) {
       this.dialogTitle = '编辑人员信息'
       this.userInfo = {
+        id: row.id,
         name: row.name,
         date: row.date,
         address: row.address,
@@ -145,8 +148,13 @@ export default {
         const index = this.tableData.findIndex(item => item.id === id)
         this.tableData.splice(index, 1)
         this.$message({
-          message: '删除成功!',
+          message: '删除成功',
           type: 'success'
+        })
+      }).catch(() => {
+        this.$message({
+          message: '取消删除',
+          type: 'warning'
         })
       })
     }

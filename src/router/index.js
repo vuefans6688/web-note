@@ -422,7 +422,7 @@ const router = new VueRouter({
           path: 'new-western-formulation/:templateId',
           name: 'NewWesternFormulation',
           component: () => import('@/views/module/western-formulation/new-western-formulation')
-        },
+        }
       ]
     },
     {
