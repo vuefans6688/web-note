@@ -107,11 +107,6 @@ export default {
       ]
     }
   },
-  filters: {
-    ageFilter (params) {
-      return computeAge(params)
-    }
-  },
   methods: {
     handleAdd () {
       this.dialogTitle = '添加人员信息'
@@ -162,6 +157,11 @@ export default {
   computed: {
     valueFormat () {
       return 'yyyy年MM月dd日'
+    }
+  },
+  filters: {
+    ageFilter (params) {
+      return computeAge(params)
     }
   }
 }
