@@ -446,10 +446,6 @@ const router = new VueRouter({
       component: () => import('@/views/drag')
     },
     {
-      path: '/table-use',
-      component: () => import('@/views/table-use')
-    },
-    {
       path: '/table-search',
       component: () => import('@/views/table-search')
     },
@@ -460,6 +456,10 @@ const router = new VueRouter({
     {
       path: '/region',
       component: () => import('@/views/region')
+    },
+    {
+      path: '/modal',
+      component: () => import('@/views/modal')
     }
   ]
 })
