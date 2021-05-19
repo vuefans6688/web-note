@@ -156,10 +156,6 @@ const router = new VueRouter({
       component: () => import('@/views/different-table')
     },
     {
-      path: '/place-zone',
-      component: () => import('@/views/place-zone')
-    },
-    {
       path: '/message-board',
       component: () => import('@/views/message-board')
     },
@@ -460,6 +456,10 @@ const router = new VueRouter({
     {
       path: '/recursion',
       component: () => import('@/views/recursion')
+    },
+    {
+      path: '/region',
+      component: () => import('@/views/region')
     }
   ]
 })
