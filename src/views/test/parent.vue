@@ -2,40 +2,80 @@
   <div class="parent">
     <el-card class="box-card" v-show="isShow">
       <div class="select">已选择{{ selectData.length }}项</div>
-      <div class="fork">
-        <i class="el-icon-close" @click="close"></i>
+      <div class="fork" @click="close">
+        <i class="el-icon-close"></i>
       </div>
       <div class="control">
         <el-button @click="cancel" size="mini">取消</el-button>
-        <el-button @click="confirm" type="primary" size="mini">确定</el-button>
+        <el-button @click="confirm(selectData)" type="primary" size="mini"
+          >确定</el-button
+        >
       </div>
     </el-card>
-    <el-table :data="formData" @selection-change="selectChange" ref="formRef">
-      <el-table-column type="selection" align="center" width="60"></el-table-column>
+    <el-table :data="formData" @selection-change="selectChange" ref="form-ref">
+      <el-table-column
+        type="selection"
+        align="center"
+        width="60"
+      ></el-table-column>
       <el-table-column prop="name" label="名字" align="center" width="100">
         <template slot-scope="scope">
-          <el-input v-model="scope.row.name" v-if="scope.row.isEdit" size="small" placeholder="请输入名字"></el-input>
+          <el-input
+            v-model="scope.row.name"
+            v-if="scope.row.isEdit"
+            size="small"
+            placeholder="请输入名字"
+          ></el-input>
           <span v-else>{{ scope.row.name }}</span>
         </template>
       </el-table-column>
       <el-table-column prop="sex" label="性别" align="center" width="90">
         <template slot-scope="scope">
-          <el-input v-model="scope.row.sex" v-if="scope.row.isEdit" size="small" placeholder="请输入性别"></el-input>
+          <el-input
+            v-model="scope.row.sex"
+            v-if="scope.row.isEdit"
+            size="small"
+            placeholder="请输入性别"
+          ></el-input>
           <span v-else>{{ scope.row.sex }}</span>
         </template>
       </el-table-column>
       <el-table-column prop="age" label="年龄" align="center" width="90">
         <template slot-scope="scope">
-          <el-input v-model="scope.row.age" v-if="scope.row.isEdit" size="small" placeholder="请输入年龄"></el-input>
+          <el-input
+            v-model="scope.row.age"
+            v-if="scope.row.isEdit"
+            size="small"
+            placeholder="请输入年龄"
+          ></el-input>
           <span v-else>{{ scope.row.age }}</span>
         </template>
       </el-table-column>
       <el-table-column label="操作" align="center">
         <template slot-scope="scope">
-          <el-button @click="modify(scope.$index, scope.row)" v-if="!scope.row.isModify" type="text">修改</el-button>
-          <el-button @click="modifyConfirm(scope.$index)" v-if="scope.row.isModify" type="text" class="confirm">确定</el-button>
-          <el-button @click="modifyCancel(scope.$index)" v-if="scope.row.isModify" type="text" class="cancel">取消</el-button>
-          <el-button @click="remove(scope.row.id)" type="text" class="remove">移除</el-button>
+          <el-button
+            @click="modify(scope.$index, scope.row)"
+            v-if="!scope.row.isModify"
+            type="text"
+            >修改</el-button
+          >
+          <el-button
+            @click="modifyConfirm(scope.$index)"
+            v-if="scope.row.isModify"
+            type="text"
+            class="confirm"
+            >确定</el-button
+          >
+          <el-button
+            @click="modifyCancel(scope.$index)"
+            v-if="scope.row.isModify"
+            type="text"
+            class="cancel"
+            >取消</el-button
+          >
+          <el-button @click="remove(scope.row.id)" type="text" class="remove"
+            >移除</el-button
+          >
         </template>
       </el-table-column>
     </el-table>
@@ -73,14 +113,15 @@ export default {
         this.isShow = true
       }
     },
-    confirm () {
+    confirm (selectList) {
       this.isShow = true
-      this.$confirm('是否删除该数据?', {
+      const rowName = selectList.map(item => item.name)[0]
+      this.$confirm(`是否删除${rowName}?`, {
         confirmButtonText: '确定',
         cancelButtonText: '取消'
       }).then(() => {
         this.formData = this.formData.filter(item => {
-          return this.selectData.findIndex(value => value.id === item.id) < 0
+          return selectList.findIndex(value => value.id === item.id) < 0
         })
         this.$message({
           type: 'success',
@@ -95,7 +136,7 @@ export default {
     },
     cancel () {
       this.isShow = false
-      this.$refs.formRef.clearSelection()
+      this.$refs['form-ref'].clearSelection()
     },
     close () {
       this.cancel()

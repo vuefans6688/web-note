@@ -185,12 +185,13 @@ export default {
       })
       this.addDetail = {}
     },
-    // 删除
+    // 删除之前
     del (id) {
       const index = this.newsList.findIndex(item => item.id === id)
       this.editId = index
       this.dialogVisible = true
     },
+    // 删除之后
     confirm () {
       this.newsList.splice(this.editId, 1)
       this.dialogVisible = false
