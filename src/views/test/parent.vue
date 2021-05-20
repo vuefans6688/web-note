@@ -89,10 +89,10 @@ export default {
       isShow: false,
       selectData: [],
       formData: [
-        { id: 1, name: '莉莉', sex: '女', age: 23, isEdit: false, isModify: false },
-        { id: 2, name: '韩梅梅', sex: '女', age: 20, isEdit: false, isModify: false },
-        { id: 3, name: '卫华', sex: '女', age: 22, isEdit: false, isModify: false },
-        { id: 4, name: '露茜', sex: '女', age: 24, isEdit: false, isModify: false }
+        { id: '101', name: '莉莉', sex: '女', age: 23, isEdit: false, isModify: false },
+        { id: '202', name: '韩梅梅', sex: '女', age: 20, isEdit: false, isModify: false },
+        { id: '303', name: '卫华', sex: '女', age: 22, isEdit: false, isModify: false },
+        { id: '404', name: '露茜', sex: '女', age: 24, isEdit: false, isModify: false }
       ],
       editData: {
         id: '',
@@ -115,8 +115,7 @@ export default {
     },
     confirm (selectList) {
       this.isShow = true
-      const rowName = selectList.map(item => item.name)[0]
-      this.$confirm(`是否删除${rowName}?`, {
+      this.$confirm(`是否删除${selectList[0].name}?`, {
         confirmButtonText: '确定',
         cancelButtonText: '取消'
       }).then(() => {
