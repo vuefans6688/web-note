@@ -12,7 +12,7 @@
 ## uni-ui操作流程
     1.安装uni-ui
       npm install @dcloudio/uni-ui
-    2.使用(放在script标签内)
+    2.使用uni-ui
       (1)import { uniBadge } from '@dcloudio/uni-ui'
       (2)export default {
         components: {
