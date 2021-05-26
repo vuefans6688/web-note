@@ -1,17 +1,37 @@
 <template>
   <div class="pass-word">
     <div class="user-name">
-      <el-input size="small" v-model="username" placeholder="手机号/邮箱/用户名"></el-input>
+      <el-input
+        size="small"
+        v-model="username"
+        placeholder="手机号/邮箱/用户名"
+      ></el-input>
     </div>
     <div class="pass-word">
-      <el-input size="small" type="password" v-model="password" v-if="!isShow" placeholder="密码"></el-input>
-      <el-input size="small" type="text" v-model="password" v-else placeholder="密码"></el-input>
+      <el-input
+        size="small"
+        type="password"
+        v-model="password"
+        v-if="!isShow"
+        placeholder="密码"
+      ></el-input>
+      <el-input
+        size="small"
+        type="text"
+        v-model="password"
+        v-else
+        placeholder="密码"
+      ></el-input>
     </div>
     <div class="switch-icon">
-      <el-switch v-model="value" @change="isShow=!isShow"></el-switch>
+      <el-switch v-model="value" @change="isShow = !isShow"></el-switch>
     </div>
     <div class="verify-code">
-      <el-input size="small" v-model="verifyCode" placeholder="验证码"></el-input>
+      <el-input
+        size="small"
+        v-model="verifyCode"
+        placeholder="验证码"
+      ></el-input>
     </div>
     <div class="canvas">
       <mine-canvas></mine-canvas>

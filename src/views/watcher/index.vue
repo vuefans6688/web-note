@@ -7,11 +7,10 @@
     </p>
     <!-- <p class="data">{{ $data }}</p> -->
     <p class="name">
-      姓: <el-input v-model="firstName"></el-input>
-      &nbsp;
-      名: <el-input v-model="lastName"></el-input>
+      姓: <el-input v-model="firstName"></el-input> &nbsp; 名:
+      <el-input v-model="lastName"></el-input>
     </p>
-    <p class="full">展示姓名: {{ fullName }}</p>
+    <p class="full">显示姓名: {{ fullName }}</p>
   </div>
 </template>
 
@@ -36,7 +35,7 @@ export default {
     }
   },
   watch: {
-    a () {    
+    a () {
       this.b.c += 1
     },
     'b.c' () {
@@ -46,7 +45,7 @@ export default {
       this.e.f.g += 1
     },
     e: {
-      handler () {  
+      handler () {
         this.h.push('诸事顺利')
       },
       deep: true

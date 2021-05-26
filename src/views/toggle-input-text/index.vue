@@ -7,8 +7,8 @@
     <keep-alive>
       <component :is="currentItem"></component>
     </keep-alive>
-    <br/>
-    <el-button size="small" @click="handleClick">切换</el-button>
+    <br />
+    <el-button @click="handleClick" type="primary" size="small">切换</el-button>
   </div>
 </template>
 
@@ -16,7 +16,10 @@
 import InputItem from './input-item'
 import CommonItem from './common-item'
 export default {
-  components: { InputItem, CommonItem },
+  components: {
+    InputItem,
+    CommonItem
+  },
   data () {
     return {
       currentItem: 'input-item'
@@ -26,9 +29,13 @@ export default {
     handleClick () {
       this.currentItem = this.currentItem === 'input-item' ? 'common-item' : 'input-item'
     }
-  } 
+  }
 }
 </script>
 
 <style lang="scss" scoped>
+.toggle-input-text {
+  margin: 20px auto;
+  text-align: center;
+}
 </style>

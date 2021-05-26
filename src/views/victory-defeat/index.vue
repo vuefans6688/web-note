@@ -1,14 +1,22 @@
 <template>
   <div class="victory-defeat">
     <ul class="board">
-      <li v-for="(chess, index) in chesses" @click="setChess(index)" class="square">{{ chess }}</li>
+      <li
+        v-for="(chess, index) in chesses"
+        @click="setChess(index)"
+        class="square"
+      >
+        {{ chess }}
+      </li>
     </ul>
     <div class="container">
       <div class="hint">{{ playerHint }}</div>
       <button @click="restart" class="restart">重新开始</button>
       <ul class="normal">
         <li v-for="(history, index) in histories" class="history">
-          <button @click="repentance(index)" class="step">第{{ index + 1 }}步</button>
+          <button @click="repentance(index)" class="step">
+            第{{ index + 1 }}步
+          </button>
         </li>
       </ul>
     </div>
@@ -62,7 +70,7 @@ export default {
     },
     // 判断是否胜出
     isWin (player) {
-      return this.cases.some(array => array.every(item => this.chesses[item] === player))
+      return this.cases.some(arrays => arrays.every(item => this.chesses[item] === player))
     },
     // 初始化数据
     restart () {
