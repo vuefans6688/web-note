@@ -2,10 +2,17 @@
   <div class="mini-games">
     <div class="describe">{{ describe }}</div>
     <div class="row">
-      <jing-zi-chess v-for="(chess, index) in 9" :key="index" 
-        @handle-click="handleClick(index, $event)" :count="count" :is-finished="isFinished" />
+      <jing-zi-chess
+        v-for="(chess, index) in 9"
+        :key="index"
+        @handle-click="handleClick(index, $event)"
+        :count="count"
+        :is-finished="isFinished"
+      />
     </div>
-    <div class="result">结果：{{ result === null ? '胜负未分' : `胜方为${result}` }}</div>
+    <div class="result">
+      结果：{{ result === null ? "胜负未分" : `胜方为${result}` }}
+    </div>
   </div>
 </template>
 

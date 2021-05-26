@@ -1,9 +1,11 @@
 <template>
   <div class="clock">
     <div class="container">
-      <el-button @click="handleClick" type="primary">{{ buttonText }}</el-button>
+      <el-button @click="handleClick" type="primary">{{
+        buttonText
+      }}</el-button>
       <span class="now-time">当前时间: {{ now | dateFilter }}</span>
-    </div>   
+    </div>
   </div>
 </template>
 
@@ -44,7 +46,7 @@ export default {
   },
   beforeDestroy () {
     clearInterval(this.intervalId)
-  }  
+  }
 }
 </script>
 

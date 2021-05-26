@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import data from './food-list'
+import { data } from './food-list'
 export default {
   data () {
     return {

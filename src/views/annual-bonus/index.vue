@@ -1,11 +1,7 @@
 <template>
   <div class="annual-bonus">
-    <p class="work-year">
-      工作年限: <el-input v-model="year"></el-input>
-    </p>
-    <p class="work-money">
-      工作薪酬: <el-input v-model="money"></el-input>
-    </p>
+    <p class="work-year">工作年限: <el-input v-model="year"></el-input></p>
+    <p class="work-money">工作薪酬: <el-input v-model="money"></el-input></p>
     <p class="show-content">你的年终奖为: ￥{{ result.toFixed(2) }}</p>
     <p class="submit">
       <el-button @click="handleSubmit" type="primary">提交</el-button>
@@ -34,10 +30,10 @@ export default {
       // 工作0年
       if (year === 0) {
         this.result = money >= 8000 ? money * 1.2 : money * 1
-      // 工作1年
+        // 工作1年
       } else if (year === 1) {
         this.result = money >= 10000 ? money * 1.7 : money * 1.5
-      // 工作2年及以上 
+        // 工作2年及以上 
       } else {
         this.result = money >= 12000 ? money * 3.2 : money * 3
       }

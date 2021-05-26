@@ -17,8 +17,8 @@ import vTextarea from '@/components/vTextarea'
 import vList from '@/components/vList'
 export default {
   components: {
-    vInput, 
-    vTextarea, 
+    vInput,
+    vTextarea,
     vList
   },
   data () {

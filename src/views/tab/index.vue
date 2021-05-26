@@ -1,12 +1,21 @@
 <template>
   <div class="tab">
-    <span class="list" v-for="(item, index) in list" :key="item.key" 
-      :class="{ active: currentIndex === index }" @click="handleTab(index)">
+    <span
+      class="list"
+      v-for="(item, index) in list"
+      :key="item.key"
+      :class="{ active: currentIndex === index }"
+      @click="handleTab(index)"
+    >
       {{ item }}
     </span>
-    <div class="content" v-for="(item, index) in content" :key="item.key" 
-      v-show="currentIndex === index">
-      <img :src="item">
+    <div
+      class="content"
+      v-for="(item, index) in content"
+      :key="item.key"
+      v-show="currentIndex === index"
+    >
+      <img :src="item" />
     </div>
   </div>
 </template>
@@ -21,12 +30,12 @@ export default {
         'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1583494551985&di=d0ca7e90b4cc35d9bbfadb8cc91a5db9&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201903%2F16%2F20190316171632_fodwy.jpg',
         'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1583494616273&di=b9e094f34a7dd00345af14a5f01c734b&imgtype=0&src=http%3A%2F%2Fimg3.duitang.com%2Fuploads%2Fitem%2F201607%2F31%2F20160731150331_8Q4Wi.jpeg'
       ],
-      currentIndex: 0    
+      currentIndex: 0
     }
   },
   methods: {
-    handleTab (index) {      
-      this.currentIndex = index      
+    handleTab (index) {
+      this.currentIndex = index
     }
   }
 }
@@ -51,7 +60,7 @@ export default {
   }
   .content {
     img {
-      width: 453px; 
+      width: 453px;
       height: 400px;
     }
   }

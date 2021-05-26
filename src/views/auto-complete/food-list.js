@@ -1,4 +1,4 @@
-const data =  [
+export const data = [
   { "id": "101", "name": "番茄", "num": 1, "price": 8.50 },
   { "id": "102", "name": "油麦菜", "num": 1, "price": 3.12 },
   { "id": "103", "name": "笋尖", "num": 1, "price": 6.72 },
@@ -11,9 +11,7 @@ const data =  [
   { "id": "110", "name": "猪肉", "num": 1, "price": 26.78 },
   { "id": "111", "name": "鸡肉", "num": 1, "price": 20.12 },
   { "id": "112", "name": "鸭肉", "num": 1, "price": 18.16 },
-  { "id": "113", "name": "牛肉", "num": 1,"price": 30.50 },
+  { "id": "113", "name": "牛肉", "num": 1, "price": 30.50 },
   { "id": "114", "name": "鱼肉", "num": 1, "price": 12.13 },
   { "id": "115", "name": "兔肉", "num": 1, "price": 40.45 }
 ]
-
-export default data

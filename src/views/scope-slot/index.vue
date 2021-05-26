@@ -1,9 +1,14 @@
 <template>
   <div class="scope-slot">
     <todo-list>
-      <todo-item v-for="lesson in lessons" :key="lesson.id" :title="lesson.title" 
-        :is-delete="lesson.isDelete" @delete="handleDelete(lesson.id)"
-        @changed="handleChange(lesson)">
+      <todo-item
+        v-for="lesson in lessons"
+        :key="lesson.id"
+        :title="lesson.title"
+        :is-delete="lesson.isDelete"
+        @delete="handleDelete(lesson.id)"
+        @changed="handleChange(lesson)"
+      >
         <template v-slot:pre-icon="{ value }">
           <span>前置图标{{ value }}</span>
         </template>

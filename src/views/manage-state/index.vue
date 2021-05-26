@@ -1,7 +1,9 @@
 <template>
   <div class="manage-state">
     <div class="counter">
-      <el-button @click="reduceHandle" :disabled="count < 1" size="small">减1</el-button>
+      <el-button @click="reduceHandle" :disabled="count < 1" size="small"
+        >减1</el-button
+      >
       <span>{{ count }}</span>
       <el-button @click="addHandle" size="small">加1</el-button>
     </div>

@@ -1,8 +1,8 @@
 <template>
   <div class="son">
-    <p>{{ $attrs['job'] }}, 在$attrs里面只会有props没有注册的属性</p>
+    <p>{{ $attrs["job"] }}, 在$attrs里面只会有props没有注册的属性</p>
     <p>性别---{{ gender }}</p>
-    <p>工作---{{ $attrs['job'] }}</p>
+    <p>工作---{{ $attrs["job"] }}</p>
     <button @click="send">给爷爷数据</button>
   </div>
 </template>
@@ -28,5 +28,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 </style>

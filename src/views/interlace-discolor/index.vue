@@ -1,9 +1,16 @@
 <template>
   <div class="interlace-discolor">
     <ul>
-      <li v-for="(name, index) in names" @mouseover="handleOver(index)" :key="index"
-        @mouseout="handleOut" :class="{ on: index === activeName && index % 2 === 0, 
-        off: index === activeName && index % 2 !== 0 }">
+      <li
+        v-for="(name, index) in names"
+        @mouseover="handleOver(index)"
+        :key="index"
+        @mouseout="handleOut"
+        :class="{
+          on: index === activeName && index % 2 === 0,
+          off: index === activeName && index % 2 !== 0,
+        }"
+      >
         {{ name }}
       </li>
     </ul>

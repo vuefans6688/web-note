@@ -1,15 +1,36 @@
 <template>
   <div class="login-container">
     <van-nav-bar @click-left="$router.back()" title="欢迎登录" left-arrow />
-    <van-form @submit="onLogin" @failed="onFailed" ref="login-form" :show-error="false">
-      <van-field v-model="user.mobile" :rules="formRules.mobile" name="mobile" label="手机号" placeholder="请输入手机号或用户名" />
-      <van-field v-model="user.code" :rules="formRules.code" name="code" label="验证码" placeholder="请输入验证码">
+    <van-form
+      @submit="onLogin"
+      @failed="onFailed"
+      ref="login-form"
+      :show-error="false"
+    >
+      <van-field
+        v-model="user.mobile"
+        :rules="formRules.mobile"
+        name="mobile"
+        label="手机号"
+        placeholder="请输入手机号或用户名"
+      />
+      <van-field
+        v-model="user.code"
+        :rules="formRules.code"
+        name="code"
+        label="验证码"
+        placeholder="请输入验证码"
+      >
         <template #button>
-          <van-button @click.prevent="onVerifyCode" size="mini" type="info" plain>{{ buttonText }}</van-button>
+          <van-button @click.prevent="getCode" size="mini" type="info" plain>{{
+            buttonText
+          }}</van-button>
         </template>
       </van-field>
       <div class="submit-box">
-        <van-button native-type="submit" type="info" size="small" block>登录</van-button>
+        <van-button native-type="submit" type="info" size="small" block
+          >登录</van-button
+        >
       </div>
     </van-form>
   </div>
@@ -39,16 +60,16 @@ export default {
     }
   },
   methods: {
-    onVerifyCode () {
+    getCode () {
       if (this.countDown > 0) {
-        return 
+        return
       }
       this.$refs['login-form'].validate('mobile').then(() => {
         captcha({ mobile: this.user.mobile }).then(res => {
           this.$toast.success(res.data)
           this.countDown = 60
           this.buttonText = `${this.countDown}秒后重试`
-          this.intervalId =setInterval(() => {
+          this.intervalId = setInterval(() => {
             this.countDown--
             this.buttonText = `${this.countDown}秒后重试`
             if (this.countDown <= 0) {

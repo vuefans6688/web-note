@@ -31,7 +31,7 @@ export default {}
 </script>
 
 <style lang="scss" scoped>
-@import '../../assets/styles/base.scss';
+@import "../../assets/styles/base.scss";
 .theme {
   background: $primary-color;
 }
@@ -94,25 +94,25 @@ export default {}
     width: 110px;
     height: 55px;
     &:before {
-      content: '';
+      content: "";
       display: inline-block;
       width: 55px;
       height: 55px;
-      background: url('../../assets/img/mi.jpg') no-repeat center;
+      background: url("../../assets/img/mi.jpg") no-repeat center;
       background-size: contain;
-      transition: margin .2s;
+      transition: margin 0.2s;
     }
     &:after {
-      content: '';
+      content: "";
       display: inline-block;
       width: 55px;
       height: 55px;
-      background: url('../../assets/img/home.jpg') no-repeat center;
+      background: url("../../assets/img/home.jpg") no-repeat center;
       background-size: contain;
     }
     &:hover:before {
       margin-left: -55px;
-      transition: margin .2s;
+      transition: margin 0.2s;
     }
   }
 }

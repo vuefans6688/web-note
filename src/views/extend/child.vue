@@ -7,15 +7,15 @@
 </template>
 
 <script>
-  export default {
-    data () {
-      return {
-        datas: [
-          { id: '01', text: '子组件内容一' },
-          { id: '02', text: '子组件内容二' },
-          { id: '03', text: '子组件内容三' }
-        ]
-      }
+export default {
+  data () {
+    return {
+      datas: [
+        { id: '01', text: '子组件内容一' },
+        { id: '02', text: '子组件内容二' },
+        { id: '03', text: '子组件内容三' }
+      ]
     }
   }
+}
 </script>

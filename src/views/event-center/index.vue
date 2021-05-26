@@ -9,6 +9,9 @@
 import increment from './increment'
 import decrease from './decrease'
 export default {
-  components: { increment, decrease }
+  components: {
+    increment,
+    decrease
+  }
 }
 </script>

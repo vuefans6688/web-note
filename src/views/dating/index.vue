@@ -1,8 +1,8 @@
 <template>
   <div class="dating">
     <p class="d1">完整版: {{ date | dateFilter }}</p>
-    <p class="d2">年月日: {{ date | dateFilter('YYYY-MM-DD') }}</p>
-    <p class="d3">时分秒: {{ date | dateFilter('HH:mm:ss') }}</p>
+    <p class="d2">年月日: {{ date | dateFilter("YYYY-MM-DD") }}</p>
+    <p class="d3">时分秒: {{ date | dateFilter("HH:mm:ss") }}</p>
     <p class="d4">现在是: {{ today }}</p>
   </div>
 </template>

@@ -24,12 +24,12 @@ export default {
 
     // 侦听的完整写法
     searchText: {
-       // 当数据发生变化将会执行handler处理函数
+      // 当数据发生变化将会执行handler处理函数
       handler: debounce(async () => {
         // 发送网络请求
         const result = await console.log('wahaha')
         console.log(result)
-      }, 200), 
+      }, 200),
       // 该回调将会在侦听开始之后被立即调用
       immediate: true
     }
@@ -38,5 +38,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 </style>

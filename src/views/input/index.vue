@@ -1,7 +1,10 @@
 <template>
   <div class="input">
     <!-- <input-component :user-name="username" @handle-input="username = $event" /> -->
-    <input-component :user-name="username" @handle-input="restrictInput($event)" />
+    <input-component
+      :user-name="username"
+      @handle-input="restrictInput($event)"
+    />
     <p class="user-name">{{ username }}</p>
   </div>
 </template>
@@ -17,7 +20,7 @@ export default {
     }
   },
   methods: {
-    restrictInput(event, limit) {
+    restrictInput (event, limit) {
       this.username = intLimit(event, limit)
     }
   }

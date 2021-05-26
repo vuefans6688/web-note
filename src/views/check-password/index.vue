@@ -1,15 +1,38 @@
 <template>
   <div class="check-password">
-    <el-form :model="registerForm" ref="registerForm" :rules="rules" size="small">
+    <el-form
+      :model="registerForm"
+      ref="registerForm"
+      :rules="rules"
+      size="small"
+    >
       <el-form-item label="密码" :label-width="formLabelWidth" prop="password">
-        <el-input type="password" v-model="registerForm.password" autocomplete="off" 
-          clearable show-password placeholder="8-20位字符在数字、小写、大写字母以及特殊字符中四选三">
+        <el-input
+          type="password"
+          v-model="registerForm.password"
+          autocomplete="off"
+          clearable
+          show-password
+          placeholder="8-20位字符在数字、小写、大写字母以及特殊字符中四选三"
+        >
         </el-input>
-        <el-progress :percentage="passwordPercent" :format="passwordPercentFormat"></el-progress>
+        <el-progress
+          :percentage="passwordPercent"
+          :format="passwordPercentFormat"
+        ></el-progress>
       </el-form-item>
-      <el-form-item label="确认密码" :label-width="formLabelWidth" prop="comfirmPassword">
-        <el-input type="password" v-model="registerForm.comfirmPassword" autocomplete="off" 
-          clearable placeholder="请输入确认密码">
+      <el-form-item
+        label="确认密码"
+        :label-width="formLabelWidth"
+        prop="comfirmPassword"
+      >
+        <el-input
+          type="password"
+          v-model="registerForm.comfirmPassword"
+          autocomplete="off"
+          clearable
+          placeholder="请输入确认密码"
+        >
         </el-input>
       </el-form-item>
     </el-form>
@@ -35,10 +58,10 @@ export default {
           if (this.registerForm.password.match(/([A-Z])+/)) {
             charLength++
           }
-          if (this.registerForm.password.match(/([\W])+/) && !this.registerForm.password.match(/(![\u4E00-\u9FA5])+/)) {  
+          if (this.registerForm.password.match(/([\W])+/) && !this.registerForm.password.match(/(![\u4E00-\u9FA5])+/)) {
             charLength++
           }
-          if (this.registerForm.password.length < 6 || this.registerForm.password.length > 20){
+          if (this.registerForm.password.length < 6 || this.registerForm.password.length > 20) {
             callback(new Error('要求6-20位字符'))
             charLength = 0
           }
@@ -47,24 +70,24 @@ export default {
             charLength = 0
           }
           switch (charLength) {
-            case 0: 
+            case 0:
               this.passwordPercent = 0
-              callback(new Error('数字、小写字母、大写字母以及特殊字符中四选三')) 
+              callback(new Error('数字、小写字母、大写字母以及特殊字符中四选三'))
               break
-            case 1: 
-              this.passwordPercent = 33 
-              callback(new Error('数字、小写字母、大写字母以及特殊字符中四选三')) 
+            case 1:
+              this.passwordPercent = 33
+              callback(new Error('数字、小写字母、大写字母以及特殊字符中四选三'))
               break
-            case 2: 
-              this.passwordPercent = 66  
-              callback(new Error('数字、小写字母 、大写字母以及特殊字符中四选三')) 
+            case 2:
+              this.passwordPercent = 66
+              callback(new Error('数字、小写字母 、大写字母以及特殊字符中四选三'))
               break
             case 3:
-            case 4: 
-              this.passwordPercent = 100 
+            case 4:
+              this.passwordPercent = 100
               break
-            default: 
-              this.passwordPercent = 0 
+            default:
+              this.passwordPercent = 0
           }
         }
         callback()

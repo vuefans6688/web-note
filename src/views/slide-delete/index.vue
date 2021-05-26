@@ -1,8 +1,19 @@
 <template>
   <div class="container">
     <ul>
-      <li class="list-item" v-for="(item, index) in list" data-type="0" :key="index" ref="list-item">
-        <div class="list-box" @touchstart.capture="touchStart" @touchend.capture="touchEnd" :data-index="index">
+      <li
+        class="list-item"
+        v-for="(item, index) in list"
+        data-type="0"
+        :key="index"
+        ref="list-item"
+      >
+        <div
+          class="list-box"
+          @touchstart.capture="touchStart"
+          @touchend.capture="touchEnd"
+          :data-index="index"
+        >
           <div class="list-content">
             <p class="title">{{ item.title }}</p>
             <p class="tips">{{ item.tips }}</p>
@@ -82,11 +93,11 @@ export default {
       return false
     },
     // 复位滑动状态
-    resetSlide (index) {
+    resetSlide (i) {
       let listItems = this.$refs['list-item']
       // 复位
-      listItems.forEach((item, i) => {
-        if (index === i) {
+      listItems.forEach((item, index) => {
+        if (i === index) {
           item.dataset.type = 1
         } else {
           item.dataset.type = 0
@@ -126,7 +137,7 @@ export default {
   transform: translate3d(-2rem, 0, 0);
 }
 .list-item:after {
-  content: '';
+  content: "";
   position: absolute;
   left: 0.2rem;
   bottom: 0;

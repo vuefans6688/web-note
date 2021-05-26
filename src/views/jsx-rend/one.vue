@@ -13,7 +13,7 @@ export default {
   render () {
     return (
       <div class="one">
-        <input value={this.message} on-input={this.handleChange}/>
+        <input value={this.message} on-input={this.handleChange} />
         <p style={{ color: '#f00' }}>消息: {this.message}</p>
       </div>
     )

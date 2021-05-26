@@ -32,7 +32,7 @@ export default {
       }
       this.isShow = true
       this.text = this.count % 2 === 0 ? 'x' : 'o'
-      this.$emit('handle-click', this.text) 
+      this.$emit('handle-click', this.text)
     }
   }
 }

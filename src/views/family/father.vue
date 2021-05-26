@@ -1,7 +1,9 @@
 <template>
   <div class="father">
     <ul>
-      <li :is="'son'" v-for="item in items" :key="item.id" :level="item.level">{{ item.info }}</li>
+      <li :is="'son'" v-for="item in items" :key="item.id" :level="item.level">
+        {{ item.info }}
+      </li>
     </ul>
   </div>
 </template>

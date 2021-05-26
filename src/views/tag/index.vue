@@ -1,11 +1,20 @@
 <template>
   <div class="tag">
-    <div class="content" v-for="(tag, index) in tags" :key="tag.id" 
-      @mouseenter="handleEnter(index)" @mouseleave="handleLeave" 
-      :class="{ active: currentIndex === index }">
+    <div
+      class="content"
+      v-for="(tag, index) in tags"
+      :key="tag.id"
+      @mouseenter="handleEnter(index)"
+      @mouseleave="handleLeave"
+      :class="{ active: currentIndex === index }"
+    >
       <span class="index">{{ index + 1 }}、</span>
       <span class="text">{{ tag.text }}</span>
-      <span class="el-icon-close" v-if="currentIndex === index" @click="handleDelete(tag.id)"></span>
+      <span
+        class="el-icon-close"
+        v-if="currentIndex === index"
+        @click="handleDelete(tag.id)"
+      ></span>
     </div>
   </div>
 </template>

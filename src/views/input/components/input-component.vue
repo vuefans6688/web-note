@@ -1,7 +1,12 @@
 <template>
   <div class="input-component">
     <!-- <input :value="username" @input="$emit('handle-input', $event.target.value)" v-focus> -->
-    <input :value="username" @input="getUsername($event)" v-focus v-enter-number>
+    <input
+      :value="username"
+      @input="getUsername($event)"
+      v-focus
+      v-enter-number
+    />
   </div>
 </template>
 

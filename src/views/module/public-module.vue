@@ -6,14 +6,19 @@
       </el-form-item>
       <el-form-item label="模板类型:">
         <el-select v-model="templateType" @change="ownerTypeChange">
-          <el-option v-for="item in moduleOption" :key="item.value" :label="item.label" :value="item.value"></el-option>
+          <el-option
+            v-for="item in moduleOption"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+          ></el-option>
         </el-select>
       </el-form-item>
       <el-form-item>
         <el-button @click="addModule" type="primary">新增</el-button>
       </el-form-item>
     </el-form>
-    <el-table :data="tableData" style="width: 100%;" stripe>
+    <el-table :data="tableData" style="width: 100%" stripe>
       <el-table-column type="index" label="序号" align="center">
       </el-table-column>
       <el-table-column prop="name" label="模板名称" align="center">
@@ -29,15 +34,20 @@
         </template>
       </el-table-column>
     </el-table>
-    <el-pagination @current-change="handleCurrentChange" :current-page="currentPage" 
-      :page-size="10" layout="total, prev, pager, next, jumper" :total="total">
+    <el-pagination
+      @current-change="handleCurrentChange"
+      :current-page="currentPage"
+      :page-size="10"
+      layout="total, prev, pager, next, jumper"
+      :total="total"
+    >
     </el-pagination>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
-function sortListByName(obj1, obj2) {
+function sortListByName (obj1, obj2) {
   return obj1.name.localeCompare(obj2.name)
 }
 export default {
@@ -129,14 +139,14 @@ export default {
         const res = response.data
         if (res.errcode === 0 && res.data && res.data.clinic_id === this.clinic &&
           res.data.items && res.data.items.length) {
-            const data = res.data.items || []
-            this.tableData = data.map(value => {
-              value.owner_type = value.owner_type ? '通用模板' : '个人模板'
-              value.create_time = this.makeDateTime(value.create_time)
-              return value
-            })
-            this.total = res.data.total
-            this.tableData.sort(sortListByName)
+          const data = res.data.items || []
+          this.tableData = data.map(value => {
+            value.owner_type = value.owner_type ? '通用模板' : '个人模板'
+            value.create_time = this.makeDateTime(value.create_time)
+            return value
+          })
+          this.total = res.data.total
+          this.tableData.sort(sortListByName)
         } else {
           this.tableData = []
           if (res.errcode !== 0) {
@@ -156,21 +166,21 @@ export default {
     addModule () {
       if (this.$route.params.formulationId === 'west') {
         const id = 'new'
-        this.$router.push({ name: 'NewWesternFormulation', params: { templateId: id, data: null, selectedType: 2 }})
+        this.$router.push({ name: 'NewWesternFormulation', params: { templateId: id, data: null, selectedType: 2 } })
       }
     },
     edit (index) {
       if (this.$route.params.formulationId === 'west') {
         const id = this.tableData[index].template_id
-        this.$router.push({ name: 'NewWesternFormulation', params: { templateId: id, data: this.tableData[index], selectedType: 2 }})
+        this.$router.push({ name: 'NewWesternFormulation', params: { templateId: id, data: this.tableData[index], selectedType: 2 } })
       }
     },
     del (index) {
       this.$confirm('是否删除该模板?', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }).then(() => {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
         const id = this.tableData[index].template_id
         this.$http.post('/service/template/delete', {
           head: {
@@ -178,7 +188,7 @@ export default {
             lastnotice: 0,
             msgid: ''
           },
-          body: { 
+          body: {
             clinic_id: this.clinic,
             template_id: id
           }
@@ -204,5 +214,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 </style>

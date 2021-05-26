@@ -34,22 +34,22 @@ export default {
       }, 1000)
     },
     rowStyle ({ row }) {
-      const obj = {}
+      const styles = {}
       switch (row.status) {
         case 0:
-          obj.color = '#32cd32'
+          styles.color = '#32cd32'
           break
         case 1:
-          obj.color = '#f00'
+          styles.color = '#f00'
           break
         case 2:
-          obj.color = '#09f'
+          styles.color = '#09f'
           break
         case 3:
-          obj.color = '#ffa500'
-          break      
+          styles.color = '#ffa500'
+          break
       }
-      return obj
+      return styles
     }
   }
 }

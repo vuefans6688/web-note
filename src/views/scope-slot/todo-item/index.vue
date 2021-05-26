@@ -2,7 +2,9 @@
   <div class="todo-item">
     <li class="list">
       <slot name="pre-icon" :value="value"></slot>
-      <span :class="isDelete ? 'title-style' : ''" @click="switchDelete">{{ title }}</span>
+      <span :class="isDelete ? 'title-style' : ''" @click="switchDelete">{{
+        title
+      }}</span>
       <slot name="suf-icon">😄</slot>
       <span class="delete" v-if="!isDelete" @click="handleRemove">删除</span>
     </li>
@@ -43,7 +45,7 @@ export default {
   list-style: none;
   cursor: pointer;
   .delete {
-    color: #f00; 
+    color: #f00;
   }
   span {
     padding: 6px;

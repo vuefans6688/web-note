@@ -10,7 +10,7 @@ export default {
         { id: '01', cityName: '苏州' },
         { id: '02', cityName: '牡丹江' },
         { id: '03', cityName: '长江' }
-      ]  
+      ]
     }
   },
   render () {

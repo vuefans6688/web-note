@@ -21,10 +21,10 @@ export default {
   text-align: center;
 }
 .bounce-enter-active {
-  animation: bounce-in .5s;
+  animation: bounce-in 0.5s;
 }
 .bounce-leave-active {
-  animation: bounce-in .5s reverse;
+  animation: bounce-in 0.5s reverse;
 }
 @keyframes bounce-in {
   0% {

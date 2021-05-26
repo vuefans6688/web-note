@@ -1,12 +1,19 @@
 <template>
   <div class="pierce-through">
     <section>
-      <parent :name="name" :age="age" :gender="gender" :job="job" @isClick="isClick" 
-        @add="add" @getSonData="getSonData" />
-      <input type="text" v-model="name">
-      <input type="text" v-model="age">
-      <input type="text" v-model="gender">
-      <input type="text" v-model="job">
+      <parent
+        :name="name"
+        :age="age"
+        :gender="gender"
+        :job="job"
+        @isClick="isClick"
+        @add="add"
+        @getSonData="getSonData"
+      />
+      <input type="text" v-model="name" />
+      <input type="text" v-model="age" />
+      <input type="text" v-model="gender" />
+      <input type="text" v-model="job" />
     </section>
   </div>
 </template>
@@ -38,5 +45,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 </style>

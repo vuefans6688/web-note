@@ -1,6 +1,11 @@
 <template>
   <div class="search-result">
-    <van-list @load="onLoad" v-model="loading" :finished="finished" finished-text="没有更多了">
+    <van-list
+      @load="onLoad"
+      v-model="loading"
+      :finished="finished"
+      finished-text="没有更多了"
+    >
       <van-cell v-for="item in list" :key="item" :title="item" />
     </van-list>
   </div>

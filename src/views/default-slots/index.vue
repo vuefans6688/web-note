@@ -9,10 +9,11 @@
 <script>
 import OffSpring from './off-spring'
 export default {
-  components: { OffSpring }
+  components: {
+    OffSpring
+  }
 }
 </script>
 
 <style lang="scss" scoped>
-
 </style>

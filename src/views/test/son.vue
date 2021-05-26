@@ -10,9 +10,27 @@
       </el-table-column>
       <el-table-column label="操作" align="center">
         <template slot-scope="scope">
-          <el-button v-if="scope.row.status === 0" @click="statusChange(scope.$index)" type="text" class="enable">启用</el-button>
-          <el-button v-if="scope.row.status === 1" @click="statusChange(scope.$index)" type="text" class="disable">禁用</el-button>
-          <el-button v-if="scope.row.status === 2" @click="statusChange(scope.$index)" type="text" class="freeze">冻结</el-button>
+          <el-button
+            v-if="scope.row.status === 0"
+            @click="statusChange(scope.$index)"
+            type="text"
+            class="enable"
+            >启用</el-button
+          >
+          <el-button
+            v-if="scope.row.status === 1"
+            @click="statusChange(scope.$index)"
+            type="text"
+            class="disable"
+            >禁用</el-button
+          >
+          <el-button
+            v-if="scope.row.status === 2"
+            @click="statusChange(scope.$index)"
+            type="text"
+            class="freeze"
+            >冻结</el-button
+          >
         </template>
       </el-table-column>
     </el-table>

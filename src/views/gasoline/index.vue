@@ -1,12 +1,18 @@
 <template>
   <div class="gasoline">
     <p class="type">
-      汽油型号: <el-select v-model="types" placeholder="请选择汽油型号">
-        <el-option v-for="item in options" :key="item.id" :value="item.text"></el-option>
+      汽油型号:
+      <el-select v-model="types" placeholder="请选择汽油型号">
+        <el-option
+          v-for="item in options"
+          :key="item.id"
+          :value="item.text"
+        ></el-option>
       </el-select>
     </p>
     <p class="price">
-      汽油升数: <el-input v-model="rise" placeholder="请输入汽油升数"></el-input>
+      汽油升数:
+      <el-input v-model="rise" placeholder="请输入汽油升数"></el-input>
     </p>
     <p class="money">支付总价为: ￥{{ totalMoney.toFixed(2) }}</p>
     <p class="submit">

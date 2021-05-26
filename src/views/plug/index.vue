@@ -1,6 +1,5 @@
 <template>
   <div class="plug">
-
     <!-- 作用域插槽 -->
     <stride>
       <template v-slot:todo="slotProps">
@@ -14,11 +13,10 @@
     <!-- 自定义指令 -->
     <p v-color-full="colorfull">我的颜色由自定义指令来更改</p>
     <p class="directive">
-      <input v-model="keyword" type="text" style="width: 280px;" v-focus>
+      <input v-model="keyword" type="text" style="width: 280px" v-focus />
       <el-input v-model="keyword" size="small" v-focus></el-input>
     </p>
     <p class="upper-case" v-upper-text="info"></p>
-
   </div>
 </template>
 
@@ -27,7 +25,7 @@ import Stride from '@/components/Stride'
 import Fruit from '@/components/Fruit'
 export default {
   components: {
-    Stride, 
+    Stride,
     Fruit
   },
   directives: {
@@ -50,7 +48,7 @@ export default {
     }
   },
   data () {
-    return {      
+    return {
       colorfull: {
         color: '#42b983',
         fontSize: '20px',
