@@ -5086,6 +5086,65 @@ function b (m, n) {
 }
 a(b)  // 4
 
+function findString (strings) {
+  if (typeof strings !== "string") {
+    return false
+  }
+  let oldObject = {}
+  let newObject = {}
+  for (let key of strings) {
+    if (!oldObject.hasOwnProperty(key)) {
+      oldObject[key] = 1
+    } else {
+      oldObject[key]++
+    }
+  }
+  let max = Math.max.apply(null, Object.values(oldObject))
+  for (let key in oldObject) {
+    if (oldObject[key] == max) {
+      newObject[key] = max
+    }
+  }
+  return newObject
+}
+findString('abaoskdkadnfghfl')  // {a: 3}
+
+function Letter (a) {
+  this.a = a
+}
+Letter.prototype.print = function () {
+  return this.a  // 123
+}
+const letter = new Letter('123')
+letter.print()  // undefined
+const test = letter.print
+test()  // undefined
+const objects = {}
+test.call(objects)  // undefined
+
+function Person () {
+  this.name = 'Petter'
+}
+Person.prototype.getName = function () {
+  return this.name
+}
+const person = new Person()
+console.log(person.name)
+
+function unique (arrays) {
+  for (let i = 0; i < arrays.length; i++) {
+    for (let j = i + 1; j < arrays.length; j++) {
+      if (arrays[i] === arrays[j]) {
+        arrays.splice(j, 1)
+        j--
+        arrays.length--
+      }
+    }
+  }
+  return arrays
+}
+unique([1, 5, 6, 0, 7, 3, 0, 5, 9, 5])  // [1, 5, 6, 0, 7, 3]
+
 // 从对象或数组中深度删除所有假值
 function compactObject (objects) {
   const datas = Array.isArray(objects) ? objects.filter(Boolean) : objects
