@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>axios.create()</title>
 </head>
+
 <body>
-  
+
   <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.0/axios.min.js"></script>
   <script>
     /*
@@ -16,16 +18,13 @@
         (1)需求：项目中有部分接口需要的配置与另一部分接口需要的配置不太一样，如何处理
         (2)解决：创建2个新的axios，每个都有自己特有的配置，分贝应用到不同要求的接口请求中    
     */
-
     axios.defaults.baseURL = 'http://localhost:3000'
     axios({
       url: '/posts'
     })
-
     const instance = axios.create({
       baseURL: 'http://localhost:4000'
     })
-    
     // 使用instance发送请求
     // instance({
     //   url: '/user'
@@ -33,4 +32,5 @@
     instance.get('/user')
   </script>
 </body>
+
 </html>

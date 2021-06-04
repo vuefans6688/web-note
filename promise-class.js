@@ -1,5 +1,5 @@
 // 手写Promise
-(function (window) {
+(window => {
   const PENDING = 'pending'
   const RESOLVED = 'resolved'
   const REJECTED = 'rejected'
@@ -7,7 +7,7 @@
   class Promise {
     // Promise构造函数
     // excutor执行器函数(同步执行) 
-    constructor (excutor) {
+    constructor(excutor) {
       // 将当前promise对象保存起来
       const self = this
       // 给promise对象指定status属性，初始值为pending
@@ -17,7 +17,7 @@
       // 每个元素的结构: {onResolved() {}, onRejected() {}}
       self.callbacks = []
 
-      function resolve(value) {
+      function resolve (value) {
         // 如果当前状态不是pending，直接结束
         if (self.status !== PENDING) {
           return
@@ -37,7 +37,7 @@
         }
       }
 
-      function reject(reason) {
+      function reject (reason) {
         // 如果当前状态不是pending，直接结束
         if (self.status !== PENDING) {
           return
@@ -64,7 +64,7 @@
       } catch (error) {
         reject(error)
       }
-      
+
     }
     // Promise原型对象的then()，指定成功和失败的回调函数，返回一个新的promise对象
     then (onResolved, onRejected) {
@@ -78,7 +78,7 @@
       // 返回一个新的promise对象
       return new Promise((resolve, reject) => {
         // 调用回调函数的处理，根据执行结果，改变return的promise状态
-        function handle(callback) {
+        function handle (callback) {
           try {
             const result = callback(self.data)
             // 如果回调函数返回的是promise，return的promise结果就是这个promise结果
@@ -110,12 +110,12 @@
               handle(onRejected)
             }
           })
-        // 如果当前是resolved状态，异步执行onResolved并改变return的promise状态
+          // 如果当前是resolved状态，异步执行onResolved并改变return的promise状态
         } else if (self.status === RESOLVED) {
           setTimeout(() => {
             handle(onResolved)
           })
-        // 如果当前是rejected状态，异步执行onRejected并改变return的promise状态  
+          // 如果当前是rejected状态，异步执行onRejected并改变return的promise状态  
         } else {
           setTimeout(() => {
             handle(onRejected)
@@ -136,7 +136,7 @@
         // value是promise，使用value的结果作为promise的结果
         if (value instanceof Promise) {
           value.then(resolve, reject)
-        // value不是promise，promise变为成功，数据是value
+          // value不是promise，promise变为成功，数据是value
         } else {
           resolve(value)
         }
@@ -191,7 +191,7 @@
             reason => reject(reason)
           )
         })
-      }) 
+      })
     }
 
     // 返回一个promise对象，它在指定的时间后才确定结果
@@ -202,7 +202,7 @@
           // value是promise，使用value的结果作为promise的结果
           if (value instanceof Promise) {
             value.then(resolve, reject)
-          // value不是promise，promise变为成功，数据是value
+            // value不是promise，promise变为成功，数据是value
           } else {
             resolve(value)
           }

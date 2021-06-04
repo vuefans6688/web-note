@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>使用promise封装ajax</title>
 </head>
+
 <body>
   <button>点击发送ajax请求</button>
   <script>
@@ -12,30 +14,31 @@
     button.addEventListener('click', () => {
       const promise = new Promise((resolve, reject) => {
         // 创建ajax实例对象
-        const xhr = new XMLHttpRequest()
+        const ajax = new XMLHttpRequest()
         // 初始化ajax
-        xhr.open('GET', 'https://autumnfish.cn/heimamm_server/')
+        ajax.open('GET', 'https://autumnfish.cn/heimamm_server/')
         // 发送ajax
-        xhr.send()
+        ajax.send()
         // 处理响应结果
-        xhr.onreadystatechange = function () {
-          if (xhr.readyState === 4) {
-            if (xhr.code === 200) {
+        ajax.onreadystatechange = function () {
+          if (ajax.readyState === 4) {
+            if (ajax.code === 200) {
               // 响应体
-              resolve(xhr.data)
+              resolve(ajax.data)
             } else {
               // 响应状态码
-              reject(xhr.status)
+              reject(ajax.status)
             }
           }
         }
       })
-      promise.then(res => {
-        console.log(res)
-      }, err => {
-        console.log(err)
+      promise.then(response => {
+        console.log(response)
+      }, error => {
+        console.log(error)
       })
     })
   </script>
 </body>
+
 </html>

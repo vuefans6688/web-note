@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>axios取消请求</title>
 </head>
+
 <body>
   <button onclick="getProducts1()">获取商品列表1</button>
   <button onclick="getProducts2()">获取商品列表2</button>
@@ -26,17 +28,17 @@
           // 保存取消函数，用于之后可能需要取消当前请求
           cancel = c
         })
-      }).then(res => {
+      }).then(response => {
         cancel = null
-        console.log('请求1成功了', res.data)
-      }).catch(err => {
-        if (axios.isCancel(err)) {
-          console.log('请求1取消的错误', err.message)
-        // 请求出错了 
+        console.log('请求1成功了', response.data)
+      }).catch(error => {
+        if (axios.isCancel(error)) {
+          console.log('请求1取消的错误', error.message)
+          // 请求出错了 
         } else {
           cancel = null
-          console.log('请求1失败了', err.message)
-        }        
+          console.log('请求1失败了', error.message)
+        }
       })
     }
 
@@ -51,17 +53,17 @@
           // 保存取消函数，用于之后可能需要取消当前请求
           cancel = c
         })
-      }).then(res => {
+      }).then(response => {
         cancel = null
-        console.log('请求2成功了', res.data)
-      }).catch(err => {
-        if (axios.isCancel(err)) {
-          console.log('请求2取消的错误', err.message)
-        // 请求出错了 
+        console.log('请求2成功了', response.data)
+      }).catch(error => {
+        if (axios.isCancel(error)) {
+          console.log('请求2取消的错误', error.message)
+          // 请求出错了 
         } else {
           cancel = null
-          console.log('请求2失败了', err.message)
-        }   
+          console.log('请求2失败了', error.message)
+        }
       })
     }
 
@@ -75,4 +77,5 @@
     }
   </script>
 </body>
+
 </html>

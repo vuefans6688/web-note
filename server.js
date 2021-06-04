@@ -11,9 +11,9 @@ app.use(express.urlencoded())
 // 能解析json格式的请求体参数
 app.use(express.json())
 
-app.get('/product1', (req, res) => {
+app.get('/product1', (request, response) => {
   setTimeout(() => {
-    res.send([
+    response.send([
       { id: 1, name: '商品1' },
       { id: 2, name: '商品2' },
       { id: 3, name: '商品3' }
@@ -21,9 +21,9 @@ app.get('/product1', (req, res) => {
   }, 1000 + Math.random() * 2000)
 })
 
-app.get('/product2', (req, res) => {
+app.get('/product2', (request, response) => {
   setTimeout(() => {
-    res.send([
+    response.send([
       { id: 1, name: '商品2.1' },
       { id: 2, name: '商品2.2' },
       { id: 3, name: '商品2.3' }

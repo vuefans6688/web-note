@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>rest-api测试</title>
 </head>
+
 <body>
 
   <button onclick="testGet()">GET请求</button>
@@ -16,36 +18,37 @@
   <script>
 
     function testGet() {
-      axios.get('http://localhost:3000/posts').then(res => {
-        console.log(res.data)
+      axios.get('http://localhost:3000/posts').then(response => {
+        console.log(response.data)
       })
       // param参数
-      // axios.get('http://localhost:3000/posts/1').then(res => {
-      //   console.log(res.data)
+      // axios.get('http://localhost:3000/posts/1').then(response => {
+      //   console.log(response.data)
       // })
       // query参数
-      // axios.get('http://localhost:3000/posts?id=1').then(res => {
-      //   console.log(res.data)
+      // axios.get('http://localhost:3000/posts?id=1').then(response => {
+      //   console.log(response.data)
       // })
     }
 
     function testPost() {
-      axios.post('http://localhost:3000/posts', { "title": "json-server3", "author": "typicode3" }).then(res => {
-        console.log(res.data)
+      axios.post('http://localhost:3000/posts', { "title": "json-server3", "author": "typicode3" }).then(response => {
+        console.log(response.data)
       })
     }
 
     function testPut() {
-      axios.put('http://localhost:3000/posts/3', { "title": "json-server...", "author": "typicode..." }).then(res => {
-        console.log(res.data)
+      axios.put('http://localhost:3000/posts/3', { "title": "json-server...", "author": "typicode..." }).then(response => {
+        console.log(response.data)
       })
     }
 
     function testDelete() {
-      axios.delete('http://localhost:3000/posts/3').then(res => {
-        console.log(res.data)
+      axios.delete('http://localhost:3000/posts/3').then(response => {
+        console.log(response.data)
       })
     }
   </script>
 </body>
+
 </html>
