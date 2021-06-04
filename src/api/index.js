@@ -1,6 +1,6 @@
 import request from '@/utils/request'
 
-export function captcha(data) {
+export function captcha (data) {
   return request({
     url: '/au/code',
     method: 'post',
@@ -8,7 +8,7 @@ export function captcha(data) {
   })
 }
 
-export function login(data) {
+export function login (data) {
   return request({
     url: '/au/login',
     method: 'post',
