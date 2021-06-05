@@ -73,16 +73,15 @@ function useClosure (i) {
     return i + j
   }
 }
-let c = useClosure(1)
-c(2)  // 3  
+useClosure(1)(2)  // 3
 
 // 实现一函数，判断输入的是不是回文字符串
-function palindRome (code) {
+function palindRome (codes) {
   let strings = ''
-  for (let i = code.length - 1; i >= 0; i--) {
-    strings += code[i]
+  for (let i = codes.length - 1; i >= 0; i--) {
+    strings += codes[i]
   }
-  return strings === code
+  return strings === codes
 }
 palindRome('abcba')  // true
 
@@ -626,16 +625,16 @@ function isQianFengEmail (email) {
     } else {
       // 从0开始提取，@符号往前的位置，但不包括@符号
       const username = email.substring(0, index)
-      const isAccordWith = true  // 假设都符合
+      const flag = true  // 假设都符合
       for (let i = 0; i < username.length; i++) {
-        // 如果其中有一个singleLetter为假的话，说明就有非数字、字母、下划线，直接设置isAccordWith为假
+        // 如果其中有一个singleLetter为假的话，说明就有非数字、字母、下划线，直接设置flag为假
         // 如果在整个for循环过程中，其中if语句一次都没执行，说明其中没有任何一个字符它是非数字、字母、下划线
         if (!singleLetter(username[i])) {
-          isAccordWith = false
+          flag = false
           break
         }
       }
-      return isAccordWith
+      return flag
     }
   }
 }
@@ -927,10 +926,10 @@ function getResult (start, end) {
 getResult(1, 100)  // 5050
 
 // 数组排序
-function arraysSort (...list) {
+function arraySort (...list) {
   return list.sort((a, b) => a - b)
 }
-arraysSort(10, -2, 101, -4, 50)  // [-4, -2, 10, 50, 101]
+arraySort(10, -2, 101, -4, 50)  // [-4, -2, 10, 50, 101]
 
 // 数组快速排序
 function quickSort (array) {
@@ -1047,9 +1046,9 @@ function rightTriangle (row) {
 rightTriangle(9)
 
 // 用while打印直角三角形
-function triangle (num) {
+function triangle (numbers) {
   let outer = 0
-  while (outer < num) {
+  while (outer < numbers) {
     outer++
     let inner = 0
     while (inner < outer) {
@@ -1062,7 +1061,7 @@ function triangle (num) {
 triangle(5)
 
 // 用do...while打印直角三角形
-function triangles (num) {
+function triangles (numbers) {
   let start = 0
   do {
     let i = 0
@@ -1072,7 +1071,7 @@ function triangles (num) {
     } while (i < start)
     start++
     document.write('<br/>')
-  } while (start < num)
+  } while (start < numbers)
 }
 triangles(5)
 
@@ -1303,19 +1302,21 @@ hollowDiamond(6)
 
 // 实心菱形
 function blackDiamond (row) {
+  let star = ''
   for (let i = 1; i <= 2 * row - 1; i++) {
     // 空格的个数
     let blanks = Math.abs(row - i)
     // 星号个数，2乘以row减1是一个矩形，减去两边空格的个数，剩下中间的就是一个菱形  
-    let stars = 2 * row - 1 - 2 * blanks
+    let tinySpot = 2 * row - 1 - 2 * blanks
     for (let j = 1; j <= blanks; j++) {
-      document.write("&ensp;")
+      star += ' '
     }
-    for (let k = 1; k <= stars; k++) {
-      document.write("*")
+    for (let k = 1; k <= tinySpot; k++) {
+      star += '*'
     }
-    document.write("<br/>")
+    star += '\n'
   }
+  return star
 }
 blackDiamond(6)
 
@@ -1657,9 +1658,9 @@ function findMinMax () {
 }
 findMinMax(1, 123, -500, -1150, 440, 88)  // 最小数: -1150 最大数: 440
 
-function foundMinMax (arr) {
-  let min = Math.min(...arr)
-  let max = Math.max(...arr)
+function foundMinMax (arrays) {
+  let min = Math.min(...arrays)
+  let max = Math.max(...arrays)
   return `最小数是: ${min} 最大数是: ${max}`
 }
 foundMinMax([10, 123, 500, -115, 44, 88])  // 最小数是: -115 最大数是: 500
@@ -1714,11 +1715,11 @@ function sevenMultipleSum (start, end) {
 sevenMultipleSum(1, 100)  // 总和735，7的倍数的数有14个
 
 // 打印1-100之间所有7的倍数的数字个数以及总和
-function sevenMultiple (n) {
+function sevenMultiple (numbers) {
   let i = 1
   let count = 0
   let sum = 0
-  while (i <= n) {
+  while (i <= numbers) {
     if (i % 7 === 0) {
       sum += i
       count++
@@ -2211,11 +2212,9 @@ function numberLeapYear (start, end) {
 }
 numberLeapYear(1000, 2000)
 
-
-
 // 定义一个函数，输入数字，逆转并输出汉字形式
 function outPutChinese (values) {
-  let strings = ""
+  let strings = ''
   if (typeof values !== 'string' || values === '0' || values === '' || /[^\d]/g.test(values)) {
     return '请输入合法的值!'
   }
@@ -3452,7 +3451,7 @@ function greaterThanTen (list, numbers) {
 }
 greaterThanTen([2, 0, 6, 1, 77, 0, 52, 0, 265, 7], 10)  // [77, 52, 265]
 
-function numberRemoveRepeat (list) {
+function removeRepeat (list) {
   let arrays = []
   for (let i = 0; i < list.length; i++) {
     if (list[i] !== 0) {
@@ -3461,16 +3460,16 @@ function numberRemoveRepeat (list) {
   }
   return arrays.sort((a, b) => a - b)
 }
-numberRemoveRepeat([2, 0, 6, 1, 77, 0, 52, 0, 25, 7])  // [1, 2, 6, 7, 25, 52, 77]
+removeRepeat([2, 0, 6, 1, 77, 0, 52, 0, 25, 7])  // [1, 2, 6, 7, 25, 52, 77]
 
-function reverseFruits (fruit) {
-  let arrays = []
-  for (let i = fruit.length - 1; i >= 0; i--) {
-    arrays[arrays.length] = fruit[i]
+function reverseArray (fruits) {
+  let datas = []
+  for (let i = fruits.length - 1; i >= 0; i--) {
+    datas[datas.length] = fruits[i]
   }
-  return arrays
+  return datas
 }
-reverseFruits(['red', 'green', 'blue', 'pink', 'purple'])  // ['purple', 'pink', 'blue', 'green', 'red']
+reverseArray(['red', 'green', 'blue', 'pink', 'purple'])  // ['purple', 'pink', 'blue', 'green', 'red']
 
 // 对称数组
 function symmetricArray (arrays) {
@@ -3499,7 +3498,7 @@ function isLetter (char) {
   return (char >= 'a' && char <= 'z') || (char >= 'A' && char <= 'Z') ? true : false
 }
 
-function sumUp (start, end) {
+function summation (start, end) {
   let total = 0
   if (start > end) {
     return false
@@ -3509,7 +3508,7 @@ function sumUp (start, end) {
   }
   return total
 }
-sumUp(1, 100)  // 5050
+summation(1, 100)  // 5050
 
 function changePosition (x, y) {
   let temp = x
@@ -3740,29 +3739,29 @@ function swapper (codes, chinese) {
 }
 swapper('1112223337789999', '零壹贰叁肆伍陆柒捌玖')  // "壹壹壹贰贰贰叁叁叁柒柒捌玖玖玖玖"
 
-function charAtTest (strings, numbers) {
-  // 从索引为n – 1的位置，获取正确的字符，并返回
-  return strings.charAt(numbers - 1)
+function charAtTest (strings, index) {
+  // 从索引为index – 1的位置，获取正确的字符，并返回
+  return strings.charAt(index - 1)
 }
 charAtTest('ABCDEFGHIJKLMNOPQRSTUVWXYZ')  // "A"
 
-function stringPosition (codes) {
+function stringPosition (strings) {
   let objects = {}
   // 把每个字符都保存在对象里面，如果对象中有该属性，就+1，如果对象中没有该属性，就为1
-  for (let i = 0; i < codes.length; i++) {
-    let chars = codes[i]
+  for (let i = 0; i < strings.length; i++) {
+    let chars = strings[i]
     // objects[chars]得到的是属性值
     objects[chars] ? objects[chars] += 1 : objects[chars] = 1
   }
-  let strings = ''
+  let label = ''
   let count = 0
   for (const key in objects) {
     if (objects[key] > count) {
       count = objects[key]
-      strings = key
+      label = key
     }
   }
-  return `出现最多的字符是${strings}, 一共出现了${count}次`
+  return `出现最多的字符是${label}, 一共出现了${count}次`
 }
 stringPosition('abcoefoxyozzopp')  // "出现最多的字符是o, 一共出现了4次"
 
@@ -5050,11 +5049,7 @@ let list = [
 ]
 handleMap(list)
 
-// this.$nextTick()将回调延迟到下次DOM更新循环之后执行
-// promise.all是数组里面所有的promise对象执行结束之后，会返回一个存储所有promise对象的结果 
-// promise.race顾名思义race就是比赛的意思，只会返回一个执行速度最快的那个promise对象返回的结果 
-
-// splice() 方法向/从数组中添加/删除项目，然后返回被删除的项目。
+// splice()方法向或从数组中添加或删除项目，然后返回被删除的项目。
 const fruits = ["Banana", "Orange", "Apple", "Mango"]
 fruits.splice(2, 0, "Lemon")
 console.log(fruits)  // ["Banana", "Orange", "Lemon", "Apple", "Mango"]
@@ -5071,9 +5066,11 @@ console.log(arrays.slice(-2, -1))  // [6]
 const arrays = [1, 2, 3, 4, 5, 6, 7]
 console.log(arrays.slice(3))  // [4, 5, 6, 7]
 
-const arrays = [1, 2, 3, 4, 5]
-arrays.forEach((item, index) => arrays[index] = item * 4)
-console.log(arrays)  // [4, 8, 12, 16, 20]
+function multiplyNumbers (arrays) {
+  arrays.forEach((item, index) => arrays[index] = item * 4)
+  return arrays
+}
+multiplyNumbers([1, 2, 3, 4, 5])  // [4, 8, 12, 16, 20]
 
 // 回调函数: 因为函数实际上是一种对象，它可以存储在变量中，通过参数传递给另一个函数，在函数内部创建，
 // 从函数中返回结果值，因为函数是内置对象，我们可以将它作为参数传递给另一个函数，到函数中执行，
