@@ -37,10 +37,10 @@ function judgeSex (sex) {
     case 2:
       return '男士'
     default:
-      return '请选择性别'
+      return '未知'
   }
 }
-judgeSex(3)  // 请选择性别
+judgeSex(3)  // 未知
 
 // 位运算符
 console.log(5 & 1)  // 1
@@ -2060,14 +2060,47 @@ function primeNumber (start, end) {
 }
 primeNumber(100, 200)  // 3167
 
-function findMaxNumber (array) {
-  let max = array[0]
-  for (let i = 0; i < array.length; i++) {
-    max = max < array[i] ? array[i] : max
+function findMaxNumber (arrays) {
+  let max = arrays[0]
+  for (let i = 0; i < arrays.length; i++) {
+    max = max < arrays[i] ? arrays[i] : max
   }
   return max
 }
 findMaxNumber([1, 2, 5, 3, 7, 4])  // 7
+
+// 实现倒置的九九乘法表
+for (let i = 9; i >= 1; i--) {
+  for (let j = 1; j <= i; j++) {
+    document.write(`${i} x ${j} = ${i * j}`)
+  }
+  document.write('</br>')
+}
+
+// 通过for循环实现百钱买百鸡的题
+// 公鸡5元每只，母鸡3元每只，小鸡1元3只，100元可以买100只鸡
+// 三层for循环实现
+for (let i = 0; i <= 20; i++) {
+  for (let j = 0; j <= 33; j++) {
+    for (let k = 0; k <= 100; k++) {
+      if ((i + j + k === 100) && (i * 5 + j * 3 + k / 3 === 100)) {
+        document.write(`公鸡: ${i} 母鸡: ${j} 小鸡: ${k}`)
+      }
+    }
+  }
+  document.write('</br>')
+}
+
+// 双层for循环实现
+for (let i = 0; i <= 20; i++) {
+  for (let j = 0; j <= 33; j++) {
+    let k = 100 - i - j
+    if ((k % 3 === 0) && (i * 5 + j * 3 + k / 3 === 100)) {
+      document.write(`公鸡: ${i} 母鸡: ${j} 小鸡: ${k}`)
+    }
+  }
+  document.write('</br>')
+}
 
 function getCaption (url, parameter) {
   const index = url.lastIndexOf(parameter)
