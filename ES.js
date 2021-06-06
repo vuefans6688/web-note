@@ -3766,6 +3766,32 @@ function stringPosition (strings) {
 }
 stringPosition('abcoefoxyozzopp')  // "出现最多的字符是o, 一共出现了4次"
 
+// 给定仅有小写字母组成的字符串数组A
+// 返回列表中的每个字符串中都显示的全部字符(包含重复字符)组成的列表
+// 你可以按任意顺序返回答案
+// 输入: ["bella", "label", "roller"]
+// 输出: ["e", "l", "l"]
+function charCount (arrays) {
+  let datas = {}
+  let result = []
+  for (let i = 0; i < 26; i++) {
+    datas[String.fromCharCode(i + 97)] = new Array(arrays.length).fill(0)
+  }
+  for (let j = 0; j < arrays.length; j++) {
+    for (let key of arrays[j]) {
+      datas[key][j]++
+    }
+  }
+  for (let item in datas) {
+    let numbers = Math.min(...datas[item])
+    while (numbers--) {
+      result.push(item)
+    }
+  }
+  return result
+}
+charCount(['bella', 'label', 'roller'])  // ["e", "l", "l"]
+
 // 将字符串的字符全部转换为小写字符
 function lowerCase (strings) {
   let arrays = strings.split('')
