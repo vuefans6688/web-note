@@ -2255,24 +2255,24 @@ function outPutChinese (values) {
 }
 function transfer (target) {
   switch (target) {
-    case "1":
-      return "壹"
-    case "2":
-      return "贰"
-    case "3":
-      return "弎"
-    case "4":
-      return "四"
-    case "5":
-      return "伍"
-    case "6":
-      return "陆"
-    case "7":
-      return "七"
-    case "8":
-      return "八"
-    case "9":
-      return "玖"
+    case '1':
+      return '壹'
+    case '2':
+      return '贰'
+    case '3':
+      return '弎'
+    case '4':
+      return '肆'
+    case '5':
+      return '伍'
+    case '6':
+      return '陆'
+    case '7':
+      return '柒'
+    case '8':
+      return '捌'
+    case '9':
+      return '玖'
   }
 }
 outPutChinese('1')  // "壹"
@@ -2302,16 +2302,6 @@ function links (strings, ...multiples) {
 }
 templates()  // 作者: 小红 课程: 后盾人媒体查询响应式布局 ...
 
-while (true) {
-  const year = prompt('后盾人哪年成立的?').trim()
-  if (!year) {
-    continue
-  } else {
-    year === '2010' ? '回答正确' : '输入错误'
-    break
-  }
-}
-
 function Ticker (config) {
   this.getNumber = function () {
     return config.start
@@ -2336,7 +2326,7 @@ ticker2.getNumber()  // 26
 // 创建一个Human类
 class Human {
   constructor(firstName, lastName, age, eye) {
-    // 构造器中的this指的是类的实例对象
+    // 构造器中的this指向类的实例对象
     this.firstName = firstName
     this.lastName = lastName
     this.age = age
@@ -2454,12 +2444,16 @@ const getMonthWeek = function (a, b, c) {
 }
 getMonthWeek(2020, 11, 3)  // 今天是2020年的第11月的第1周"
 
-const params = [1992, 2, 22, 13, 22, 19]
-const dates = new Date(...params)
-console.log(dates)
-const date3 = new Date('1996-07-12 08:22:12')
-const timestamp = date3.valueOf()
-console.log(timestamp)
+function fullDate (params) {
+  return new Date(...params)
+}
+fullDate([1992, 2, 22, 13, 22, 19])  // Sun Mar 22 1992 13:22:19 GMT+0800 (中国标准时间)
+
+function getTimeStamp (date) {
+  return new Date(date).valueOf()
+}
+getTimeStamp('1996-07-12 08:22:12')  // 837130932000
+
 // 转化日期格式
 function dateFormat (date, format = 'YYYY-MM-DD HH:mm:ss') {
   date = new Date(date)
@@ -2573,9 +2567,9 @@ formatTime(date, '{0}年{1}月{2}日')
 function formatTimes (template = '{0}年{1}月{2}日 {3}时{4}分{5}秒') {
   const validates = this.match(/\d+/g)
   return template.replace(/\{(\d+)\}/g, (_, number) => {
-    const item = validates[number] || '0' + item
-    item.length < 2 ? item : null
-    return item
+    const items = validates[number] || '0' + items
+    items.length < 2 ? items : null
+    return items
   })
 }
 String.prototype.formatTime = formatTimes
@@ -2625,29 +2619,6 @@ function calculateAge (birthDate) {
   }
 }
 calculateAge('1991-09-18')  // 29
-
-// 统计1-n整数中出现1的次数
-function countOne (number) {
-  let factor = 1
-  let count = 0
-  let next = parseInt(number / factor)
-  while (next !== 0) {
-    let lower = number - next * factor
-    let current = next % 10
-    let high = parseInt(number / (10 * factor))
-    if (current === 0) {
-      count += high * factor
-    } else if (current === 1) {
-      count += high * factor + lower + 1
-    } else {
-      count += (high + 1) * factor
-    }
-    factor *= 10
-    next = parseInt(number / factor)
-  }
-  return count
-}
-countOne(1)  // 1
 
 function get () {
   return ['后盾人', 2010]
@@ -2760,8 +2731,8 @@ function getMax (array) {
 getMax([1, 2, 3, 4, 5, 6, 7])  // 7
 
 // 求数组最大元素
-function getMax (array) {
-  return Math.max.apply(null, array)
+function getMax (arrays) {
+  return Math.max.apply(null, arrays)
 }
 getMax([1, 2, 3, 4, 5, 6, 7])  // 7
 
@@ -2933,16 +2904,16 @@ let lessons = [
   { title: 'js入门课程', click: 31 },
   { title: 'h5和css3案例', click: 35 }
 ]
-function change (lessons, numbers = 100, i = 0) {
+function changed (lessons, numbers = 100, i = 0) {
   // 退出条件，当i等于所有课程数量的时候，表示全部操作完成，然后把lessons返回出去
   if (i === lessons.length) {
     return lessons
   }
   lessons[i].click += numbers
   // 前加加i是为了防止出现死循环
-  return change(lessons, numbers, ++i)
+  return changed(lessons, numbers, ++i)
 }
-change(lessons, 20)  // 原数组对象中的click属性值都加上20，title属性值不变
+changed(lessons, 20)  // 原数组对象中的click属性值都加上20，title属性值不变
 
 let hd = Symbol('后盾人在线教程')
 let edu = Symbol('网址是houdunren.com')
