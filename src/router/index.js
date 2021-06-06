@@ -438,8 +438,8 @@ const router = new VueRouter({
       component: () => import('@/views/recursive')
     },
     {
-      path: '/multiplication-formula',
-      component: () => import('@/views/multiplication-formula')
+      path: '/multip-formula',
+      component: () => import('@/views/multip-formula')
     },
     {
       path: '/drag',
@@ -460,6 +460,10 @@ const router = new VueRouter({
     {
       path: '/modal',
       component: () => import('@/views/modal')
+    },
+    {
+      path: '/multip-table',
+      component: () => import('@/views/multip-table')
     }
   ]
 })

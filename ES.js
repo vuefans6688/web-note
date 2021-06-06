@@ -2070,37 +2070,34 @@ function findMaxNumber (arrays) {
 findMaxNumber([1, 2, 5, 3, 7, 4])  // 7
 
 // 实现倒置的九九乘法表
-for (let i = 9; i >= 1; i--) {
-  for (let j = 1; j <= i; j++) {
-    document.write(`${i} x ${j} = ${i * j}`)
+function multipTable (start, end) {
+  let label = ''
+  for (let i = end; i >= start; i--) {
+    for (let j = start; j <= i; j++) {
+      label += `${i} x ${j} = ${i * j}`
+    }
+    label += '\n'
   }
-  document.write('</br>')
+  return label
 }
+multipTable(1, 9)
 
-// 通过for循环实现百钱买百鸡的题
+// 通过for循环实现百钱买百鸡
 // 公鸡5元每只，母鸡3元每只，小鸡1元3只，100元可以买100只鸡
-// 三层for循环实现
-for (let i = 0; i <= 20; i++) {
-  for (let j = 0; j <= 33; j++) {
-    for (let k = 0; k <= 100; k++) {
-      if ((i + j + k === 100) && (i * 5 + j * 3 + k / 3 === 100)) {
-        document.write(`公鸡: ${i} 母鸡: ${j} 小鸡: ${k}`)
+function buyChicken (cock, hen, poult) {
+  let label = ''
+  for (let i = 0; i <= cock; i++) {
+    for (let j = 0; j <= hen; j++) {
+      let k = poult - i - j
+      if ((k % 3 === 0) && (i * 5 + j * 3 + k / 3 === poult)) {
+        label += `公鸡: ${i}只， 母鸡: ${j}只， 小鸡: ${k}只`
       }
     }
+    label += '\n'
   }
-  document.write('</br>')
+  return label
 }
-
-// 双层for循环实现
-for (let i = 0; i <= 20; i++) {
-  for (let j = 0; j <= 33; j++) {
-    let k = 100 - i - j
-    if ((k % 3 === 0) && (i * 5 + j * 3 + k / 3 === 100)) {
-      document.write(`公鸡: ${i} 母鸡: ${j} 小鸡: ${k}`)
-    }
-  }
-  document.write('</br>')
-}
+buyChicken(20, 33, 100)
 
 function getCaption (url, parameter) {
   const index = url.lastIndexOf(parameter)

@@ -1,6 +1,6 @@
 <template>
-  <!-- 九九乘法表 -->
-  <div class="multiplication-formula">
+  <!-- 99乘法表 -->
+  <div class="multip-formula">
     <table border="1">
       <tr v-for="row in count">
         <td v-for="col in row">{{ col }} x {{ row }} = {{ row * col }}</td>
