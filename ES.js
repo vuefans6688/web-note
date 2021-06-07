@@ -3792,6 +3792,59 @@ function charCount (arrays) {
 }
 charCount(['bella', 'label', 'roller'])  // ["e", "l", "l"]
 
+// 给你一个有序数组numbers，请你原地删除重复出现的元素，
+// 使每个元素最多出现两次，返回删除后的信数组的长度
+// 不要使用额外的数组空间，你必须在原地修改输入数组
+// 并在使用O(1)额外空间的条件下完成
+// numbers = [0, 0, 0, 1, 1, 1, 2, 3, 3]
+// 输出: 7
+function deleteArray (numbers) {
+  if (numbers.length < 3) {
+    return numbers.length
+  }
+  let slow = fast = 2
+  while (fast < numbers.length) {
+    if (numbers[fast] !== numbers[slow - 2]) {
+      numbers[slow] = numbers[fast]
+      slow++
+    }
+    fast++
+  }
+  return slow
+}
+deleteArray([0, 0, 0, 1, 1, 1, 2, 3, 3])  // 7
+
+// 给定一个非负整数numbers，反复将各个位上的数字相加，直到结果为一位数
+// 输入: 38
+// 输出: 2
+// 解释: 各位相加的过程为 3 + 8 = 11,1 + 1 = 2由于2是一位数，所以返回2
+function addMore (numbers) {
+  if (numbers < 10) {
+    return numbers
+  }
+  let result = numbers.toString().split('').reduce((previou, current) => previou + parseInt(current), 0)
+  return addMore(result)
+}
+addMore(38)  // 2
+
+// 给你一个整数数组numbers，请你将数组按照每个值的频率升序排序
+// 如果有多个值的频率相同，请你按照数值本身将它们降序排序
+// 请你返回排序后的数组
+// 输入: [1, 1, 1, 1, 2, 2, 3, 4]
+// 输出: 4, 3, 2, 2, 1, 1, 1, 1
+function arraySort (arrays) {
+  let maps = {}
+  arrays.forEach(item => maps[item] = maps[item] ? maps[item] + 1 : 1)
+  return arrays.sort((a, b) => {
+    if (maps[a] === maps[b]) {
+      return b - a
+    } else {
+      return maps[a] - maps[b]
+    }
+  })
+}
+arraySort([1, 1, 1, 1, 2, 2, 3, 4])  // [4, 3, 2, 2, 1, 1, 1, 1]
+
 // 将字符串的字符全部转换为小写字符
 function lowerCase (strings) {
   let arrays = strings.split('')
