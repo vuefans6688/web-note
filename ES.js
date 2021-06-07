@@ -5334,9 +5334,7 @@ class HttpRequest {
   request (options) {
     options = Object.assign(this.defaults, options)
     // 请求的子实例
-    const instance = axios.create(options)
-    this.interceptor(instance)
-    return instance
+    return this.interceptor(axios.create(options))
   }
 }
 // 创建axios实例
@@ -5345,7 +5343,6 @@ const instance = new HttpRequest({
 })
 // 请求的axios实例
 const http = instance.request()
-// 使用http
 export function getUserInfo () {
   return http.get('/user')
 }
