@@ -1,5 +1,9 @@
 ## 前端笔记
 
+## 根据版本号来安装sass
+    npm i node-sass@4.13.1
+    npm i sass-loader@8.0.2
+
 ## uni-app操作流程
     1.全局安装
       npm install -g @vue/cli
