@@ -5295,6 +5295,13 @@ function chain (files) {
 const files = ['foo.txt ', '.bar', ' ', 'baz.foo']
 chain(files)
 
+/**
+ * typeof 用来检测数据类型的运算符
+ * instanceof 用来检测当前实例是否隶属于某个类
+ * constructor 基于构造函数检测数据类型(也是基于类的方式)
+ * Object.prototype.toString.call() 检测数据类型最好的办法
+ */
+
 // 使用class类封装axios
 import axios from 'axios'
 import { merge } from 'lodash'
