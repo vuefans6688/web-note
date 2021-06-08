@@ -9,7 +9,36 @@
 </head>
 
 <body>
-  <h1>这是一个用来测试的文件</h1>
+  <h1>真是一个热火朝天的季节...</h1>
+  <el-container>
+    <el-aside width="200px">
+      <el-menu router>
+        <el-submenu index="1" v-for="(route, index) in routers" :key="index" v-if="route.hidden">
+          <template slot="title">
+            <i></i>
+            <span>{{ route.name }}</span>
+          </template>
+          <el-menu-item v-for="(item, i) in route.children" :index="item.path">{{ item.name }}</el-menu-item>
+        </el-submenu>
+      </el-menu>
+    </el-aside>
+    <el-main>
+      <router-view />
+    </el-main>
+  </el-container>
+
+  <script>
+    new Vue({
+      el: '#app',
+      computed: {
+        routers() {
+          return this.$router.options.routes
+        }
+      }
+    })
+  </script>
 </body>
+
+
 
 </html>
