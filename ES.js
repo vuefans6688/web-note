@@ -5298,7 +5298,7 @@ chain(files)
 // 使用class类封装axios
 import axios from 'axios'
 import { merge } from 'lodash'
-class HttpRequest {
+class Request {
   constructor(options) {
     this.defaults = {
       baseURL: ''
@@ -5306,7 +5306,7 @@ class HttpRequest {
     this.defaults = Object.assign(this.defaults, options)
   }
   interceptor (install) {
-    // 拦截请求，给请求的数据或者头信息添加一些数据
+    // 拦截请求，给请求头添加一些数据
     install.interceptors.request.use(
       config => {
         const token = localStorage.getItem('token')
@@ -5320,7 +5320,7 @@ class HttpRequest {
         return Promise.reject(error)
       }
     )
-    // 拦截响应，给响应的数据添加一些数据
+    // 拦截响应，给请求体添加一些数据
     install.interceptors.response.use(
       response => {
         const { data, status } = response
@@ -5338,11 +5338,10 @@ class HttpRequest {
   }
 }
 // 创建axios实例
-const instance = new HttpRequest({
+const instance = new Request({
   baseURL: '/api'
 })
-// 请求的axios实例
-const http = instance.request()
-export function getUserInfo () {
-  return http.get('/user')
+const network = instance.request()
+export function login () {
+  return network.get('/user/login')
 }
