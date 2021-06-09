@@ -5302,51 +5302,6 @@ chain(files)
  * Object.prototype.toString.call() 检测数据类型最好的办法
  */
 
-// 插入排序
-function insertionSort (A) {
-  for (let i = 1; i < A.length; i++) {
-    const key = A[i]
-    let j = i - 1
-    // 将抓到的牌插入到合适的位置
-    while (j >= 0 && A[j] > key) {
-      A[j + 1] = A[j]
-      j--
-    }
-    // 每次循环结束的时候j的位置代表下一张需要排序的牌
-    A[j + 1] = key
-  }
-  return A
-}
-insertionSort([3, 2, 1])  // [1, 2, 3]
-
-// 找出数组中的最大值
-function findMax (arrays) {
-  let max = Number.NEGATIVE_INFINITY
-  for (let i = 0; i < arrays.length; i++) {
-    max = arrays[i] > max ? arrays[i] : max
-  }
-  return max
-}
-findMax([1, 4, 2, 3])  // 4
-
-// 数组冒泡排序
-function swap (A, i, j) {
-  const t = A[i]
-  A[i] = A[j]
-  A[j] = t
-}
-function bubbleSort (A) {
-  for (let i = A.length; i > 0; i--) {
-    for (let j = 1; j < i; j++) {
-      if (A[j] < A[j - 1]) {
-        swap(A, j, j - 1)
-      }
-    }
-  }
-  return A
-}
-bubbleSort([1, 3, 2, 6, 4, 5])  // [1, 2, 3, 4, 5, 6]
-
 // 使用class类封装axios
 import axios from 'axios'
 import { merge } from 'lodash'

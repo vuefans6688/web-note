@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>算法</title>
+</head>
+
+<body>
+  <script>
+    // 插入排序
+    function insertionSort(arrays) {
+      for (let i = 1; i < arrays.length; i++) {
+        const key = arrays[i]
+        let j = i - 1
+        // 将抓到的牌插入到合适的位置
+        while (j >= 0 && arrays[j] > key) {
+          arrays[j + 1] = arrays[j]
+          j--
+        }
+        // 每次循环结束的时候j的位置代表下一张需要排序的牌
+        arrays[j + 1] = key
+      }
+      return arrays
+    }
+    insertionSort([3, 2, 1])  // [1, 2, 3]
+
+    // 找出数组中的最大值
+    function findMax(arrays) {
+      let max = Number.NEGATIVE_INFINITY
+      for (let i = 0; i < arrays.length; i++) {
+        max = arrays[i] > max ? arrays[i] : max
+      }
+      return max
+    }
+    findMax([1, 4, 2, 3])  // 4
+
+    // 数组冒泡排序
+    function swap(arrays, i, j) {
+      const temp = arrays[i]
+      arrays[i] = arrays[j]
+      arrays[j] = temp
+    }
+    function bubbleSort(arrays) {
+      for (let i = arrays.length; i > 0; i--) {
+        for (let j = 1; j < i; j++) {
+          if (arrays[j] < arrays[j - 1]) {
+            swap(arrays, j, j - 1)
+          }
+        }
+      }
+      return arrays
+    }
+    bubbleSort([1, 3, 2, 6, 4, 5])  // [1, 2, 3, 4, 5, 6]
+
+    // 在一个范围内求和
+    function sumAll(arrays) {
+      return (arrays[0] + arrays[1]) * (Math.abs(arrays[0]) - arrays[1] + 1) / 2
+    }
+    sumAll([1, 4])  // -5
+    sumAll([4, 1])  // 10
+
+    // 根据数组中指定的元素的范围来求和
+    function sumRange(arrays) {
+      let result = 0, min, max
+      if (arrays[0] > arrays[1]) {
+        max = arrays[0]
+        min = arrays[1]
+      } else {
+        min = arrays[0]
+        max = arrays[1]
+      }
+      for (let i = min; i <= max; i++) {
+        result += i
+      }
+      return result
+    }
+    sumRange([1, 4])  // 10
+
+    // 根据数组中指定的元素的范围来求和
+    function sumRange(arrays) {
+      let min = Math.min(...arrays)
+      let max = Math.max(...arrays)
+      let temp = []
+      for (let i = min; i <= max; i++) {
+        temp.push(i)
+      }
+      return temp.reduce((previou, current) => previou + current, 0)
+    }
+    sumRange([1, 4])  // 10
+
+    // 找出两个数组中的不同元素
+    function differentArray(first, second) {
+      let result = []
+      for (let i = 0; i < first.length; i++) {
+        if (!second.includes(first[i])) {
+          result.push(first[i])
+        }
+      }
+      for (let j = 0; j < second.length; j++) {
+        if (!first.includes(second[j])) {
+          result.push(second[j])
+        }
+      }
+      return result
+    }
+    differentArray([1, 2, 3, 5, 8], [1, 2, 3, 4, 5])  // [8, 4]
+
+    // 找出两个数组中的不同元素
+    function differentArray(first, second) {
+      return getElementOf(first, second).concat(getElementOf(second, first))
+    }
+    function getElementOf(arrays, target) {
+      let result = []
+      for (let i = 0; i < arrays.length; i++) {
+        if (!target.includes(arrays[i])) {
+          result.push(arrays[i])
+        }
+      }
+      return result
+    }
+    differentArray([1, 2, 3, 5, 8], [1, 2, 3, 4, 5])  // [8, 4]
+
+    // 找出两个数组中的不同元素
+    function differentArray(first, second) {
+      return first.concat(second).filter(item => !first.includes(item) || !second.includes(item))
+    }
+    differentArray([1, 2, 3, 5, 8], [1, 2, 3, 4, 5])  // [8, 4]
+
+    // 销毁数组元素
+    function destroyer(arrays) {
+      let result = []
+      let toDelete = Array.from(arguments).slice(1)
+      // let toDelete = Array.prototype.slice.call(arguments)
+      arrays.forEach(item => {
+        if (!toDelete.includes(item)) {
+          result.push(item)
+        }
+      })
+      return result
+    }
+    destroyer([1, 2, 3, 1, 2, 3], 2, 3)  // [1, 1]
+
+    function whatIsInAName(collection, source) {
+      let result = []
+      for (let i = 0; i < collection.length; i++) {
+        let isShould = true
+        let current = collection[i]
+        for (let key in source) {
+          if (current[key] !== source[key]) {
+            isShould = false
+          }
+        }
+        if (isShould) {
+          result.push(current)
+        }
+      }
+      return result
+    }
+    const firstData = [
+      { first: 'Remeo', last: 'Montague' },
+      { first: 'Mercutio', last: null },
+      { first: 'Tybalt', last: 'Capulet' }
+    ]
+    const secondData = {
+      last: 'Capulet'
+    }
+    whatIsInAName(firstData, secondData)  // [{first: "Tybalt", last: "Capulet"}]
+
+    function whatIsInAName(collection, source) {
+      let result = []
+      for (let i = 0; i < collection.length; i++) {
+        let current = collection[i]
+        if (shouldKeep(current, source)) {
+          result.push(current)
+        }
+      }
+      return result
+    }
+    function shouldKeep(current, source) {
+      for (let key in source) {
+        if (current[key] !== source[key]) {
+          return false
+        }
+      }
+      return true
+    }
+    const firstData = [
+      { first: 'Remeo', last: 'Montague' },
+      { first: 'Mercutio', last: null },
+      { first: 'Tybalt', last: 'Capulet' }
+    ]
+    const secondData = { last: 'Capulet' }
+    whatIsInAName(firstData, secondData)  // [{first: "Tybalt", last: "Capulet"}]
+
+    function spinalCase(strings) {
+      let codes = ''
+      for (let i = 0; i < strings.length; i++) {
+        if (strings[i] === ' ' || strings[i] === '_') {
+          codes += '-'
+        } else if (/[A-Z]/.test(strings[i])) {
+          if (strings[i - 1] && /[a-z]/.test(strings[i - 1])) {
+            codes += `-${strings[i]}`
+          } else {
+            codes += strings[i]
+          }
+        } else {
+          codes += strings[i]
+        }
+      }
+      return codes.toLowerCase()
+    }
+    spinalCase('This Is Spinal Tap')  // "this-is-spinal-tap"
+    function spinalCase(strings) {
+      return strings.split(/\s|_|(?<=[a-z])\B(?=[A-Z])/).join('-').toLowerCase()
+    }
+    spinalCase('This Is Spinal Tap')  // "this-is-spinal-tap"
+    function translatePigLatin(strings) {
+      let vowelIndex = -1
+      for (let i = 0; i < strings.length; i++) {
+        if (/[aeiou]/.test(strings[i])) {
+          vowelIndex = i
+          break
+        }
+      }
+      if (vowelIndex === -1) {
+        return strings + 'ay'
+      } else if (vowelIndex === 0) {
+        return strings + 'way'
+      } else {
+        return strings.slice(vowelIndex) + strings.slice(0, vowelIndex) + 'ay'
+      }
+    }
+    translatePigLatin('consonant')  // "onsonantcay"
+    function translatePigLatin(strings) {
+      return strings.replace(/([^aeiou]*)(\w*)/, (match, before, after) => `${after}${before || 'w'}ay`)
+    }
+    translatePigLatin('consonant')  // "onsonantcay"
+  </script>
+</body>
+
+</html>
