@@ -1,9 +1,9 @@
 {
   "posts": [
     {
+      "id": 1,
       "title": "json-server测试数据",
-      "author": "typicode测试数据",
-      "id": 1
+      "author": "typicode测试数据"
     },
     {
       "id": 2,
@@ -14,9 +14,9 @@
       "id": 3
     },
     {
+      "id": 4,
       "title": "json-server，服务器",
-      "author": "typicode，服务器",
-      "id": 4
+      "author": "typicode，服务器"
     }
   ],
   "comments": [
