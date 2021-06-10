@@ -213,10 +213,12 @@
       return codes.toLowerCase()
     }
     spinalCase('This Is Spinal Tap')  // "this-is-spinal-tap"
+
     function spinalCase(strings) {
       return strings.split(/\s|_|(?<=[a-z])\B(?=[A-Z])/).join('-').toLowerCase()
     }
     spinalCase('This Is Spinal Tap')  // "this-is-spinal-tap"
+
     function translatePigLatin(strings) {
       let vowelIndex = -1
       for (let i = 0; i < strings.length; i++) {
@@ -234,10 +236,46 @@
       }
     }
     translatePigLatin('consonant')  // "onsonantcay"
+
     function translatePigLatin(strings) {
       return strings.replace(/([^aeiou]*)(\w*)/, (match, before, after) => `${after}${before || 'w'}ay`)
     }
     translatePigLatin('consonant')  // "onsonantcay"
+
+    function searchReplace(strings, before, after) {
+      let arrays = strings.split(' ')
+      let target
+      if (/^[A-Z]/.test(before)) {
+        target = after[0].toUpperCase() + after.slice(1)
+      } else {
+        target = after[0].toLowerCase() + after.slice(1)
+      }
+      for (let i = 0; i < arrays.length; i++) {
+        if (arrays[i] === before) {
+          arrays[i] = target
+        }
+      }
+      return arrays.join(' ')
+    }
+    // "A quick brown fox leaped over the lazy dog"
+    searchReplace('A quick brown fox jumped over the lazy dog', 'jumped', 'leaped')
+
+    function pairElement(strings) {
+      let result = []
+      for (let i = 0; i < strings.length; i++) {
+        if (strings[i] === 'A') {
+          result.push(['A', 'T'])
+        } else if (strings[i] === 'T') {
+          result.push(['T', 'A'])
+        } else if (strings[i] === 'C') {
+          result.push(['C', 'G'])
+        } else {
+          result.push(['G', 'C'])
+        }
+      }
+      return result
+    }
+    pairElement('GCG')  // ["G", "C"] ["C", "G"] ["G", "C"]
   </script>
 </body>
 
