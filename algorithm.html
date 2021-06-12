@@ -276,7 +276,119 @@
       return result
     }
     pairElement('GCG')  // ["G", "C"] ["C", "G"] ["G", "C"]
+
+    function pairElement(strings) {
+      let result = []
+      let pair = {
+        'A': 'T',
+        'T': 'A',
+        'C': 'G',
+        'G': 'C'
+      }
+      for (let i = 0; i < strings.length; i++) {
+        let current = strings[i]
+        result.push(current, pair[current])
+      }
+      return result
+    }
+    pairElement('GCG')  // ["G", "C", "C", "G", "G", "C"]
+
+    function fearNotLetter(strings) {
+      let previou = strings.charCodeAt(0)
+      for (let i = 1; i < strings.length; i++) {
+        let current = strings.charCodeAt(i)
+        if (current !== previou + 1) {
+          return String.fromCharCode(previou + 1)
+        }
+        previou = current
+      }
+    }
+    fearNotLetter('abce')  // "d"
+
+    function fearNotLetter(strings) {
+      let start = strings.charCodeAt(0)
+      let end = strings.slice(-1).charCodeAt()
+      let array = []
+      for (let i = start; i <= end; i++) {
+        array.push(String.fromCharCode(i))
+      }
+      for (let i = 0; i < array.length; i++) {
+        if (!strings.includes(array[i])) {
+          return array[i]
+        }
+      }
+    }
+    fearNotLetter('abce')  // "d"
+
+    function uniteUnique(array) {
+      let params = [...arguments]
+      let result = []
+      for (let i = 0; i < params.length; i++) {
+        for (let j = 0; j < params[i].length; j++) {
+          let element = params[i][j]
+          if (!result.includes(element)) {
+            result.push(element)
+          }
+        }
+      }
+      return result
+    }
+    uniteUnique([1, 3, 2], [5, 2, 1, 4], [2, 1])  // [1, 3, 2, 5, 4]
+
+    function uniteUnique(array) {
+      let params = [...arguments]
+      let result = []
+      for (let item of params) {
+        for (let value of item) {
+          if (!result.includes(value)) {
+            result.push(value)
+          }
+        }
+      }
+      return result
+    }
+    uniteUnique([1, 3, 2], [5, 2, 1, 4], [2, 1])  // [1, 3, 2, 5, 4]
+
+    function convertHTML(strings) {
+      let result = ''
+      for (let char of strings) {
+        switch (char) {
+          case '&':
+            result += '&amp;'
+            break
+          case '<':
+            result += '&lt;'
+            break
+          case '>':
+            result += '&gt;'
+            break
+          case '"':
+            result += '&quot;'
+            break
+          case "'":
+            result += '&apos;'
+            break
+          default:
+            result += char
+            break
+        }
+      }
+      return result
+    }
+    convertHTML('Dolce & Gabbana')  // "Dolce &amp; Gabbana"
+
+    function convertHTML(strings) {
+      let entityMap = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        '\'': '&apos;'
+      }
+      return strings.replace(/&|>|<|"|'/g, match => entityMap[match])
+    }
+    convertHTML('Dolce & Gabbana')  // "Dolce &amp; Gabbana"
   </script>
 </body>
 
-</html>
+</html
