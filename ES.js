@@ -5273,8 +5273,7 @@ function forLoop (files) {
   }
   return arrays
 }
-const files = ['foo.txt ', '.bar', ' ', 'baz.foo']
-forLoop(files)
+forLoop(['foo.txt ', '.bar', ' ', 'baz.foo'])
 
 function reduceWay (files) {
   return files.reduce((result, file) => {
@@ -5286,14 +5285,12 @@ function reduceWay (files) {
     return result
   }, [])
 }
-const files = ['foo.txt ', '.bar', ' ', 'baz.foo']
-reduceWay(files)
+reduceWay(['foo.txt ', '.bar', ' ', 'baz.foo'])
 
 function chain (files) {
   return files.map(item => item.trim()).filter(Boolean).map(fileName => `~/cool_app/${fileName}`)
 }
-const files = ['foo.txt ', '.bar', ' ', 'baz.foo']
-chain(files)
+chain(['foo.txt ', '.bar', ' ', 'baz.foo'])
 
 /**
  * typeof 用来检测数据类型的运算符
