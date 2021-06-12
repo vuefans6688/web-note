@@ -1,5 +1,6 @@
 <script>
 import one from './one'
+import './index.scss'
 export default {
   components: { one },
   data () {
@@ -16,10 +17,10 @@ export default {
   render () {
     const tip = this.flag ? '你中奖了!' : '很遗憾，没中...'
     return (
-      <div style={{ 'text-align': 'center' }}>
-        <p style={{ color: '#09f' }}>中奖情况: {tip}</p>
+      <div class="two">
+        <p class="tip">中奖情况: {tip}</p>
         <one message={this.message} handle-change={this.handleChange} />
-        <ul style={{ 'list-style': 'none', color: '#f90' }}>
+        <ul class="city-name">
           {
             this.list.map(item => <li>城市: {item.cityName}</li>)
           }
