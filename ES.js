@@ -5299,6 +5299,22 @@ chain(['foo.txt ', '.bar', ' ', 'baz.foo'])
  * Object.prototype.toString.call() 检测数据类型最好的办法
  */
 
+// Python是一种多范式、通用、解释的高级编程语言。Python允许程序员使用不同的编程风格来创建简单或复杂的程序，
+// 获得更快的结果并编写代码，就像用人类语言说话一样。
+
+/**
+ * Python应用场景：
+ * (1)web应用开发
+ * (2)操作系统管理、服务器运维的自动化脚本
+ * (3)科学计算
+ * (4)桌面软件
+ * (5)游戏
+ * (6)人工智能、机器学习
+ */
+
+// 集成开发环境(IDE，Integrated Development Environment)--集成了开发软件需要的所有工具
+// Pycharm就是开发Python比较优秀的IDE
+
 // 使用class类封装axios
 import axios from 'axios'
 import { merge } from 'lodash'
