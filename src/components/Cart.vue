@@ -31,7 +31,7 @@
         align="center"
       ></el-table-column>
       <el-table-column
-        prop="total_num"
+        prop="totalNum"
         label="小计"
         width="180"
         align="center"

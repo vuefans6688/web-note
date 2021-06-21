@@ -1,64 +1,62 @@
 // 获取出生年龄，周岁、月、天、时、分、秒
 export function computeAge (time) {
-  let date = new Date()
-  let year = date.getFullYear()
-  let month = date.getMonth() + 1
-  let day = date.getDate()
-  // let hour = date.getHours()
-  // let minute = date.getMinutes()
-  // let second = date.getSeconds()
+  let nowDate = new Date()
+  let nowYear = nowDate.getFullYear()
+  let nowMonth = nowDate.getMonth() + 1
+  let nowDay = nowDate.getDate()
+  let nowHour = nowDate.getHours()
+  let nowMinute = nowDate.getMinutes()
+  let nowSecond = nowDate.getSeconds()
 
   let birthDate = new Date(time)
   let birthYear = birthDate.getFullYear()
   let birthMonth = birthDate.getMonth() + 1
   let birthDay = birthDate.getDate()
-  // let birthHour = birthDate.getHours()
-  // let birthMinute = birthDate.getMinutes()
-  // let birthSecond = birthDate.getSeconds()
+  let birthHour = birthDate.getHours()
+  let birthMinute = birthDate.getMinutes()
+  let birthSecond = birthDate.getSeconds()
 
-  // let nowSecond = second - birthSecond
-  // if (nowSecond < 0) {
-  //   minute -= 1
-  //   nowSecond = 60 - birthSecond + second
-  // }
-
-  // let nowMinute = minute - birthMinute
-  // if (nowMinute < 0) {
-  //   hour -= 1
-  //   nowMinute = 60 - birthMinute + minute
-  // }
-
-  // let nowHour = hour - birthHour
-  // if (nowHour < 0) {
-  //   day -= 1
-  //   nowHour = 24 - birthHour + hour
-  // }
-
-  let nowDay = day - birthDay
-  if (nowDay < 0) {
-    month -= 1
-    nowDay = getDaysOfMonth(time) - birthDay + day
+  let diffSecond = nowSecond - birthSecond
+  if (diffSecond < 0) {
+    nowMinute -= 1
+    diffSecond = 60 - birthSecond + nowSecond
   }
 
-  let nowMonth = month - birthMonth
-  if (nowMonth < 0) {
-    year -= 1
-    nowMonth = 12 - birthMonth + month
+  let diffMinute = nowMinute - birthMinute
+  if (diffMinute < 0) {
+    nowHour -= 1
+    diffMinute = 60 - birthMinute + nowMinute
   }
 
-  let nowYear = year - birthYear
-  if (nowYear < 0) {
-    nowYear = 0
+  let diffHour = nowHour - birthHour
+  if (diffHour < 0) {
+    nowDay -= 1
+    diffHour = 24 - birthHour + nowHour
   }
 
-  // return (nowYear > 0 ? nowYear + '岁 ' : '') +
-  //   (nowMonth > 0 ? nowMonth + '月 ' : '') +
-  //   (nowDay > 0 ? nowDay + '天 ' : '') +
-  //   (nowHour > 0 ? nowHour + '时 ' : '') +
-  //   (nowMinute > 0 ? nowMinute + '分 ' : '') +
-  //   (nowSecond > 0 ? nowSecond + '秒 ' : '')
+  let diffDay = nowDay - birthDay
+  if (diffDay < 0) {
+    nowMonth -= 1
+    diffDay = getDaysOfMonth(time) - birthDay + nowDay
+  }
 
-  return (nowYear > 0 ? nowYear + '岁 ' : '')
+  let diffMonth = nowMonth - birthMonth
+  if (diffMonth < 0) {
+    nowYear -= 1
+    diffMonth = 12 - birthMonth + nowMonth
+  }
+
+  let diffYear = nowYear - birthYear
+  if (diffYear < 0) {
+    diffYear = 0
+  }
+
+  return (diffYear > 0 ? diffYear + '岁 ' : '') +
+    (diffMonth > 0 ? diffMonth + '月 ' : '') +
+    (diffDay > 0 ? diffDay + '天 ' : '') +
+    (diffHour > 0 ? diffHour + '时 ' : '') +
+    (diffMinute > 0 ? diffMinute + '分 ' : '') +
+    (diffSecond > 0 ? diffSecond + '秒 ' : '')
 }
 
 // 获取当月的天数

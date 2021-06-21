@@ -10,7 +10,7 @@ export default {
   },
   // 商品列表
   goodList (state) {
-    return state.good_list.map(item => {
+    return state.goodList.map(item => {
       return {
         id: item.id,
         name: item.name,
@@ -21,13 +21,13 @@ export default {
   // 购物车的列表
   cartProducts (state) {
     return state.added.map(({ id, num }) => {
-      let product = state.good_list.find(item => item.id === id )
+      let product = state.goodList.find(item => item.id === id)
       return {
         id: product.id,
         name: product.name,
         price: product.price.toFixed(2),
         num,
-        total_num: (product.price * num).toFixed(2)
+        totalNum: (product.price * num).toFixed(2)
       }
     })
   },
