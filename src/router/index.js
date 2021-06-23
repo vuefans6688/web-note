@@ -466,6 +466,10 @@ const router = new VueRouter({
       component: () => import('@/views/multip-table')
     },
     {
+      path: '/district',
+      component: () => import('@/views/district')
+    },
+    {
       path: '/drop-down-selection',
       component: () => import('@/views/drop-down-selection')
     }
