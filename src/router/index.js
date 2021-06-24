@@ -470,6 +470,10 @@ const router = new VueRouter({
       component: () => import('@/views/district')
     },
     {
+      path: '/different-tag-color',
+      component: () => import('@/views/different-tag-color')
+    },
+    {
       path: '/drop-down-selection',
       component: () => import('@/views/drop-down-selection')
     }

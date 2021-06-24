@@ -50,11 +50,5 @@ export default {
     color: #666;
     cursor: pointer;
   }
-  .el-input {
-    width: 280px;
-  }
-  .el-button {
-    margin-left: 10px;
-  }
 }
 </style>
