@@ -426,10 +426,6 @@ const router = new VueRouter({
       component: () => import('@/views/mini-games')
     },
     {
-      path: '/victory-defeat',
-      component: () => import('@/views/victory-defeat')
-    },
-    {
       path: '/global-filter',
       component: () => import('@/views/global-filter')
     },

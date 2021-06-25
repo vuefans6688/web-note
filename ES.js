@@ -428,6 +428,19 @@ const list = [
 getWaresId(list, 1)  // {id: 1, name: "家电", goods: Array(2)}
 getWaresId(list, 11)  // {id: 11, name: "冰箱"}
 
+// 运用递归算法求一个数字各个位数上的数字的和
+// 声明一个函数，输入一个数字，先判断，如果该数字是一位数(< 10),那么直接返回，相反，如果不是，
+// 那么任何一个数与10求余即可得到其个位数字即x % 10，如果是两位数这个结果就已经出来了，
+// 但如果超过两位数，比如说三位数，除以10取整(parseInt(x / 10)),这时会得到一个两位数，
+// 那么想要得到这个两位数的十位上的数字，需要再次放入这个函数里面进行计算即可得到(recursion(parseInt(x / 10))
+function recursion (x) {
+  if (x < 10) {
+    return x
+  }
+  return x % 10 + recursion(parseInt(x / 10))
+}
+recursion(123)  // 6
+
 // 用递归求1-100的和
 function recursion (start, end) {
   if (start === end) {
