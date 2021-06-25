@@ -35,8 +35,8 @@ export default {
         el.addEventListener('keypress', e => {
           e = e || window.event
           let code = typeof e.charCode === 'number' ? e.charCode : e.keyCode
-          let reg = /\d/
-          if (!reg.test(String.fromCharCode(code)) && code > 9 && !e.ctrlKey) {
+          let valid = /\d/
+          if (!valid.test(String.fromCharCode(code)) && code > 9 && !e.ctrlKey) {
             if (e.preventDefault) {
               e.preventDefault()
             } else {

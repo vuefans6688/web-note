@@ -1,5 +1,5 @@
 <template>
-  <div class="functional">
+  <div class="parent">
     <children :persons="persons" />
   </div>
 </template>

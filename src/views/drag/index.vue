@@ -36,6 +36,7 @@ export default {
         element.style.left = left + 'px'
         element.style.top = top + 'px'
       }
+      // 解除事件绑定
       document.onmouseup = () => {
         document.onmousemove = null
         document.onmouseup = null
