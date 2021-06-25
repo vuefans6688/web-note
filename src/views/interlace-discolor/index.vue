@@ -3,8 +3,8 @@
     <ul>
       <li
         v-for="(name, index) in names"
-        @mouseover="handleOver(index)"
         :key="index"
+        @mouseover="handleOver(index)"
         @mouseout="handleOut"
         :class="{
           on: index === activeName && index % 2 === 0,
