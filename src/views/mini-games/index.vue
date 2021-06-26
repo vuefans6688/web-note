@@ -27,8 +27,8 @@ export default {
       isFinished: false,
       describe: '开始游戏',
       maps: [
-        [null, null, null], // 1. 声明一个二维数组
-        [null, null, null], // 2.在用户点击的时候获取用户点击的序号和内容，把对应的index的event填到数组里面
+        [null, null, null],  // 1. 声明一个二维数组
+        [null, null, null],  // 2.在用户点击的时候获取用户点击的序号和内容，把对应的index的event填到数组里面
         [null, null, null]  // 3.调用getWinner判断谁胜谁负
       ]
     }
@@ -79,9 +79,8 @@ export default {
         this.isFinished = true
         this.result = maps[0][2]
       }
-      this.describe = `第${this.count}手`
       if (this.isFinished) {
-        this.describe = `游戏结束，${this.describe}`
+        this.describe = `游戏结束，第${this.count}手`
       }
     }
   }
