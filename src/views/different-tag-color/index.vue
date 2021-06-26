@@ -1,8 +1,12 @@
 <template>
   <div class="different-tag-color">
     <ul class="item-wrap">
-      <li class="item-list" v-for="index in mockData" :class="itemClass(index)">
-        {{ disorders[index].text }}
+      <li
+        class="item-list"
+        v-for="(item, index) in mockData"
+        :class="itemClass(index)"
+      >
+        {{ disorders[item].text }}
       </li>
     </ul>
     <div class="change-item">
